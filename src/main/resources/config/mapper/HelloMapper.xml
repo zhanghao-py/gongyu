@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>   
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.baidu.foo.ssh.dao.UserDao">
+<mapper namespace="cm.h3c.college.pay.payment.dao.HelloDao">
 
 	<resultMap type="com.baidu.foo.ssh.entity.User" id="userResultMap">
 		<id column="id" property="id" />

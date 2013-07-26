@@ -24,6 +24,10 @@
 	</bean>
 
 	<import resource="classpath:config/spring-dataSource.xml" />
+	<import resource="classpath:config/spring-transaction.xml" />
+	
+	<!-- 
 	<import resource="classpath:config/spring-beans.xml" />
+	-->
 
 </beans>
