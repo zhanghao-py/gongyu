@@ -81,7 +81,7 @@ function closeWindow() {
  */
 function completePayment() {
    // window.location = root + "/internetFee_new/jsp/payment/payment_third.jsp?order_info=" + order_info;
-	window.location = root + "/cm/paySuccess.html?order_info=" + order_info;
+	window.location =  "/cm/paySuccess.html?order_info=" + order_info;
 }
 
 /***
