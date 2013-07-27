@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>充值交费_网上营业厅_山东移动</title>
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<link type="text/css" href="css/chongzhi.css" rel="stylesheet" />
+<link type="text/css" href="css/chongzhi-1.css" rel="stylesheet" />
+
+
+<script type="text/javascript" src="js/util.js"></script>
+<script type="text/javascript" src="js/jquery-1.htm">
+    //防止命名冲突
+    var $j = jQuery.noConflict();
+    //防止jquery和dwr命名冲突
+</script>
+    <script type="text/javascript" src="js/jquery.htm"></script>
+    <script type="text/javascript" src="js/jquery_002.htm"></script>
+    <script type="text/javascript" src="js/payment_first.js"></script>
+    <script type="text/javascript" src="js/show_msisdn.js"></script>
+    <script type="text/javascript">
+        var loginNumber = "0";//登录号码
+        var root = 'http://localhost:8080/gongyu';
+        var imagesPath = 'http://localhost';
+        var msg = "";
+        var isPayPhoneFoucs = true;//手机号码输入框是否获取焦点标志,用于判断是否隐藏号码提示框
+        var xialaDivIsOnOver = true;//手机提示层是否鼠标悬停在上面
+
+    </script>
+    
+        
+        
+            
+        
+    
+
+
+    
+    <meta name="WT.si_n" content="CZJF" />
+    <meta name="WT.si_x" content="20" />
+    <meta name="WT.mobile" content="0" />
+    <meta name="WT.brand" content="0" />
+   <style type="text/css">
+        .phone-list-gray{
+            color:#999;
+            font-size:12px;
+            font-weight:100
+        }
+    </style>
+</head>
+
+<body onclick="onBodyClick()">
+
+<form name="paymentForm" method="post" action="paymentAction_confirm.html"><div><input name="org.apache.struts.taglib.html.TOKEN" value="699a7af79d5f11477c082f1466b3fac7" type="hidden" /></div>
+<input name="method" value="pageInit" type="hidden" />
+<input name="sort" value="" type="hidden" />
+<input name="key" value="" type="hidden" />
+<input name="commonPay" value="100" id="commonPay" type="hidden" />
+<input name="billMoney" value="" id="billMoney" type="hidden" />
+<input name="pay_type" value="" id="pay_type" type="hidden" />
+<div class="contentRi">
+    <div class="lr-box">
+        <div class="lr-lc">
+            <div class="lr-lc-blue">1.填写号码、金额</div>
+            <div class="lf lr-lc-blue1"></div>
+            <div class="lr-lc-gray">2.确认并支付</div>
+            <div class="lf lr-lc-gray1"></div>
+            <div class="lr-lc-gray">3.完成</div>
+            <div class="clr"></div>
+        </div>
+        <div style="position:relative">
+            <div class="lr-zc">
+                <div class="lr-zc-name">帐户</div>
+                <div class="lr-zc-bd">
+                    <div class="lf">
+                        <input class="lr-zc-inp1 qh" name="payPhone" maxlength="11" value="13810292997" onclick="showCookieMsisdn()" onblur="autheMsisdn()" id="payPhoneID" type="text" />
+                            
+                    </div>
+                </div>
+            </div>
+            <div class="lr-zc1">
+                <div class="lr-zc-name">充值金额</div>
+                <div class="lr-zc-jg">
+                    <ul id="YHKJF_YRCZ_UL">
+                        <li id="YHKJF_YRCZ_WDL_30" onclick="selectAmount(30)">30元</li>
+                        <li id="YHKJF_YRCZ_WDL_50" onclick="selectAmount(50)">50元</li>
+                        <li class="active" id="YHKJF_YRCZ_WDL_100" onclick="selectAmount(100)">100元</li>
+                        <li id="YHKJF_YRCZ_WDL_200" onclick="selectAmount(200)">200元</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="lr-zc1">
+                <div class="lr-zc-name">其他金额</div>
+                <div class="lf">
+                    <input name="otherMoney" onblur="selectAmount('otherMoney')" id="YHKJF_YRCZ_WDL_QTJE" class="lr-zc-fw" type="text" />
+                </div>
+                <div class="lr-zc-fwt" id="otherMoney_tip">请输入1元~500元的整数</div>
+                <!--错误时，样式是class="lr-zc-fwt red"-->
+            </div>
+            <div class="lr-zc2">
+                <div class="lr-zc-name">验证码</div>
+                <div class="lf">
+                    <div class="lf"><input name="imgCode" class="lr-zc-fw" maxlength="4" id="imgCodeId" style="font-size:16px;font-weight:bold;" type="text" /></div>
+                    <div class="yz">
+                        <img id="randImg" onclick="reloadRandImg('')" style="cursor: pointer" alt="验证码" src="images/autheCode.png" height="30" width="80" /></div>
+                    <!--lr-zc-ts1是输入错误样式-->
+                    <div class="blue yz-txt"><a onclick="reloadRandImg('')" class="hand">看不清，再换一张</a></div>
+                    <!--lr-zc-ts1是输入错误样式-->
+                    <div style="padding-top:4px" class="red" id="authe_code_tip_div"></div>
+                    <div class="clr"></div>
+
+                    <!--lr-zc-ts1是输入错误样式-->
+                </div>
+            </div>
+
+            <div class="clr"></div>
+											<div class="lr-zc-tj">
+												<img class="hand" alt="开始充值" src="images/btn4.png"
+													onmouseover="this.src='images/btn4-1.png'"
+													id="YHKJF_YRCZ_WDL_KSCZ" onclick="btnSubmit()"
+													onmouseout="this.src='images/btn4.png'" height="36"
+													width="116" /><span class="pl8">请确认帐号填写无误</span>
+											</div>
+
+        </div>
+    </div>
+
+</div>
+
+
+<div id="dl_tip_div" style="display: none">
+        
+
+    <div class="zhifu" style="top:-20px; left:-10px;width:402px;height:220px;z-index: 1001">
+        <div class="zhifu_tanchu"></div>
+        <div class="zhifu_tanchu_box h210">
+            <div class="zhifu_tanchu_tit">
+                <h3>银行卡充值</h3>
+
+                <div class="close_btn" onclick="closeLoginWindow()"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</form>
+
+
+
+</body></html>

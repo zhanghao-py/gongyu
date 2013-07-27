@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>充值交费_网上营业厅_山东移动</title>
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<link type="text/css" href="css/chongzhi.css" rel="stylesheet" />
+<link type="text/css" href="css/chongzhi-1.css" rel="stylesheet" />
+
+
+<script type="text/javascript" src="js/util.js"></script>
+<script type="text/javascript" src="js/jquery-1.htm" >
+    //防止命名冲突
+    var $j = jQuery.noConflict();
+    //防止jquery和dwr命名冲突
+</script>
+    <script type="text/javascript" src="js/jquery_002.htm"></script>
+    <script type="text/javascript" src="js/jquery.htm"></script>
+    <script type="text/javascript" src="js/payment_second.js"></script>
+    <script type="text/javascript">
+        var loginNumber = "0";//登录号码
+        var root = 'http://localhost:8080/gongyu';
+        var imagesPath = 'http://localhost';
+        //返回修改
+        var order_info = "072089072070074094075066075089078076078095077064078092;8cf0e6a3a0fdbe10eb84a91e2ab8300b";
+
+    </script>
+    
+    <style type="text/css">
+        .pay_methods .pay_list_con li {
+            width: 140px;
+        }
+
+        .lr-lc-bluesp3 {
+            background: url('images/header_arrow_blue02.jpg') no-repeat;
+            width: 41px;
+            height: 35px;
+        }
+    </style>
+</head>
+<body>
+
+<form name="paymentForm" method="post" action="images/cmpay.PNG" target="_blank">
+<div>
+<input name="org.apache.struts.taglib.html.TOKEN" value="aa6c476a7d9e567326a06625345535a8" type="hidden">
+</div>
+<input name="nextMethod" value="" type="hidden" />
+
+<input name="sort" value="" type="hidden" />
+<input name="key" value="" type="hidden" />
+<input name="commonPay" value="100" id="commonPay" type="hidden" />
+<input name="billMoney" value="" id="billMoney" type="hidden" />
+<input name="payPhone" value="13810292997" type="hidden" />
+<input name="pay_type" value="4" type="hidden" />
+<input name="orderId" value="201307271079464545" type="hidden" />
+<div class="contentRi">
+<div class="lr-box">
+<div class="lr-lc">
+    <div class="lr-lc-gray">1.填写号码、金额</div>
+    <div class="lf lr-lc-bluesp3"></div>
+    <div class="lr-lc-blue">2.确认并支付</div>
+    <div class="lf lr-lc-blue1"></div>
+    <div class="lr-lc-gray">3.完成</div>
+    <div class="clr"></div>
+</div>
+<!--支付方式 begin-->
+<div class="pay_methods">
+<!--充值信息 beign-->
+<div class="chongzhiInfo">
+    <table border="0" cellpadding="0" cellspacing="0">
+        <tbody><tr style="height: 10px">
+            
+            <th scope="col">充值帐号</th>
+            <th scope="col">归属地</th>
+            <th scope="col">缴费金额</th>
+            <th scope="col">操作</th>
+        </tr>
+        <tr>
+            
+            <td><b>13810292997</b></td>
+            <td>济南移动 山东XX学院</td>
+            <td>100元</td>
+            <td><a href="javascript:void(0)" id="YHKJF_YRCZ_FHXG" onclick="btnGobakck()">返回修改</a></td>
+        </tr>
+    </tbody></table>
+
+
+    <!-- hewen 2013-5-18 start-->
+    <div>
+        
+            
+
+    </div>
+    <!--hewen 2013-5-18 end-->
+</div>
+<!--充值信息 end-->
+
+<!--支付列表 begin-->
+<div class="tit">
+    <h2>支付方式：<span class="blue" style="font-weight:100"></span></h2>
+
+        
+</div>
+<div class="pay_methods_con" style="width:700px;">
+    <div class="pay_methods_box">
+        <div class="pay_list">
+ 
+        <ul class="pay_list_con">
+            <li><input name="pay_bank_id" value="100900;IPOS" id="YHKJF_YRCZ_SJZF" type="radio">
+                <label><img src="images/bank_ipos.gif" alt="手机支付"></label>
+
+                
+            </li>
+        </ul>
+        </div>
+    </div>
+    <!--账户支付 end-->
+</div>
+<!--支付列表 end-->
+
+					<div class="pay_btn">
+						<img class="hand" alt="立即支付" src="images/btn32.png"
+							onmouseover="this.src='images/btn32-1.png'"
+							id="YHKJF_YRCZ_LJZF" onclick="btnSubmit()"
+							onmouseout="this.src='images/btn32.png'"
+							height="36" width="116" />
+					</div>
+
+</div>
+<!--支付方式 end-->
+</div>
+
+</div>
+<!--网银支付 end-->
+
+<!--弹出页面 begin-->
+<div class="zhifu" id="div_zhifu" style="display: none;text-align: left;top:-20px;_top:-200px; left:-10px;width:402px;height:220px;z-index: 1001;position: absolute">
+    <div class="zhifu_tanchu"></div>
+    <div class="zhifu_tanchu_box">
+        <div class="zhifu_tanchu_tit">
+            <h3>支付</h3>
+
+            <div class="close_btn" onclick="closeWindow()"></div>
+        </div>
+        <div class="zhifu_tanchu_con">
+            <dl>
+                <dt>请您在新打开的页面进行支付，支付完成前请不要关闭该窗口。</dt>
+                <dd style="padding-left:85px">
+							<img class="hand" alt="已完成支付" src="images/btn34.png"
+								id="YHKJF_YRCZ_WCZF"
+								onmouseover="this.src='images/btn34-1.png'"
+								onmouseout="this.src='images/btn34.png'"
+								onclick="completePayment()" height="25" width="86" />
+							<img
+								class="hand" alt="支付遇到问题"
+								src="images/btn35.png"
+								onmouseover="this.src='images/btn35-1.png'"
+								id="YHKJF_YRCZ_YDWT"
+								onmouseout="this.src='images/btn35.png'"
+								onclick="closeWindow()" height="25" width="97" />
+						</dd>
+            </dl>
+        </div>
+    </div>
+</div>
+<!--弹出页面 end-->
+
+
+</form>
+
+
+</body></html>
