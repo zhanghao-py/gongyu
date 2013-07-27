@@ -33,6 +33,21 @@ public class College implements Serializable {
 	 * 备注信息
 	 */
 	private String description;
+	
+	/**
+	 * 操作员-用户名
+	 */
+	private String operatorUsername;
+	
+	/**
+	 * 操作员-密码
+	 */
+	private String operatorPassword;
+	
+	/**
+	 * keystore路径，证书路径
+	 */
+	private String keystorePath;
 
 
 	public Long getId() {
@@ -70,6 +85,30 @@ public class College implements Serializable {
 		this.url = url;
 	}
 	
+	public String getOperatorUsername() {
+		return operatorUsername;
+	}
+
+	public void setOperatorUsername(String operatorUsername) {
+		this.operatorUsername = operatorUsername;
+	}
+
+	public String getOperatorPassword() {
+		return operatorPassword;
+	}
+
+	public void setOperatorPassword(String operatorPassword) {
+		this.operatorPassword = operatorPassword;
+	}
+
+	public String getKeystorePath() {
+		return keystorePath;
+	}
+
+	public void setKeystorePath(String keystorePath) {
+		this.keystorePath = keystorePath;
+	}
+
 	@Override
 	public int hashCode() {
 		if (this.hashCode == null) {

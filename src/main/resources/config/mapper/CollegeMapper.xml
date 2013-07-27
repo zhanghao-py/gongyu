@@ -7,10 +7,13 @@
 		<result column="name" property="name" jdbcType="VARCHAR" />
 		<result column="url" property="url" jdbcType="VARCHAR" />
 		<result column="description" property="description" jdbcType="VARCHAR" />
+		<result column="operator_username" property="operatorUsername" jdbcType="VARCHAR" />
+		<result column="operator_password" property="operatorPassword" jdbcType="VARCHAR" />
+		<result column="keystore_path" property="keystorePath" jdbcType="VARCHAR" />
 	</resultMap>
 	
 	<sql id="Base_Column_List">
-		id, name, url, description
+		id, name, url, description, operator_username, operator_password, keystore_path
 	</sql>
 
 
