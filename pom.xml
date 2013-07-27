@@ -23,6 +23,8 @@
 		<commons-pool.version>1.5.6</commons-pool.version>
 		<cxf.version>2.7.3</cxf.version>
 		<javax.jws.version>1.0-MR1</javax.jws.version>
+		<struts.version>2.3.15.1</struts.version>
+		<velocity-tools.version>2.0</velocity-tools.version>
 		
 	</properties>
 	
@@ -147,20 +149,11 @@
 			<artifactId>commons-pool</artifactId>
 			<version>${commons-pool.version}</version>
 		</dependency>
-
+		
+		
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-api</artifactId>
-			<version>${cxf.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-bindings-xml</artifactId>
-			<version>${cxf.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-frontend-jaxrs</artifactId>
+			<artifactId>cxf-rt-frontend-jaxws</artifactId>
 			<version>${cxf.version}</version>
 		</dependency>
 		<dependency>
@@ -168,36 +161,33 @@
 			<artifactId>cxf-rt-transports-http</artifactId>
 			<version>${cxf.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>javax.jws</groupId>
-			<artifactId>jsr181-api</artifactId>
-			<version>${javax.jws.version}</version>
-		</dependency>
+		
+		  
 		<dependency>
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-core</artifactId>
-			<version>2.3.15.1</version>
+			<version>${struts.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-spring-plugin</artifactId>
-			<version>2.3.15.1</version>
+			<version>${struts.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-json-plugin</artifactId>
-			<version>2.3.15.1</version>
+			<version>${struts.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-convention-plugin</artifactId>
-			<version>2.3.15.1</version>
+			<version>${struts.version}</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>org.apache.velocity</groupId>
 			<artifactId>velocity-tools</artifactId>
-			<version>2.0</version>
+			<version>${velocity-tools.version}</version>
 		</dependency>
 		
 	</dependencies>
