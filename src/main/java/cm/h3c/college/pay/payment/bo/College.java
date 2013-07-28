@@ -15,12 +15,12 @@ public class College implements Serializable {
 			.synchronizedMap(new WeakHashMap<Serializable, Long>());
 
 	/**
-	 * Ö÷¼üid, Ñ§Ğ£±àºÅ
+	 * ä¸»é”®id, å­¦æ ¡ç¼–å·
 	 */
 	private Long id;
 	
 	/**
-	 * Ñ§Ğ£Ãû³Æ
+	 * å­¦æ ¡åç§°
 	 */
 	private String name;
 	
@@ -30,22 +30,22 @@ public class College implements Serializable {
 	private String url;
 	
 	/**
-	 * ±¸×¢ĞÅÏ¢
+	 * å¤‡æ³¨ä¿¡æ¯
 	 */
 	private String description;
 	
 	/**
-	 * ²Ù×÷Ô±-ÓÃ»§Ãû
+	 * æ“ä½œå‘˜-ç”¨æˆ·å
 	 */
 	private String operatorUsername;
 	
 	/**
-	 * ²Ù×÷Ô±-ÃÜÂë
+	 * æ“ä½œå‘˜-å¯†ç 
 	 */
 	private String operatorPassword;
 	
 	/**
-	 * keystoreÂ·¾¶£¬Ö¤ÊéÂ·¾¶
+	 * keystoreè·¯å¾„ï¼Œè¯ä¹¦è·¯å¾„
 	 */
 	private String keystorePath;
 

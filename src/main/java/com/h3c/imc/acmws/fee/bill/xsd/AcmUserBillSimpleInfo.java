@@ -10,9 +10,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
- * <p>AcmUserBillSimpleInfo complex typeµÄ Java Àà¡£
+ * <p>AcmUserBillSimpleInfo complex typeçš„ Java ç±»ã€‚
  * 
- * <p>ÒÔÏÂÄ£Ê½Æ¬¶ÎÖ¸¶¨°üº¬ÔÚ´ËÀàÖĞµÄÔ¤ÆÚÄÚÈİ¡£
+ * <p>ä»¥ä¸‹æ¨¡å¼ç‰‡æ®µæŒ‡å®šåŒ…å«åœ¨æ­¤ç±»ä¸­çš„é¢„æœŸå†…å®¹ã€‚
  * 
  * <pre>
  * &lt;complexType name="AcmUserBillSimpleInfo">
@@ -94,7 +94,7 @@ public class AcmUserBillSimpleInfo {
     protected JAXBElement<String> userName;
 
     /**
-     * »ñÈ¡billIDÊôĞÔµÄÖµ¡£
+     * è·å–billIDå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -106,7 +106,7 @@ public class AcmUserBillSimpleInfo {
     }
 
     /**
-     * ÉèÖÃbillIDÊôĞÔµÄÖµ¡£
+     * è®¾ç½®billIDå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -118,7 +118,7 @@ public class AcmUserBillSimpleInfo {
     }
 
     /**
-     * »ñÈ¡billStatusÊôĞÔµÄÖµ¡£
+     * è·å–billStatuså±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -130,7 +130,7 @@ public class AcmUserBillSimpleInfo {
     }
 
     /**
-     * ÉèÖÃbillStatusÊôĞÔµÄÖµ¡£
+     * è®¾ç½®billStatuså±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -142,7 +142,7 @@ public class AcmUserBillSimpleInfo {
     }
 
     /**
-     * »ñÈ¡billTimeÊôĞÔµÄÖµ¡£
+     * è·å–billTimeå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -154,7 +154,7 @@ public class AcmUserBillSimpleInfo {
     }
 
     /**
-     * ÉèÖÃbillTimeÊôĞÔµÄÖµ¡£
+     * è®¾ç½®billTimeå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -166,7 +166,7 @@ public class AcmUserBillSimpleInfo {
     }
 
     /**
-     * »ñÈ¡billTypeÊôĞÔµÄÖµ¡£
+     * è·å–billTypeå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -178,7 +178,7 @@ public class AcmUserBillSimpleInfo {
     }
 
     /**
-     * ÉèÖÃbillTypeÊôĞÔµÄÖµ¡£
+     * è®¾ç½®billTypeå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -190,7 +190,7 @@ public class AcmUserBillSimpleInfo {
     }
 
     /**
-     * »ñÈ¡bonusCashÊôĞÔµÄÖµ¡£
+     * è·å–bonusCashå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -202,7 +202,7 @@ public class AcmUserBillSimpleInfo {
     }
 
     /**
-     * ÉèÖÃbonusCashÊôĞÔµÄÖµ¡£
+     * è®¾ç½®bonusCashå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -214,7 +214,7 @@ public class AcmUserBillSimpleInfo {
     }
 
     /**
-     * »ñÈ¡endTimeÊôĞÔµÄÖµ¡£
+     * è·å–endTimeå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -226,7 +226,7 @@ public class AcmUserBillSimpleInfo {
     }
 
     /**
-     * ÉèÖÃendTimeÊôĞÔµÄÖµ¡£
+     * è®¾ç½®endTimeå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -238,7 +238,7 @@ public class AcmUserBillSimpleInfo {
     }
 
     /**
-     * »ñÈ¡fixedAmountÊôĞÔµÄÖµ¡£
+     * è·å–fixedAmountå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -250,7 +250,7 @@ public class AcmUserBillSimpleInfo {
     }
 
     /**
-     * ÉèÖÃfixedAmountÊôĞÔµÄÖµ¡£
+     * è®¾ç½®fixedAmountå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -262,7 +262,7 @@ public class AcmUserBillSimpleInfo {
     }
 
     /**
-     * »ñÈ¡serviceNameÊôĞÔµÄÖµ¡£
+     * è·å–serviceNameå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -274,7 +274,7 @@ public class AcmUserBillSimpleInfo {
     }
 
     /**
-     * ÉèÖÃserviceNameÊôĞÔµÄÖµ¡£
+     * è®¾ç½®serviceNameå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -286,7 +286,7 @@ public class AcmUserBillSimpleInfo {
     }
 
     /**
-     * »ñÈ¡serviceTypeÊôĞÔµÄÖµ¡£
+     * è·å–serviceTypeå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -298,7 +298,7 @@ public class AcmUserBillSimpleInfo {
     }
 
     /**
-     * ÉèÖÃserviceTypeÊôĞÔµÄÖµ¡£
+     * è®¾ç½®serviceTypeå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -310,7 +310,7 @@ public class AcmUserBillSimpleInfo {
     }
 
     /**
-     * »ñÈ¡startTimeÊôĞÔµÄÖµ¡£
+     * è·å–startTimeå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -322,7 +322,7 @@ public class AcmUserBillSimpleInfo {
     }
 
     /**
-     * ÉèÖÃstartTimeÊôĞÔµÄÖµ¡£
+     * è®¾ç½®startTimeå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -334,7 +334,7 @@ public class AcmUserBillSimpleInfo {
     }
 
     /**
-     * »ñÈ¡usageUnitÊôĞÔµÄÖµ¡£
+     * è·å–usageUnitå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -346,7 +346,7 @@ public class AcmUserBillSimpleInfo {
     }
 
     /**
-     * ÉèÖÃusageUnitÊôĞÔµÄÖµ¡£
+     * è®¾ç½®usageUnitå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -358,7 +358,7 @@ public class AcmUserBillSimpleInfo {
     }
 
     /**
-     * »ñÈ¡usedAmountÊôĞÔµÄÖµ¡£
+     * è·å–usedAmountå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -370,7 +370,7 @@ public class AcmUserBillSimpleInfo {
     }
 
     /**
-     * ÉèÖÃusedAmountÊôĞÔµÄÖµ¡£
+     * è®¾ç½®usedAmountå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -382,7 +382,7 @@ public class AcmUserBillSimpleInfo {
     }
 
     /**
-     * »ñÈ¡usedBonusCashÊôĞÔµÄÖµ¡£
+     * è·å–usedBonusCashå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -394,7 +394,7 @@ public class AcmUserBillSimpleInfo {
     }
 
     /**
-     * ÉèÖÃusedBonusCashÊôĞÔµÄÖµ¡£
+     * è®¾ç½®usedBonusCashå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -406,7 +406,7 @@ public class AcmUserBillSimpleInfo {
     }
 
     /**
-     * »ñÈ¡usedCashÊôĞÔµÄÖµ¡£
+     * è·å–usedCashå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -418,7 +418,7 @@ public class AcmUserBillSimpleInfo {
     }
 
     /**
-     * ÉèÖÃusedCashÊôĞÔµÄÖµ¡£
+     * è®¾ç½®usedCashå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -430,7 +430,7 @@ public class AcmUserBillSimpleInfo {
     }
 
     /**
-     * »ñÈ¡userNameÊôĞÔµÄÖµ¡£
+     * è·å–userNameå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -442,7 +442,7 @@ public class AcmUserBillSimpleInfo {
     }
 
     /**
-     * ÉèÖÃuserNameÊôĞÔµÄÖµ¡£
+     * è®¾ç½®userNameå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is

@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.Map;
 import java.util.WeakHashMap;
 
+import cm.h3c.college.pay.payment.web.action.dto.OrderForm;
+
 public class Order implements Serializable {
 
 	private static final long serialVersionUID = 2014593433036376984L;
@@ -16,45 +18,54 @@ public class Order implements Serializable {
 			.synchronizedMap(new WeakHashMap<Serializable, Long>());
 	
 	/**
-	 * Ö÷¼üid£¬¶©µ¥ºÅ
+	 * ä¸»é”®idï¼Œè®¢å•å·
 	 */
 	private Long id;
 	
 	/**
-	 * ½É·Ñ½ğ¶î
+	 * ç¼´è´¹é‡‘é¢
 	 */
 	private BigDecimal money;
 	
 	/**
-	 * ¶©µ¥×´Ì¬()
+	 * è®¢å•çŠ¶æ€()
 	 */
 	private Short status;
 	
 	/**
-	 * Ö§¸¶½á¹û()
+	 * æ”¯ä»˜ç»“æœ()
 	 */
 	private Short payResult;
 	
 	/**
-	 * ³äÖµ½á¹û()
+	 * å……å€¼ç»“æœ()
 	 */
 	private Short camsResult;
 	
 	/**
-	 * ¶©µ¥´´½¨Ê±¼ä
+	 * è®¢å•åˆ›å»ºæ—¶é—´
 	 */
 	private Date createTime;
 	
 	/**
-	 * ½É·ÑÕËºÅ
+	 * ç¼´è´¹è´¦å·
 	 */
 	private String account;
 	
 	/**
-	 * ËùÊôÑ§Ğ£id
+	 * æ‰€å±å­¦æ ¡id
 	 */
 	private Long collegeId;
 	
+	public Order(OrderForm form) {
+		setAccount(form.getAccount());
+		setCollegeId(form.getCollegeId());
+		setMoney(form.getMoney());
+		setStatus(form.getStatus());
+		setPayResult(form.getPayResult());
+		setCamsResult(form.getCamsResult());
+	}
+
 	public Long getId() {
 		return id;
 	}

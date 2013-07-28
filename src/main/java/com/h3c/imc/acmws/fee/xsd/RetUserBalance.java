@@ -10,9 +10,9 @@ import com.h3c.imc.common.ws.xsd.WSCommonResult;
 
 
 /**
- * <p>RetUserBalance complex typeµÄ Java Àà¡£
+ * <p>RetUserBalance complex typeçš„ Java ç±»ã€‚
  * 
- * <p>ÒÔÏÂÄ£Ê½Æ¬¶ÎÖ¸¶¨°üº¬ÔÚ´ËÀàÖĞµÄÔ¤ÆÚÄÚÈİ¡£
+ * <p>ä»¥ä¸‹æ¨¡å¼ç‰‡æ®µæŒ‡å®šåŒ…å«åœ¨æ­¤ç±»ä¸­çš„é¢„æœŸå†…å®¹ã€‚
  * 
  * <pre>
  * &lt;complexType name="RetUserBalance">
@@ -40,7 +40,7 @@ public class RetUserBalance
     protected JAXBElement<String> balance;
 
     /**
-     * »ñÈ¡balanceÊôĞÔµÄÖµ¡£
+     * è·å–balanceå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -52,7 +52,7 @@ public class RetUserBalance
     }
 
     /**
-     * ÉèÖÃbalanceÊôĞÔµÄÖµ¡£
+     * è®¾ç½®balanceå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is

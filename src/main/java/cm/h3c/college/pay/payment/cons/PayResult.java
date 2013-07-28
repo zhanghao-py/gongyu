@@ -2,8 +2,8 @@ package cm.h3c.college.pay.payment.cons;
 
 public enum PayResult {
 	
-	SUCCESS("支付成功", (short) 1), 
-	FAIL("支付失败", (short) 2);
+	SUCCESS("鏀粯鎴愬姛", (short) 1), 
+	FAIL("鏀粯澶辫触", (short) 2);
 
 	private String name;
 	private Short value;

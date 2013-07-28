@@ -10,9 +10,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
- * <p>AcmBillDetailSimpleInfo complex typeµÄ Java Àà¡£
+ * <p>AcmBillDetailSimpleInfo complex typeçš„ Java ç±»ã€‚
  * 
- * <p>ÒÔÏÂÄ£Ê½Æ¬¶ÎÖ¸¶¨°üº¬ÔÚ´ËÀàÖĞµÄÔ¤ÆÚÄÚÈİ¡£
+ * <p>ä»¥ä¸‹æ¨¡å¼ç‰‡æ®µæŒ‡å®šåŒ…å«åœ¨æ­¤ç±»ä¸­çš„é¢„æœŸå†…å®¹ã€‚
  * 
  * <pre>
  * &lt;complexType name="AcmBillDetailSimpleInfo">
@@ -70,7 +70,7 @@ public class AcmBillDetailSimpleInfo {
     protected JAXBElement<Double> usedCash;
 
     /**
-     * »ñÈ¡accessEndTimeÊôĞÔµÄÖµ¡£
+     * è·å–accessEndTimeå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -82,7 +82,7 @@ public class AcmBillDetailSimpleInfo {
     }
 
     /**
-     * ÉèÖÃaccessEndTimeÊôĞÔµÄÖµ¡£
+     * è®¾ç½®accessEndTimeå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -94,7 +94,7 @@ public class AcmBillDetailSimpleInfo {
     }
 
     /**
-     * »ñÈ¡accessSessionTimeÊôĞÔµÄÖµ¡£
+     * è·å–accessSessionTimeå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -106,7 +106,7 @@ public class AcmBillDetailSimpleInfo {
     }
 
     /**
-     * ÉèÖÃaccessSessionTimeÊôĞÔµÄÖµ¡£
+     * è®¾ç½®accessSessionTimeå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -118,7 +118,7 @@ public class AcmBillDetailSimpleInfo {
     }
 
     /**
-     * »ñÈ¡accessStartTimeÊôĞÔµÄÖµ¡£
+     * è·å–accessStartTimeå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -130,7 +130,7 @@ public class AcmBillDetailSimpleInfo {
     }
 
     /**
-     * ÉèÖÃaccessStartTimeÊôĞÔµÄÖµ¡£
+     * è®¾ç½®accessStartTimeå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -142,7 +142,7 @@ public class AcmBillDetailSimpleInfo {
     }
 
     /**
-     * »ñÈ¡bonusCashÊôĞÔµÄÖµ¡£
+     * è·å–bonusCashå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -154,7 +154,7 @@ public class AcmBillDetailSimpleInfo {
     }
 
     /**
-     * ÉèÖÃbonusCashÊôĞÔµÄÖµ¡£
+     * è®¾ç½®bonusCashå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -166,7 +166,7 @@ public class AcmBillDetailSimpleInfo {
     }
 
     /**
-     * »ñÈ¡feeSessionIdÊôĞÔµÄÖµ¡£
+     * è·å–feeSessionIdå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -178,7 +178,7 @@ public class AcmBillDetailSimpleInfo {
     }
 
     /**
-     * ÉèÖÃfeeSessionIdÊôĞÔµÄÖµ¡£
+     * è®¾ç½®feeSessionIdå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -190,7 +190,7 @@ public class AcmBillDetailSimpleInfo {
     }
 
     /**
-     * »ñÈ¡influxByteÊôĞÔµÄÖµ¡£
+     * è·å–influxByteå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -202,7 +202,7 @@ public class AcmBillDetailSimpleInfo {
     }
 
     /**
-     * ÉèÖÃinfluxByteÊôĞÔµÄÖµ¡£
+     * è®¾ç½®influxByteå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -214,7 +214,7 @@ public class AcmBillDetailSimpleInfo {
     }
 
     /**
-     * »ñÈ¡outfluxByteÊôĞÔµÄÖµ¡£
+     * è·å–outfluxByteå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -226,7 +226,7 @@ public class AcmBillDetailSimpleInfo {
     }
 
     /**
-     * ÉèÖÃoutfluxByteÊôĞÔµÄÖµ¡£
+     * è®¾ç½®outfluxByteå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -238,7 +238,7 @@ public class AcmBillDetailSimpleInfo {
     }
 
     /**
-     * »ñÈ¡usedBonusCashÊôĞÔµÄÖµ¡£
+     * è·å–usedBonusCashå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -250,7 +250,7 @@ public class AcmBillDetailSimpleInfo {
     }
 
     /**
-     * ÉèÖÃusedBonusCashÊôĞÔµÄÖµ¡£
+     * è®¾ç½®usedBonusCashå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -262,7 +262,7 @@ public class AcmBillDetailSimpleInfo {
     }
 
     /**
-     * »ñÈ¡usedCashÊôĞÔµÄÖµ¡£
+     * è·å–usedCashå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -274,7 +274,7 @@ public class AcmBillDetailSimpleInfo {
     }
 
     /**
-     * ÉèÖÃusedCashÊôĞÔµÄÖµ¡£
+     * è®¾ç½®usedCashå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is

@@ -17,6 +17,48 @@
 	<sql id="Base_Column_List">
 		id, money, status, pay_result, cams_result, create_time, account, college_id
 	</sql>
+	
+	<insert id="save"
+		parameterType="cm.h3c.college.pay.payment.bo.Order"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into gy_order
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			money, status, create_time, account, college_id,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{money, jdbcType=DECIMAL},
+			#{status, jdbcType=SMALLINT},
+			now(),
+			#{account, jdbcType=VARCHAR},
+			#{collegeId, jdbcType=BIGINT}
+		</trim>
+	</insert>
+	
+	<update id="update"
+		parameterType="cm.h3c.college.pay.payment.bo.Order"
+		flushCache="true">
+		update gy_college
+		<set>
+			<if test="money != null">
+				money = #{money, jdbcType=DECIMAL},
+			</if>
+			<if test="status != null">
+				status = #{status, jdbcType=SMALLINT},
+			</if>
+			<if test="payResult != null">
+				pay_result = #{payResult, jdbcType=SMALLINT},
+			</if>
+			<if test="camsResult != null">
+				cams_result = #{camsResult, jdbcType=SMALLINT},
+			</if>
+			<if test="account != null">
+				account = #{account, jdbcType=VARCHAR},
+			</if>
+		</set>
+		<where> 
+			id = #{id, jdbcType=BIGINT}
+		</where>
+	</update>
 
 
 

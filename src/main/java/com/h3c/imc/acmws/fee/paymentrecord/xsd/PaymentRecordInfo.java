@@ -10,9 +10,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
- * <p>PaymentRecordInfo complex typeµÄ Java Àà¡£
+ * <p>PaymentRecordInfo complex typeçš„ Java ç±»ã€‚
  * 
- * <p>ÒÔÏÂÄ£Ê½Æ¬¶ÎÖ¸¶¨°üº¬ÔÚ´ËÀàÖĞµÄÔ¤ÆÚÄÚÈİ¡£
+ * <p>ä»¥ä¸‹æ¨¡å¼ç‰‡æ®µæŒ‡å®šåŒ…å«åœ¨æ­¤ç±»ä¸­çš„é¢„æœŸå†…å®¹ã€‚
  * 
  * <pre>
  * &lt;complexType name="PaymentRecordInfo">
@@ -82,7 +82,7 @@ public class PaymentRecordInfo {
     protected JAXBElement<String> userName;
 
     /**
-     * »ñÈ¡balanceÊôĞÔµÄÖµ¡£
+     * è·å–balanceå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -94,7 +94,7 @@ public class PaymentRecordInfo {
     }
 
     /**
-     * ÉèÖÃbalanceÊôĞÔµÄÖµ¡£
+     * è®¾ç½®balanceå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -106,7 +106,7 @@ public class PaymentRecordInfo {
     }
 
     /**
-     * »ñÈ¡feeTypeÊôĞÔµÄÖµ¡£
+     * è·å–feeTypeå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -118,7 +118,7 @@ public class PaymentRecordInfo {
     }
 
     /**
-     * ÉèÖÃfeeTypeÊôĞÔµÄÖµ¡£
+     * è®¾ç½®feeTypeå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -130,7 +130,7 @@ public class PaymentRecordInfo {
     }
 
     /**
-     * »ñÈ¡flowIdÊôĞÔµÄÖµ¡£
+     * è·å–flowIdå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -142,7 +142,7 @@ public class PaymentRecordInfo {
     }
 
     /**
-     * ÉèÖÃflowIdÊôĞÔµÄÖµ¡£
+     * è®¾ç½®flowIdå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -154,7 +154,7 @@ public class PaymentRecordInfo {
     }
 
     /**
-     * »ñÈ¡fullNameÊôĞÔµÄÖµ¡£
+     * è·å–fullNameå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -166,7 +166,7 @@ public class PaymentRecordInfo {
     }
 
     /**
-     * ÉèÖÃfullNameÊôĞÔµÄÖµ¡£
+     * è®¾ç½®fullNameå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -178,7 +178,7 @@ public class PaymentRecordInfo {
     }
 
     /**
-     * »ñÈ¡lastBalanceÊôĞÔµÄÖµ¡£
+     * è·å–lastBalanceå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -190,7 +190,7 @@ public class PaymentRecordInfo {
     }
 
     /**
-     * ÉèÖÃlastBalanceÊôĞÔµÄÖµ¡£
+     * è®¾ç½®lastBalanceå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -202,7 +202,7 @@ public class PaymentRecordInfo {
     }
 
     /**
-     * »ñÈ¡operatorÊôĞÔµÄÖµ¡£
+     * è·å–operatorå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -214,7 +214,7 @@ public class PaymentRecordInfo {
     }
 
     /**
-     * ÉèÖÃoperatorÊôĞÔµÄÖµ¡£
+     * è®¾ç½®operatorå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -226,7 +226,7 @@ public class PaymentRecordInfo {
     }
 
     /**
-     * »ñÈ¡operatorLoginIpÊôĞÔµÄÖµ¡£
+     * è·å–operatorLoginIpå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -238,7 +238,7 @@ public class PaymentRecordInfo {
     }
 
     /**
-     * ÉèÖÃoperatorLoginIpÊôĞÔµÄÖµ¡£
+     * è®¾ç½®operatorLoginIpå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -250,7 +250,7 @@ public class PaymentRecordInfo {
     }
 
     /**
-     * »ñÈ¡payAmountÊôĞÔµÄÖµ¡£
+     * è·å–payAmountå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -262,7 +262,7 @@ public class PaymentRecordInfo {
     }
 
     /**
-     * ÉèÖÃpayAmountÊôĞÔµÄÖµ¡£
+     * è®¾ç½®payAmountå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -274,7 +274,7 @@ public class PaymentRecordInfo {
     }
 
     /**
-     * »ñÈ¡paymentDateÊôĞÔµÄÖµ¡£
+     * è·å–paymentDateå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -286,7 +286,7 @@ public class PaymentRecordInfo {
     }
 
     /**
-     * ÉèÖÃpaymentDateÊôĞÔµÄÖµ¡£
+     * è®¾ç½®paymentDateå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -298,7 +298,7 @@ public class PaymentRecordInfo {
     }
 
     /**
-     * »ñÈ¡paymentIDÊôĞÔµÄÖµ¡£
+     * è·å–paymentIDå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -310,7 +310,7 @@ public class PaymentRecordInfo {
     }
 
     /**
-     * ÉèÖÃpaymentIDÊôĞÔµÄÖµ¡£
+     * è®¾ç½®paymentIDå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -322,7 +322,7 @@ public class PaymentRecordInfo {
     }
 
     /**
-     * »ñÈ¡paymentModeÊôĞÔµÄÖµ¡£
+     * è·å–paymentModeå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -334,7 +334,7 @@ public class PaymentRecordInfo {
     }
 
     /**
-     * ÉèÖÃpaymentModeÊôĞÔµÄÖµ¡£
+     * è®¾ç½®paymentModeå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -346,7 +346,7 @@ public class PaymentRecordInfo {
     }
 
     /**
-     * »ñÈ¡userNameÊôĞÔµÄÖµ¡£
+     * è·å–userNameå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -358,7 +358,7 @@ public class PaymentRecordInfo {
     }
 
     /**
-     * ÉèÖÃuserNameÊôĞÔµÄÖµ¡£
+     * è®¾ç½®userNameå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is

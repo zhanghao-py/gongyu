@@ -15,6 +15,21 @@
 	<sql id="Base_Column_List">
 		id, name, url, description, operator_username, operator_password, keystore_path
 	</sql>
+	
+	<select id="findAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from gy_college
+	</select>
+	
+	<select id="findById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from gy_college
+		<where>
+			id = #{form.id, jdbcType=BIGINT}
+		</where>
+	</select>
 
 
 

@@ -10,9 +10,9 @@ import com.h3c.imc.common.ws.xsd.WSCommonResult;
 
 
 /**
- * <p>RandomInfo complex typeµÄ Java Àà¡£
+ * <p>RandomInfo complex typeçš„ Java ç±»ã€‚
  * 
- * <p>ÒÔÏÂÄ£Ê½Æ¬¶ÎÖ¸¶¨°üº¬ÔÚ´ËÀàÖĞµÄÔ¤ÆÚÄÚÈİ¡£
+ * <p>ä»¥ä¸‹æ¨¡å¼ç‰‡æ®µæŒ‡å®šåŒ…å«åœ¨æ­¤ç±»ä¸­çš„é¢„æœŸå†…å®¹ã€‚
  * 
  * <pre>
  * &lt;complexType name="RandomInfo">
@@ -40,7 +40,7 @@ public class RandomInfo
     protected JAXBElement<String> random;
 
     /**
-     * »ñÈ¡randomÊôĞÔµÄÖµ¡£
+     * è·å–randomå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -52,7 +52,7 @@ public class RandomInfo
     }
 
     /**
-     * ÉèÖÃrandomÊôĞÔµÄÖµ¡£
+     * è®¾ç½®randomå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is

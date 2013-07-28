@@ -16,9 +16,9 @@ import com.h3c.imc.acmws.fee.xsd.RetUserBalance;
 
 
 /**
- * <p>WSCommonResult complex typeµÄ Java Àà¡£
+ * <p>WSCommonResult complex typeçš„ Java ç±»ã€‚
  * 
- * <p>ÒÔÏÂÄ£Ê½Æ¬¶ÎÖ¸¶¨°üº¬ÔÚ´ËÀàÖĞµÄÔ¤ÆÚÄÚÈİ¡£
+ * <p>ä»¥ä¸‹æ¨¡å¼ç‰‡æ®µæŒ‡å®šåŒ…å«åœ¨æ­¤ç±»ä¸­çš„é¢„æœŸå†…å®¹ã€‚
  * 
  * <pre>
  * &lt;complexType name="WSCommonResult">
@@ -59,7 +59,7 @@ public class WSCommonResult {
     protected JAXBElement<String> errorMsg;
 
     /**
-     * »ñÈ¡descriptionÊôĞÔµÄÖµ¡£
+     * è·å–descriptionå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -71,7 +71,7 @@ public class WSCommonResult {
     }
 
     /**
-     * ÉèÖÃdescriptionÊôĞÔµÄÖµ¡£
+     * è®¾ç½®descriptionå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -83,7 +83,7 @@ public class WSCommonResult {
     }
 
     /**
-     * »ñÈ¡errorCodeÊôĞÔµÄÖµ¡£
+     * è·å–errorCodeå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -95,7 +95,7 @@ public class WSCommonResult {
     }
 
     /**
-     * ÉèÖÃerrorCodeÊôĞÔµÄÖµ¡£
+     * è®¾ç½®errorCodeå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -107,7 +107,7 @@ public class WSCommonResult {
     }
 
     /**
-     * »ñÈ¡errorMsgÊôĞÔµÄÖµ¡£
+     * è·å–errorMsgå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -119,7 +119,7 @@ public class WSCommonResult {
     }
 
     /**
-     * ÉèÖÃerrorMsgÊôĞÔµÄÖµ¡£
+     * è®¾ç½®errorMsgå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is

@@ -11,9 +11,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
- * <p>anonymous complex typeµÄ Java Àà¡£
+ * <p>anonymous complex typeçš„ Java ç±»ã€‚
  * 
- * <p>ÒÔÏÂÄ£Ê½Æ¬¶ÎÖ¸¶¨°üº¬ÔÚ´ËÀàÖĞµÄÔ¤ÆÚÄÚÈİ¡£
+ * <p>ä»¥ä¸‹æ¨¡å¼ç‰‡æ®µæŒ‡å®šåŒ…å«åœ¨æ­¤ç±»ä¸­çš„é¢„æœŸå†…å®¹ã€‚
  * 
  * <pre>
  * &lt;complexType>
@@ -46,7 +46,7 @@ public class SuspendUserById {
     protected Integer param2;
 
     /**
-     * »ñÈ¡param0ÊôĞÔµÄÖµ¡£
+     * è·å–param0å±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -58,7 +58,7 @@ public class SuspendUserById {
     }
 
     /**
-     * ÉèÖÃparam0ÊôĞÔµÄÖµ¡£
+     * è®¾ç½®param0å±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -70,7 +70,7 @@ public class SuspendUserById {
     }
 
     /**
-     * »ñÈ¡param1ÊôĞÔµÄÖµ¡£
+     * è·å–param1å±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -82,7 +82,7 @@ public class SuspendUserById {
     }
 
     /**
-     * ÉèÖÃparam1ÊôĞÔµÄÖµ¡£
+     * è®¾ç½®param1å±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -94,7 +94,7 @@ public class SuspendUserById {
     }
 
     /**
-     * »ñÈ¡param2ÊôĞÔµÄÖµ¡£
+     * è·å–param2å±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -106,7 +106,7 @@ public class SuspendUserById {
     }
 
     /**
-     * ÉèÖÃparam2ÊôĞÔµÄÖµ¡£
+     * è®¾ç½®param2å±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is

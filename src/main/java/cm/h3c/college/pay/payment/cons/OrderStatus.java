@@ -2,9 +2,9 @@ package cm.h3c.college.pay.payment.cons;
 
 public enum OrderStatus {
 	
-	INIT("µ¥¶©³õÊ¼»¯", (short) 1), 
-	PAYING("Ö§¸¶ÖĞ", (short) 2), 
-	DONE("Ö§¸¶Íê³É", (short) 3);
+	INIT("å•è®¢åˆå§‹åŒ–", (short) 1), 
+	PAYING("æ”¯ä»˜ä¸­", (short) 2), 
+	DONE("æ”¯ä»˜å®Œæˆ", (short) 3);
 
 	private String name;
 	private Short value;

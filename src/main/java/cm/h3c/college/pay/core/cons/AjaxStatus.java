@@ -2,8 +2,8 @@ package cm.h3c.college.pay.core.cons;
 
 public enum AjaxStatus {
 
-	SUCCESS("³É¹¦", 0L), 
-	ERROR("Ê§°Ü", 400L);
+	SUCCESS("æˆåŠŸ", 0L), 
+	ERROR("å¤±è´¥", 400L);
 
 	private String name;
 	private Long value;

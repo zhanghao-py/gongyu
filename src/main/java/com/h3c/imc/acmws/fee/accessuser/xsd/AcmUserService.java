@@ -10,9 +10,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
- * <p>AcmUserService complex typeµÄ Java Àà¡£
+ * <p>AcmUserService complex typeçš„ Java ç±»ã€‚
  * 
- * <p>ÒÔÏÂÄ£Ê½Æ¬¶ÎÖ¸¶¨°üº¬ÔÚ´ËÀàÖĞµÄÔ¤ÆÚÄÚÈİ¡£
+ * <p>ä»¥ä¸‹æ¨¡å¼ç‰‡æ®µæŒ‡å®šåŒ…å«åœ¨æ­¤ç±»ä¸­çš„é¢„æœŸå†…å®¹ã€‚
  * 
  * <pre>
  * &lt;complexType name="AcmUserService">
@@ -58,7 +58,7 @@ public class AcmUserService {
     protected JAXBElement<String> userIp;
 
     /**
-     * »ñÈ¡curCycleEndTimeÊôĞÔµÄÖµ¡£
+     * è·å–curCycleEndTimeå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -70,7 +70,7 @@ public class AcmUserService {
     }
 
     /**
-     * ÉèÖÃcurCycleEndTimeÊôĞÔµÄÖµ¡£
+     * è®¾ç½®curCycleEndTimeå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -82,7 +82,7 @@ public class AcmUserService {
     }
 
     /**
-     * »ñÈ¡curCycleStartTimeÊôĞÔµÄÖµ¡£
+     * è·å–curCycleStartTimeå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -94,7 +94,7 @@ public class AcmUserService {
     }
 
     /**
-     * ÉèÖÃcurCycleStartTimeÊôĞÔµÄÖµ¡£
+     * è®¾ç½®curCycleStartTimeå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -106,7 +106,7 @@ public class AcmUserService {
     }
 
     /**
-     * »ñÈ¡serviceNameÊôĞÔµÄÖµ¡£
+     * è·å–serviceNameå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -118,7 +118,7 @@ public class AcmUserService {
     }
 
     /**
-     * ÉèÖÃserviceNameÊôĞÔµÄÖµ¡£
+     * è®¾ç½®serviceNameå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -130,7 +130,7 @@ public class AcmUserService {
     }
 
     /**
-     * »ñÈ¡serviceSuffixÊôĞÔµÄÖµ¡£
+     * è·å–serviceSuffixå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -142,7 +142,7 @@ public class AcmUserService {
     }
 
     /**
-     * ÉèÖÃserviceSuffixÊôĞÔµÄÖµ¡£
+     * è®¾ç½®serviceSuffixå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -154,7 +154,7 @@ public class AcmUserService {
     }
 
     /**
-     * »ñÈ¡strategyNameÊôĞÔµÄÖµ¡£
+     * è·å–strategyNameå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -166,7 +166,7 @@ public class AcmUserService {
     }
 
     /**
-     * ÉèÖÃstrategyNameÊôĞÔµÄÖµ¡£
+     * è®¾ç½®strategyNameå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -178,7 +178,7 @@ public class AcmUserService {
     }
 
     /**
-     * »ñÈ¡userIpÊôĞÔµÄÖµ¡£
+     * è·å–userIpå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -190,7 +190,7 @@ public class AcmUserService {
     }
 
     /**
-     * ÉèÖÃuserIpÊôĞÔµÄÖµ¡£
+     * è®¾ç½®userIpå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is

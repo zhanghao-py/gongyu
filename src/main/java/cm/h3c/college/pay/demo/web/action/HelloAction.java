@@ -9,20 +9,21 @@ import org.apache.log4j.Logger;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
-import org.apache.struts2.json.annotations.JSON;
 
+import cm.h3c.college.pay.core.cons.AjaxStatus;
+import cm.h3c.college.pay.core.web.action.GenericAction;
+import cm.h3c.college.pay.core.web.action.dto.AbstractGenericModel;
 import cm.h3c.college.pay.demo.service.HelloService;
-
-import com.opensymphony.xwork2.ActionSupport;
+import cm.h3c.college.pay.demo.web.action.dto.HelloForm;
 
 @Namespace("/hello")
-public class HelloAction extends ActionSupport {
+public class HelloAction extends GenericAction {
 	
 	private Logger log = Logger.getLogger(HelloAction.class);
 	
 	private static final long serialVersionUID = 3921807869626262750L;
-
-	private Object data;
+	
+	private HelloForm form = new HelloForm();
 	
 	@Resource(name = "helloService")
 	private HelloService helloService;
@@ -33,12 +34,12 @@ public class HelloAction extends ActionSupport {
 		String data = helloService.sayHello("zhanghao!");
 		log.info(data);
 		
-		this.data = data;
+		result.setData(data);
 		
 		return SUCCESS;
 	}
 	
-	@Action(value = "sayHelloAjax", results = { @Result(name = "success", type = "json") })
+	@Action(value = "sayHelloAjax", results = { @Result(name = "success", type = "json" , params = { "excludeNullProperties", "true", "root", "result" }) })
 	public String sayHelloAjax() {
 		
 		String msg = helloService.sayHello("zhanghao!");
@@ -46,14 +47,16 @@ public class HelloAction extends ActionSupport {
 		Map<String, Object> data = new HashMap<String, Object>();
 		data.put("msg", msg);
 		
-		this.data = data;
+		result.setStatus(AjaxStatus.SUCCESS.getValue());
+		result.setData(data);
 		
 		return SUCCESS;
 	}
-	
-	@JSON
-	public Object getData() {
-		return data;
+
+	@Override
+	public AbstractGenericModel getModel() {
+		return form;
 	}
+
 
 }

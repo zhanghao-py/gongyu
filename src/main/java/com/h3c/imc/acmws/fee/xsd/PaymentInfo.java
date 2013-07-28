@@ -9,9 +9,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>PaymentInfo complex typeµÄ Java Àà¡£
+ * <p>PaymentInfo complex typeçš„ Java ç±»ã€‚
  * 
- * <p>ÒÔÏÂÄ£Ê½Æ¬¶ÎÖ¸¶¨°üº¬ÔÚ´ËÀàÖĞµÄÔ¤ÆÚÄÚÈİ¡£
+ * <p>ä»¥ä¸‹æ¨¡å¼ç‰‡æ®µæŒ‡å®šåŒ…å«åœ¨æ­¤ç±»ä¸­çš„é¢„æœŸå†…å®¹ã€‚
  * 
  * <pre>
  * &lt;complexType name="PaymentInfo">
@@ -53,7 +53,7 @@ public class PaymentInfo {
     protected JAXBElement<String> userPassword;
 
     /**
-     * »ñÈ¡amountÊôĞÔµÄÖµ¡£
+     * è·å–amountå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -65,7 +65,7 @@ public class PaymentInfo {
     }
 
     /**
-     * ÉèÖÃamountÊôĞÔµÄÖµ¡£
+     * è®¾ç½®amountå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -77,7 +77,7 @@ public class PaymentInfo {
     }
 
     /**
-     * »ñÈ¡cardNoÊôĞÔµÄÖµ¡£
+     * è·å–cardNoå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -89,7 +89,7 @@ public class PaymentInfo {
     }
 
     /**
-     * ÉèÖÃcardNoÊôĞÔµÄÖµ¡£
+     * è®¾ç½®cardNoå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -101,7 +101,7 @@ public class PaymentInfo {
     }
 
     /**
-     * »ñÈ¡clientIpÊôĞÔµÄÖµ¡£
+     * è·å–clientIpå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -113,7 +113,7 @@ public class PaymentInfo {
     }
 
     /**
-     * ÉèÖÃclientIpÊôĞÔµÄÖµ¡£
+     * è®¾ç½®clientIpå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -125,7 +125,7 @@ public class PaymentInfo {
     }
 
     /**
-     * »ñÈ¡userNameÊôĞÔµÄÖµ¡£
+     * è·å–userNameå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -137,7 +137,7 @@ public class PaymentInfo {
     }
 
     /**
-     * ÉèÖÃuserNameÊôĞÔµÄÖµ¡£
+     * è®¾ç½®userNameå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -149,7 +149,7 @@ public class PaymentInfo {
     }
 
     /**
-     * »ñÈ¡userPasswordÊôĞÔµÄÖµ¡£
+     * è·å–userPasswordå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -161,7 +161,7 @@ public class PaymentInfo {
     }
 
     /**
-     * ÉèÖÃuserPasswordÊôĞÔµÄÖµ¡£
+     * è®¾ç½®userPasswordå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is

@@ -2,8 +2,8 @@ package cm.h3c.college.pay.payment.cons;
 
 public enum CAMSResult {
 	
-	SUCCESS("ЁДж╣Ёи╧╕", (short) 1), 
-	FAIL("ЁДж╣й╖╟э", (short) 2);
+	SUCCESS("Е┘┘Е─╪Ф┬░Е┼÷", (short) 1), 
+	FAIL("Е┘┘Е─╪Е╓╠Х╢╔", (short) 2);
 
 	private String name;
 	private Short value;

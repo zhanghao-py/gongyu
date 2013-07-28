@@ -11,9 +11,9 @@ import com.h3c.imc.common.ws.xsd.WSCommonResult;
 
 
 /**
- * <p>RetPaymentRecordList complex typeµÄ Java Àà¡£
+ * <p>RetPaymentRecordList complex typeçš„ Java ç±»ã€‚
  * 
- * <p>ÒÔÏÂÄ£Ê½Æ¬¶ÎÖ¸¶¨°üº¬ÔÚ´ËÀàÖĞµÄÔ¤ÆÚÄÚÈİ¡£
+ * <p>ä»¥ä¸‹æ¨¡å¼ç‰‡æ®µæŒ‡å®šåŒ…å«åœ¨æ­¤ç±»ä¸­çš„é¢„æœŸå†…å®¹ã€‚
  * 
  * <pre>
  * &lt;complexType name="RetPaymentRecordList">

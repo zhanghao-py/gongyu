@@ -1,30 +1,25 @@
 package cm.h3c.college.pay.core.web.action;
 
-import org.apache.struts2.json.annotations.JSON;
+import cm.h3c.college.pay.core.web.action.dto.AbstractGenericModel;
+import cm.h3c.college.pay.core.web.action.dto.AjaxResult;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.ModelDriven;
 
-public class GenericAction extends ActionSupport {
+public class GenericAction extends ActionSupport implements ModelDriven<AbstractGenericModel> {
 
 	private static final long serialVersionUID = 4417165019227377914L;
 
-	protected Long status;
-	protected String statusInfo = "";
-	protected Object data;
+	protected AjaxResult result = new AjaxResult();
+	protected AbstractGenericModel model;
 
-	@JSON
-	public Long getStatus() {
-		return status;
+	@Override
+	public AbstractGenericModel getModel() {
+		return model;
 	}
-
-	@JSON
-	public String getStatusInfo() {
-		return statusInfo;
-	}
-
-	@JSON
-	public Object getData() {
-		return data;
+	
+	public AjaxResult getResult() {
+		return result;
 	}
 
 }

@@ -9,9 +9,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>SelfPaymentInfo complex typeµÄ Java Àà¡£
+ * <p>SelfPaymentInfo complex typeçš„ Java ç±»ã€‚
  * 
- * <p>ÒÔÏÂÄ£Ê½Æ¬¶ÎÖ¸¶¨°üº¬ÔÚ´ËÀàÖĞµÄÔ¤ÆÚÄÚÈİ¡£
+ * <p>ä»¥ä¸‹æ¨¡å¼ç‰‡æ®µæŒ‡å®šåŒ…å«åœ¨æ­¤ç±»ä¸­çš„é¢„æœŸå†…å®¹ã€‚
  * 
  * <pre>
  * &lt;complexType name="SelfPaymentInfo">
@@ -45,7 +45,7 @@ public class SelfPaymentInfo {
     protected JAXBElement<String> userName;
 
     /**
-     * »ñÈ¡cardNumÊôĞÔµÄÖµ¡£
+     * è·å–cardNumå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -57,7 +57,7 @@ public class SelfPaymentInfo {
     }
 
     /**
-     * ÉèÖÃcardNumÊôĞÔµÄÖµ¡£
+     * è®¾ç½®cardNumå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -69,7 +69,7 @@ public class SelfPaymentInfo {
     }
 
     /**
-     * »ñÈ¡cardPasswordÊôĞÔµÄÖµ¡£
+     * è·å–cardPasswordå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -81,7 +81,7 @@ public class SelfPaymentInfo {
     }
 
     /**
-     * ÉèÖÃcardPasswordÊôĞÔµÄÖµ¡£
+     * è®¾ç½®cardPasswordå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -93,7 +93,7 @@ public class SelfPaymentInfo {
     }
 
     /**
-     * »ñÈ¡userNameÊôĞÔµÄÖµ¡£
+     * è·å–userNameå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -105,7 +105,7 @@ public class SelfPaymentInfo {
     }
 
     /**
-     * ÉèÖÃuserNameÊôĞÔµÄÖµ¡£
+     * è®¾ç½®userNameå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
