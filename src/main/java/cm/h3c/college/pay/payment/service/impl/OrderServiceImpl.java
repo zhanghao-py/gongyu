@@ -1,40 +1,38 @@
 package cm.h3c.college.pay.payment.service.impl;
 
-import java.io.File;
 import java.math.BigDecimal;
-import java.net.MalformedURLException;
 
 import javax.annotation.Resource;
-import javax.xml.ws.BindingProvider;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import cm.h3c.college.pay.core.exception.ServiceException;
-import cm.h3c.college.pay.core.ws.soap.SOAPKeepSessionHandlerSettor;
+import cm.h3c.college.pay.payment.bo.College;
 import cm.h3c.college.pay.payment.bo.Order;
+import cm.h3c.college.pay.payment.cons.CAMSResult;
 import cm.h3c.college.pay.payment.cons.OrderStatus;
 import cm.h3c.college.pay.payment.dao.OrderDao;
+import cm.h3c.college.pay.payment.service.CollegeServcie;
 import cm.h3c.college.pay.payment.service.OrderService;
 import cm.h3c.college.pay.payment.web.action.dto.OrderForm;
-
-import com.h3c.imc.acm.feeservice.FeeService;
-import com.h3c.imc.acm.feeservice.FeeServicePortType;
-import com.h3c.imc.acmws.fee.xsd.ObjectFactory;
-import com.h3c.imc.acmws.fee.xsd.PaymentInfo;
-import com.h3c.imc.common.ws.xsd.WSCommonResult;
-import com.h3c.imc.imcplatservice.ImcplatService;
-import com.h3c.imc.imcplatservice.ImcplatServicePortType;
+import cm.h3c.college.pay.payment.ws.delegate.FeeServiceDelegator;
+import cm.h3c.college.pay.payment.ws.delegate.ImcplatServiceDelegator;
 
 @Service("orderService")
 public class OrderServiceImpl implements OrderService {
 
 	private Logger log = Logger.getLogger(OrderService.class);
 	
+	@Resource(name = "collegeService")
+	private CollegeServcie collegeService;
+	
 	@Resource(name = "orderDao")
 	private OrderDao orderDao;
 
+	/*
+	
 	@Override
 	public void login() {
 		
@@ -68,6 +66,7 @@ public class OrderServiceImpl implements OrderService {
 		imcplatService.logout();
 		
 	}
+	
 
 	@Override
 	public void pay() {
@@ -94,6 +93,8 @@ public class OrderServiceImpl implements OrderService {
 		log.info("error code is " + result.getErrorCode());
 		
 	}
+	
+	*/
 
 	@Override
 	public Long doCreateOrder(OrderForm form) throws ServiceException {
@@ -115,17 +116,18 @@ public class OrderServiceImpl implements OrderService {
 			throw new ServiceException("表单不能为空！");
 		}
 		
-		if (form.getCollegeId() == null || form.getCollegeId()  < 1) {
+		Long collegeId = form.getCollegeId();
+		if (collegeId == null || collegeId  < 1) {
 			throw new ServiceException("collegeId不能为空！");
 		}
 		
-		// TODO 校验collegeId是否存在
+		collegeService.findCollegeById(collegeId);
 		
 		if (StringUtils.isBlank(form.getAccount())) {
 			throw new ServiceException("account不能为空！");
 		}
 		
-		// TODO 检验account是否存在
+		// TODO CAMS检验account是否存在(需要调用ws)
 		
 		if (form.getMoney() == null || form.getMoney().compareTo(BigDecimal.ONE) < 0) {
 			throw new ServiceException("money不能为空, 不能小于一元钱！");
@@ -163,6 +165,50 @@ public class OrderServiceImpl implements OrderService {
 	public void checkOrderForm(OrderForm form) throws ServiceException {
 		validateBeforeSaveOrUptOrder(form);
 		return;
+	}
+
+	@Override
+	public void doRecharge2CAMS(Long orderId) throws ServiceException {
+		
+		Order order = this.findOrderById(orderId);
+		
+		if (!order.getStatus().equals(OrderStatus.PAYING.getValue())) {
+			throw new ServiceException("只有支付中的订单，才可以向CAMS充值！");
+		}
+		
+		if (order.getCamsResult().equals(CAMSResult.FAIL.getValue())) {
+			throw new ServiceException("cmpay支付失败，无法向CAMS充值！");
+		}
+		
+		Long collegeId = order.getCollegeId();
+		College college = collegeService.findCollegeById(collegeId);
+		
+		String account = order.getAccount();
+		BigDecimal money = order.getMoney();
+		
+		ImcplatServiceDelegator imcplatServiceDelegator = new ImcplatServiceDelegator(college);
+		FeeServiceDelegator feeServiceDelegator = new FeeServiceDelegator(college);
+		
+		imcplatServiceDelegator.login();
+		feeServiceDelegator.pay(account, money.toPlainString());
+		imcplatServiceDelegator.logout();
+		
+		return;
+	}
+
+	@Override
+	public Order findOrderById(Long id) throws ServiceException {
+		if (id == null || id < 1) {
+			throw new ServiceException("id不能为空！");
+		}
+		
+		Order order = orderDao.findById(id);
+		
+		if (order == null) {
+			throw new ServiceException("order = " + id + "不存在！");
+		}
+		
+		return order;
 	}
 
 

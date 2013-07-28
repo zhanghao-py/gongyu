@@ -10,7 +10,6 @@ import cm.h3c.college.pay.core.exception.ServiceException;
 import cm.h3c.college.pay.payment.bo.College;
 import cm.h3c.college.pay.payment.dao.CollegeDao;
 import cm.h3c.college.pay.payment.service.CollegeServcie;
-import cm.h3c.college.pay.payment.web.action.dto.CollegeForm;
 
 @Service("collegeService")
 public class CollegeServiceImpl implements CollegeServcie {
@@ -19,22 +18,31 @@ public class CollegeServiceImpl implements CollegeServcie {
 	private CollegeDao collegeDao;
 	
 	@Override
-	public College findCollege(CollegeForm form) throws ServiceException {
+	public College findCollegeById(Long id) throws ServiceException {
 		
-		if (form == null) {
-			throw new ServiceException("表单不能为空！");
-		}
-		
-		if (form.getId() == null || form.getId() < 1) {
+		if (id == null || id < 1) {
 			throw new ServiceException("id不能为空！");
 		}
 		
-		return collegeDao.findById(form.getId());
+		College college = collegeDao.findById(id);
+		
+		if (college == null) {
+			throw new ServiceException("collegeId = " + id + "不存在");
+		}
+		
+		return college;
 	}
 
 	@Override
-	public List<College> findAll() {
-		return collegeDao.findAll();
+	public List<College> findAll() throws ServiceException {
+		
+		List<College> colleges = collegeDao.findAll();
+		
+		if (colleges == null || colleges.size() == 0) {
+			throw new ServiceException("当前没有college信息.");
+		}
+		
+		return colleges;
 	}
 
 }

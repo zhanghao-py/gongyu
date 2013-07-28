@@ -9,7 +9,6 @@ import org.junit.Test;
 
 import cm.h3c.college.pay.core.exception.ServiceException;
 import cm.h3c.college.pay.payment.bo.College;
-import cm.h3c.college.pay.payment.web.action.dto.CollegeForm;
 import cm.h3c.college.pay.test.core.BaseIntegrationTest;
 
 public class CollegeServiceIntegrationTest extends BaseIntegrationTest {
@@ -23,11 +22,10 @@ public class CollegeServiceIntegrationTest extends BaseIntegrationTest {
 	public void itShouldCallFindCollege() throws ServiceException {
 		
 		// [Given]
-		CollegeForm form = new CollegeForm();
-		form.setId(1L);
+		Long collegeId = 1L;
 		
 		// [When]
-		College college = collegeService.findCollege(form);
+		College college = collegeService.findCollegeById(collegeId);
 		
 		// [Then]
 		log.info("college name is " + college.getName());
@@ -35,7 +33,7 @@ public class CollegeServiceIntegrationTest extends BaseIntegrationTest {
 	}
 	
 	@Test
-	public void itShouldCallFindAll() {
+	public void itShouldCallFindAll() throws ServiceException {
 		
 		// [Given]
 		

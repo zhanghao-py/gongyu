@@ -9,4 +9,5 @@ public interface CollegeDao {
 	public List<College> findAll();
 	
 	public College findById(Long id);
+	
 }

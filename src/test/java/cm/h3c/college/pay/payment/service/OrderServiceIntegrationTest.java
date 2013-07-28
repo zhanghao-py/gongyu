@@ -19,15 +19,15 @@ public class OrderServiceIntegrationTest extends BaseIntegrationTest  {
 	@Resource(name = "orderService")
 	private OrderService orderService;
 	
-	@Test
-	public void itShouldCallHello() {
-		orderService.login();
-	}
-
-	@Test
-	public void itShouldCallPay() {
-		orderService.pay();
-	}
+//	@Test
+//	public void itShouldCallHello() {
+//		orderService.login();
+//	}
+//
+//	@Test
+//	public void itShouldCallPay() {
+//		orderService.pay();
+//	}
 	
 	@Test
 	public void itShouldCreateOrder() throws ServiceException {

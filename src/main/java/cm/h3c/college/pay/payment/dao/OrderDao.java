@@ -7,5 +7,7 @@ public interface OrderDao {
 	public int save(Order order);
 	
 	public int update(Order order);
+	
+	public Order findById(Long id);
 
 }
