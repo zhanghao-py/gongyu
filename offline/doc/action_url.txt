@@ -1,0 +1,3 @@
+http://localhost:8080/gongyu/payment/createOrder.do?account=15810710450&collegeId=1&money=7
+
+http://localhost:8080/gongyu/payment/checkOrderForm.do?account=15810710450&collegeId=1&money=7

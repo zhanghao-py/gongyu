@@ -1,24 +1,27 @@
 CREATE TABLE `gy_order` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `money` decimal NOT NULL COMMENT '½ÇÉ«Ãû³Æ',
-  `status` tinyint(4) NOT NULL COMMENT '1:¶©µ¥³õÊ¼»¯ 2:Ö§¸¶ÖĞ 3:Ö§¸¶Íê³É',
-  `pay_result` tinyint(4) NOT NULL COMMENT '1:Ö§¸¶³É¹¦ 2:Ö§¸¶Ê§°Ü',
-  `cams_result` tinyint(4) NOT NULL COMMENT '1:³äÖµ³É¹¦ 2:³äÖµÊ§°Ü',
-  `create_time` datetime NOT NULL COMMENT '´´½¨Ê±¼ä',
-  `account` varchar(100) NOT NULL COMMENT '½É·ÑÕËºÅ',
-  `college_id` bigint(20) unsigned NOT NULL COMMENT 'ËùÊôÑ§Ğ£',
+  `money` decimal NOT NULL COMMENT 'è§’è‰²åç§°',
+  `status` tinyint(4) NOT NULL COMMENT '1:è®¢å•åˆå§‹åŒ– 2:æ”¯ä»˜ä¸­ 3:æ”¯ä»˜å®Œæˆ',
+  `pay_result` tinyint(4) NULL COMMENT '1:æ”¯ä»˜æˆåŠŸ 2:æ”¯ä»˜å¤±è´¥',
+  `cams_result` tinyint(4) NULL COMMENT '1:å……å€¼æˆåŠŸ 2:å……å€¼å¤±è´¥',
+  `create_time` datetime NOT NULL COMMENT 'åˆ›å»ºæ—¶é—´',
+  `account` varchar(100) NOT NULL COMMENT 'ç¼´è´¹è´¦å·',
+  `college_id` bigint(20) unsigned NOT NULL COMMENT 'æ‰€å±å­¦æ ¡',
   PRIMARY KEY (`id`),
   KEY `order_index_college_id` (`college_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `gy_college` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL COMMENT 'Ñ§Ğ£Ãû³Æ',
+  `name` varchar(100) NOT NULL COMMENT 'å­¦æ ¡åç§°',
   `url` varchar(100) NOT NULL COMMENT 'CAMS URL',
-  `description` varchar(100) NOT NULL COMMENT '±¸×¢ĞÅÏ¢',
-  `operator_username` varchar(100) NOT NULL COMMENT '²Ù×÷Ô±-ÓÃ»§Ãû',
-  `operator_password` varchar(100) NOT NULL COMMENT '²Ù×÷Ô±-ÃÜÂë',
-  `keystore_path` varchar(100) NOT NULL COMMENT 'Ö¤ÊéÂ·¾¶',
+  `description` varchar(100) NOT NULL COMMENT 'å¤‡æ³¨ä¿¡æ¯',
+  `operator_username` varchar(100) NOT NULL COMMENT 'æ“ä½œå‘˜-ç”¨æˆ·å',
+  `operator_password` varchar(100) NOT NULL COMMENT 'æ“ä½œå‘˜-å¯†ç ',
+  `keystore_path` varchar(100) NOT NULL COMMENT 'è¯ä¹¦è·¯å¾„',
   PRIMARY KEY (`id`),
   KEY `college_index_name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `gy_college` VALUES ('1', 'åŒ—äº¬å¤§å­¦', 'http://123.120.10.78:88', 'è”ç³»äººï¼šå¼ æµ©ã€é©¬è®¡å¤', 'admin', 'admin', '/home/xxx');
+INSERT INTO `gy_college` VALUES ('2', 'æ¸…åå¤§å­¦', 'http://123.120.10.78:88', 'è”ç³»äººï¼šå¼ æµ©ã€é©¬è®¡å¤', 'admin', 'admin', '/home/xxx/ddd');
