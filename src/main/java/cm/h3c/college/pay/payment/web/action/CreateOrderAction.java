@@ -12,6 +12,7 @@ import org.apache.struts2.convention.annotation.Result;
 
 import cm.h3c.college.pay.core.cons.AjaxStatus;
 import cm.h3c.college.pay.core.exception.ServiceException;
+import cm.h3c.college.pay.core.util.SecurityCodeCompareUtil;
 import cm.h3c.college.pay.core.web.action.GenericAction;
 import cm.h3c.college.pay.core.web.action.dto.AbstractGenericModel;
 import cm.h3c.college.pay.payment.service.OrderService;
@@ -23,6 +24,7 @@ public class CreateOrderAction extends GenericAction {
 	private Logger log = Logger.getLogger(CreateOrderAction.class);
 	private static final long serialVersionUID = -1541026036542059117L;
 	
+	private String securityCode;
 	private OrderForm form = new OrderForm();
 	
 	@Resource(name = "orderService")
@@ -38,7 +40,7 @@ public class CreateOrderAction extends GenericAction {
 		} catch (ServiceException e) {
 			log.warn(e);
 			result.setStatus(AjaxStatus.ERROR.getValue());
-			result.setStatusInfo( e.getMessage());
+			result.setStatusInfo(e.getMessage());
 			return SUCCESS;
 		}
 		
@@ -52,14 +54,19 @@ public class CreateOrderAction extends GenericAction {
 	
 	@Action(value = "checkOrderForm", results = { @Result(name = "success", type = "json", params = { "excludeNullProperties", "true", "root", "result" }) })
 	public String checkOrderFormAjax() {
-		// TODO: 校验 验证码
+		
+		if (!SecurityCodeCompareUtil.compare(securityCode)) {
+			result.setStatus(AjaxStatus.ERROR.getValue());
+			result.setStatusInfo("验证码输入不正确！");
+			return SUCCESS;
+		}
 		
 		try {
 			orderService.checkOrderForm(form);
 		} catch (ServiceException e) {
 			log.warn(e);
 			result.setStatus(AjaxStatus.ERROR.getValue());
-			result.setStatusInfo( e.getMessage());
+			result.setStatusInfo(e.getMessage());
 			return SUCCESS;
 		}
 		
@@ -70,6 +77,10 @@ public class CreateOrderAction extends GenericAction {
 	@Override
 	public AbstractGenericModel getModel() {
 		return form;
+	}
+
+	public void setSecurityCode(String securityCode) {
+		this.securityCode = securityCode;
 	}
 	
 
