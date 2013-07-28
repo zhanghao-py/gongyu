@@ -25,7 +25,6 @@ public class HelloVelocityAction extends ActionSupport {
 	
 	@Action(value = "helloVelocity", results = { @Result(name = "success", type = "velocity", location = "/vm/hello.vm") })
 	public String helloVelocity() {
-		
 		String msg = helloService.sayHello("zhanghao!");
 		this.data = msg;
 		return SUCCESS;

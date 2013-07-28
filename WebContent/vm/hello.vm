@@ -1,5 +1,6 @@
 <html>
 <body>
 <h2>$data</h2>
+<input type="hidden" name="token" value="$TokenHelper.setToken("token")" />
 </body>
 </html>

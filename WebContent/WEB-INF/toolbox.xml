@@ -54,4 +54,9 @@
 			org.apache.velocity.tools.struts.ValidatorTool
 		</class>
 	</tool>
+	<tool>
+		<key>TokenHelper</key>
+		<scope>request</scope>
+		<class>org.apache.struts2.util.TokenHelper</class>
+	</tool>
 </toolbox> 
