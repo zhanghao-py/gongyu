@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<!-- 每日定时任务 -->
+	<bean name="recommendArchiveJob" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass"
+			value="cm.h3c.college.pay.core.task.RecommendArchiveJob" />
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="recommendMgr" value-ref="recommendMgr" />
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="recommendArchiveTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="recommendArchiveJob" />
+		<property name="cronExpression" value="0 5 0 * * ? *" /> 
+		<!-- <property name="cronExpression" value="0 0/2 * * * ? *" /> -->
+	</bean>
+
+	<bean id="scheduler"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="recommendArchiveTrigger" />
+			</list>
+		</property>
+		<property name="startupDelay" value="30" />
+	</bean>
+</beans>

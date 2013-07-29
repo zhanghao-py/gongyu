@@ -25,6 +25,7 @@
 		<javax.jws.version>1.0-MR1</javax.jws.version>
 		<struts.version>2.3.15.1</struts.version>
 		<velocity-tools.version>2.0</velocity-tools.version>
+		<quartz.version>2.2.0</quartz.version>
 		
 	</properties>
 	
@@ -194,6 +195,12 @@
 			<groupId>org.apache.velocity</groupId>
 			<artifactId>velocity-tools</artifactId>
 			<version>${velocity-tools.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+			<version>${quartz.version}</version>
 		</dependency>
 		
 	</dependencies>

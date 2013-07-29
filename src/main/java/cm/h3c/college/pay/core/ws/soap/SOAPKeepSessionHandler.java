@@ -10,8 +10,11 @@ import javax.xml.ws.handler.MessageContext;
 import javax.xml.ws.handler.soap.SOAPHandler;
 import javax.xml.ws.handler.soap.SOAPMessageContext;
 
+import org.apache.log4j.Logger;
+
 public class SOAPKeepSessionHandler implements SOAPHandler<SOAPMessageContext> {
 	
+	private Logger log = Logger.getLogger(SOAPKeepSessionHandler.class);
 	private List<String> cookie = null;
 
 	@Override
@@ -54,7 +57,7 @@ public class SOAPKeepSessionHandler implements SOAPHandler<SOAPMessageContext> {
 			}
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.warn(e);
 		}
 		
 		return true;
