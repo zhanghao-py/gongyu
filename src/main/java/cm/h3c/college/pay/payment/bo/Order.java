@@ -48,6 +48,16 @@ public class Order implements Serializable {
 	private Date createTime;
 	
 	/**
+	 * 付款开始时间
+	 */
+	private Date payTime;
+	
+	/**
+	 * 完成时间
+	 */
+	private Date finishTime;
+	
+	/**
 	 * 缴费账号
 	 */
 	private String account;
@@ -56,6 +66,8 @@ public class Order implements Serializable {
 	 * 所属学校id
 	 */
 	private Long collegeId;
+	
+	public Order() {}
 	
 	public Order(OrderForm form) {
 		setAccount(form.getAccount());
@@ -178,5 +190,22 @@ public class Order implements Serializable {
 		this.collegeId = collegeId;
 	}
 
+	public Date getPayTime() {
+		return payTime;
+	}
+
+	public void setPayTime(Date payTime) {
+		this.payTime = payTime;
+	}
+
+	public Date getFinishTime() {
+		return finishTime;
+	}
+
+	public void setFinishTime(Date finishTime) {
+		this.finishTime = finishTime;
+	}
+
+	
 
 }

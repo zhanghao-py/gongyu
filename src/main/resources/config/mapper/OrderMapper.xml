@@ -9,13 +9,15 @@
 		<result column="pay_result" property="payResult" jdbcType="SMALLINT" />
 		<result column="cams_result" property="camsResult" jdbcType="SMALLINT" />
 		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="pay_time" property="payTime" jdbcType="TIMESTAMP" />
+		<result column="finish_time" property="finishTime" jdbcType="TIMESTAMP" />
 		<result column="account" property="account" jdbcType="VARCHAR" />
 		<result column="college_id" property="collegeId" jdbcType="BIGINT" />
 
 	</resultMap>
 	
 	<sql id="Base_Column_List">
-		id, money, status, pay_result, cams_result, create_time, account, college_id
+		id, money, status, pay_result, cams_result, create_time, pay_time, finish_time, account, college_id
 	</sql>
 	
 	<insert id="save"
@@ -37,7 +39,7 @@
 	<update id="update"
 		parameterType="cm.h3c.college.pay.payment.bo.Order"
 		flushCache="true">
-		update gy_college
+		update gy_order
 		<set>
 			<if test="money != null">
 				money = #{money, jdbcType=DECIMAL},
@@ -59,6 +61,33 @@
 			id = #{id, jdbcType=BIGINT}
 		</where>
 	</update>
+	
+	<update id="updateOrdersStatusByIds" flushCache="true">
+		update gy_order
+		<set>
+			status = #{status, jdbcType=SMALLINT},
+		</set>
+		<where> 
+			id in
+			<foreach item="id" index="index" collection="ids" open="("
+				separator="," close=")">
+				#{id}
+			</foreach>
+		</where>
+	</update>
+	
+	<select id="findAllUnpaidOrdersMoreThan30Mins" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from gy_order
+		<where>
+			<![CDATA[
+			pay_result IS NULL
+			and status = 2
+			and pay_time < subdate(now(), interval 30 minute)
+			]]>
+		</where>
+	</select>
 
 
 

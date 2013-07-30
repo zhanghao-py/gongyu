@@ -1,5 +1,7 @@
 package cm.h3c.college.pay.payment.service;
 
+import java.util.List;
+
 import cm.h3c.college.pay.core.exception.ServiceException;
 import cm.h3c.college.pay.payment.bo.Order;
 import cm.h3c.college.pay.payment.web.action.dto.OrderForm;
@@ -15,5 +17,7 @@ public interface OrderService {
 	
 	public void checkOrderForm(OrderForm form) throws ServiceException;
 	
+	public void updateOrdersStatus2CanceledByIds(List<Long> ids) throws ServiceException;
 
+	public void doCancelOrderAutomatically() throws ServiceException;
 }

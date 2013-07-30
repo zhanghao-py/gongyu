@@ -1,6 +1,8 @@
 package cm.h3c.college.pay.payment.service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -42,5 +44,27 @@ public class OrderServiceIntegrationTest extends BaseIntegrationTest  {
 		
 		// [Then]
 		log.info("orderId is " + id);
+	}
+	
+	@Test
+	public void itShouldUpdateOrdersStatus2Canceled() throws ServiceException {
+		// [Given]
+		List<Long> ids = new ArrayList<Long>();
+		ids.add(8L);
+		
+		// [When]
+		orderService.updateOrdersStatus2CanceledByIds(ids);
+		
+		// [Then]
+	}
+	
+	@Test
+	public void itShouldCancelOrderAutomatically() throws ServiceException {
+		// [Given]
+		
+		// [When]
+		orderService.doCancelOrderAutomatically();
+		
+		// [Then]
 	}
 }

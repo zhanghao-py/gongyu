@@ -1,9 +1,12 @@
 package cm.h3c.college.pay.payment.service.impl;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.Transformer;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
@@ -209,6 +212,37 @@ public class OrderServiceImpl implements OrderService {
 		}
 		
 		return order;
+	}
+
+	@Override
+	public void updateOrdersStatus2CanceledByIds(List<Long> ids)
+			throws ServiceException {
+		if (ids == null || ids.size() < 1) {
+			throw new ServiceException("ids不能为空！");
+		}
+		
+		orderDao.updateOrdersStatusByIds(ids, OrderStatus.CANCELED.getValue());
+		return;
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public void doCancelOrderAutomatically() throws ServiceException {
+		List<Order> orders = orderDao.findAllUnpaidOrdersMoreThan30Mins();
+		
+		if (orders == null || orders.size() < 1) {
+			return;
+		}
+		
+		List<Long> orderIds = (List<Long>) CollectionUtils.collect(orders, new Transformer() {
+			@Override
+			public Object transform(Object object) {
+				Order order = (Order) object;
+				return order.getId();
+			}
+		});
+		
+		this.updateOrdersStatus2CanceledByIds(orderIds);
 	}
 
 

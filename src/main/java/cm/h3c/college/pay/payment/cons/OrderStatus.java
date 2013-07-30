@@ -4,7 +4,8 @@ public enum OrderStatus {
 	
 	INIT("单订初始化", (short) 1), 
 	PAYING("支付中", (short) 2), 
-	DONE("支付完成", (short) 3);
+	DONE("支付完成", (short) 3),
+	CANCELED("取消", (short) 4);
 
 	private String name;
 	private Short value;
