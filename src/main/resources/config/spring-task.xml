@@ -7,18 +7,20 @@
            http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
 	<!-- 每日定时任务 -->
-	<bean name="recommendArchiveJob" class="org.springframework.scheduling.quartz.JobDetailBean">
+	<bean name="cancellationOrderArchiveJob" class="org.springframework.scheduling.quartz.JobDetailBean">
 		<property name="jobClass"
-			value="cm.h3c.college.pay.core.task.RecommendArchiveJob" />
+			value="cm.h3c.college.pay.core.task.CancellationOrderArchiveJob" />
+		<!-- 
 		<property name="jobDataAsMap">
 			<map>
 				<entry key="recommendMgr" value-ref="recommendMgr" />
 			</map>
 		</property>
+		-->
 	</bean>
 	
-	<bean id="recommendArchiveTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
-		<property name="jobDetail" ref="recommendArchiveJob" />
+	<bean id="cancellationOrderArchiveTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="cancellationOrderArchiveJob" />
 		<property name="cronExpression" value="0 5 0 * * ? *" /> 
 		<!-- <property name="cronExpression" value="0 0/2 * * * ? *" /> -->
 	</bean>
@@ -27,7 +29,7 @@
 		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<property name="triggers">
 			<list>
-				<ref bean="recommendArchiveTrigger" />
+				<ref bean="cancellationOrderArchiveTrigger" />
 			</list>
 		</property>
 		<property name="startupDelay" value="30" />
