@@ -66,6 +66,12 @@
 		update gy_order
 		<set>
 			status = #{status, jdbcType=SMALLINT},
+			<if test="status == 2">
+				pay_time = now(),
+			</if>
+			<if test="status == 3">
+				finish_time = now(),
+			</if>
 		</set>
 		<where> 
 			id in
@@ -76,7 +82,7 @@
 		</where>
 	</update>
 	
-	<select id="findAllUnpaidOrdersMoreThan30Mins" resultMap="BaseResultMap">
+	<select id="findAllUnpaidOrdersMoreThan12Hours" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
 		from gy_order
@@ -84,7 +90,7 @@
 			<![CDATA[
 			pay_result IS NULL
 			and status = 2
-			and pay_time < subdate(now(), interval 30 minute)
+			and pay_time < subdate(now(), interval 12 hour)
 			]]>
 		</where>
 	</select>

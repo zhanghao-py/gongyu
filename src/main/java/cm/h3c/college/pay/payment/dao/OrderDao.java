@@ -16,6 +16,6 @@ public interface OrderDao {
 	
 	public void updateOrdersStatusByIds(@Param("ids") List<Long> ids, @Param("status") Short status);
 
-	public List<Order> findAllUnpaidOrdersMoreThan30Mins();
+	public List<Order> findAllUnpaidOrdersMoreThan12Hours();
 
 }

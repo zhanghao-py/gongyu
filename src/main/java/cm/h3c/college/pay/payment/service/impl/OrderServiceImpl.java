@@ -1,6 +1,7 @@
 package cm.h3c.college.pay.payment.service.impl;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -228,7 +229,7 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	@SuppressWarnings("unchecked")
 	public void doCancelOrderAutomatically() throws ServiceException {
-		List<Order> orders = orderDao.findAllUnpaidOrdersMoreThan30Mins();
+		List<Order> orders = orderDao.findAllUnpaidOrdersMoreThan12Hours();
 		
 		if (orders == null || orders.size() < 1) {
 			return;
@@ -243,6 +244,43 @@ public class OrderServiceImpl implements OrderService {
 		});
 		
 		this.updateOrdersStatus2CanceledByIds(orderIds);
+	}
+
+	@Override
+	public void doPayOrder(Long orderId) throws ServiceException {
+		
+		if (orderId == null || orderId < 1) {
+			throw new ServiceException("orderId不能为空！");
+		}
+		
+		// 订单状态检查
+		Order order = orderDao.findById(orderId);
+		
+		if (order == null) {
+			throw new ServiceException("order id = " + orderId + ", 该订单不存在！");
+		}
+		
+		if (!order.getStatus().equals(OrderStatus.INIT.getValue())) {
+			throw new ServiceException("只有处于初始化状态的订单, 方可进行付款！");
+		}
+		
+		// 修改订单状态
+		this.updateOrderStatus2PayingById(orderId);
+		
+		// TODO:跳转到cmpay付款
+	}
+
+	@Override
+	public void updateOrderStatus2PayingById(Long id) throws ServiceException {
+		if (id == null || id < 1) {
+			throw new ServiceException("id不能为空！");
+		}
+		
+		List<Long> ids = new ArrayList<Long>();
+		ids.add(id);
+		
+		orderDao.updateOrdersStatusByIds(ids, OrderStatus.PAYING.getValue());
+		return;		
 	}
 
 

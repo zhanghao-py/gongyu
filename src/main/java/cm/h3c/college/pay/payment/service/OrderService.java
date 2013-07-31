@@ -9,15 +9,23 @@ import cm.h3c.college.pay.payment.web.action.dto.OrderForm;
 
 public interface OrderService {
 	
-	public Order findOrderById(Long id) throws ServiceException;
-	
-	public void doRecharge2CAMS(Long orderId) throws ServiceException;
+	public void checkOrderForm(OrderForm form) throws ServiceException;
 	
 	public Long doCreateOrder(OrderForm form) throws ServiceException;
 	
-	public void checkOrderForm(OrderForm form) throws ServiceException;
+	public void doPayOrder(Long orderId) throws ServiceException;
+	
+//	public void doFinishOrder(Long orderId) throws ServiceException;
+		
+	
+	public void doRecharge2CAMS(Long orderId) throws ServiceException;
+	
+	public void doCancelOrderAutomatically() throws ServiceException;
+	
+	
+	public Order findOrderById(Long id) throws ServiceException;
 	
 	public void updateOrdersStatus2CanceledByIds(List<Long> ids) throws ServiceException;
 
-	public void doCancelOrderAutomatically() throws ServiceException;
+	public void updateOrderStatus2PayingById(Long id) throws ServiceException;
 }
