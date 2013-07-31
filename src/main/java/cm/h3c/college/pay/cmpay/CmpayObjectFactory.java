@@ -43,19 +43,19 @@ public class CmpayObjectFactory {
 	}
 
 	void sign(CmpaySignable obj) {
-		try {
+/*		try {
 			obj.setSign(SignUtil.doGenerateSign(obj.prepareSignData()));
 		} catch (SignEncException e) {
 			throw new IllegalArgumentException(e);
 		}
-	}
+*/	}
 
 	String toXml(Object obj) {
 		try {
 			Class<?> clazz = obj.getClass();
 			StringBuilder ret = new StringBuilder();
 			ret.append("<MESSAGE>");
-			for (Field field : clazz.getFields()) {
+			for (Field field : clazz.getDeclaredFields()) {
 				ret.append("<").append(field.getName().toUpperCase())
 						.append(">");
 				ret.append(StringUtils.stripToEmpty((String) field.get(obj)));
