@@ -11,7 +11,6 @@ import java.io.InputStream;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
-import javax.imageio.stream.ImageOutputStream;
 
 import org.apache.log4j.Logger;
 import org.apache.struts2.convention.annotation.Action;
@@ -79,12 +78,9 @@ public class SecurityCodeAction extends GenericAction {
 		// 图象生效
 		g.dispose();
         ByteArrayOutputStream output = new ByteArrayOutputStream();  
-        ImageOutputStream imageOut = ImageIO.createImageOutputStream(output);  
-        ImageIO.write(image, "JPEG", imageOut);  
-        imageOut.close();
+        ImageIO.write(image, "JPEG", output);  
         
         inputStream = new ByteArrayInputStream(output.toByteArray());
-        
         log.info("code is " + code);
 		
 		return SUCCESS;
