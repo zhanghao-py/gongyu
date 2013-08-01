@@ -27,11 +27,17 @@
 		<velocity-tools.version>2.0</velocity-tools.version>
 		<quartz.version>2.2.0</quartz.version>
 		<xstream.version>1.4.4</xstream.version>
+		<httpclient.version>4.2.5</httpclient.version>
 		
 	</properties>
 	
 	
 	<dependencies>
+		<dependency>
+  			<groupId>org.apache.httpcomponents</groupId>
+  			<artifactId>httpclient</artifactId>
+  			<version>${httpclient.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>com.thoughtworks.xstream</groupId>
 			<artifactId>xstream</artifactId>
