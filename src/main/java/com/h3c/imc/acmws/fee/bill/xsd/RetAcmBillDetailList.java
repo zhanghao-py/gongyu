@@ -1,4 +1,3 @@
-﻿
 package com.h3c.imc.acmws.fee.bill.xsd;
 
 import java.util.ArrayList;
