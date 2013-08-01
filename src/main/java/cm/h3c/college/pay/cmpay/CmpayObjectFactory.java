@@ -4,25 +4,38 @@ import java.lang.reflect.Field;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.thoughtworks.xstream.XStream;
 import com.umpay.mpay.SignEncException;
 import com.umpay.mpay.SignUtil;
 
 public class CmpayObjectFactory {
 	public CmpayPaymentCallBackRequest parseCmpayPaymentCallBackRequest(
 			String xml) {
-		CmpayPaymentCallBackRequest request = new CmpayPaymentCallBackRequest();
-		// TODO parse xml to object
+		XStream xstream = new XStream();
+		xstream.alias("MESSAGE", CmpayPaymentCallBackRequest.class);
+		CmpayPaymentCallBackRequest request = (CmpayPaymentCallBackRequest) xstream
+				.fromXML(xml);
 		checkSign(request, xml);
 		return request;
 	}
 
 	public CmpayPaymentCallBackWebRequest parseCmpayPaymentCallBackWebRequest(
 			String xml) {
-		return null;
+		XStream xstream = new XStream();
+		xstream.alias("MESSAGE", CmpayPaymentCallBackWebRequest.class);
+		CmpayPaymentCallBackWebRequest request = (CmpayPaymentCallBackWebRequest) xstream
+				.fromXML(xml);
+		checkSign(request, xml);
+		return request;
 	}
 
 	public CmpayPaymentCheckResponse parseCmpayPaymentCheckResponse(String xml) {
-		return null;
+		XStream xstream = new XStream();
+		xstream.alias("MESSAGE", CmpayPaymentCheckResponse.class);
+		CmpayPaymentCheckResponse response = (CmpayPaymentCheckResponse) xstream
+				.fromXML(xml);
+		checkSign(response, xml);
+		return response;
 	}
 
 	void checkSign(CmpaySignable signedObj, String xml) {
@@ -43,12 +56,10 @@ public class CmpayObjectFactory {
 	}
 
 	void sign(CmpaySignable obj) {
-/*		try {
-			obj.setSign(SignUtil.doGenerateSign(obj.prepareSignData()));
-		} catch (SignEncException e) {
-			throw new IllegalArgumentException(e);
-		}
-*/	}
+		/*
+		 * try { obj.setSign(SignUtil.doGenerateSign(obj.prepareSignData())); }
+		 * catch (SignEncException e) { throw new IllegalArgumentException(e); }
+		 */}
 
 	String toXml(Object obj) {
 		try {
@@ -62,7 +73,7 @@ public class CmpayObjectFactory {
 				ret.append("</").append(field.getName().toUpperCase())
 						.append(">");
 			}
-			ret.append("<MESSAGE>");
+			ret.append("</MESSAGE>");
 			return ret.toString();
 		} catch (Exception e) {
 			throw new IllegalArgumentException("transfer obj to xml error, "

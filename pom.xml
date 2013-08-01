@@ -26,12 +26,17 @@
 		<struts.version>2.3.15.1</struts.version>
 		<velocity-tools.version>2.0</velocity-tools.version>
 		<quartz.version>2.2.0</quartz.version>
+		<xstream.version>1.4.4</xstream.version>
 		
 	</properties>
 	
 	
 	<dependencies>
-
+		<dependency>
+			<groupId>com.thoughtworks.xstream</groupId>
+			<artifactId>xstream</artifactId>
+			<version>${xstream.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
