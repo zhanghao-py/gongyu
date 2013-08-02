@@ -26,10 +26,27 @@ public class OrderServiceIntegrationTest extends BaseIntegrationTest  {
 //		orderService.login();
 //	}
 //
-//	@Test
-//	public void itShouldCallPay() {
-//		orderService.pay();
-//	}
+	@Test
+	public void itShouldCallPay() throws ServiceException {
+		
+		// [Given]
+		Long orderId = 2L;
+		
+		// [When]
+		orderService.doPayOrder(orderId);
+	}
+	
+	@Test
+	public void itShouldRecharge2CAMS() throws ServiceException {
+		
+		// [Given]
+		Long orderId = 2L;
+		
+		// [When]
+		orderService.doRecharge2CAMS(orderId);
+	}
+	
+	
 	
 	@Test
 	public void itShouldCreateOrder() throws ServiceException {

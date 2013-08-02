@@ -94,6 +94,15 @@
 			]]>
 		</where>
 	</select>
+	
+	<select id="findById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from gy_order
+		<where> 
+			id = #{id, jdbcType=BIGINT}
+		</where>
+	</select>
 
 
 
