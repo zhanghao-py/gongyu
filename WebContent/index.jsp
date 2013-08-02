@@ -9,5 +9,6 @@
 <br/>
 <br/>
 <div><a href="cm/paymentAction_pageInit.html">缴费</a></div>
+<div><img src="security/buildCode.do" /></div>
 </body>
 </html>

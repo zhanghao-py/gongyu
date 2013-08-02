@@ -32,7 +32,8 @@ public class SecurityCodeAction extends GenericAction {
 	private InputStream inputStream;
 	
 	@Action(value = "buildCode", results = { @Result(name = "success", type = "stream", params = {
-			"contentType", "image/jpeg", "inputName", "inputStream"}) })
+			"contentType", "image/jpeg", "inputName", "inputStream", "Pragma",
+			"No-cache", "Cache-Control", "no-cache", "Expires", "0" }) })
 	public String buildCode() throws IOException {
 		
 		// 在内存中创建图象
