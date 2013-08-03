@@ -21,13 +21,29 @@ public class OrderServiceIntegrationTest extends BaseIntegrationTest  {
 	@Resource(name = "orderService")
 	private OrderService orderService;
 	
-//	@Test
-//	public void itShouldCallHello() {
-//		orderService.login();
-//	}
-//
 	@Test
-	public void itShouldCallPay() throws ServiceException {
+	public void itShouldCheckOrder() throws ServiceException {
+		
+		// [Given]
+		OrderForm form = new OrderForm();
+		form.setAccount("15810710450");
+		form.setMoney(BigDecimal.TEN);
+		form.setCollegeId(1L);
+		
+		// [When]
+		orderService.checkOrderForm(form);
+		
+		form.setAccount("15810714450");
+		form.setMoney(BigDecimal.TEN);
+		form.setCollegeId(1L);
+		
+		// [When]
+		orderService.checkOrderForm(form);
+	}
+
+	
+	@Test
+	public void itShouldPayOrder() throws ServiceException {
 		
 		// [Given]
 		Long orderId = 2L;

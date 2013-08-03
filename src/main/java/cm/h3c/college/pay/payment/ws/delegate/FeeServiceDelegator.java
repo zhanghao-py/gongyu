@@ -21,16 +21,18 @@ public class FeeServiceDelegator {
 
 	private Logger log = Logger.getLogger(FeeServiceDelegator.class);
 	
-	private final String wsdlUrl = "/imcws/services/feeService?wsdl";
-//	private final String wsdlUrl = "/imcws/services/feeService.wsdl";
+//	private final String wsdlUrl = "/imcws/services/feeService?wsdl";
+	private final String wsdlUrl = "/imcws/services/feeService.wsdl";
 	
 	private String baseUrl;
 	
 	private FeeServicePortType feeService;
+	private ImcplatServiceDelegator imcplatServiceDelegator;
 	
 	public FeeServiceDelegator(College college) {
 		this.baseUrl = college.getUrl();
 		init();
+		imcplatServiceDelegator = new ImcplatServiceDelegator(college);
 	}
 
 	private void init() {
@@ -55,7 +57,9 @@ public class FeeServiceDelegator {
 		info.setUserName(of.createPaymentInfoUserName(account));
 		info.setAmount(of.createPaymentInfoAmount(money));
 		
+		imcplatServiceDelegator.login();
 		WSCommonResult result = feeService.pay(info);
+		imcplatServiceDelegator.logout();
 		
 		int errorCode = result.getErrorCode();
 		

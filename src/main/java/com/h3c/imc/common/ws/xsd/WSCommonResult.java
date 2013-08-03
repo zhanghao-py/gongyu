@@ -7,12 +7,31 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
+
 import com.h3c.imc.acmws.fee.accessuser.xsd.RetAcmUserServiceList;
 import com.h3c.imc.acmws.fee.bill.xsd.RetAcmBillDetailList;
 import com.h3c.imc.acmws.fee.bill.xsd.RetAcmUserBillList;
 import com.h3c.imc.acmws.fee.paymentrecord.xsd.RetPaymentRecordList;
 import com.h3c.imc.acmws.fee.xsd.RandomInfo;
 import com.h3c.imc.acmws.fee.xsd.RetUserBalance;
+import com.h3c.imc.acmws.user.accessuser.xsd.RetAcmUser;
+import com.h3c.imc.acmws.user.accessuser.xsd.RetAcmUserFullInfo;
+import com.h3c.imc.acmws.user.accessuser.xsd.RetAcmUserList;
+import com.h3c.imc.acmws.user.accessuser.xsd.RetAcmUserService;
+import com.h3c.imc.acmws.user.accessuser.xsd.RetCancelUserInfo;
+import com.h3c.imc.acmws.user.accessuser.xsd.RetPassword;
+import com.h3c.imc.acmws.user.blacklist.xsd.RetAcmBlackInfo;
+import com.h3c.imc.acmws.user.blacklist.xsd.RetAcmBlackInfoList;
+import com.h3c.imc.acmws.user.ldap.xsd.RetAcmSyncPolicyInfo;
+import com.h3c.imc.acmws.user.ldap.xsd.RetAcmSyncPolicyInfoList;
+import com.h3c.imc.acmws.user.ldap.xsd.RetAcmSyncPolicyUserInfo;
+import com.h3c.imc.acmws.user.ldap.xsd.RetAcmSyncPolicyUserInfoList;
+import com.h3c.imc.acmws.user.onlineuser.xsd.RetAcmAccessDetailList;
+import com.h3c.imc.acmws.user.onlineuser.xsd.RetAcmOnlineUserList;
+import com.h3c.imc.acmws.user.parameter.xsd.RetSystemParameter;
+import com.h3c.imc.acmws.user.security.xsd.RetRandomInfo;
+import com.h3c.imc.acmws.user.service.xsd.RetAcmServiceTemplateInfoList;
+import com.h3c.imc.acmws.user.service.xsd.RetCancelServiceInfo;
 
 
 /**
@@ -48,7 +67,25 @@ import com.h3c.imc.acmws.fee.xsd.RetUserBalance;
     RetAcmUserServiceList.class,
     RetPaymentRecordList.class,
     RetUserBalance.class,
-    RandomInfo.class
+    RandomInfo.class,
+    RetAcmOnlineUserList.class,
+    RetAcmAccessDetailList.class,
+    RetCancelUserInfo.class,
+    RetPassword.class,
+    RetAcmUser.class,
+    RetAcmUserList.class,
+    RetAcmUserFullInfo.class,
+    RetAcmUserService.class,
+    RetSystemParameter.class,
+    RetRandomInfo.class,
+    RetAcmBlackInfo.class,
+    RetAcmBlackInfoList.class,
+    RetAcmServiceTemplateInfoList.class,
+    RetCancelServiceInfo.class,
+    RetAcmSyncPolicyUserInfo.class,
+    RetAcmSyncPolicyUserInfoList.class,
+    RetAcmSyncPolicyInfoList.class,
+    RetAcmSyncPolicyInfo.class
 })
 public class WSCommonResult {
 

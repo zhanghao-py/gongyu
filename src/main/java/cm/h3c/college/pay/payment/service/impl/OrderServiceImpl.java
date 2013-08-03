@@ -21,8 +21,8 @@ import cm.h3c.college.pay.payment.dao.OrderDao;
 import cm.h3c.college.pay.payment.service.CollegeServcie;
 import cm.h3c.college.pay.payment.service.OrderService;
 import cm.h3c.college.pay.payment.web.action.dto.OrderForm;
+import cm.h3c.college.pay.payment.ws.delegate.AcmUserServiceDelegator;
 import cm.h3c.college.pay.payment.ws.delegate.FeeServiceDelegator;
-import cm.h3c.college.pay.payment.ws.delegate.ImcplatServiceDelegator;
 
 @Service("orderService")
 public class OrderServiceImpl implements OrderService {
@@ -60,19 +60,26 @@ public class OrderServiceImpl implements OrderService {
 			throw new ServiceException("collegeId不能为空！");
 		}
 		
-		collegeService.findCollegeById(collegeId);
+		College college = collegeService.findCollegeById(collegeId);
 		
 		if (StringUtils.isBlank(form.getAccount())) {
 			throw new ServiceException("account不能为空！");
 		}
 		
-		// TODO CAMS检验account是否存在(需要调用ws)
+		this.validateAccountExistAtCASM(form.getAccount(), college);
 		
 		if (form.getMoney() == null || form.getMoney().compareTo(BigDecimal.ONE) < 0) {
 			throw new ServiceException("money不能为空, 不能小于一元钱！");
 		}
 	}
 	
+	private void validateAccountExistAtCASM(String account, College college) throws ServiceException {
+		AcmUserServiceDelegator acmUserServiceDelegator = new AcmUserServiceDelegator(college);
+		acmUserServiceDelegator.queryAcmUser(account);
+		
+		return;
+	}
+
 	private Long update(OrderForm form) throws ServiceException {
 		
 		if (form.getStatus() == null || form.getStatus()  < 1) {
@@ -129,12 +136,8 @@ public class OrderServiceImpl implements OrderService {
 		String account = order.getAccount();
 		BigDecimal money = order.getMoney();
 		
-		ImcplatServiceDelegator imcplatServiceDelegator = new ImcplatServiceDelegator(college);
 		FeeServiceDelegator feeServiceDelegator = new FeeServiceDelegator(college);
-		
-		imcplatServiceDelegator.login();
 		feeServiceDelegator.pay(account, money.toPlainString());
-		imcplatServiceDelegator.logout();
 		
 		return;
 	}

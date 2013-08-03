@@ -1,0 +1,70 @@
+package cm.h3c.college.pay.payment.ws.delegate;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import javax.xml.ws.BindingProvider;
+
+import org.apache.log4j.Logger;
+
+import cm.h3c.college.pay.core.exception.ServiceException;
+import cm.h3c.college.pay.core.ws.soap.SOAPKeepSessionHandlerSettor;
+import cm.h3c.college.pay.payment.bo.College;
+
+import com.h3c.imc.acm.acmuserservice.AcmUserService;
+import com.h3c.imc.acm.acmuserservice.AcmUserServicePortType;
+import com.h3c.imc.acmws.user.accessuser.xsd.AcmUser;
+import com.h3c.imc.acmws.user.accessuser.xsd.RetAcmUser;
+
+public class AcmUserServiceDelegator {
+
+	private Logger log = Logger.getLogger(AcmUserServiceDelegator.class);
+	
+//	private final String wsdlUrl = "/imcws/services/acmUserService?wsdl";
+	private final String wsdlUrl = "/imcws/services/acmUserService.wsdl";
+	
+	private String baseUrl;
+	
+	private AcmUserServicePortType acmUserService;
+	private ImcplatServiceDelegator imcplatServiceDelegator;
+	
+	public AcmUserServiceDelegator(College college) {
+		this.baseUrl = college.getUrl();
+		init();
+		imcplatServiceDelegator = new ImcplatServiceDelegator(college);
+	}
+
+	private void init() {
+		String url = baseUrl + wsdlUrl;
+		
+		AcmUserService remoteImplService = null;
+		
+		try {
+			remoteImplService = new AcmUserService(new URL(url));
+		} catch (MalformedURLException e) {
+			log.warn(e);
+		}
+		
+		acmUserService = remoteImplService.getAcmUserServiceHttpSoap12Endpoint();
+		SOAPKeepSessionHandlerSettor.getInstance().setHandler((BindingProvider) acmUserService);		
+	}
+	
+	public AcmUser queryAcmUser(String username) throws ServiceException {
+		imcplatServiceDelegator.login();
+		RetAcmUser result = acmUserService.queryAcmUser(username);
+		imcplatServiceDelegator.logout();
+		
+		int errorCode = result.getErrorCode();
+		
+		if (errorCode > 0) {
+			String errorMsg = result.getErrorMsg().getValue();
+			String msg = "error code is " + errorCode + ", error msg is " + errorMsg;
+			log.warn(msg);
+			throw new ServiceException(msg);
+		}
+		
+		
+		
+		return result.getAcmUser().getValue();
+	}
+}
