@@ -714,13 +714,13 @@
   </wsdl:binding>
   <wsdl:service name="feeService">
     <wsdl:port name="feeServiceHttpSoap11Endpoint" binding="ns:feeServiceSoap11Binding">
-      <soap:address location="http://123.120.10.78:88/imcws/services/feeService/"/>
+      <soap:address location="http://wwwgongyu.oicp.net:88/imcws/services/feeService/"/>
     </wsdl:port>
     <wsdl:port name="feeServiceHttpSoap12Endpoint" binding="ns:feeServiceSoap12Binding">
-      <soap12:address location="http://123.120.10.78:88/imcws/services/feeService/"/>
+      <soap12:address location="http://wwwgongyu.oicp.net:88/imcws/services/feeService/"/>
     </wsdl:port>
     <wsdl:port name="feeServiceHttpEndpoint" binding="ns:feeServiceHttpBinding">
-      <http:address location="http://123.120.10.78:88/imcws/services/feeService/"/>
+      <http:address location="http://wwwgongyu.oicp.net:88/imcws/services/feeService/"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
