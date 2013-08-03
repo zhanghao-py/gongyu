@@ -1,5 +1,9 @@
-http://localhost:8080/gongyu/payment/createOrder.do?account=15810710450&collegeId=1&money=7
+http://localhost:8080/gongyu/payment/createAndPayOrder.do
 
 http://localhost:8080/gongyu/payment/checkOrderForm.do?account=15810710450&collegeId=1&money=7
 
 http://localhost:8080/gongyu/security/buildCode.do
+
+http://localhost:8080/gongyu/payment/portal.do
+
+http://localhost:8080/gongyu/payment/createAndPayOrderPortal.do
