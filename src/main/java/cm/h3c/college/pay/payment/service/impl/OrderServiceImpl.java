@@ -21,6 +21,7 @@ import cm.h3c.college.pay.payment.dao.OrderDao;
 import cm.h3c.college.pay.payment.service.CollegeServcie;
 import cm.h3c.college.pay.payment.service.OrderService;
 import cm.h3c.college.pay.payment.web.action.dto.OrderForm;
+import cm.h3c.college.pay.payment.web.action.dto.OrderVO;
 import cm.h3c.college.pay.payment.ws.delegate.AcmUserServiceDelegator;
 import cm.h3c.college.pay.payment.ws.delegate.FeeServiceDelegator;
 
@@ -210,6 +211,8 @@ public class OrderServiceImpl implements OrderService {
 		this.updateOrderStatus2PayingById(orderId);
 		
 		// TODO:跳转到cmpay付款
+		
+		return;
 	}
 
 	@Override
@@ -223,6 +226,15 @@ public class OrderServiceImpl implements OrderService {
 		
 		orderDao.updateOrdersStatusByIds(ids, OrderStatus.PAYING.getValue());
 		return;		
+	}
+
+	@Override
+	public OrderVO findOrderVOById(Long id) throws ServiceException {
+		if (id == null || id < 1) {
+			throw new ServiceException("id不能为空！");
+		}
+		
+		return orderDao.findOrderVOById(id);
 	}
 
 

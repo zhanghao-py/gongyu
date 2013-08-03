@@ -5,6 +5,7 @@ import java.util.List;
 import cm.h3c.college.pay.core.exception.ServiceException;
 import cm.h3c.college.pay.payment.bo.Order;
 import cm.h3c.college.pay.payment.web.action.dto.OrderForm;
+import cm.h3c.college.pay.payment.web.action.dto.OrderVO;
 
 
 public interface OrderService {
@@ -28,4 +29,6 @@ public interface OrderService {
 	public void updateOrdersStatus2CanceledByIds(List<Long> ids) throws ServiceException;
 
 	public void updateOrderStatus2PayingById(Long id) throws ServiceException;
+
+	public OrderVO findOrderVOById(Long orderId) throws ServiceException;
 }

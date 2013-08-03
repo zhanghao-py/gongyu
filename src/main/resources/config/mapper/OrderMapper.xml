@@ -13,7 +13,12 @@
 		<result column="finish_time" property="finishTime" jdbcType="TIMESTAMP" />
 		<result column="account" property="account" jdbcType="VARCHAR" />
 		<result column="college_id" property="collegeId" jdbcType="BIGINT" />
-
+	</resultMap>
+	
+	<resultMap id="VOResultMap" type="cm.h3c.college.pay.payment.web.action.dto.OrderVO">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="money" property="money" jdbcType="DECIMAL" />
+		<result column="name" property="collegeName" jdbcType="VARCHAR" />
 	</resultMap>
 	
 	<sql id="Base_Column_List">
@@ -101,6 +106,17 @@
 		from gy_order
 		<where> 
 			id = #{id, jdbcType=BIGINT}
+		</where>
+	</select>
+	
+	<select id="findOrderVOById" parameterType="java.lang.Long" resultMap="VOResultMap">
+		select
+			o.id, o.money, c.name
+		from
+			gy_order o
+		left join gy_college c on o.college_id = c.id
+		<where> 
+			o.id = #{id, jdbcType=BIGINT}
 		</where>
 	</select>
 

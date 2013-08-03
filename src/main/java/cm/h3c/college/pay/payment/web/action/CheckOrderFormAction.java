@@ -1,6 +1,5 @@
 package cm.h3c.college.pay.payment.web.action;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -18,44 +17,25 @@ import cm.h3c.college.pay.core.web.action.dto.AbstractGenericModel;
 import cm.h3c.college.pay.payment.service.OrderService;
 import cm.h3c.college.pay.payment.web.action.dto.OrderForm;
 
-@Namespace("/payment")
-public class CreateOrderAction extends GenericAction {
+import com.opensymphony.xwork2.ActionContext;
 
-	private Logger log = Logger.getLogger(CreateOrderAction.class);
-	private static final long serialVersionUID = -1541026036542059117L;
+@Namespace("/payment")
+public class CheckOrderFormAction extends GenericAction {
+
+	private static final long serialVersionUID = -3920702417617589420L;
 	
-	private String securityCode;
-	private OrderForm form = new OrderForm();
+	private Logger log = Logger.getLogger(CheckOrderFormAction.class);
 	
 	@Resource(name = "orderService")
 	private OrderService orderService;
 	
-	@Action(value = "createOrder", results = { @Result(name = "success", type = "json", params = { "excludeNullProperties", "true", "root", "result" }) })
-	public String createOrderAjax() {
-		
-		Long id = null;
-		
-		try {
-			id = orderService.doCreateOrder(form);
-		} catch (ServiceException e) {
-			log.warn(e);
-			result.setStatus(AjaxStatus.ERROR.getValue());
-			result.setStatusInfo(e.getMessage());
-			return SUCCESS;
-		}
-		
-		Map<String, Object> data = new HashMap<String, Object>();
-		data.put("id", id);
-		
-		result.setData(data);
-		result.setStatus(AjaxStatus.SUCCESS.getValue());
-		return SUCCESS;
-	}
-	
+	private String imgCode;
+	private OrderForm form = new OrderForm();
+
 	@Action(value = "checkOrderForm", results = { @Result(name = "success", type = "json", params = { "excludeNullProperties", "true", "root", "result" }) })
 	public String checkOrderFormAjax() {
 		
-		if (!SecurityCodeCompareUtil.compare(securityCode)) {
+		if (!SecurityCodeCompareUtil.compare(imgCode)) {
 			result.setStatus(AjaxStatus.ERROR.getValue());
 			result.setStatusInfo("验证码输入不正确！");
 			return SUCCESS;
@@ -70,18 +50,19 @@ public class CreateOrderAction extends GenericAction {
 			return SUCCESS;
 		}
 		
+		Map<String, Object> session = ActionContext.getContext().getSession();
+		session.put("orderForm", form);
+		
 		result.setStatus(AjaxStatus.SUCCESS.getValue());
 		return SUCCESS;
 	}
-
+	
 	@Override
 	public AbstractGenericModel getModel() {
 		return form;
 	}
-
-	public void setSecurityCode(String securityCode) {
-		this.securityCode = securityCode;
-	}
 	
-
+	public void setImgCode(String imgCode) {
+		this.imgCode = imgCode;
+	}
 }

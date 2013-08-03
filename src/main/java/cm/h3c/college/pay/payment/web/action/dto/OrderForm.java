@@ -11,6 +11,8 @@ public class OrderForm extends AbstractGenericModel {
 	private String account;
 
 	private Long collegeId;
+	
+	private String collegeName;
 
 	private BigDecimal money;
 
@@ -66,6 +68,14 @@ public class OrderForm extends AbstractGenericModel {
 
 	public void setCollegeId(Long collegeId) {
 		this.collegeId = collegeId;
+	}
+	
+	public String getCollegeName() {
+		return collegeName;
+	}
+
+	public void setCollegeName(String collegeName) {
+		this.collegeName = collegeName;
 	}
 
 	public BigDecimal getMoney() {
