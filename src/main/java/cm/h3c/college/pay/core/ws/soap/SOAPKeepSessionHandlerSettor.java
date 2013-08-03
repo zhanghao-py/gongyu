@@ -12,9 +12,7 @@ public class SOAPKeepSessionHandlerSettor {
 	
 	private static SOAPKeepSessionHandlerSettor instance;
 	
-	private SOAPKeepSessionHandlerSettor() {
-		keepSessionHandler.set(new SOAPKeepSessionHandler());
-	}
+	private SOAPKeepSessionHandlerSettor() {}
 	
 	public static SOAPKeepSessionHandlerSettor getInstance() {
 		
@@ -27,17 +25,22 @@ public class SOAPKeepSessionHandlerSettor {
 	
 	
 	public void setHandler(BindingProvider proxy) {
-
+		
 		if (proxy == null) {
 			return;
+		}
+
+		SOAPKeepSessionHandler handler = keepSessionHandler.get();
+		
+		if (handler == null) {
+			handler = new SOAPKeepSessionHandler();
+			keepSessionHandler.set(handler);
 		}
 
 		Binding binding = ((BindingProvider) proxy).getBinding();
 
 		List<Handler> handlerList = binding.getHandlerChain();// 获得Handler链
 
-		SOAPKeepSessionHandler handler = keepSessionHandler.get();
-		
 		if (!handlerList.contains(handler)) {// 防止重复插入Handler
 			handlerList.add(handler);
 			binding.setHandlerChain(handlerList);

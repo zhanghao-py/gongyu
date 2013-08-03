@@ -20,8 +20,8 @@ public class AcmUserServiceDelegator {
 
 	private Logger log = Logger.getLogger(AcmUserServiceDelegator.class);
 	
-//	private final String wsdlUrl = "/imcws/services/acmUserService?wsdl";
-	private final String wsdlUrl = "/imcws/services/acmUserService.wsdl";
+	private final String wsdlUrl = "/imcws/services/acmUserService?wsdl";
+//	private final String wsdlUrl = "/imcws/services/acmUserService.wsdl";
 	
 	private String baseUrl;
 	
