@@ -1,5 +1,7 @@
 package cm.h3c.college.pay.cmpay;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class CmpayPaymentCheckResponse implements CmpaySignable {
 	String MCODE;// 功能码 101455 M
 	String MID;// 系统跟踪号 同原交易 M
@@ -23,8 +25,24 @@ public class CmpayPaymentCheckResponse implements CmpaySignable {
 
 	@Override
 	public String prepareSignData() {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder ret = new StringBuilder();
+		ret.append(StringUtils.stripToEmpty(MCODE));
+		ret.append("|").append(StringUtils.stripToEmpty(MID));
+		ret.append("|").append(StringUtils.stripToEmpty(DATE));
+		ret.append("|").append(StringUtils.stripToEmpty(TIME));
+		ret.append("|").append(StringUtils.stripToEmpty(PAYDAY));
+		ret.append("|").append(StringUtils.stripToEmpty(RCODE));
+		ret.append("|").append(StringUtils.stripToEmpty(DESC));
+		ret.append("|").append(StringUtils.stripToEmpty(ORDDATE));
+		ret.append("|").append(StringUtils.stripToEmpty(ORDTIME));
+		ret.append("|").append(StringUtils.stripToEmpty(ORDAMT));
+		ret.append("|").append(StringUtils.stripToEmpty(ORDSTS));
+		ret.append("|").append(StringUtils.stripToEmpty(PAYTYP));
+		ret.append("|").append(StringUtils.stripToEmpty(ORDEXPDAT));
+		ret.append("|").append(StringUtils.stripToEmpty(ORDEXPTIM));
+		ret.append("|").append(StringUtils.stripToEmpty(ORDACTDT));
+		ret.append("|").append(StringUtils.stripToEmpty(RJTRSN));
+		return ret.toString();
 	}
 
 	@Override

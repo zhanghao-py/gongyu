@@ -1,5 +1,7 @@
 package cm.h3c.college.pay.cmpay;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class CmpayPaymentCallBackWebRequest implements CmpaySignable {
 	String MERID;// 商户编号 15位 M
 	String MID;// 系统跟踪号 14位 M
@@ -20,8 +22,18 @@ public class CmpayPaymentCallBackWebRequest implements CmpaySignable {
 
 	@Override
 	public String prepareSignData() {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder ret = new StringBuilder();
+		ret.append("MERID=").append(StringUtils.stripToEmpty(MERID));
+		ret.append("&MID=").append(StringUtils.stripToEmpty(MID));
+		ret.append("&OMID=").append(StringUtils.stripToEmpty(OMID));
+		ret.append("&TXNTYP=").append(StringUtils.stripToEmpty(TXNTYP));
+		ret.append("&AMOUT=").append(StringUtils.stripToEmpty(AMOUT));
+		ret.append("&ORDERID=").append(StringUtils.stripToEmpty(ORDERID));
+		ret.append("&ORDERDATE=").append(StringUtils.stripToEmpty(ORDERDATE));
+		ret.append("&PAYDATE=").append(StringUtils.stripToEmpty(PAYDATE));
+		ret.append("&REMARK=").append(StringUtils.stripToEmpty(REMARK));
+		ret.append("&STATUS=").append(StringUtils.stripToEmpty(STATUS));
+		return ret.toString();
 	}
 
 	@Override

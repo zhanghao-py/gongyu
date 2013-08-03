@@ -1,5 +1,7 @@
 package cm.h3c.college.pay.cmpay;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class CmpayPaymentRequest implements CmpaySignable {
 	String MCODE = "101425";// 功能码 101425
 	String MID;// 系统跟踪号 14位
@@ -25,8 +27,27 @@ public class CmpayPaymentRequest implements CmpaySignable {
 
 	@Override
 	public String prepareSignData() {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder ret = new StringBuilder();
+		ret.append("MCODE=").append(StringUtils.stripToEmpty(MCODE));
+		ret.append("&MID=").append(StringUtils.stripToEmpty(MID));
+		ret.append("&DATE=").append(StringUtils.stripToEmpty(DATE));
+		ret.append("&TIME=").append(StringUtils.stripToEmpty(TIME));
+		ret.append("&MERID=").append(StringUtils.stripToEmpty(MERID));
+		ret.append("&ORDERID=").append(StringUtils.stripToEmpty(ORDERID));
+		ret.append("&AMOUT=").append(StringUtils.stripToEmpty(AMOUT));
+		ret.append("&ALLOWNOTE=").append(StringUtils.stripToEmpty(ALLOWNOTE));
+		ret.append("&AUTHORIZEMODE=").append(StringUtils.stripToEmpty(AUTHORIZEMODE));
+		ret.append("&CURRENCY=").append(StringUtils.stripToEmpty(CURRENCY));
+		ret.append("&ORDERDATE=").append(StringUtils.stripToEmpty(ORDERDATE));
+		ret.append("&PERIOD=").append(StringUtils.stripToEmpty(PERIOD));
+		ret.append("&PERIODUNIT=").append(StringUtils.stripToEmpty(PERIODUNIT));
+		ret.append("&PRODUCTDESC=").append(StringUtils.stripToEmpty(PRODUCTDESC));
+		ret.append("&PRODUCTID=").append(StringUtils.stripToEmpty(PRODUCTID));
+		ret.append("&PRODUCTNAME=").append(StringUtils.stripToEmpty(PRODUCTNAME));
+		ret.append("&TXNTYP=").append(StringUtils.stripToEmpty(TXNTYP));
+		ret.append("&CALLBACK=").append(StringUtils.stripToEmpty(CALLBACK));
+		ret.append("&MOBILEID=").append(StringUtils.stripToEmpty(MOBILEID));
+		return ret.toString();
 	}
 
 	@Override
