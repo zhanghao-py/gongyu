@@ -17,12 +17,13 @@ public class SecurityCodeCompareUtil {
 	 * @return 相等 - true, 不相等 - false
 	 */
 	public static boolean compare(String inputCode) {
-		if (StringUtils.isBlank(inputCode)) {
-			return false;
-		}
 		
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		String code = (String) session.get(SystemConfig.SECURITY_CODE_KEY);
+		
+		if (StringUtils.isBlank(inputCode) || StringUtils.isBlank(code)) {
+			return false;
+		}
 		
 		return (code.compareToIgnoreCase(inputCode) == 0);
 	}

@@ -11,6 +11,7 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 
+import cm.h3c.college.pay.core.config.SystemConfig;
 import cm.h3c.college.pay.core.cons.AjaxStatus;
 import cm.h3c.college.pay.core.exception.ServiceException;
 import cm.h3c.college.pay.core.web.action.GenericAction;
@@ -32,7 +33,7 @@ public class CreateAndPayOrderAction extends GenericAction {
 	public String createAndPayOrderAjax() {
 		
 		Map<String, Object> session = ActionContext.getContext().getSession();
-		OrderForm form = (OrderForm) session.get("orderForm");
+		OrderForm form = (OrderForm) session.get(SystemConfig.ORDER_FORM_KEY);
 		
 		if (ObjectUtils.equals(form, null)) {
 			result.setStatus(AjaxStatus.ERROR.getValue());

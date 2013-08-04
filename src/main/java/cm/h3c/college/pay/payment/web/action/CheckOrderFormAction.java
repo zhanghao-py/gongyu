@@ -9,6 +9,7 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 
+import cm.h3c.college.pay.core.config.SystemConfig;
 import cm.h3c.college.pay.core.cons.AjaxStatus;
 import cm.h3c.college.pay.core.exception.ServiceException;
 import cm.h3c.college.pay.core.util.SecurityCodeCompareUtil;
@@ -51,7 +52,9 @@ public class CheckOrderFormAction extends GenericAction {
 		}
 		
 		Map<String, Object> session = ActionContext.getContext().getSession();
-		session.put("orderForm", form);
+		session.remove(SystemConfig.SECURITY_CODE_KEY);
+		session.put(SystemConfig.ORDER_FORM_KEY, form);
+		
 		
 		result.setStatus(AjaxStatus.SUCCESS.getValue());
 		return SUCCESS;
