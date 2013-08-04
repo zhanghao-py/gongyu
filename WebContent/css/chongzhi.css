@@ -317,3 +317,13 @@ lr-tabc li.tu{ padding-top:9px; width:8px; border:0; background-color:transparen
 .zhifu_tanchu_con .end_btn{display:block;float:left;margin-right:9px;width:86px;height:25px;background:url(../images/tuanchu_btn.jpg) no-repeat left -27px;}
 .zhifu_tanchu_con .question_btn{display:block;float:left;width:97px;height:25px;background:url(../images/tuanchu_btn.jpg) no-repeat;}
 .zhifu_tanchu_con dd a{color:#007ac7;}
+
+.lr-tgray{background-color:#dfdfdf; width:201px; float:left; padding-left:23px;color:#656565;text-align:center}
+.lr-tgray2{background-color:#dfdfdf;width:201px; float:left;color:#656565;text-align:center;}
+.lr-sgray{background:url(../images/header_arrow_gary.jpg) no-repeat; width:41px; height:35px; float:left}
+.lr-sgray1{background:url(../images/header_arrow_blue02.jpg) no-repeat; width:41px; height:35px; float:left}
+.lr-sblue{background-color:#66a4d5; width:201px; float:left;color:#fff; font-weight:bold;text-align:center}
+
+.success{margin:50px 0 70px 202px;width:430px;}
+.success .pointInfo_success{margin-bottom:16px;padding-left:48px;height:39px;background:url(../images/success_ioc.png) no-repeat;font-size:14px;font-weight:bold;color:#4e4e4e;line-height:44px;}
+.success p{padding-bottom:25px;color:#9a9a9a;line-height:22px;}

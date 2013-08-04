@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+
+#set($webRoot=$!link.getContextPath())
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>充值交费_网上营业厅_山东移动</TITLE>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+	<meta content="no-cache" http-equiv="pragma" />
+	<meta content="no-cache" http-equiv="cache-control" />
+	<meta content="0" http-equiv="expires" />
+
+	<link rel="icon" href="$!{webRoot}/favicon.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="$!{webRoot}/favicon.ico" type="image/x-icon" />
+	
+
+	<link rel="stylesheet" type="text/css" href="$!{webRoot}/css/chongzhi.css">
+</head>
+<body>
+	<div class="contentRi">
+
+		<div class="lr-box">
+			<div class="lr-lc">
+				<div class="lr-tgray">1.填写号码、金额</div>
+				<div class="lr-sgray lf"></div>
+				<div class="lr-tgray2">2.确认并支付</div>
+				<div class="lr-sgray1"></div>
+				<div class="lr-sblue">3.完成</div>
+			</div>
+			<!--充值成功 begin-->
+			<div style="MARGIN-LEFT: 101px" class="success">
+				<div class="pointInfo_success">您已成功支付100元，订单号201307271079499131</div>
+				<p style="width:543px">尊敬的客户您好，您已经为13810292997客户成功充值100元，谢谢您的使用！</p>
+				<div>&nbsp;</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
