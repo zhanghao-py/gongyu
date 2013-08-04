@@ -12,12 +12,16 @@ public class SecurityCodeUtil {
 	};
 
 	/**
-	 * 产生默认验证码，4位中等难度
+	 * 产生默认验证码，4位高级难度
 	 * 
 	 * @return String 验证码
 	 */
 	public static String getSecurityCode() {
-		return getSecurityCode(4, SecurityCodeLevel.Hard, false);
+		return getSecurityCode(4, SecurityCodeLevel.Hard, true);
+	}
+	
+	public static String getRandomNumber() {
+		return getSecurityCode(4, SecurityCodeLevel.Simple, true);
 	}
 
 	/**

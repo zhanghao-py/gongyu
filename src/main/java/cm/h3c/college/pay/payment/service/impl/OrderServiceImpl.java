@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 import cm.h3c.college.pay.core.exception.ServiceException;
+import cm.h3c.college.pay.core.util.PrimaryKeyGenerator;
 import cm.h3c.college.pay.payment.bo.College;
 import cm.h3c.college.pay.payment.bo.Order;
 import cm.h3c.college.pay.payment.cons.OrderStatus;
@@ -43,6 +44,7 @@ public class OrderServiceImpl implements OrderService {
 	private Long save(OrderForm form) throws ServiceException {
 		
 		Order order = new Order(form);
+		order.setId(PrimaryKeyGenerator.getKey());
 		order.setStatus(OrderStatus.INIT.getValue());
 		
 		orderDao.save(order);
