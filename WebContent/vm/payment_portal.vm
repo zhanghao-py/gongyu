@@ -9,6 +9,11 @@
 	<meta http-equiv="pragma" content="no-cache" />
 	<meta http-equiv="cache-control" content="no-cache" />
 	<meta http-equiv="expires" content="0" />
+	
+	<link rel="icon" href="$!{webRoot}/favicon.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="$!{webRoot}/favicon.ico" type="image/x-icon" />
+	
+	
 	<link type="text/css" href="$!{webRoot}/css/chongzhi.css" rel="stylesheet" />
 	<link type="text/css" href="$!{webRoot}/css/showLoading.css" rel="stylesheet" />
 	
