@@ -26,10 +26,6 @@
     </script>
     
     <style type="text/css">
-        .pay_methods .pay_list_con li {
-            width: 140px;
-        }
-
         .lr-lc-bluesp3 {
             background: url('$!{webRoot}/images/header_arrow_blue02.jpg') no-repeat;
             width: 41px;

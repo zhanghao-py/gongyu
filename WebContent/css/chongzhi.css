@@ -101,7 +101,7 @@ lr-tabc li.tu{ padding-top:9px; width:8px; border:0; background-color:transparen
 .lr-box{border:1px #dfdfdf solid; padding:1px 15px;_padding:1px 15px;*padding:10px 15px; border-top:0;}
 .lr-box table{border-top:1px solid #dfdfdf;border-left:1px solid #dfdfdf; margin:20px 0; width:100%}
 .lr-box td{height:37px;color:#4e4e4e;text-align:center;border-right:1px solid #dfdfdf;border-bottom:1px solid #dfdfdf; padding:0 10px}
-.lr-box th{height:37px;color:#4e4e4e;text-align:center;border-right:1px solid #dfdfdf;border-bottom:1px solid #dfdfdf; padding:0 10px; font-size:14px; font-weight:100 }
+.lr-box th{height:37px;color:#4e4e4e;text-align:center;border-right:1px solid #dfdfdf;border-bottom:1px solid #dfdfdf; padding:0 10px; font-size:12px; font-weight:100 }
 
 .lr-box td.gray{ color:#999}
 .lr-lc{height:35px; font-size:14px; line-height:35px; margin-top:9px}
@@ -291,5 +291,13 @@ lr-tabc li.tu{ padding-top:9px; width:8px; border:0; background-color:transparen
 .tc{text-align:center}
 
 .pay_methods .pay_btn{margin:0px auto;width:116px;height:36px; padding-bottom:20px; padding-top:20px;}
-.pay_methods .pay_list_con li{float:left;padding:0 2px 5px 0;width:120px;text-align:center;}
+.pay_methods .pay_list_con li{float:left;padding:5px 2px 5px 2px;width:140px;text-align:center; border: 1px solid #ccc;}
 .pay_methods .pay_list_con{padding-top:10px;overflow:hidden;zoom:1; }
+
+.pay_methods .chongzhiInfo{margin-bottom:12px; margin-top:11px}
+.pay_methods .chongzhiInfo table{border-top:1px solid #dfdfdf;border-left:1px solid #dfdfdf;}
+
+.pay_methods .chongzhiInfo table th,.pay_methods .chongzhiInfo table td{width:97px;height:23px;color:#4e4e4e;text-align:center;border-right:1px solid #dfdfdf;border-bottom:1px solid #dfdfdf;line-height:23px;}
+.pay_methods .chongzhiInfo td{height:23px;text-align:center;}
+.pay_methods .chongzhiInfo b{color:#fd8e08;}
+.pay_methods .chongzhiInfo table td a{color:#027cc9;}
