@@ -67,6 +67,11 @@ public class OrderPortalAction extends GenericAction {
 		this.data = form;
 		return SUCCESS;
 	}
+	
+	@Action(value = "doneOrderPortal", results = { @Result(name = "success", type = "velocity", location = "/vm/payment_doneOrder_portal.vm"), @Result(name = "error", type = "velocity", location = "/vm/error.vm") })
+	public String doneOrderPortal() {
+		return SUCCESS;
+	}
 
 	public Object getData() {
 		return data;
