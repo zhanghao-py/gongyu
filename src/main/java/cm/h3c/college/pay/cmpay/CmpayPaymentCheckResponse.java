@@ -54,4 +54,15 @@ public class CmpayPaymentCheckResponse implements CmpaySignable {
 		this.SIGN = sign;
 	}
 
+	public String getRcode() {
+		return this.RCODE;
+	}
+
+	public String getDesc() {
+		return DESC;
+	}
+
+	public String getRjtrsn() {
+		return RJTRSN;
+	}
 }

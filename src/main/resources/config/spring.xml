@@ -19,8 +19,16 @@
 		<property name="locations">
 			<list>
 				<value>classpath:config/jdbc.properties</value>
+				<value>classpath:config/config.properties</value>
 			</list>
 		</property>
+	</bean>
+	
+	<bean class="cm.h3c.college.pay.core.config.SystemConfig">
+		<property name="merId" value="${merId}" />
+		<property name="payUrl" value="${payUrl}" />
+		<property name="checkUrl" value="${checkUrl}" />
+		<property name="paymentResultUrl" value="${paymentResultUrl}" />
 	</bean>
 
 	<import resource="classpath:config/spring-dataSource.xml" />

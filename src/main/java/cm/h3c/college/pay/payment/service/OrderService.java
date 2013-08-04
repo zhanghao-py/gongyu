@@ -31,4 +31,8 @@ public interface OrderService {
 	public void updateOrderStatus2PayingById(Long id) throws ServiceException;
 
 	public OrderVO findOrderVOById(Long orderId) throws ServiceException;
+
+	public void paySuccess(Order order);
+
+	public void payFiled(Order order, String status, String remark);
 }

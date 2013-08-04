@@ -3,27 +3,27 @@ package cm.h3c.college.pay.cmpay;
 import java.lang.reflect.Field;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Component;
 
 import com.thoughtworks.xstream.XStream;
-import com.umpay.mpay.SignEncException;
-import com.umpay.mpay.SignUtil;
 
+@Component
 public class CmpayObjectFactory {
-	public CmpayPaymentCallBackRequest parseCmpayPaymentCallBackRequest(
+	public CmpayPaymentCallbackRequest parseCmpayPaymentCallbackRequest(
 			String xml) {
 		XStream xstream = new XStream();
-		xstream.alias("MESSAGE", CmpayPaymentCallBackRequest.class);
-		CmpayPaymentCallBackRequest request = (CmpayPaymentCallBackRequest) xstream
+		xstream.alias("MESSAGE", CmpayPaymentCallbackRequest.class);
+		CmpayPaymentCallbackRequest request = (CmpayPaymentCallbackRequest) xstream
 				.fromXML(xml);
 		checkSign(request, xml);
 		return request;
 	}
 
-	public CmpayPaymentCallBackWebRequest parseCmpayPaymentCallBackWebRequest(
+	public CmpayPaymentCallbackWebRequest parseCmpayPaymentCallbackWebRequest(
 			String xml) {
 		XStream xstream = new XStream();
-		xstream.alias("MESSAGE", CmpayPaymentCallBackWebRequest.class);
-		CmpayPaymentCallBackWebRequest request = (CmpayPaymentCallBackWebRequest) xstream
+		xstream.alias("MESSAGE", CmpayPaymentCallbackWebRequest.class);
+		CmpayPaymentCallbackWebRequest request = (CmpayPaymentCallbackWebRequest) xstream
 				.fromXML(xml);
 		checkSign(request, xml);
 		return request;
@@ -39,18 +39,17 @@ public class CmpayObjectFactory {
 	}
 
 	void checkSign(CmpaySignable signedObj, String xml) {
-		try {
-			if (!SignUtil.doCheckSign(signedObj.prepareSignData(),
-					signedObj.getSign())) {
-				throw new IllegalArgumentException("check Sign failed " + xml);
-			}
-		} catch (SignEncException e) {
-			throw new IllegalArgumentException("check Sign failed " + xml, e);
-		}
+		/*
+		 * try { if (!SignUtil.doCheckSign(signedObj.prepareSignData(),
+		 * signedObj.getSign())) { throw new
+		 * IllegalArgumentException("check Sign failed " + xml); } } catch
+		 * (SignEncException e) { throw new
+		 * IllegalArgumentException("check Sign failed " + xml, e); }
+		 */
 	}
 
-	public String cmpayPaymentCallBackResponse2Xml(
-			CmpayPaymentCallBackResponse callBackResponse) {
+	public String cmpayPaymentCallbackResponse2Xml(
+			CmpayPaymentCallbackResponse callBackResponse) {
 		sign(callBackResponse);
 		return toXml(callBackResponse);
 	}
@@ -77,7 +76,7 @@ public class CmpayObjectFactory {
 			return ret.toString();
 		} catch (Exception e) {
 			throw new IllegalArgumentException("transfer obj to xml error, "
-					+ obj.getClass());
+					+ obj.getClass(), e);
 		}
 	}
 

@@ -237,5 +237,17 @@ public class OrderServiceImpl implements OrderService {
 		return orderDao.findOrderVOById(id);
 	}
 
+	@Override
+	public void paySuccess(Order order) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void payFiled(Order order, String status, String remark) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

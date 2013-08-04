@@ -60,4 +60,147 @@ public class CmpayPaymentRequest implements CmpaySignable {
 		this.SIGN = sign;
 	}
 
+	public String getMid() {
+		return MID;
+	}
+
+	public void setMid(String mid) {
+		MID = mid;
+	}
+
+	public String getDate() {
+		return DATE;
+	}
+
+	public void setDate(String date) {
+		DATE = date;
+	}
+
+	public String getTime() {
+		return TIME;
+	}
+
+	public void setTime(String time) {
+		TIME = time;
+	}
+
+	public String getMerid() {
+		return MERID;
+	}
+
+	public void setMerid(String merid) {
+		MERID = merid;
+	}
+
+	public String getOrderId() {
+		return ORDERID;
+	}
+
+	public void setOrderId(String orderid) {
+		ORDERID = orderid;
+	}
+
+	public String getAmout() {
+		return AMOUT;
+	}
+
+	public void setAmout(String amout) {
+		AMOUT = amout;
+	}
+
+	public String getAllowNote() {
+		return ALLOWNOTE;
+	}
+
+	public void setAllowNote(String allownote) {
+		ALLOWNOTE = allownote;
+	}
+
+	public String getAuthorizeMode() {
+		return AUTHORIZEMODE;
+	}
+
+	public void setAuthorizeMode(String authorizemode) {
+		AUTHORIZEMODE = authorizemode;
+	}
+
+	public String getCurrency() {
+		return CURRENCY;
+	}
+
+	public void setCurrency(String currency) {
+		CURRENCY = currency;
+	}
+
+	public String getOrderDate() {
+		return ORDERDATE;
+	}
+
+	public void setOrderDate(String orderdate) {
+		ORDERDATE = orderdate;
+	}
+
+	public String getPeriod() {
+		return PERIOD;
+	}
+
+	public void setPeriod(String period) {
+		PERIOD = period;
+	}
+
+	public String getPeriodUnit() {
+		return PERIODUNIT;
+	}
+
+	public void setPeriodUnit(String periodunit) {
+		PERIODUNIT = periodunit;
+	}
+
+	public String getProductDesc() {
+		return PRODUCTDESC;
+	}
+
+	public void setProductDesc(String productdesc) {
+		PRODUCTDESC = productdesc;
+	}
+
+	public String getProductId() {
+		return PRODUCTID;
+	}
+
+	public void setProductId(String productid) {
+		PRODUCTID = productid;
+	}
+
+	public String getProductName() {
+		return PRODUCTNAME;
+	}
+
+	public void setProductName(String productname) {
+		PRODUCTNAME = productname;
+	}
+
+	public String getTxntyp() {
+		return TXNTYP;
+	}
+
+	public void setTxntyp(String txntyp) {
+		TXNTYP = txntyp;
+	}
+
+	public String getCallback() {
+		return CALLBACK;
+	}
+
+	public void setCallback(String callback) {
+		CALLBACK = callback;
+	}
+
+	public String getMobileId() {
+		return MOBILEID;
+	}
+
+	public void setMobileId(String mobileid) {
+		MOBILEID = mobileid;
+	}
 }

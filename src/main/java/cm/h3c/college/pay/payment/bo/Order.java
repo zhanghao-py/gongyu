@@ -206,6 +206,11 @@ public class Order implements Serializable {
 		this.finishTime = finishTime;
 	}
 
+	public boolean isPaySuccess() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 	
 
 }
