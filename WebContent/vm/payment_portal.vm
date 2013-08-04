@@ -109,9 +109,10 @@
                     <div class="clr"></div>
                 </div>
             </div>
-
-            <div class="clr">
-            </div>
+            
+			<div class="clr"></div>
+			
+            <div class="lr-zc-fwt" style="display:none; color:red;" id="error_tip">请输入1元~500元的整数</div>
             
 			<div class="lr-zc-tj">
 				<img class="hand" alt="开始充值" src="$!{webRoot}/images/btn4.png"

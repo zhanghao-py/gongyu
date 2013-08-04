@@ -178,12 +178,12 @@ function btnSubmit() {
     var msisdn = jQuery('#payPhoneID').val();
     if (isMsisdn(msisdn) == false) {
         jQuery('#sjh_tip_div').removeClass().addClass('lr-zc-ts1').html('请输入正确的手机号');
-        alert('请输入正确的手机号');
+        jQuery('#error_tip').html('请输入正确的手机号').css("display", "block");
         jQuery('#payPhoneID').focus();
         return false;
     }
     if (jQuery('#sjh_tip_div').html() == '请输入正确的手机号') {
-        alert('请输入正确的手机号');
+    	jQuery('#error_tip').html('请输入正确的手机号').css("display", "block");
         jQuery('#payPhoneID').focus();
         return false;
     }
@@ -193,6 +193,7 @@ function btnSubmit() {
 	if (amount == "" || isNumber(amount) == false || amount < 1 || amount > 500) {
 		jQuery('#otherMoney_tip').removeClass().addClass('lr-zc-fwt red');
 		jQuery('input[type=text][name="otherMoney"]').focus();
+		jQuery('#error_tip').html('请正确输入缴费金额').css("display", "block");
 		return false;
 	}
 	
@@ -200,15 +201,11 @@ function btnSubmit() {
     var collegeName = jQuery('select[name="collegeId"]').find("option:selected").text();
     
     var imgCode = jQuery('input[type=text][name=imgCode]').val();
-    /*
-    var imgCode = jQuery('input[type=text][name=imgCode]').val();
     if (imgCode == "" || imgCode.length != 4) {
-        alert('验证码不正确！');
-        jQuery('#authe_code_tip_div').removeClass().addClass('lr-zc-ts1 red');
+    	jQuery('#error_tip').html('验证码格式不正确！').css("display", "block");
         jQuery('input[type=text][name=imgCode]').focus();
         return false;
     }
-    */
     
 	var token = jQuery('input[type=hidden][name="token"]').val();
 	
@@ -237,13 +234,13 @@ function btnSubmit() {
 			var statusInfo = msg.statusInfo;
 			
 			if (status > 0) {
-				alert(statusInfo);
+				jQuery('#error_tip').html(statusInfo).css("display", "block");
 			} else {
 				location.href = forwardUrl;
 			}
 		},
 		error : function(msg) {
-			alert("系统出错了，请联系管理员");
+			jQuery('#error_tip').html('系统出错了，请联系管理员！').css("display", "block");
 		}
 	});
 }
