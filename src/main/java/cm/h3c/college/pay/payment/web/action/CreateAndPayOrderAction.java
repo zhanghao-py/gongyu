@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.ObjectUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
@@ -33,6 +34,12 @@ public class CreateAndPayOrderAction extends GenericAction {
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		OrderForm form = (OrderForm) session.get("orderForm");
 		
+		if (ObjectUtils.equals(form, null)) {
+			result.setStatus(AjaxStatus.ERROR.getValue());
+			result.setStatusInfo("表单不存在！");
+			return SUCCESS;
+		}
+		
 		Long id = null;
 		
 		try {
@@ -44,6 +51,8 @@ public class CreateAndPayOrderAction extends GenericAction {
 			result.setStatusInfo(e.getMessage());
 			return SUCCESS;
 		}
+		
+		session.remove("orderForm");
 		
 		Map<String, Object> data = new HashMap<String, Object>();
 		data.put("id", id);

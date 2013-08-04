@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.ObjectUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
@@ -53,10 +54,15 @@ public class OrderPortalAction extends GenericAction {
 		return SUCCESS;
 	}
 	
-	@Action(value = "createAndPayOrderPortal", results = { @Result(name = "success", type = "velocity", location = "/vm/payment_createAndPayOrder_portal.vm") })
+	@Action(value = "createAndPayOrderPortal", results = { @Result(name = "success", type = "velocity", location = "/vm/payment_createAndPayOrder_portal.vm"), @Result(name = "error", type = "velocity", location = "/vm/error.vm") })
 	public String createAndPayOrderPortal() {
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		OrderForm form = (OrderForm) session.get("orderForm");
+		
+		if (ObjectUtils.equals(form, null)) {
+			return ERROR;
+		}
+		
 		this.data = form;
 		return SUCCESS;
 	}
