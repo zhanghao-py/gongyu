@@ -70,13 +70,13 @@ function showXiala() {
                     jQuery(this).show();
 
                 } else {
-                    jQuery(this).hide()
+                    jQuery(this).hide();
                 }
             });
         } else {
             jQuery('li[id^="cookieMsisdn"]').each(function (i) {
                 jQuery(this).hide();
-            })
+            });
             var str = '<span class="orange">';
             if (msisdn.length <= 3) {
                 str = str + msisdn;
@@ -95,7 +95,7 @@ function showXiala() {
         jQuery('#li_xiala_msisdn').hide();
         jQuery('li[id^="cookieMsisdn"]').each(function (i) {
             jQuery(this).hide();
-        })
+        });
     } else {
         jQuery('#sjh_tip_div').removeClass().addClass('lr-zc-ts1').html('请输入正确的手机号');
 //        jQuery('#payPhoneID').focus();
