@@ -27,3 +27,12 @@ CREATE TABLE `gy_college` (
 
 INSERT INTO `gy_college` VALUES ('1', '北京大学', 'http://123.120.10.78:88', '联系人：张浩、马计坤', 'admin', 'admin', '/home/xxx');
 INSERT INTO `gy_college` VALUES ('2', '清华大学', 'http://123.120.10.78:88', '联系人：张浩、马计坤', 'admin', 'admin', '/home/xxx/ddd');
+
+CREATE TABLE `gy_log` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `order_id` bigint(20) unsigned NULL COMMENT '订单id',
+  `type` tinyint(4) unsigned NOT NULL COMMENT '1:CmpayRequest 2:CmpayCallbackRequest 3:CmpayCallbackWebRequest 10:CAMS充值日志 20:本地日志',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `content` longtext NOT NULL COMMENT '日志内容',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
