@@ -10,7 +10,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Transformer;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import cm.h3c.college.pay.core.exception.ServiceException;
 import cm.h3c.college.pay.payment.bo.College;
@@ -21,11 +21,10 @@ import cm.h3c.college.pay.payment.dao.OrderDao;
 import cm.h3c.college.pay.payment.service.CollegeServcie;
 import cm.h3c.college.pay.payment.service.OrderService;
 import cm.h3c.college.pay.payment.web.action.dto.OrderForm;
-import cm.h3c.college.pay.payment.web.action.dto.OrderVO;
 import cm.h3c.college.pay.payment.ws.delegate.AcmUserServiceDelegator;
 import cm.h3c.college.pay.payment.ws.delegate.FeeServiceDelegator;
 
-@Service("orderService")
+@Component("orderService")
 public class OrderServiceImpl implements OrderService {
 
 	private Logger log = Logger.getLogger(OrderService.class);
@@ -226,15 +225,6 @@ public class OrderServiceImpl implements OrderService {
 		
 		orderDao.updateOrdersStatusByIds(ids, OrderStatus.PAYING.getValue());
 		return;		
-	}
-
-	@Override
-	public OrderVO findOrderVOById(Long id) throws ServiceException {
-		if (id == null || id < 1) {
-			throw new ServiceException("id不能为空！");
-		}
-		
-		return orderDao.findOrderVOById(id);
 	}
 
 	@Override

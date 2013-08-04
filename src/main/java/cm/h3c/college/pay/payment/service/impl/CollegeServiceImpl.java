@@ -4,14 +4,14 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import cm.h3c.college.pay.core.exception.ServiceException;
 import cm.h3c.college.pay.payment.bo.College;
 import cm.h3c.college.pay.payment.dao.CollegeDao;
 import cm.h3c.college.pay.payment.service.CollegeServcie;
 
-@Service("collegeService")
+@Component("collegeService")
 public class CollegeServiceImpl implements CollegeServcie {
 
 	@Resource(name = "collegeDao")

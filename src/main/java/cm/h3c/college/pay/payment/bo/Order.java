@@ -7,6 +7,9 @@ import java.util.Date;
 import java.util.Map;
 import java.util.WeakHashMap;
 
+import org.apache.commons.lang.ObjectUtils;
+
+import cm.h3c.college.pay.payment.cons.PayResult;
 import cm.h3c.college.pay.payment.web.action.dto.OrderForm;
 
 public class Order implements Serializable {
@@ -207,8 +210,11 @@ public class Order implements Serializable {
 	}
 
 	public boolean isPaySuccess() {
-		// TODO Auto-generated method stub
-		return false;
+		if (ObjectUtils.equals(this.payResult, null)) {
+			return false;
+		}
+		
+		return ObjectUtils.equals(this.payResult, PayResult.SUCCESS.getValue());
 	}
 
 	

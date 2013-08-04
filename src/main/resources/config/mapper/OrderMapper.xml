@@ -15,12 +15,6 @@
 		<result column="college_id" property="collegeId" jdbcType="BIGINT" />
 	</resultMap>
 	
-	<resultMap id="VOResultMap" type="cm.h3c.college.pay.payment.web.action.dto.OrderVO">
-		<id column="id" property="id" jdbcType="BIGINT" />
-		<result column="money" property="money" jdbcType="DECIMAL" />
-		<result column="name" property="collegeName" jdbcType="VARCHAR" />
-	</resultMap>
-	
 	<sql id="Base_Column_List">
 		id, money, status, pay_result, cams_result, create_time, pay_time, finish_time, account, college_id
 	</sql>
@@ -109,18 +103,6 @@
 		</where>
 	</select>
 	
-	<select id="findOrderVOById" parameterType="java.lang.Long" resultMap="VOResultMap">
-		select
-			o.id, o.money, c.name
-		from
-			gy_order o
-		left join gy_college c on o.college_id = c.id
-		<where> 
-			o.id = #{id, jdbcType=BIGINT}
-		</where>
-	</select>
-
-
 
 </mapper>
 
