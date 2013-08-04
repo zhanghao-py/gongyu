@@ -37,6 +37,11 @@ public class AcmUserServiceDelegator {
 	private void init() {
 		String url = baseUrl + wsdlUrl;
 		
+		if ( !(url.startsWith("http") || url.startsWith("https")) ) {
+			log.error("can't init AcmUserServiceDelegator caused by url prefix illegal!");
+			return;
+		}
+		
 		AcmUserService remoteImplService = null;
 		
 		try {
@@ -47,6 +52,8 @@ public class AcmUserServiceDelegator {
 		
 		acmUserService = remoteImplService.getAcmUserServiceHttpSoap12Endpoint();
 		SOAPKeepSessionHandlerSettor.getInstance().setHandler((BindingProvider) acmUserService);		
+		
+		return;
 	}
 	
 	public AcmUser queryAcmUser(String username) throws ServiceException {
@@ -60,7 +67,7 @@ public class AcmUserServiceDelegator {
 			String errorMsg = result.getErrorMsg().getValue();
 			String msg = "error code is " + errorCode + ", error msg is " + errorMsg;
 			log.warn(msg);
-			throw new ServiceException(msg);
+			throw new ServiceException(errorMsg);
 		}
 		
 		

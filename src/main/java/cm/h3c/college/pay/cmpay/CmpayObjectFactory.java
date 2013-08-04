@@ -53,7 +53,7 @@ public class CmpayObjectFactory {
 		sign(callBackResponse);
 		return toXml(callBackResponse);
 	}
-
+	
 	void sign(CmpaySignable obj) {
 		/*
 		 * try { obj.setSign(SignUtil.doGenerateSign(obj.prepareSignData())); }
@@ -89,5 +89,15 @@ public class CmpayObjectFactory {
 	public String cmpayPaymentReqeust2Xml(CmpayPaymentRequest request) {
 		sign(request);
 		return toXml(request);
+	}
+	
+	public String cmpayPaymentCallbackRequest2Xml(CmpayPaymentCallbackRequest callbackRequest) {
+		sign(callbackRequest);
+		return toXml(callbackRequest);
+	}
+	
+	public String cmpayPaymentCallbackWebRequest2Xml(CmpayPaymentCallbackWebRequest callbackWebRequest) {
+		sign(callbackWebRequest);
+		return toXml(callbackWebRequest);
 	}
 }

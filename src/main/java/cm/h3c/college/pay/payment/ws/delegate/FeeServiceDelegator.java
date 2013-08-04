@@ -38,6 +38,11 @@ public class FeeServiceDelegator {
 	private void init() {
 		String url = baseUrl + wsdlUrl;
 		
+		if ( !(url.startsWith("http") || url.startsWith("https")) ) {
+			log.error("can't init FeeServiceDelegator caused by url prefix illegal!");
+			return;
+		}
+		
 		FeeService remoteImplService = null;
 		
 		try {
@@ -67,7 +72,7 @@ public class FeeServiceDelegator {
 			String errorMsg = result.getErrorMsg().getValue();
 			String msg = "error code is " + errorCode + ", error msg is " + errorMsg;
 			log.warn(msg);
-			throw new ServiceException(msg);
+			throw new ServiceException(errorMsg);
 		}
 		
 		return;
