@@ -1,9 +1,9 @@
 CREATE TABLE `gy_order` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `money` decimal NOT NULL COMMENT '角色名称',
-  `status` tinyint(4) NOT NULL COMMENT '1:订单初始化 2:支付中 3:支付完成 4:取消',
-  `pay_result` tinyint(4) NULL COMMENT '1:支付成功 2:支付失败',
-  `cams_result` tinyint(4) NULL COMMENT '1:充值成功 2:充值失败',
+  `status` tinyint(4) unsigned NOT NULL COMMENT '1:订单初始化 2:支付中 3:支付完成 4:取消',
+  `pay_result` tinyint(4) unsigned NULL COMMENT '1:支付成功 2:支付失败',
+  `cams_result` tinyint(4) unsigned NULL COMMENT '1:充值成功 2:充值失败',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `pay_time` datetime NULL COMMENT '支付开始时间',
   `finish_time` datetime NULL COMMENT '完成时间',
