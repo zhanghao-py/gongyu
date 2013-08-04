@@ -40,21 +40,10 @@ function btnGobakck() {
 function btnSubmit() {
     var bank = jQuery('input[type=radio][name=pay_bank_id]:checked').val();
     if (bank == null || bank == undefined) {
-        alert('请选择支付方式');
+        jQuery('#error_tip').html('请选择支付方式').css("display", "block");
         return false;
     }
-    /***
-     * 立即支付按钮变灰
-     */
-    buttonToGray();
-    /***
-     * 弹出遮盖层
-     * @type {*}
-     */
-    jQuery.blockUI({
-        message: jQuery('#div_zhifu'),
-        css: {left: '20%', top: '20%', cursor: 'default' }
-    });
+
     var bank_id = jQuery('input[type=radio][name=pay_bank_id]:checked').attr('id');
     jQuery.cookie('lastBank', bank_id, { expires: 365 });
 
@@ -70,17 +59,37 @@ function btnSubmit() {
 			var data = msg.data;
 			
 			if (status > 0) {
-				alert(statusInfo);
+				jQuery('#error_tip').html(statusInfo).css("display", "block");
 			} else {
-				var orderId = data.id;
-				alert("跳转到cmpay付款, orderId = " + orderId);
+				popWindow();
+//				var orderId = data.id;
+//				alert("跳转到cmpay付款, orderId = " + orderId);
+				var forwardUrl = 'http://www.baidu.com';
+				window.open(forwardUrl, "_blank");
 			}
 		},
 		error : function(msg) {
-			alert("系统出错了，请联系管理员");
+			jQuery('#error_tip').html('系统出错了，请联系管理员').css("display", "block");
+		},
+		beforeSend : function() {
+			jQuery('#loading_panel').showLoading();
+		},
+		complete : function() {
+			jQuery('#loading_panel').hideLoading();
 		}
 	});
     
+}
+
+/***
+ * 弹出遮盖层
+ * @type {*}
+ */
+function popWindow() {
+    jQuery.blockUI({
+        message: jQuery('#div_zhifu'),
+        css: {left: '35%', top: '20%', cursor: 'default' }
+    });
 }
 
 /***
@@ -100,17 +109,6 @@ function closeWindow() {
 function completePayment() {
    // window.location = root + "/internetFee_new/jsp/payment/payment_third.jsp?order_info=" + order_info;
 	window.location =  "/cm/paySuccess.html?order_info=" + order_info;
-}
-
-/***
- *  按钮变灰并不可用
- */
-function buttonToGray() {
-    //银行充值缴费
-    var obj = jQuery('img[id="YHKJF_YRCZ_LJZF"]');
-    obj.attr('disabled', true);
-    obj.css('filter', 'gray');
-    obj.css('cursor', '');
 }
 
 /***

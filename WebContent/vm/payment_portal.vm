@@ -10,9 +10,11 @@
 	<meta http-equiv="cache-control" content="no-cache" />
 	<meta http-equiv="expires" content="0" />
 	<link type="text/css" href="$!{webRoot}/css/chongzhi.css" rel="stylesheet" />
+	<link type="text/css" href="$!{webRoot}/css/showLoading.css" rel="stylesheet" />
 	
 	<script type="text/javascript" src="$!{webRoot}/js/jquery-1.10.2.min.js"></script>
 	<script type="text/javascript" src="$!{webRoot}/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="$!{webRoot}/js/jquery.showLoading.min.js"></script>
 	
 	<script type="text/javascript" src="$!{webRoot}/js/util.js"></script>
     <script type="text/javascript" src="$!{webRoot}/js/payment_portal.js"></script>
@@ -39,7 +41,7 @@
     </style>
 </head>
 
-<body onclick="onBodyClick()">
+<body>
 
 <form name="paymentForm" method="post" action="$!{webRoot}/payment/checkOrderForm.do">
 
@@ -112,15 +114,17 @@
             
 			<div class="clr"></div>
 			
-            <div class="lr-zc-fwt" style="display:none; color:red;" id="error_tip">请输入1元~500元的整数</div>
+            <div class="lr-zc-fwt" style="display:none; color:red;" id="error_tip"></div>
             
 			<div class="lr-zc-tj">
-				<img class="hand" alt="开始充值" src="$!{webRoot}/images/btn4.png"
-					onmouseover="this.src='$!{webRoot}/images/btn4-1.png'"
-					id="YHKJF_YRCZ_WDL_KSCZ" onclick="btnSubmit()"
-					onmouseout="this.src='$!{webRoot}/images/btn4.png'" height="36"
-					width="116" />
-				<span class="pl8">请确认帐号填写无误</span>
+				<div id="loading_panel">
+					<img class="hand" alt="开始充值" src="$!{webRoot}/images/btn4.png"
+						onmouseover="this.src='$!{webRoot}/images/btn4-1.png'"
+						id="YHKJF_YRCZ_WDL_KSCZ" onclick="btnSubmit()"
+						onmouseout="this.src='$!{webRoot}/images/btn4.png'" height="36"
+						width="116" />
+					<span class="pl8">请确认帐号填写无误</span>
+				</div>
 			</div>
 
         </div>
@@ -128,24 +132,7 @@
 
 </div>
 
-
-<div id="dl_tip_div" style="display: none">
-        
-
-    <div class="zhifu" style="top:-20px; left:-10px;width:402px;height:220px;z-index: 1001">
-        <div class="zhifu_tanchu"></div>
-        <div class="zhifu_tanchu_box h210">
-            <div class="zhifu_tanchu_tit">
-                <h3>银行卡充值</h3>
-
-                <div class="close_btn" onclick="closeLoginWindow()"></div>
-            </div>
-        </div>
-    </div>
-</div>
-
 </form>
 
-
-
-</body></html>
+</body>
+</html>

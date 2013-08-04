@@ -211,8 +211,6 @@ function btnSubmit() {
 	
 	//记录cookie
 	addMsisdnTOCookie(msisdn);
-	//充值
-	buttonToGray();
 	
 	var url = jQuery('form[name="paymentForm"]').attr('action');
 	var forwardUrl = "createAndPayOrderPortal.do";
@@ -241,34 +239,23 @@ function btnSubmit() {
 		},
 		error : function(msg) {
 			jQuery('#error_tip').html('系统出错了，请联系管理员！').css("display", "block");
+		},
+		beforeSend : function() {
+			jQuery('#loading_panel').showLoading();
+		},
+		complete : function() {
+			jQuery('#loading_panel').hideLoading();
 		}
 	});
 }
-/***
- *  按钮变灰并不可用
- */
 
-function buttonToGray() {
-    //银行充值缴费
-    var obj = jQuery('img[id^="YHKJF_YRCZ_"][id$="_KSCZ"]');
-    obj.attr('disabled', true);
-    obj.css('filter', 'gray');
-    obj.css('cursor', '');
-}
 // 刷新验证码
 function reloadRandImg() {
     var cache = new Date().getTime();
     var path = jQuery('#randImg').attr('src');
     jQuery('#randImg').attr('src', path + '?cache=' + cache);
 }
-/***
- * 页面点击事件
- */
-function onBodyClick() {
-    if (undefined != xialaDivIsOnOver && xialaDivIsOnOver == false && isPayPhoneFoucs != undefined && isPayPhoneFoucs == false) {
-        jQuery('.xiala').hide();
-    }
-}
+
 
 
 

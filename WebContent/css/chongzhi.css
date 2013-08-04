@@ -301,3 +301,19 @@ lr-tabc li.tu{ padding-top:9px; width:8px; border:0; background-color:transparen
 .pay_methods .chongzhiInfo td{height:23px;text-align:center;}
 .pay_methods .chongzhiInfo b{color:#fd8e08;}
 .pay_methods .chongzhiInfo table td a{color:#027cc9;}
+
+/*弹出页面==============================*/
+#bg{width:100%;top:0px;left:0px;bottom:0px;position:absolute;filter:Alpha(opacity=50);opacity:0.5;background:#000;_display:none; height:100%}
+.zhifu{ position:absolute; top:30%; left:35%;width:402px;height:220px;z-index: 1001 }
+.zhifu .zhifu_tanchu{width:402px;height:220px;background:#4e4e4e;filter:Alpha(opacity=50);opacity:0.5;}
+.zhifu .zhifu_tanchu .h210{height:210px;}
+.zhifu .zhifu_tanchu_box{width:392px;height:210px;background:#fff; position:absolute; top:5px; left:5px}
+.zhifu .zhifu_tanchu_tit{padding:4px 6px 0;height:22px;border-bottom:1px solid #bebebe;background:#f2f2f2;overflow:hidden;zoom:1;}
+.zhifu .zhifu_tanchu_tit h3{float:left;font-size:14px;color:#2a2a2a;}
+.zhifu .zhifu_tanchu_tit .close_btn{float:right;width:15px;height:15px;background:url(../images/chongzhi_web.jpg) no-repeat right -135px;cursor:pointer;}
+.zhifu .zhifu_tanchu_con{padding:15px 20px 10px 20px}
+.zhifu .zhifu_tanchu_con dt{padding:0 0 24px 45px;height:39px;background:url(../images/tan.png) no-repeat left 0;font-size:12px;color:#4e4e4e;line-height:24px;}
+.zhifu_tanchu_con dd.btn{overflow:hidden;zoom:1;padding:0 0 50px 90px;height:25px;}
+.zhifu_tanchu_con .end_btn{display:block;float:left;margin-right:9px;width:86px;height:25px;background:url(../images/tuanchu_btn.jpg) no-repeat left -27px;}
+.zhifu_tanchu_con .question_btn{display:block;float:left;width:97px;height:25px;background:url(../images/tuanchu_btn.jpg) no-repeat;}
+.zhifu_tanchu_con dd a{color:#007ac7;}
