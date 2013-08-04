@@ -1,6 +1,6 @@
 /*common*/
-body{font-size:12px;font-family:Arial, Helvetica, sans-serif; color:#999999}
-body,form,img,p{margin:0px;padding:0px;border:0px;}
+body{margin:auto;padding:0px;font-size:12px;font-family:Arial, Helvetica, sans-serif; color:#999999; width:740px; }
+form,img,p{margin:0px;padding:0px;border:0px;}
 dl,dd,dt,ul,li{list-style-position:outside;list-style-type:none;margin:0px;padding:0px;border:0px;}
 h1,h2,h3,h4{margin:0px;padding:0px;border:0px;}
 a:link,a:visited{text-decoration:none;}
@@ -289,3 +289,7 @@ lr-tabc li.tu{ padding-top:9px; width:8px; border:0; background-color:transparen
 .gl-tc-tab{margin:20px 12px 25px 12px; background:url(../images/tan.png) no-repeat left top}
 .gl-tc-nr{padding-left:45px; line-height:24px; color:#4e4e4e}
 .tc{text-align:center}
+
+.pay_methods .pay_btn{margin:0px auto;width:116px;height:36px; padding-bottom:20px; padding-top:20px;}
+.pay_methods .pay_list_con li{float:left;padding:0 2px 5px 0;width:120px;text-align:center;}
+.pay_methods .pay_list_con{padding-top:10px;overflow:hidden;zoom:1; }

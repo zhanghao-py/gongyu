@@ -10,10 +10,8 @@
 	<meta http-equiv="cache-control" content="no-cache" />
 	<meta http-equiv="expires" content="0" />
 	<link type="text/css" href="$!{webRoot}/css/chongzhi.css" rel="stylesheet" />
-	<link type="text/css" href="$!{webRoot}/css/chongzhi-1.css" rel="stylesheet" />
-
-
-	<script type="text/javascript" src="$!{webRoot}/js/jquery-2.0.3.min.js"></script>
+	
+	<script type="text/javascript" src="$!{webRoot}/js/jquery-1.10.2.min.js"></script>
 	<script type="text/javascript" src="$!{webRoot}/js/jquery.cookie.js"></script>
 	
 	<script type="text/javascript" src="$!{webRoot}/js/util.js"></script>
