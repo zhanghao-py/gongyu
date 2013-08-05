@@ -34,5 +34,6 @@ CREATE TABLE `gy_log` (
   `type` tinyint(4) unsigned NOT NULL COMMENT '1:CmpayRequest 2:CmpayCallbackRequest 3:CmpayCallbackWebRequest 10:CAMS充值日志 20:本地日志',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `content` longtext NOT NULL COMMENT '日志内容',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `log_index_order_id` (`order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

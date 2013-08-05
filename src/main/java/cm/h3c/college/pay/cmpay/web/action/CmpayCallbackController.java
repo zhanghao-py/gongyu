@@ -2,6 +2,7 @@ package cm.h3c.college.pay.cmpay.web.action;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -17,10 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import cm.h3c.college.pay.cmpay.CmpayObjectFactory;
 import cm.h3c.college.pay.cmpay.CmpayPaymentCallbackRequest;
 import cm.h3c.college.pay.cmpay.CmpayPaymentCallbackResponse;
-import cm.h3c.college.pay.cmpay.CmpayPaymentRequest;
 import cm.h3c.college.pay.cmpay.service.CmpayPaymentService;
 import cm.h3c.college.pay.core.config.SystemConfig;
-import cm.h3c.college.pay.payment.bo.Order;
+import cm.h3c.college.pay.core.exception.ServiceException;
+import cm.h3c.college.pay.payment.cons.LogType;
+import cm.h3c.college.pay.payment.service.LogService;
 import cm.h3c.college.pay.payment.service.OrderService;
 
 @Controller
@@ -33,6 +35,9 @@ public class CmpayCallbackController implements HttpRequestHandler {
 
 	@Autowired
 	private OrderService orderService;
+
+	@Autowired
+	private LogService logService;
 
 	@Autowired
 	private SystemConfig config;
@@ -48,38 +53,47 @@ public class CmpayCallbackController implements HttpRequestHandler {
 		CmpayPaymentCallbackRequest callback = cmpayObjectFactory
 				.parseCmpayPaymentCallbackRequest(reqXml);
 
-		// log callback to DB
+		CmpayPaymentCallbackResponse callbackResponse = cmpayObjectFactory
+				.createCmpayPaymentCallbackResponse(callback);
 
-		// get payment
-		CmpayPaymentRequest payment = new CmpayPaymentRequest();
-		CmpayPaymentCallbackResponse callbackResponse = new CmpayPaymentCallbackResponse(
-				payment);
+		Long orderId = null;
+		try {
+			orderId = Long.parseLong(callback.getOrderId());
+		} catch (NumberFormatException e) {
+			log.error("parse callback.orderId to Long error, xml=" + reqXml);
+			callbackResponse.setRcode("1");
+			callbackResponse.setDesc("error orderid");
+			sendCallBackResponse(response, callbackResponse);
+			return;
+		}
+
+		// log callback to DB
+		try {
+			logService.doLog(LogType.CMPAY_CALLBACK_REQUEST, orderId, reqXml);
+		} catch (ServiceException e) {
+			log.error("save callback error, xml=" + reqXml, e);
+		}
 
 		try {
-			// get Order
-			Order order = orderService.findOrderById(Long.parseLong(callback
-					.getOrderId()));
-
-			if (order.isPaySuccess()) {
-				log.warn("duplication payment callback, ignore: " + callback);
-			} else {
-				// update order status
-				if (callback.getStatus().equals(
-						CmpayPaymentService.PaymentResult.SUCCESS.name())) {
-					orderService.paySuccess(order);
-				} else {
-					orderService.payFiled(order, callback.getStatus(),
-							callback.getRemark());
-				}
-			}
+			orderService.updateOrderStatusByCallback(
+					orderId,
+					callback.getStatus().equals(
+							CmpayPaymentService.PaymentResult.SUCCESS.name()),
+					callback.getStatus(), callback.getRemark());
 
 			callbackResponse.setRcode(CmpayPaymentService.RCODE_SUCCESS);
 		} catch (Exception e) {
-			callbackResponse.setRcode("-1");
+			callbackResponse.setRcode("2");
 			log.error("", e);
 		}
 
 		// send response
+		sendCallBackResponse(response, callbackResponse);
+	}
+
+	private void sendCallBackResponse(HttpServletResponse response,
+			CmpayPaymentCallbackResponse callbackResponse)
+			throws UnsupportedEncodingException, IOException {
 		String responseXml = cmpayObjectFactory
 				.cmpayPaymentCallbackResponse2Xml(callbackResponse);
 		response.getOutputStream().write(responseXml.getBytes("UTF-8"));

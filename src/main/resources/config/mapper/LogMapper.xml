@@ -4,14 +4,24 @@
 
 	<resultMap id="BaseResultMap" type="cm.h3c.college.pay.payment.bo.Log">
 		<id column="id" property="id" jdbcType="BIGINT" />
+		<id column="order_id" property="orderId" jdbcType="BIGINT" />
 		<result column="type" property="type" jdbcType="SMALLINT" />
 		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
 		<result column="content" property="content" jdbcType="LONGVARCHAR" />
 	</resultMap>
 	
 	<sql id="Base_Column_List">
-		id, type, create_time, content
+		id, type, create_time, content, order_id
 	</sql>
+	
+	<select id="findByOrderId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from gy_log
+		<where> 
+			order_id = #{orderId, jdbcType=BIGINT}
+		</where>
+	</select>
 	
 	<insert id="saveLog"
 		parameterType="cm.h3c.college.pay.payment.bo.Log"

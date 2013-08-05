@@ -37,6 +37,14 @@ public class CmpayObjectFactory {
 		checkSign(response, xml);
 		return response;
 	}
+	
+	public CmpayPaymentRequest parseCmpayPaymentRequest(String xml) {
+		XStream xstream = new XStream();
+		xstream.alias("MESSAGE", CmpayPaymentRequest.class);
+		CmpayPaymentRequest response = (CmpayPaymentRequest) xstream
+				.fromXML(xml);
+		return response;
+	}
 
 	void checkSign(CmpaySignable signedObj, String xml) {
 		/*
@@ -99,5 +107,25 @@ public class CmpayObjectFactory {
 	public String cmpayPaymentCallbackWebRequest2Xml(CmpayPaymentCallbackWebRequest callbackWebRequest) {
 		sign(callbackWebRequest);
 		return toXml(callbackWebRequest);
+	}
+
+	public CmpayPaymentCheckRequest createCmpayPaymentCheckRequest(
+			CmpayPaymentRequest paymentRequest) {
+		CmpayPaymentCheckRequest ret = new CmpayPaymentCheckRequest();
+		ret.MID = paymentRequest.MID;
+		ret.DATE = paymentRequest.DATE;
+		ret.TIME = paymentRequest.TIME;
+		ret.MERID = paymentRequest.MERID;
+		ret.ORDERID = paymentRequest.ORDERID;
+		return ret;
+	}
+
+	public CmpayPaymentCallbackResponse createCmpayPaymentCallbackResponse(
+			CmpayPaymentCallbackRequest callback) {
+		CmpayPaymentCallbackResponse ret = new CmpayPaymentCallbackResponse();
+		ret.MID = callback.MID;
+		ret.DATE = callback.DATE;
+		ret.TIME = callback.TIME;
+		return ret;
 	}
 }

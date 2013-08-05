@@ -1,5 +1,7 @@
 package cm.h3c.college.pay.payment.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.apache.commons.lang.ObjectUtils;
@@ -60,6 +62,11 @@ public class LogServiceImpl implements LogService {
 		logDao.saveLog(log);
 		
 		return;
+	}
+
+	@Override
+	public List<Log> findByOrderId(Long orderId) throws ServiceException {
+		return logDao.findByOrderId(orderId);
 	}
 	
 	

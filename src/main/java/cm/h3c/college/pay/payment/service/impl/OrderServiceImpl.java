@@ -230,16 +230,10 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public void paySuccess(Order order) {
+	public void updateOrderStatusByCallback(Long orderId, boolean success,
+			String status, String remark) {
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public void payFiled(Order order, String status, String remark) {
-		// TODO Auto-generated method stub
-		
-	}
-
 
 }

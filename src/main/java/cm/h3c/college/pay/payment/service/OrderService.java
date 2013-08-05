@@ -29,7 +29,6 @@ public interface OrderService {
 
 	public void updateOrderStatus2PayingById(Long id) throws ServiceException;
 
-	public void paySuccess(Order order);
-
-	public void payFiled(Order order, String status, String remark);
+	public void updateOrderStatusByCallback(Long orderId, boolean equals,
+			String status, String remark);
 }

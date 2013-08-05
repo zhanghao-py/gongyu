@@ -10,13 +10,7 @@ public class CmpayPaymentCallbackResponse implements CmpaySignable {
 	String RCODE;// 返回码 000000表示成功，其它失败 M
 	String DESC;// 返回信息 M
 	String SIGN;// 签名 172位 M
-
-	public CmpayPaymentCallbackResponse(CmpayPaymentRequest payment) {
-		MID = payment.MID;
-		DATE = payment.DATE;
-		TIME = payment.TIME;	
-	}
-
+	
 	@Override
 	public String prepareSignData() {
 		StringBuilder ret = new StringBuilder();
@@ -44,5 +38,9 @@ public class CmpayPaymentCallbackResponse implements CmpaySignable {
 
 	public void setMid(String mid) {
 		this.MID = mid;
+	}
+	
+	public void setDesc(String desc) {
+		this.DESC = desc;
 	}
 }
