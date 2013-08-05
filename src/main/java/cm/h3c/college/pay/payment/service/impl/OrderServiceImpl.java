@@ -12,6 +12,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
+import cm.h3c.college.pay.cmpay.service.CmpayPaymentService;
 import cm.h3c.college.pay.core.exception.ServiceException;
 import cm.h3c.college.pay.core.util.PrimaryKeyGenerator;
 import cm.h3c.college.pay.payment.bo.College;
@@ -35,6 +36,9 @@ public class OrderServiceImpl implements OrderService {
 	
 	@Resource(name = "orderDao")
 	private OrderDao orderDao;
+	
+	@Resource(name = "cmpayPaymentService")
+	private CmpayPaymentService cmpayPaymentService;
 
 	@Override
 	public Long doCreateOrder(OrderForm form) throws ServiceException {

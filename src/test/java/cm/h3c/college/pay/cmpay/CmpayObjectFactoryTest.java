@@ -5,11 +5,13 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import com.thoughtworks.xstream.XStream;
+import com.umpay.mpay.SignEncException;
+import com.umpay.mpay.SignUtil;
 
 public class CmpayObjectFactoryTest {
 
 	@Test
-	public void testToXml() {
+	public void testToXml() throws SignEncException {
 		CmpayObjectFactory factory = new CmpayObjectFactory();
 		CmpayPaymentCheckRequest request = new CmpayPaymentCheckRequest();
 		request.MID = "1234";

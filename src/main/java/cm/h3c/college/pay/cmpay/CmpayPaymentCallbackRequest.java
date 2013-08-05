@@ -14,9 +14,8 @@ public class CmpayPaymentCallbackRequest implements CmpaySignable {
 	String MERID;// 商户编号 15位 M
 	String ORDERDATE;// 订单日期 YYYYMMDD 8位 M
 	String ORDERID;// 订单号 20位 M
-	String STATUS;// 状态
-	// PADSUCCESS：预授权成功PADFAILED：预授权失败REFUSE：用户拒付SUCCESS：成功FAILED：失败
-	// M
+	// 状态 PADSUCCESS：预授权成功PADFAILED：预授权失败REFUSE：用户拒付SUCCESS：成功FAILED：失败  M
+	String STATUS;
 	String REMARK;// 备注 最长60位 O
 	String FROZENNO;// 冻结编号 6为 M
 	String SIGN;// 签名 172位 M

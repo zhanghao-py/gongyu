@@ -6,6 +6,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import com.thoughtworks.xstream.XStream;
+import com.umpay.mpay.SignEncException;
+import com.umpay.mpay.SignUtil;
 
 @Component
 public class CmpayObjectFactory {
@@ -37,7 +39,7 @@ public class CmpayObjectFactory {
 		checkSign(response, xml);
 		return response;
 	}
-	
+
 	public CmpayPaymentRequest parseCmpayPaymentRequest(String xml) {
 		XStream xstream = new XStream();
 		xstream.alias("MESSAGE", CmpayPaymentRequest.class);
@@ -47,13 +49,16 @@ public class CmpayObjectFactory {
 	}
 
 	void checkSign(CmpaySignable signedObj, String xml) {
-		/*
-		 * try { if (!SignUtil.doCheckSign(signedObj.prepareSignData(),
-		 * signedObj.getSign())) { throw new
-		 * IllegalArgumentException("check Sign failed " + xml); } } catch
-		 * (SignEncException e) { throw new
-		 * IllegalArgumentException("check Sign failed " + xml, e); }
-		 */
+
+		try {
+			if (!SignUtil.doCheckSign(signedObj.prepareSignData(),
+					signedObj.getSign())) {
+				throw new IllegalArgumentException("check Sign failed " + xml);
+			}
+		} catch (SignEncException e) {
+			throw new IllegalArgumentException("check Sign failed " + xml, e);
+		}
+
 	}
 
 	public String cmpayPaymentCallbackResponse2Xml(
@@ -61,12 +66,14 @@ public class CmpayObjectFactory {
 		sign(callBackResponse);
 		return toXml(callBackResponse);
 	}
-	
+
 	void sign(CmpaySignable obj) {
-		/*
-		 * try { obj.setSign(SignUtil.doGenerateSign(obj.prepareSignData())); }
-		 * catch (SignEncException e) { throw new IllegalArgumentException(e); }
-		 */}
+		try {
+			obj.setSign(SignUtil.doGenerateSign(obj.prepareSignData()));
+		} catch (SignEncException e) {
+			throw new IllegalArgumentException(e);
+		}
+	}
 
 	String toXml(Object obj) {
 		try {
@@ -98,17 +105,25 @@ public class CmpayObjectFactory {
 		sign(request);
 		return toXml(request);
 	}
-	
-	public String cmpayPaymentCallbackRequest2Xml(CmpayPaymentCallbackRequest callbackRequest) {
+
+	public String cmpayPaymentCallbackRequest2Xml(
+			CmpayPaymentCallbackRequest callbackRequest) {
 		sign(callbackRequest);
 		return toXml(callbackRequest);
 	}
-	
-	public String cmpayPaymentCallbackWebRequest2Xml(CmpayPaymentCallbackWebRequest callbackWebRequest) {
+
+	public String cmpayPaymentCallbackWebRequest2Xml(
+			CmpayPaymentCallbackWebRequest callbackWebRequest) {
 		sign(callbackWebRequest);
 		return toXml(callbackWebRequest);
 	}
 
+	public String cmpayPaymentCallbackRequest(
+			CmpayPaymentCallbackRequest callBackRequest) {
+		sign(callBackRequest);
+		return toXml(callBackRequest);
+	}
+	
 	public CmpayPaymentCheckRequest createCmpayPaymentCheckRequest(
 			CmpayPaymentRequest paymentRequest) {
 		CmpayPaymentCheckRequest ret = new CmpayPaymentCheckRequest();

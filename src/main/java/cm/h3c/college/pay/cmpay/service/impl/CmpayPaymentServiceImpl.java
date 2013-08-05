@@ -25,7 +25,7 @@ import cm.h3c.college.pay.payment.bo.Order;
 import cm.h3c.college.pay.payment.cons.LogType;
 import cm.h3c.college.pay.payment.service.LogService;
 
-@Component
+@Component("cmpayPaymentService")
 public class CmpayPaymentServiceImpl implements CmpayPaymentService {
 	private static Logger log = Logger.getLogger(CmpayPaymentServiceImpl.class);
 
