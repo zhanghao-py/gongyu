@@ -45,7 +45,7 @@ public class OrderPortalAction extends GenericAction {
 		try {
 			colleges = collegeService.findAll();
 		} catch (ServiceException e) {
-			log.warn(e);
+			log.warn("", e);
 		}
 		
 		Map<String, Object> data = new HashMap<String, Object>();

@@ -47,7 +47,7 @@ public class CreateAndPayOrderAction extends GenericAction {
 			id = orderService.doCreateOrder(form);
 			orderService.doPayOrder(id);
 		} catch (ServiceException e) {
-			log.warn(e);
+			log.warn("", e);
 			result.setStatus(AjaxStatus.ERROR.getValue());
 			result.setStatusInfo(e.getMessage());
 			return SUCCESS;
