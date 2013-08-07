@@ -64,8 +64,29 @@ function btnSubmit() {
 				popWindow();
 //				var orderId = data.id;
 //				alert("跳转到cmpay付款, orderId = " + orderId);
-				var forwardUrl = 'http://www.baidu.com';
-				window.open(forwardUrl, "_blank");
+//				var forwardUrl = 'http://www.baidu.com';
+//				window.open(forwardUrl, "_blank");
+				jQuery('#merId').val(msg.data.payment.merId);
+				jQuery('#orderId').val(msg.data.payment.orderId);
+				jQuery('#amout').val(msg.data.payment.amout);
+				jQuery('#mcode').val(msg.data.payment.mcode);
+				jQuery('#mid').val(msg.data.payment.mid);
+				jQuery('#date').val(msg.data.payment.date);
+				jQuery('#time').val(msg.data.payment.time);
+				jQuery('#allowNote').val(msg.data.payment.allowNote);
+				jQuery('#authorizeMode').val(msg.data.payment.authorizeMode);
+				jQuery('#currency').val(msg.data.payment.currency);
+				jQuery('#orderDate').val(msg.data.payment.orderDate);
+				jQuery('#period').val(msg.data.payment.period);
+				jQuery('#periodUnit').val(msg.data.payment.periodUnit);
+				jQuery('#productId').val(msg.data.payment.productId);
+				jQuery('#productDesc').val(msg.data.payment.productDesc);
+				jQuery('#productName').val(msg.data.payment.productName);
+				jQuery('#mobileId').val(msg.data.payment.mobileId);
+				jQuery('#callBack').val(msg.data.payment.callback);
+				jQuery('#txntyp').val(msg.data.payment.txntyp);
+				jQuery('#SIGN').val(msg.data.payment.sign);
+				jQuery('form[name="cmpayForm"]').submit();
 			}
 		},
 		error : function(msg) {

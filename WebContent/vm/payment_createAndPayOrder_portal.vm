@@ -141,5 +141,102 @@
 
 </form>
 
+		<div id="debugInf" style="display: none">
+		<form name="cmpayForm" method="post" target="_blank" action=" http://114.251.148.201:29095/newWpay/pay/uniformPayModSel.pay">
+			<table>
+				<tr>
+					<td>商户号：</td>
+					<td><input type="text" id="merId" name="merId" value='888001900010004' />
+					</td>
+				</tr>
+				<tr>
+					<td>订单号：</td>
+					<td><input type="text" id="orderId" name="orderId"
+						value='19090412520528459274' onchange="modOrder(this.value)" /></td>
+				</tr>
+				<tr>
+					<td>金额：</td>
+					<td><input type="text" id="amout" name="amout" value='10' /></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input type="hidden" id="mcode" name="mcode" value='101425' /> <br />
+						<input type="hidden" id="mid" name="mid" value='20091103003870' /> <br />
+					</td>
+				</tr>
+				<tr>
+					<td>交易日期：</td>
+					<td><input type="text" id="date" name="date" value='20091103' /> <br />
+					</td>
+				</tr>
+				<tr>
+					<td>交易时间：</td>
+					<td><input type="text" id="time" name="time" value='101315' /><br /></td>
+				</tr>
+				<tr>
+					<td>是否允许评论：</td>
+					<td><input type="text" id="allowNote" name="allowNote" value='0' /><br /></td>
+				</tr>
+				<tr>
+					<td>推荐确认方式：</td>
+					<td><input type="text" id="authorizeMode" name="authorizeMode" value='WEB' /><br />
+					</td>
+				</tr>
+				<tr>
+					<td>币种：</td>
+					<td><input type="text" id="currency" name="currency" value='CNY' /><br />
+					</td>
+				</tr>
+				<tr>
+					<td>订单日期：</td>
+					<td><input type="text" id="orderDate" name="orderDate" value='20091103' /><br />
+					</td>
+				</tr>
+				<tr>
+					<td>有效期数量：</td>
+					<td><input type="text" id="period" name="period" value='1' /><br /></td>
+				</tr>
+				<tr>
+					<td>有效期单位：</td>
+					<td><input type="text" id="periodUnit" name="periodUnit" value='1' /><br />
+					</td>
+				</tr>
+				<tr>
+					<td>商品描述：</td>
+					<td><input type="text" id="productDesc" name="productDesc" value='数码皮皮熊' /><br />
+					</td>
+				</tr>
+				<tr>
+					<td>商品编号：</td>
+					<td><input type="text" id="productId" name="productId" value='0003' /><br />
+					</td>
+				</tr>
+				<tr>
+					<td>商品名称：</td>
+					<td><input type="text" id="productName" name="productName"
+						value='数码皮皮熊7号经典版PPX-730JD' /><br /></td>
+				</tr>
+
+				<tr>
+					<td>交易类型：</td>
+					<td><input type="text" id="mobileId" name="mobileId" value='13500000000' /><br />
+					</td>
+				</tr>
+
+				<tr>
+					<td>回调URL：</td>
+					<td><input type="text" id="callBack" name="callBack"
+						value='http://localhost:29095/merPlat/success2.jsp' /><br /></td>
+				</tr>
+				<tr>
+					<td>手机号：</td>
+					<td><input type="text" id="txntyp" name="txntyp" value='S' /><br /> <input
+						type="hidden" id="SIGN" name="SIGN"
+						value='R6iukaEgK9WSfpCTUFl4S91SP6J+GFBah3Mro/UfS3IOGVa3i2kgRfw0eaaScQuSqIciJ+RqpFoYoM92InkT7I4t3pBd1g8aFp1Gb5KAFM25xh3zLUYmjEmMubnLaeBb7noSLV1g1Yh4ASPr363wy2swrxZyNiYUf3qdy5IuLyE=' /><br />
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
 
 </body></html>
