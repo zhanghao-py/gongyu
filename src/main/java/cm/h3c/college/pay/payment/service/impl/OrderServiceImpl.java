@@ -2,6 +2,7 @@ package cm.h3c.college.pay.payment.service.impl;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -12,6 +13,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
+import cm.h3c.college.pay.cmpay.CmpayPaymentRequest;
 import cm.h3c.college.pay.cmpay.service.CmpayPaymentService;
 import cm.h3c.college.pay.core.exception.ServiceException;
 import cm.h3c.college.pay.core.util.PrimaryKeyGenerator;
@@ -195,7 +197,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public void doPayOrder(Long orderId) throws ServiceException {
+	public CmpayPaymentRequest doPayOrder(Long orderId) throws ServiceException {
 		
 		if (orderId == null || orderId < 1) {
 			throw new ServiceException("orderId不能为空！");
@@ -215,9 +217,10 @@ public class OrderServiceImpl implements OrderService {
 		// 修改订单状态
 		this.updateOrderStatus2PayingById(orderId);
 		
-		// TODO:跳转到cmpay付款
+		// 生成cmpay订单
 		
-		return;
+		order.setPayTime(new Date());
+		return cmpayPaymentService.createPayment(order);
 	}
 
 	@Override

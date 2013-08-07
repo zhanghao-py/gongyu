@@ -13,6 +13,8 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.umpay.mpay.SignEncException;
+
 import cm.h3c.college.pay.cmpay.CmpayObjectFactory;
 import cm.h3c.college.pay.cmpay.CmpayPaymentCheckRequest;
 import cm.h3c.college.pay.cmpay.CmpayPaymentCheckResponse;
@@ -43,7 +45,7 @@ public class CmpayPaymentServiceImpl implements CmpayPaymentService {
 	@Override
 	public void submitPayment(Order order) throws ServiceException {
 		// create CmpayPaymentRequest
-		CmpayPaymentRequest request = new CmpayPaymentRequest();
+		CmpayPaymentRequest request = createPayment(order);
 		String reqXml = cmpayObjectFactory.cmpayPaymentReqeust2Xml(request);
 		// save request to db
 		logService.doLog(LogType.CAMS_PAY_REQUEST, order.getId(), reqXml);
@@ -109,6 +111,19 @@ public class CmpayPaymentServiceImpl implements CmpayPaymentService {
 			if (post != null) {
 				post.releaseConnection();
 			}
+		}
+	}
+
+	@Override
+	public CmpayPaymentRequest createPayment(Order order)
+			throws ServiceException {
+		try {
+			CmpayPaymentRequest ret = cmpayObjectFactory.createCmpayPaymentRequest(order);
+			log.debug("signdata: " + ret.prepareSignData());
+			log.debug("sign    : " + ret.getSign());
+			return ret;
+		} catch (SignEncException e) {
+			throw new ServiceException("sign payment request error", e);
 		}
 	}
 }

@@ -10,6 +10,7 @@ public class SystemConfig {
 	private String checkUrl;
 
 	private String paymentResultUrl;
+	private String callbackUrl;
 
 	public String getMerId() {
 		return merId;
@@ -41,6 +42,14 @@ public class SystemConfig {
 
 	public void setPaymentResultUrl(String paymentResultUrl) {
 		this.paymentResultUrl = paymentResultUrl;
+	}
+
+	public String getCallbackUrl() {
+		return callbackUrl;
+	}
+
+	public void setCallbackUrl(String callbackUrl) {
+		this.callbackUrl = callbackUrl;
 	}
 
 }

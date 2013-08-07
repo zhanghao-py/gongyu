@@ -11,6 +11,7 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 
+import cm.h3c.college.pay.cmpay.CmpayPaymentRequest;
 import cm.h3c.college.pay.core.config.SystemConfig;
 import cm.h3c.college.pay.core.cons.AjaxStatus;
 import cm.h3c.college.pay.core.exception.ServiceException;
@@ -28,7 +29,7 @@ public class CreateAndPayOrderAction extends GenericAction {
 	
 	@Resource(name = "orderService")
 	private OrderService orderService;
-	
+		
 	@Action(value = "createAndPayOrder", results = { @Result(name = "success", type = "json", params = { "excludeNullProperties", "true", "root", "result" }) })
 	public String createAndPayOrderAjax() {
 		
@@ -43,11 +44,12 @@ public class CreateAndPayOrderAction extends GenericAction {
 		
 		Long id = null;
 		
+		CmpayPaymentRequest payment = null;
 		try {
 			id = orderService.doCreateOrder(form);
-			orderService.doPayOrder(id);
+			payment = orderService.doPayOrder(id);
 		} catch (ServiceException e) {
-			log.warn("", e);
+			log.warn(e);
 			result.setStatus(AjaxStatus.ERROR.getValue());
 			result.setStatusInfo(e.getMessage());
 			return SUCCESS;
@@ -57,6 +59,7 @@ public class CreateAndPayOrderAction extends GenericAction {
 		
 		Map<String, Object> data = new HashMap<String, Object>();
 		data.put("id", id);
+		data.put("payment", payment);
 		
 		result.setData(data);
 		result.setStatus(AjaxStatus.SUCCESS.getValue());

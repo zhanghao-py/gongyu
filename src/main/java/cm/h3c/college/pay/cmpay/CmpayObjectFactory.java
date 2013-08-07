@@ -1,9 +1,15 @@
 package cm.h3c.college.pay.cmpay;
 
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import cm.h3c.college.pay.core.config.SystemConfig;
+import cm.h3c.college.pay.payment.bo.Order;
 
 import com.thoughtworks.xstream.XStream;
 import com.umpay.mpay.SignEncException;
@@ -11,6 +17,9 @@ import com.umpay.mpay.SignUtil;
 
 @Component
 public class CmpayObjectFactory {
+	@Autowired
+	private SystemConfig config;
+	
 	public CmpayPaymentCallbackRequest parseCmpayPaymentCallbackRequest(
 			String xml) {
 		XStream xstream = new XStream();
@@ -142,5 +151,30 @@ public class CmpayObjectFactory {
 		ret.DATE = callback.DATE;
 		ret.TIME = callback.TIME;
 		return ret;
+	}
+	
+
+	public CmpayPaymentRequest createCmpayPaymentRequest(Order order) throws SignEncException {
+		CmpayPaymentRequest request = new CmpayPaymentRequest();
+		request.MID = "10000000000001";
+		request.DATE = new SimpleDateFormat("yyyyMMdd").format(order.getPayTime());
+		request.TIME = new SimpleDateFormat("HHmmss").format(order.getPayTime());
+		request.MERID = config.getMerId();
+		request.ORDERID = "10" + order.getId();
+		request.AMOUT = order.getMoney().multiply(new BigDecimal(10)).toBigInteger().toString();
+		request.ALLOWNOTE = "1";
+		request.AUTHORIZEMODE = "WEB";
+		request.CURRENCY = "CNY";
+		request.ORDERDATE = request.DATE;
+		request.PERIOD = "30";// 有效期数量 3位
+		request.PERIODUNIT = "4";// 有效期单位 1位1-月2-日3-小时4-分钟
+		request.PRODUCTDESC = "cmpay";
+		request.PRODUCTID = request.AMOUT;
+		request.PRODUCTNAME = "cmpay";
+		request.TXNTYP ="S";// 交易类型 1位S：直接支付
+		request.CALLBACK = config.getCallbackUrl() + "?orderId=" + order.getId();
+		request.MOBILEID = order.getAccount();
+		request.SIGN = SignUtil.doGenerateSign(request.prepareSignData());
+		return request;
 	}
 }

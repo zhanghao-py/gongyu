@@ -28,6 +28,7 @@
 		<property name="merId" value="${merId}" />
 		<property name="payUrl" value="${payUrl}" />
 		<property name="checkUrl" value="${checkUrl}" />
+		<property name="callbackUrl" value="${callbackUrl}" />
 		<property name="paymentResultUrl" value="${paymentResultUrl}" />
 	</bean>
 

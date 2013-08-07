@@ -28,26 +28,34 @@ public class CmpayPaymentRequest implements CmpaySignable {
 	@Override
 	public String prepareSignData() {
 		StringBuilder ret = new StringBuilder();
-		ret.append("MCODE=").append(StringUtils.stripToEmpty(MCODE));
-		ret.append("&MID=").append(StringUtils.stripToEmpty(MID));
-		ret.append("&DATE=").append(StringUtils.stripToEmpty(DATE));
-		ret.append("&TIME=").append(StringUtils.stripToEmpty(TIME));
-		ret.append("&MERID=").append(StringUtils.stripToEmpty(MERID));
-		ret.append("&ORDERID=").append(StringUtils.stripToEmpty(ORDERID));
-		ret.append("&AMOUT=").append(StringUtils.stripToEmpty(AMOUT));
-		ret.append("&ALLOWNOTE=").append(StringUtils.stripToEmpty(ALLOWNOTE));
-		ret.append("&AUTHORIZEMODE=").append(StringUtils.stripToEmpty(AUTHORIZEMODE));
-		ret.append("&CURRENCY=").append(StringUtils.stripToEmpty(CURRENCY));
-		ret.append("&ORDERDATE=").append(StringUtils.stripToEmpty(ORDERDATE));
-		ret.append("&PERIOD=").append(StringUtils.stripToEmpty(PERIOD));
-		ret.append("&PERIODUNIT=").append(StringUtils.stripToEmpty(PERIODUNIT));
-		ret.append("&PRODUCTDESC=").append(StringUtils.stripToEmpty(PRODUCTDESC));
-		ret.append("&PRODUCTID=").append(StringUtils.stripToEmpty(PRODUCTID));
-		ret.append("&PRODUCTNAME=").append(StringUtils.stripToEmpty(PRODUCTNAME));
-		ret.append("&TXNTYP=").append(StringUtils.stripToEmpty(TXNTYP));
-		ret.append("&CALLBACK=").append(StringUtils.stripToEmpty(CALLBACK));
-		ret.append("&MOBILEID=").append(StringUtils.stripToEmpty(MOBILEID));
+		ret.append("mcode=").append(StringUtils.stripToEmpty(MCODE));
+		ret.append("&mid=").append(StringUtils.stripToEmpty(MID));
+		ret.append("&date=").append(StringUtils.stripToEmpty(DATE));
+		ret.append("&time=").append(StringUtils.stripToEmpty(TIME));
+		ret.append("&merId=").append(StringUtils.stripToEmpty(MERID));
+		ret.append("&orderId=").append(StringUtils.stripToEmpty(ORDERID));
+		ret.append("&amout=").append(StringUtils.stripToEmpty(AMOUT));
+		ret.append("&allowNote=").append(StringUtils.stripToEmpty(ALLOWNOTE));
+		ret.append("&authorizeMode=").append(StringUtils.stripToEmpty(AUTHORIZEMODE));
+		ret.append("&currency=").append(StringUtils.stripToEmpty(CURRENCY));
+		ret.append("&orderDate=").append(StringUtils.stripToEmpty(ORDERDATE));
+		ret.append("&period=").append(StringUtils.stripToEmpty(PERIOD));
+		ret.append("&periodUnit=").append(StringUtils.stripToEmpty(PERIODUNIT));
+		ret.append("&productDesc=").append(StringUtils.stripToEmpty(PRODUCTDESC));
+		ret.append("&productId=").append(StringUtils.stripToEmpty(PRODUCTID));
+		ret.append("&productName=").append(StringUtils.stripToEmpty(PRODUCTNAME));
+		ret.append("&txntyp=").append(StringUtils.stripToEmpty(TXNTYP));
+		ret.append("&callBack=").append(StringUtils.stripToEmpty(CALLBACK));
+		ret.append("&mobileId=").append(StringUtils.stripToEmpty(MOBILEID));
 		return ret.toString();
+	}
+	
+	public String getMcode() {
+		return MCODE;
+	}
+	
+	public void setMcode(String mcode) {
+		MCODE = mcode;
 	}
 
 	@Override
@@ -84,11 +92,11 @@ public class CmpayPaymentRequest implements CmpaySignable {
 		TIME = time;
 	}
 
-	public String getMerid() {
+	public String getMerId() {
 		return MERID;
 	}
 
-	public void setMerid(String merid) {
+	public void setMerId(String merid) {
 		MERID = merid;
 	}
 
