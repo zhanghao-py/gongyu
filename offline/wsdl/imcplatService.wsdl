@@ -129,13 +129,13 @@
   </wsdl:binding>
   <wsdl:service name="imcplatService">
     <wsdl:port name="imcplatServiceHttpSoap11Endpoint" binding="ns:imcplatServiceSoap11Binding">
-      <soap:address location="http://wwwgongyu.oicp.net:88/imcws/services/imcplatService/"/>
+      <soap:address location="https://123.120.33.72/imcws/services/imcplatService/"/>
     </wsdl:port>
     <wsdl:port name="imcplatServiceHttpSoap12Endpoint" binding="ns:imcplatServiceSoap12Binding">
-      <soap12:address location="http://wwwgongyu.oicp.net:88/imcws/services/imcplatService/"/>
+      <soap12:address location="https://123.120.33.72/imcws/services/imcplatService/"/>
     </wsdl:port>
     <wsdl:port name="imcplatServiceHttpEndpoint" binding="ns:imcplatServiceHttpBinding">
-      <http:address location="http://wwwgongyu.oicp.net:88/imcws/services/imcplatService/"/>
+      <http:address location="https://123.120.33.72/imcws/services/imcplatService/"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
