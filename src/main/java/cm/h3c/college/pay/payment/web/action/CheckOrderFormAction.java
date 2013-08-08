@@ -45,7 +45,7 @@ public class CheckOrderFormAction extends GenericAction {
 		try {
 			orderService.checkOrderForm(form);
 		} catch (ServiceException e) {
-			log.warn(e);
+			log.warn("", e);
 			result.setStatus(AjaxStatus.ERROR.getValue());
 			result.setStatusInfo(e.getMessage());
 			return SUCCESS;
