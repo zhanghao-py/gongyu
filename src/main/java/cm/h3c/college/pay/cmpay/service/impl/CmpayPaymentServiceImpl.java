@@ -119,6 +119,10 @@ public class CmpayPaymentServiceImpl implements CmpayPaymentService {
 			throws ServiceException {
 		try {
 			CmpayPaymentRequest ret = cmpayObjectFactory.createCmpayPaymentRequest(order);
+			String reqXml = cmpayObjectFactory.cmpayPaymentReqeust2Xml(ret);
+			// save request to db
+			logService.doLog(LogType.CAMS_PAY_REQUEST, order.getId(), reqXml);
+
 			log.debug("signdata: " + ret.prepareSignData());
 			log.debug("sign    : " + ret.getSign());
 			return ret;
