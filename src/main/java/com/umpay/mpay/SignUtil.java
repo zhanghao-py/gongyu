@@ -18,6 +18,8 @@ import java.security.cert.X509Certificate;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
+
+
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
@@ -64,7 +66,15 @@ public class SignUtil
     } catch (Exception e) {
     	e.printStackTrace();
       throw new SignEncException("load the primary key failed");
+    } finally {
+    	try {
+			fis.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		    throw new SignEncException("load the primary key failed");
+		}
     }
+    
     return kb;
   }
 
