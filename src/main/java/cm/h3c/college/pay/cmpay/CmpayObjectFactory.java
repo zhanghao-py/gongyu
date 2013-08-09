@@ -3,6 +3,7 @@ package cm.h3c.college.pay.cmpay;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ import com.umpay.mpay.SignUtil;
 public class CmpayObjectFactory {
 	@Autowired
 	private SystemConfig config;
-	
+
 	public CmpayPaymentCallbackRequest parseCmpayPaymentCallbackRequest(
 			String xml) {
 		XStream xstream = new XStream();
@@ -132,15 +133,15 @@ public class CmpayObjectFactory {
 		sign(callBackRequest);
 		return toXml(callBackRequest);
 	}
-	
-	public CmpayPaymentCheckRequest createCmpayPaymentCheckRequest(
-			CmpayPaymentRequest paymentRequest) {
+
+	public CmpayPaymentCheckRequest createCmpayPaymentCheckRequest(Long orderId) {
 		CmpayPaymentCheckRequest ret = new CmpayPaymentCheckRequest();
-		ret.MID = paymentRequest.MID;
-		ret.DATE = paymentRequest.DATE;
-		ret.TIME = paymentRequest.TIME;
-		ret.MERID = paymentRequest.MERID;
-		ret.ORDERID = paymentRequest.ORDERID;
+		Date date = new Date();
+		ret.MID = formatYyyyMMddHHmmsss(date);
+		ret.DATE = formatYyyyMMdd(date);
+		ret.TIME = formatHHmmsss(date);
+		ret.MERID = config.getMerId();
+		ret.ORDERID = "10" + orderId;
 		return ret;
 	}
 
@@ -152,16 +153,29 @@ public class CmpayObjectFactory {
 		ret.TIME = callback.TIME;
 		return ret;
 	}
-	
 
-	public CmpayPaymentRequest createCmpayPaymentRequest(Order order) throws SignEncException {
+	String formatYyyyMMddHHmmsss(Date date) {
+		return new SimpleDateFormat("yyyyMMddHHmmss").format(date);
+	}
+
+	String formatYyyyMMdd(Date date) {
+		return new SimpleDateFormat("yyyyMMdd").format(date);
+	}
+
+	String formatHHmmsss(Date date) {
+		return new SimpleDateFormat("HHmmss").format(date);
+	}
+
+	public CmpayPaymentRequest createCmpayPaymentRequest(Order order)
+			throws SignEncException {
 		CmpayPaymentRequest request = new CmpayPaymentRequest();
 		request.MID = "10000000000001";
-		request.DATE = new SimpleDateFormat("yyyyMMdd").format(order.getPayTime());
-		request.TIME = new SimpleDateFormat("HHmmss").format(order.getPayTime());
+		request.DATE = formatYyyyMMdd(order.getPayTime());
+		request.TIME = formatHHmmsss(order.getPayTime());
 		request.MERID = config.getMerId();
 		request.ORDERID = "10" + order.getId();
-		request.AMOUT = order.getMoney().multiply(new BigDecimal(10)).toBigInteger().toString();
+		request.AMOUT = order.getMoney().multiply(new BigDecimal(100))
+				.toBigInteger().toString();
 		request.ALLOWNOTE = "1";
 		request.AUTHORIZEMODE = "WEB";
 		request.CURRENCY = "CNY";
@@ -171,8 +185,9 @@ public class CmpayObjectFactory {
 		request.PRODUCTDESC = "cmpay";
 		request.PRODUCTID = request.AMOUT;
 		request.PRODUCTNAME = "cmpay";
-		request.TXNTYP ="S";// 交易类型 1位S：直接支付
-		request.CALLBACK = config.getCallbackUrl() + "?orderId=" + order.getId();
+		request.TXNTYP = "S";// 交易类型 1位S：直接支付
+		request.CALLBACK = config.getCallbackUrl() + "?orderId="
+				+ order.getId();
 		request.MOBILEID = order.getAccount();
 		request.SIGN = SignUtil.doGenerateSign(request.prepareSignData());
 		return request;

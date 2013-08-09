@@ -16,7 +16,7 @@ public interface CmpayPaymentService {
 		FAILED //失败
 	}	
 	
-	public CmpayPaymentCheckResponse checkPayment(Order order) throws ServiceException;
+	public CmpayPaymentCheckResponse checkPayment(Long orderId) throws ServiceException;
 
 	void submitPayment(Order order) throws ServiceException;
 	

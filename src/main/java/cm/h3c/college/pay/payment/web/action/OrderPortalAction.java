@@ -12,7 +12,9 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 
+import cm.h3c.college.pay.cmpay.CmpayPaymentCheckResponse;
 import cm.h3c.college.pay.core.config.SystemConfig;
+import cm.h3c.college.pay.core.cons.AjaxStatus;
 import cm.h3c.college.pay.core.exception.ServiceException;
 import cm.h3c.college.pay.core.web.action.GenericAction;
 import cm.h3c.college.pay.payment.bo.College;
@@ -70,7 +72,19 @@ public class OrderPortalAction extends GenericAction {
 	
 	@Action(value = "doneOrderPortal", results = { @Result(name = "success", type = "velocity", location = "/vm/payment_doneOrder_portal.vm"), @Result(name = "error", type = "velocity", location = "/vm/error.vm") })
 	public String doneOrderPortal() {
-		return SUCCESS;
+		Map<String, Object> session = ActionContext.getContext().getSession();
+		OrderForm form = (OrderForm) session.get(SystemConfig.ORDER_FORM_KEY);
+		try {
+			CmpayPaymentCheckResponse response = orderService.checkPayment(form.getId());
+			this.data = response;
+			return SUCCESS;
+		} catch (ServiceException e) {
+			//TODO 停留在当前页，或者给出可在此查询的入口 
+			log.warn(e);
+			result.setStatus(AjaxStatus.ERROR.getValue());
+			result.setStatusInfo(e.getMessage());
+			return ERROR;
+		}
 	}
 
 	public Object getData() {

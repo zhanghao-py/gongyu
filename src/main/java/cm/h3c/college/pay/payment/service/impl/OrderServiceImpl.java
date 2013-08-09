@@ -13,6 +13,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
+import cm.h3c.college.pay.cmpay.CmpayPaymentCheckResponse;
 import cm.h3c.college.pay.cmpay.CmpayPaymentRequest;
 import cm.h3c.college.pay.cmpay.service.CmpayPaymentService;
 import cm.h3c.college.pay.core.exception.ServiceException;
@@ -241,6 +242,11 @@ public class OrderServiceImpl implements OrderService {
 			String status, String remark) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public CmpayPaymentCheckResponse checkPayment(Long orderId) throws ServiceException {
+		return cmpayPaymentService.checkPayment(orderId);
 	}
 
 }

@@ -63,25 +63,25 @@ public class CmpayPaymentServiceImpl implements CmpayPaymentService {
 	}
 
 	@Override
-	public CmpayPaymentCheckResponse checkPayment(Order order)
+	public CmpayPaymentCheckResponse checkPayment(Long orderId)
 			throws ServiceException {
-		// get paymentRequest from db
-		List<Log> reqList = logService.findByOrderId(order.getId());
-		if (reqList.isEmpty()) {
-			throw new ServiceException("Can't find payment request. order.id="
-					+ order.getId());
-		}
-		if (reqList.size() > 1) {
-			log.warn("Muilty payment request find, use the first. order.id="
-					+ order.getId());
-		}
-
-		CmpayPaymentRequest paymentRequest = cmpayObjectFactory
-				.parseCmpayPaymentRequest(reqList.get(0).getContent());
+//		// get paymentRequest from db
+//		List<Log> reqList = logService.findByOrderId(order.getId());
+//		if (reqList.isEmpty()) {
+//			throw new ServiceException("Can't find payment request. order.id="
+//					+ order.getId());
+//		}
+//		if (reqList.size() > 1) {
+//			log.warn("Muilty payment request find, use the first. order.id="
+//					+ order.getId());
+//		}
+//
+//		CmpayPaymentRequest paymentRequest = cmpayObjectFactory
+//				.parseCmpayPaymentRequest(reqList.get(0).getContent());
 
 		// create checkRequest by paymentRequest
 		CmpayPaymentCheckRequest request = cmpayObjectFactory
-				.createCmpayPaymentCheckRequest(paymentRequest);
+				.createCmpayPaymentCheckRequest(orderId);
 
 		log.info(request);
 
