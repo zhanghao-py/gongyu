@@ -26,7 +26,7 @@ public class FeeServiceDelegator {
 	private Logger log = Logger.getLogger(FeeServiceDelegator.class);
 	
 	private final String wsdlUrl = "/imcws/services/feeService?wsdl";
-//	private final String wsdlUrl = "file:/E:/ZhangHao/workspace/gongyu/offline/wsdl/feeService.wsdl";
+//	private final String wsdlUrl = "/imcws/services/feeService.wsdl";
 	
 	private String baseUrl;
 	
@@ -52,7 +52,7 @@ public class FeeServiceDelegator {
 		try {
 			remoteImplService = new FeeService(new URL(url));
 		} catch (MalformedURLException e) {
-			log.warn(e);
+			log.warn("", e);
 		}
 		
 		feeService = remoteImplService.getFeeServiceHttpSoap12Endpoint();

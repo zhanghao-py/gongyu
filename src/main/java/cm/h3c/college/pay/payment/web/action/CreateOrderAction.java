@@ -22,16 +22,16 @@ import cm.h3c.college.pay.payment.web.action.dto.OrderForm;
 import com.opensymphony.xwork2.ActionContext;
 
 @Namespace("/payment")
-public class CreateAndPayOrderAction extends GenericAction {
+public class CreateOrderAction extends GenericAction {
 
-	private Logger log = Logger.getLogger(CreateAndPayOrderAction.class);
+	private Logger log = Logger.getLogger(CreateOrderAction.class);
 	private static final long serialVersionUID = -1541026036542059117L;
 	
 	@Resource(name = "orderService")
 	private OrderService orderService;
-		
-	@Action(value = "createAndPayOrder", results = { @Result(name = "success", type = "json", params = { "excludeNullProperties", "true", "root", "result" }) })
-	public String createAndPayOrderAjax() {
+	
+	@Action(value = "createOrder", results = { @Result(name = "success", type = "json", params = { "excludeNullProperties", "true", "root", "result" }) })
+	public String createOrderAjax() {
 		
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		OrderForm form = (OrderForm) session.get(SystemConfig.ORDER_FORM_KEY);
@@ -67,5 +67,4 @@ public class CreateAndPayOrderAction extends GenericAction {
 		return SUCCESS;
 	}
 	
-
 }

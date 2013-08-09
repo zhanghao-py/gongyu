@@ -51,7 +51,7 @@ public class AcmUserServiceDelegator {
 		try {
 			remoteImplService = new AcmUserService(new URL(url));
 		} catch (MalformedURLException e) {
-			log.warn(e);
+			log.warn("", e);
 		}
 		
 		acmUserService = remoteImplService.getAcmUserServiceHttpSoap12Endpoint();

@@ -25,7 +25,7 @@ public class ImcplatServiceDelegator {
 	private Logger log = Logger.getLogger(ImcplatServiceDelegator.class);
 	
 	private final String wsdlUrl = "/imcws/services/imcplatService?wsdl";
-//	private final String wsdlUrl = "file:/E:/ZhangHao/workspace/gongyu/offline/wsdl/imcplatService.wsdl";
+//	private final String wsdlUrl = "/imcws/services/imcplatService.wsdl";
 	
 	private String baseUrl;
 	private String opUsername;
@@ -53,7 +53,7 @@ public class ImcplatServiceDelegator {
 		try {
 			remoteImplService = new ImcplatService(new URL(url));
 		} catch (MalformedURLException e) {
-			log.warn(e);
+			log.warn("", e);
 		}
 		
 		imcplatService = remoteImplService.getImcplatServiceHttpSoap12Endpoint();
