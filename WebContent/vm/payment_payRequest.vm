@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+#set($webRoot=$!link.getContextPath())
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>支付请求发起中...</title>
+	<meta http-equiv="pragma" content="no-cache" />
+	<meta http-equiv="cache-control" content="no-cache" />
+	<meta http-equiv="expires" content="0" />
+	
+	<link rel="icon" href="$!{webRoot}/favicon.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="$!{webRoot}/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body onload="javascript:document.forms[0].submit()">
+
+	<form name="cmpayForm" method="post" action="http://114.251.148.201:29095/newWpay/pay/uniformPayModSel.pay">
+		<input type="hidden" id="merId" name="merId" value="$payment.merId" />
+		<input type="hidden" id="orderId" name="orderId" value="$payment.orderId" />
+		<input type="hidden" id="amout" name="amout" value="$payment.amout" />
+		<input type="hidden" id="mcode" name="mcode" value="$payment.mcode" />
+		<input type="hidden" id="mid" name="mid" value="$payment.mid" />
+		<input type="hidden" id="date" name="date" value="$payment.date" />
+		<input type="hidden" id="time" name="time" value="$payment.time" />
+		<input type="hidden" id="allowNote" name="allowNote" value="$payment.allowNote" />
+		<input type="hidden" id="authorizeMode" name="authorizeMode" value="$payment.authorizeMode" />
+		<input type="hidden" id="currency" name="currency" value="$payment.currency" />
+		<input type="hidden" id="orderDate" name="orderDate" value="$payment.orderDate" />
+		<input type="hidden" id="period" name="period" value="$payment.period" />
+		<input type="hidden" id="periodUnit" name="periodUnit" value="$payment.periodUnit" />
+		<input type="hidden" id="productDesc" name="productDesc" value="$payment.productDesc" />
+		<input type="hidden" id="productId" name="productId" value="$payment.productId" />
+		<input type="hidden" id="productName" name="productName" value="$payment.productName" />
+		<input type="hidden" id="mobileId" name="mobileId" value="$payment.mobileId" />
+		<input type="hidden" id="callBack" name="callBack" value="$payment.callback" />
+		<input type="hidden" id="txntyp" name="txntyp" value="$payment.txntyp" />
+		<input type="hidden" id="SIGN" name="SIGN" value="$payment.sign" />
+	</form>
+
+</body>
+</html>
