@@ -64,8 +64,8 @@ function btnSubmit() {
 				popWindow();
 				
 				var p = window.open("about:blank");
-//				var forwardUrl = "http://wwwgongyu.oicp.net:99/payment/payOrder.do";
-				var forwardUrl = "http://localhost:8080/gongyu/payment/payOrder.do";
+				var forwardUrl = "http://wwwgongyu.oicp.net:99/payment/payOrder.do";
+//				var forwardUrl = "http://localhost:8080/gongyu/payment/payOrder.do";
 				var orderId = data.id;
 				p.location = forwardUrl + "?orderId=" + orderId;
 				
