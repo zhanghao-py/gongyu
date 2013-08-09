@@ -123,6 +123,6 @@ public class OrderServiceIntegrationTest extends BaseIntegrationTest  {
 		c.setOperatorPassword("admin");
 		c.setOperatorUsername("admin");
 		FeeServiceDelegator feeServiceDelegator = new FeeServiceDelegator(c);
-		feeServiceDelegator.pay("15810710450", "10");
+		feeServiceDelegator.pay("15810710450", "8");
 	}
 }
