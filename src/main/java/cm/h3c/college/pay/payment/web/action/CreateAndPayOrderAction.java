@@ -47,6 +47,7 @@ public class CreateAndPayOrderAction extends GenericAction {
 		CmpayPaymentRequest payment = null;
 		try {
 			id = orderService.doCreateOrder(form);
+			form.setId(id);
 			payment = orderService.doPayOrder(id);
 		} catch (ServiceException e) {
 			log.warn("", e);
@@ -55,7 +56,7 @@ public class CreateAndPayOrderAction extends GenericAction {
 			return SUCCESS;
 		}
 		
-		session.remove("orderForm");
+//		session.remove(SystemConfig.ORDER_FORM_KEY);
 		
 		Map<String, Object> data = new HashMap<String, Object>();
 		data.put("id", id);

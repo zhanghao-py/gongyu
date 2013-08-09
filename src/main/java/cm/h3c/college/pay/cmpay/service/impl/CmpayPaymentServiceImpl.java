@@ -1,19 +1,19 @@
 package cm.h3c.college.pay.cmpay.service.impl;
 
 import java.io.IOException;
-import java.util.List;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ByteArrayEntity;
-import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import com.umpay.mpay.SignEncException;
 
 import cm.h3c.college.pay.cmpay.CmpayObjectFactory;
 import cm.h3c.college.pay.cmpay.CmpayPaymentCheckRequest;
@@ -22,10 +22,11 @@ import cm.h3c.college.pay.cmpay.CmpayPaymentRequest;
 import cm.h3c.college.pay.cmpay.service.CmpayPaymentService;
 import cm.h3c.college.pay.core.config.SystemConfig;
 import cm.h3c.college.pay.core.exception.ServiceException;
-import cm.h3c.college.pay.payment.bo.Log;
 import cm.h3c.college.pay.payment.bo.Order;
 import cm.h3c.college.pay.payment.cons.LogType;
 import cm.h3c.college.pay.payment.service.LogService;
+
+import com.umpay.mpay.SignEncException;
 
 @Component("cmpayPaymentService")
 public class CmpayPaymentServiceImpl implements CmpayPaymentService {
@@ -65,31 +66,29 @@ public class CmpayPaymentServiceImpl implements CmpayPaymentService {
 	@Override
 	public CmpayPaymentCheckResponse checkPayment(Long orderId)
 			throws ServiceException {
-//		// get paymentRequest from db
-//		List<Log> reqList = logService.findByOrderId(order.getId());
-//		if (reqList.isEmpty()) {
-//			throw new ServiceException("Can't find payment request. order.id="
-//					+ order.getId());
-//		}
-//		if (reqList.size() > 1) {
-//			log.warn("Muilty payment request find, use the first. order.id="
-//					+ order.getId());
-//		}
-//
-//		CmpayPaymentRequest paymentRequest = cmpayObjectFactory
-//				.parseCmpayPaymentRequest(reqList.get(0).getContent());
+		// // get paymentRequest from db
+		// List<Log> reqList = logService.findByOrderId(order.getId());
+		// if (reqList.isEmpty()) {
+		// throw new ServiceException("Can't find payment request. order.id="
+		// + order.getId());
+		// }
+		// if (reqList.size() > 1) {
+		// log.warn("Muilty payment request find, use the first. order.id="
+		// + order.getId());
+		// }
+		//
+		// CmpayPaymentRequest paymentRequest = cmpayObjectFactory
+		// .parseCmpayPaymentRequest(reqList.get(0).getContent());
 
 		// create checkRequest by paymentRequest
 		CmpayPaymentCheckRequest request = cmpayObjectFactory
 				.createCmpayPaymentCheckRequest(orderId);
-
-		log.info(request);
+		String reqXml = cmpayObjectFactory.cmpayPaymentCheckRequest2Xml(request);
+		log.info(reqXml);
 
 		// submit
 		try {
-			String response = postRequest(
-					cmpayObjectFactory.cmpayPaymentCheckRequest2Xml(request),
-					config.getCheckUrl());
+			String response = postRequest(reqXml, config.getCheckUrl());
 
 			log.info(response);
 			return cmpayObjectFactory.parseCmpayPaymentCheckResponse(response);
@@ -105,8 +104,18 @@ public class CmpayPaymentServiceImpl implements CmpayPaymentService {
 		ByteArrayEntity entity = new ByteArrayEntity(reqXml.getBytes("UTF-8"));
 		post.setEntity(entity);
 		try {
-			ResponseHandler<String> responseHandler = new BasicResponseHandler();
-			return client.execute(post, responseHandler);
+			HttpResponse response = client.execute(post);
+
+			StatusLine statusLine = response.getStatusLine();
+			HttpEntity responseEntity = response.getEntity();
+			if (statusLine.getStatusCode() >= 300) {
+				EntityUtils.consume(responseEntity);
+				log.warn(statusLine.getStatusCode() + ", "
+						+ statusLine.getReasonPhrase());
+				throw new HttpResponseException(statusLine.getStatusCode(),
+						statusLine.getReasonPhrase());
+			}
+			return entity == null ? null : EntityUtils.toString(responseEntity, "UTF-8");
 		} finally {
 			if (post != null) {
 				post.releaseConnection();
@@ -118,7 +127,8 @@ public class CmpayPaymentServiceImpl implements CmpayPaymentService {
 	public CmpayPaymentRequest createPayment(Order order)
 			throws ServiceException {
 		try {
-			CmpayPaymentRequest ret = cmpayObjectFactory.createCmpayPaymentRequest(order);
+			CmpayPaymentRequest ret = cmpayObjectFactory
+					.createCmpayPaymentRequest(order);
 			String reqXml = cmpayObjectFactory.cmpayPaymentReqeust2Xml(ret);
 			// save request to db
 			logService.doLog(LogType.CAMS_PAY_REQUEST, order.getId(), reqXml);

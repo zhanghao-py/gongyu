@@ -29,6 +29,7 @@
 			</div>
 			<!--充值成功 begin-->
 			<div style="MARGIN-LEFT: 101px" class="success">
+				<div>$data.rcode, $data.desc, $data.rjtrsn</div>
 				<div class="pointInfo_success">您已成功支付100元，订单号201307271079499131</div>
 				<p style="width:543px">尊敬的客户您好，您已经为13810292997客户成功充值100元，谢谢您的使用！</p>
 				<div>&nbsp;</div>
