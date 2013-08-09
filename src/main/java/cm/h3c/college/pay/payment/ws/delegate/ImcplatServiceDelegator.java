@@ -24,8 +24,8 @@ public class ImcplatServiceDelegator {
 	
 	private Logger log = Logger.getLogger(ImcplatServiceDelegator.class);
 	
-//	private final String wsdlUrl = "/imcws/services/imcplatService?wsdl";
-	private final String wsdlUrl = "file:/D:/cmpay/workspace/gongyu/offline/wsdl/imcplatService.wsdl";
+	private final String wsdlUrl = "/imcws/services/imcplatService?wsdl";
+//	private final String wsdlUrl = "file:/E:/ZhangHao/workspace/gongyu/offline/wsdl/imcplatService.wsdl";
 	
 	private String baseUrl;
 	private String opUsername;
@@ -41,12 +41,12 @@ public class ImcplatServiceDelegator {
 	}
 	
 	private void init() {
-		String url = wsdlUrl;
+		String url = baseUrl + wsdlUrl;
 		
-//		if ( !(url.startsWith("http") || url.startsWith("https")) ) {
-//			log.error("can't init ImcplatServiceDelegator caused by url prefix illegal!");
-//			return;
-//		}
+		if ( !(url.startsWith("http") || url.startsWith("https")) ) {
+			log.error("can't init ImcplatServiceDelegator caused by url prefix illegal!");
+			return;
+		}
 		
 		ImcplatService remoteImplService = null;
 		

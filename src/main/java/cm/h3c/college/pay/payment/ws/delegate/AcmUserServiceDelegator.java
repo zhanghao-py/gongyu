@@ -5,6 +5,10 @@ import java.net.URL;
 
 import javax.xml.ws.BindingProvider;
 
+import org.apache.cxf.configuration.jsse.TLSClientParameters;
+import org.apache.cxf.endpoint.Client;
+import org.apache.cxf.frontend.ClientProxy;
+import org.apache.cxf.transport.http.HTTPConduit;
 import org.apache.log4j.Logger;
 
 import cm.h3c.college.pay.core.exception.ServiceException;
@@ -51,7 +55,14 @@ public class AcmUserServiceDelegator {
 		}
 		
 		acmUserService = remoteImplService.getAcmUserServiceHttpSoap12Endpoint();
-		SOAPKeepSessionHandlerSettor.getInstance().setHandler((BindingProvider) acmUserService);		
+		SOAPKeepSessionHandlerSettor.getInstance().setHandler((BindingProvider) acmUserService);
+		Client client = ClientProxy.getClient(acmUserService);
+		HTTPConduit http = (HTTPConduit) client.getConduit();
+		
+		TLSClientParameters param = new TLSClientParameters();
+		param.setDisableCNCheck(Boolean.TRUE);
+		
+		http.setTlsClientParameters(param);
 		
 		return;
 	}
