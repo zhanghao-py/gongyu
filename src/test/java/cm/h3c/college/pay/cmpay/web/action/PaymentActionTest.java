@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter;
 
 import cm.h3c.college.pay.cmpay.CmpayObjectFactory;
 import cm.h3c.college.pay.cmpay.CmpayPaymentCallbackRequest;
+import cm.h3c.college.pay.cmpay.CmpayPaymentCallbackWebRequest;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/config/spring.xml",
@@ -25,8 +26,13 @@ import cm.h3c.college.pay.cmpay.CmpayPaymentCallbackRequest;
 public class PaymentActionTest {
 	@Autowired
 	public HttpRequestHandlerAdapter handlerAdapter;
+	
 	@Autowired
 	private CmpayCallbackController cmpayCallbackController;
+	
+	@Autowired
+	private CmpayWebCallbackController cmpayWebCallbackController;
+	
 	@Autowired
 	private CmpayObjectFactory cmpayObjectFactory;
 
@@ -42,12 +48,13 @@ public class PaymentActionTest {
 	}
 
 	@Test
-	public void postWebCallback() throws ClientProtocolException, IOException {
+	public void postCallback() throws ClientProtocolException, IOException {
 		CmpayPaymentCallbackRequest callbackRequest = new CmpayPaymentCallbackRequest();
 		callbackRequest.setRemark("中文");
-		callbackRequest.setOrderId("1");
+		callbackRequest.setOrderId("201308101615543112");
+		callbackRequest.setStatus("SUCCESS");
 		String xml = cmpayObjectFactory
-				.cmpayPaymentCallbackRequest(callbackRequest);
+				.cmpayPaymentCallbackRequest2Xml(callbackRequest);
 
 		request.setRequestURI("/");
 		request.setMethod(HttpMethod.POST.name());
@@ -57,6 +64,32 @@ public class PaymentActionTest {
 		try {
 			mv = handlerAdapter.handle(request, response,
 					cmpayCallbackController);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		Assert.assertNull(mv);
+		Assert.assertEquals(response.getStatus(), 200);
+		System.out.println(response.getContentAsString());
+	}
+	
+	@Test
+	public void postWebCallback() throws ClientProtocolException, IOException {
+		CmpayPaymentCallbackWebRequest callbackRequest = new CmpayPaymentCallbackWebRequest();
+		callbackRequest.setRemark("中文");
+		callbackRequest.setOrderId("201308101615543112");
+		callbackRequest.setStatus("SUCCESS");
+		String xml = cmpayObjectFactory
+				.cmpayPaymentCallbackWebRequest2Xml(callbackRequest);
+
+		request.setRequestURI("/");
+		request.setMethod(HttpMethod.POST.name());
+		request.setContent(xml.getBytes("UTF-8"));
+
+		ModelAndView mv = null;
+		try {
+			mv = handlerAdapter.handle(request, response,
+					cmpayWebCallbackController);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

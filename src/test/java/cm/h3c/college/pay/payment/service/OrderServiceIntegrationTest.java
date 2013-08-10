@@ -1,8 +1,6 @@
 package cm.h3c.college.pay.payment.service;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.annotation.Resource;
 import javax.net.ssl.HostnameVerifier;
@@ -16,7 +14,6 @@ import cm.h3c.college.pay.core.exception.ServiceException;
 import cm.h3c.college.pay.payment.bo.College;
 import cm.h3c.college.pay.payment.web.action.dto.OrderForm;
 import cm.h3c.college.pay.payment.ws.delegate.FeeServiceDelegator;
-import cm.h3c.college.pay.payment.ws.delegate.ImcplatServiceDelegator;
 import cm.h3c.college.pay.test.core.BaseIntegrationTest;
 
 
@@ -59,18 +56,6 @@ public class OrderServiceIntegrationTest extends BaseIntegrationTest  {
 	}
 	
 	@Test
-	public void itShouldRecharge2CAMS() throws ServiceException {
-		
-		// [Given]
-		Long orderId = 2L;
-		
-		// [When]
-		orderService.doRecharge2CAMS(orderId);
-	}
-	
-	
-	
-	@Test
 	public void itShouldCreateOrder() throws ServiceException {
 		// [Given]
 		OrderForm form = new OrderForm();
@@ -83,18 +68,6 @@ public class OrderServiceIntegrationTest extends BaseIntegrationTest  {
 		
 		// [Then]
 		log.info("orderId is " + id);
-	}
-	
-	@Test
-	public void itShouldUpdateOrdersStatus2Canceled() throws ServiceException {
-		// [Given]
-		List<Long> ids = new ArrayList<Long>();
-		ids.add(8L);
-		
-		// [When]
-		orderService.updateOrdersStatus2CanceledByIds(ids);
-		
-		// [Then]
 	}
 	
 	@Test
