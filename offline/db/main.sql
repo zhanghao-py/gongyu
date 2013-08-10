@@ -11,7 +11,7 @@ CREATE TABLE `gy_order` (
   `college_id` bigint(20) unsigned NOT NULL COMMENT '所属学校',
   PRIMARY KEY (`id`),
   KEY `order_index_college_id` (`college_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '订单信息表';
 
 CREATE TABLE `gy_college` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -23,7 +23,7 @@ CREATE TABLE `gy_college` (
   `keystore_path` varchar(100) NOT NULL COMMENT '证书路径',
   PRIMARY KEY (`id`),
   KEY `college_index_name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '高校信息表';
 
 INSERT INTO `gy_college` VALUES ('1', '北京大学', 'http://123.120.10.78:88', '联系人：张浩、马计坤', 'admin', 'admin', '/home/xxx');
 INSERT INTO `gy_college` VALUES ('2', '清华大学', 'http://123.120.10.78:88', '联系人：张浩、马计坤', 'admin', 'admin', '/home/xxx/ddd');
@@ -36,4 +36,4 @@ CREATE TABLE `gy_log` (
   `content` longtext NOT NULL COMMENT '日志内容',
   PRIMARY KEY (`id`),
   KEY `log_index_order_id` (`order_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '日志信息表';
