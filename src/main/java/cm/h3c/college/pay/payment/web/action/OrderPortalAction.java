@@ -79,6 +79,7 @@ public class OrderPortalAction extends GenericAction {
 			response = orderService.checkPayment(form.getId());
 		} catch (ServiceException e) {
 			//TODO 停留在当前页，或者给出可在此查询的入口 
+			
 			log.warn("", e);
 			this.data = e.getMessage();
 			return ERROR;
