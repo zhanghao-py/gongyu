@@ -27,7 +27,7 @@ public class CmpayWebCallbackController implements HttpRequestHandler {
 
 	@Autowired
 	private CmpayObjectFactory cmpayObjectFactory;
-	
+
 	@Autowired
 	private OrderService orderService;
 

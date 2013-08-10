@@ -25,8 +25,8 @@ public class FeeServiceDelegator {
 
 	private Logger log = Logger.getLogger(FeeServiceDelegator.class);
 	
-	private final String wsdlUrl = "/imcws/services/feeService?wsdl";
-//	private final String wsdlUrl = "/imcws/services/feeService.wsdl";
+//	private final String wsdlUrl = "/imcws/services/feeService?wsdl";
+	private final String wsdlUrl = "/imcws/services/feeService.wsdl";
 	
 	private String baseUrl;
 	
@@ -75,7 +75,7 @@ public class FeeServiceDelegator {
 		
 		imcplatServiceDelegator.login();
 		WSCommonResult result = feeService.pay(info);
-		imcplatServiceDelegator.logout();
+//		imcplatServiceDelegator.logout();
 		
 		int errorCode = result.getErrorCode();
 		

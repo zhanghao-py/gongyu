@@ -21,6 +21,7 @@ import cm.h3c.college.pay.cmpay.CmpayPaymentCallbackResponse;
 import cm.h3c.college.pay.cmpay.service.CmpayPaymentService;
 import cm.h3c.college.pay.core.config.SystemConfig;
 import cm.h3c.college.pay.core.exception.ServiceException;
+import cm.h3c.college.pay.payment.cons.PayResult;
 import cm.h3c.college.pay.payment.service.LogService;
 import cm.h3c.college.pay.payment.service.OrderService;
 
@@ -65,8 +66,7 @@ public class CmpayCallbackController implements HttpRequestHandler {
 			sendCallBackResponse(response, callbackResponse);
 			return;
 		} catch (ServiceException e) {
-			callbackResponse.setRcode("2");
-			log.error("", e);
+			log.error("save callback error, xml=" + reqXml, e);
 		}
 
 		// send response

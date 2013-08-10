@@ -24,8 +24,8 @@ public class AcmUserServiceDelegator {
 
 	private Logger log = Logger.getLogger(AcmUserServiceDelegator.class);
 	
-	private final String wsdlUrl = "/imcws/services/acmUserService?wsdl";
-//	private final String wsdlUrl = "/imcws/services/acmUserService.wsdl";
+//	private final String wsdlUrl = "/imcws/services/acmUserService?wsdl";
+	private final String wsdlUrl = "/imcws/services/acmUserService.wsdl";
 	
 	private String baseUrl;
 	
@@ -70,7 +70,7 @@ public class AcmUserServiceDelegator {
 	public AcmUser queryAcmUser(String username) throws ServiceException {
 		imcplatServiceDelegator.login();
 		RetAcmUser result = acmUserService.queryAcmUser(username);
-		imcplatServiceDelegator.logout();
+//		imcplatServiceDelegator.logout();
 		
 		int errorCode = result.getErrorCode();
 		
