@@ -1,7 +1,6 @@
 package cm.h3c.college.pay.payment.service.impl;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,6 +19,7 @@ import cm.h3c.college.pay.cmpay.service.CmpayPaymentService;
 import cm.h3c.college.pay.core.exception.ServiceException;
 import cm.h3c.college.pay.core.util.PrimaryKeyGenerator;
 import cm.h3c.college.pay.payment.bo.College;
+import cm.h3c.college.pay.payment.bo.Log;
 import cm.h3c.college.pay.payment.bo.Order;
 import cm.h3c.college.pay.payment.cons.LogType;
 import cm.h3c.college.pay.payment.cons.OrderStatus;
@@ -247,8 +247,23 @@ public class OrderServiceImpl implements OrderService {
 		logService.doLog(LogType.CMPAY_CALLBACK_REQUEST, orderId, remark);
 		
 //		if (payResult.equals(PayResult.SUCCESS)) {
-			
 //		}
+		
+		return;
+	}
+	
+	@Override
+	public void updateOrderPayResultByWebCallback(Long orderId, PayResult payResult, String remark) throws ServiceException {
+		
+		List<Log> logs = logService.findByOrderIdAndType(orderId, LogType.CMPAY_CALLBACK_REQUEST);
+		
+		// Back Callback 已经调用过，无需进行Web Callback
+		if (logs.size() > 0) {
+			return;
+		}
+		
+		orderDao.updateOrderPayResultById(orderId, payResult.getValue());
+		logService.doLog(LogType.CMPAY_CALLBACK_WEB_REQUEST, orderId, remark);
 		
 		return;
 	}

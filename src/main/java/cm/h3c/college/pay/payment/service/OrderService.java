@@ -36,6 +36,8 @@ public interface OrderService {
 
 	public void updateOrderPayResultByCallback(Long orderId, PayResult payResult, String remark) throws ServiceException;
 
+	public void updateOrderPayResultByWebCallback(Long orderId, PayResult payResult, String remark) throws ServiceException;
+	
 	public CmpayPaymentCheckResponse checkPayment(Long orderId) throws ServiceException;
 	
 }

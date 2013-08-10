@@ -36,7 +36,7 @@ public class LogServiceImpl implements LogService {
 		Log log = new Log();
 		log.setType(type.getValue());
 		log.setContent(content);
-		logDao.saveLog(log);
+		logDao.save(log);
 		
 		return;
 	}
@@ -59,7 +59,7 @@ public class LogServiceImpl implements LogService {
 		log.setType(type.getValue());
 		log.setOrderId(orderId);
 		log.setContent(content);
-		logDao.saveLog(log);
+		logDao.save(log);
 		
 		return;
 	}
@@ -67,6 +67,11 @@ public class LogServiceImpl implements LogService {
 	@Override
 	public List<Log> findByOrderId(Long orderId) throws ServiceException {
 		return logDao.findByOrderId(orderId);
+	}
+	
+	@Override
+	public List<Log> findByOrderIdAndType(Long orderId, LogType type) throws ServiceException {
+		return logDao.findByOrderIdAndType(orderId, type.getValue());
 	}
 	
 	

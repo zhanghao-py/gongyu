@@ -14,4 +14,6 @@ public interface LogService {
 			throws ServiceException;
 
 	List<Log> findByOrderId(Long orderId) throws ServiceException;
+	
+	List<Log> findByOrderIdAndType(Long orderId, LogType logType) throws ServiceException;
 }
