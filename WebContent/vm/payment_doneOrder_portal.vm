@@ -27,13 +27,24 @@
 				<div class="lr-sgray1"></div>
 				<div class="lr-sblue">3.完成</div>
 			</div>
-			<!--充值成功 begin-->
-			<div style="MARGIN-LEFT: 101px" class="success">
-				<div>$data.rcode, $data.desc, $data.rjtrsn</div>
-				<div class="pointInfo_success">您已成功支付100元，订单号201307271079499131</div>
-				<p style="width:543px">尊敬的客户您好，您已经为13810292997客户成功充值100元，谢谢您的使用！</p>
-				<div>&nbsp;</div>
-			</div>
+			
+			#if($data.isPaySuccess())
+				<!--充值成功 begin-->
+				<div style="MARGIN-LEFT: 101px" class="success">
+					<div>$data.rcode, $data.desc, $data.rjtrsn</div>
+					<div class="pointInfo_success">您已成功支付100元，订单号201307271079499131</div>
+					<p style="width:543px">尊敬的客户您好，您已经为13810292997客户成功充值100元，谢谢您的使用！</p>
+					<div>&nbsp;</div>
+				</div>
+			#else
+				<!--充值失败 begin-->
+				<div style="MARGIN-LEFT: 101px" class="success">
+					<div class="pointInfo_success">您已成功支付100元，订单号201307271079499131，充值失败</div>
+					<p style="width:543px">失败原因：$data.rcode, $data.desc</p>
+					<div>&nbsp;</div>
+				</div>
+				<!--加入重试按钮-->
+			#end
 		</div>
 	</div>
 </body>
