@@ -48,6 +48,7 @@ public class CmpayPaymentServiceImpl implements CmpayPaymentService {
 		// create CmpayPaymentRequest
 		CmpayPaymentRequest request = createPayment(order);
 		String reqXml = cmpayObjectFactory.cmpayPaymentReqeust2Xml(request);
+		log.info(reqXml);
 		// save request to db
 		logService.doLog(LogType.CAMS_PAY_REQUEST, order.getId(), reqXml);
 
@@ -66,21 +67,7 @@ public class CmpayPaymentServiceImpl implements CmpayPaymentService {
 	@Override
 	public CmpayPaymentCheckResponse checkPayment(Long orderId)
 			throws ServiceException {
-		// // get paymentRequest from db
-		// List<Log> reqList = logService.findByOrderId(order.getId());
-		// if (reqList.isEmpty()) {
-		// throw new ServiceException("Can't find payment request. order.id="
-		// + order.getId());
-		// }
-		// if (reqList.size() > 1) {
-		// log.warn("Muilty payment request find, use the first. order.id="
-		// + order.getId());
-		// }
-		//
-		// CmpayPaymentRequest paymentRequest = cmpayObjectFactory
-		// .parseCmpayPaymentRequest(reqList.get(0).getContent());
-
-		// create checkRequest by paymentRequest
+		// create checkRequest by orderId
 		CmpayPaymentCheckRequest request = cmpayObjectFactory
 				.createCmpayPaymentCheckRequest(orderId);
 		String reqXml = cmpayObjectFactory.cmpayPaymentCheckRequest2Xml(request);
@@ -130,11 +117,10 @@ public class CmpayPaymentServiceImpl implements CmpayPaymentService {
 			CmpayPaymentRequest ret = cmpayObjectFactory
 					.createCmpayPaymentRequest(order);
 			String reqXml = cmpayObjectFactory.cmpayPaymentReqeust2Xml(ret);
+			log.info(reqXml);
 			// save request to db
 			logService.doLog(LogType.CAMS_PAY_REQUEST, order.getId(), reqXml);
 
-			log.debug("signdata: " + ret.prepareSignData());
-			log.debug("sign    : " + ret.getSign());
 			return ret;
 		} catch (SignEncException e) {
 			throw new ServiceException("sign payment request error", e);
