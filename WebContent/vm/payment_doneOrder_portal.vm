@@ -40,7 +40,7 @@
 				<!--充值失败 begin-->
 				<div style="MARGIN-LEFT: 101px" class="success">
 					<div class="pointInfo_success">充值失败</div>
-					<p style="width:543px">失败原因：$data.response.rcode, $data.response.desc, $data.response.rjtrsn</p>
+					<p style="width:543px">失败原因：$data.response.rcode, $data.response.desc.</p>
 					<div>&nbsp;</div>
 				</div>
 				<!--加入重试按钮-->
