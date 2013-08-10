@@ -249,4 +249,10 @@ public class OrderServiceImpl implements OrderService {
 		return cmpayPaymentService.checkPayment(orderId);
 	}
 
+	@Override
+	public CmpayPaymentRequest doCreateAndPayOrder(OrderForm form) throws ServiceException {
+		Long orderId = this.doCreateOrder(form);
+		return this.doPayOrder(orderId);
+	}
+
 }

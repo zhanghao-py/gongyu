@@ -6,6 +6,8 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang.ObjectUtils;
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.math.NumberUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
@@ -27,7 +29,7 @@ public class PayOrderAction extends GenericAction {
 	private OrderService orderService;
 	
 	// 页面输入参数
-	private Long orderId;
+	private String orderId;
 	
 	// 模版渲染参数
 	private Object data;
@@ -35,15 +37,16 @@ public class PayOrderAction extends GenericAction {
 	@Action(value = "payOrder", results = { @Result(name = "success", type = "velocity", location = "/vm/payment_payRequest.vm") })
 	public String payOrder() {
 		
-		if (ObjectUtils.equals(orderId, null)) {
+		if (StringUtils.isBlank(orderId) || !NumberUtils.isNumber(orderId)) {
 			result.setStatus(AjaxStatus.ERROR.getValue());
-			result.setStatusInfo("OrderId不存在！");
+			result.setStatusInfo("orderId不存在！");
 			return SUCCESS;
 		}
 		
 		CmpayPaymentRequest payment = null;
+		
 		try {
-			payment = orderService.doPayOrder(orderId);
+			payment = orderService.doPayOrder(NumberUtils.createLong(orderId));
 		} catch (ServiceException e) {
 			log.warn("", e);
 			result.setStatus(AjaxStatus.ERROR.getValue());
@@ -59,7 +62,7 @@ public class PayOrderAction extends GenericAction {
 		return SUCCESS;
 	}
 
-	public void setOrderId(Long orderId) {
+	public void setOrderId(String orderId) {
 		this.orderId = orderId;
 	}
 

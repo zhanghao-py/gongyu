@@ -35,4 +35,6 @@ public interface OrderService {
 			String status, String remark);
 
 	public CmpayPaymentCheckResponse checkPayment(Long orderId) throws ServiceException;
+
+	public CmpayPaymentRequest doCreateAndPayOrder(OrderForm form) throws ServiceException;
 }
