@@ -17,6 +17,7 @@ import cm.h3c.college.pay.core.config.SystemConfig;
 import cm.h3c.college.pay.core.exception.ServiceException;
 import cm.h3c.college.pay.core.web.action.GenericAction;
 import cm.h3c.college.pay.payment.bo.College;
+import cm.h3c.college.pay.payment.bo.Order;
 import cm.h3c.college.pay.payment.service.CollegeServcie;
 import cm.h3c.college.pay.payment.service.OrderService;
 import cm.h3c.college.pay.payment.web.action.dto.OrderForm;
@@ -75,8 +76,10 @@ public class OrderPortalAction extends GenericAction {
 		OrderForm form = (OrderForm) session.get(SystemConfig.ORDER_FORM_KEY);
 		
 		CmpayPaymentCheckResponse response = null;
+		Order order = null;
 		try {
 			response = orderService.checkPayment(form.getId());
+			order = orderService.findOrderById(form.getId());
 		} catch (ServiceException e) {
 			//TODO 停留在当前页，或者给出可在此查询的入口 
 			log.warn("", e);
@@ -84,7 +87,11 @@ public class OrderPortalAction extends GenericAction {
 			return ERROR;
 		}
 		
-		this.data = response;
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("response", response);
+		data.put("order", order);
+		
+		this.data = data;
 		return SUCCESS;
 	}
 
