@@ -80,6 +80,7 @@ public class OrderPortalAction extends GenericAction {
 		} catch (ServiceException e) {
 			//TODO 停留在当前页，或者给出可在此查询的入口 
 			log.warn("", e);
+			this.data = e.getMessage();
 			return ERROR;
 		}
 		
