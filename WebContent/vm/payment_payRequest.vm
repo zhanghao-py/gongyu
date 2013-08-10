@@ -18,26 +18,26 @@
 <body onload="javascript:document.forms[0].submit()">
 
 	<form name="cmpayForm" method="post" action="http://114.251.148.201:29095/newWpay/pay/uniformPayModSel.pay">
-		<input type="hidden" id="merId" name="merId" value="$payment.merId" />
-		<input type="hidden" id="orderId" name="orderId" value="$payment.orderId" />
-		<input type="hidden" id="amout" name="amout" value="$payment.amout" />
-		<input type="hidden" id="mcode" name="mcode" value="$payment.mcode" />
-		<input type="hidden" id="mid" name="mid" value="$payment.mid" />
-		<input type="hidden" id="date" name="date" value="$payment.date" />
-		<input type="hidden" id="time" name="time" value="$payment.time" />
-		<input type="hidden" id="allowNote" name="allowNote" value="$payment.allowNote" />
-		<input type="hidden" id="authorizeMode" name="authorizeMode" value="$payment.authorizeMode" />
-		<input type="hidden" id="currency" name="currency" value="$payment.currency" />
-		<input type="hidden" id="orderDate" name="orderDate" value="$payment.orderDate" />
-		<input type="hidden" id="period" name="period" value="$payment.period" />
-		<input type="hidden" id="periodUnit" name="periodUnit" value="$payment.periodUnit" />
-		<input type="hidden" id="productDesc" name="productDesc" value="$payment.productDesc" />
-		<input type="hidden" id="productId" name="productId" value="$payment.productId" />
-		<input type="hidden" id="productName" name="productName" value="$payment.productName" />
-		<input type="hidden" id="mobileId" name="mobileId" value="$payment.mobileId" />
-		<input type="hidden" id="callBack" name="callBack" value="$payment.callback" />
-		<input type="hidden" id="txntyp" name="txntyp" value="$payment.txntyp" />
-		<input type="hidden" id="SIGN" name="SIGN" value="$payment.sign" />
+		<input type="hidden" id="merId" name="merId" value="$data.payment.merId" />
+		<input type="hidden" id="orderId" name="orderId" value="$data.payment.orderId" />
+		<input type="hidden" id="amout" name="amout" value="$data.payment.amout" />
+		<input type="hidden" id="mcode" name="mcode" value="$data.payment.mcode" />
+		<input type="hidden" id="mid" name="mid" value="$data.payment.mid" />
+		<input type="hidden" id="date" name="date" value="$data.payment.date" />
+		<input type="hidden" id="time" name="time" value="$data.payment.time" />
+		<input type="hidden" id="allowNote" name="allowNote" value="$data.payment.allowNote" />
+		<input type="hidden" id="authorizeMode" name="authorizeMode" value="$data.payment.authorizeMode" />
+		<input type="hidden" id="currency" name="currency" value="$data.payment.currency" />
+		<input type="hidden" id="orderDate" name="orderDate" value="$data.payment.orderDate" />
+		<input type="hidden" id="period" name="period" value="$data.payment.period" />
+		<input type="hidden" id="periodUnit" name="periodUnit" value="$data.payment.periodUnit" />
+		<input type="hidden" id="productDesc" name="productDesc" value="$data.payment.productDesc" />
+		<input type="hidden" id="productId" name="productId" value="$data.payment.productId" />
+		<input type="hidden" id="productName" name="productName" value="$data.payment.productName" />
+		<input type="hidden" id="mobileId" name="mobileId" value="$data.payment.mobileId" />
+		<input type="hidden" id="callBack" name="callBack" value="$data.payment.callback" />
+		<input type="hidden" id="txntyp" name="txntyp" value="$data.payment.txntyp" />
+		<input type="hidden" id="SIGN" name="SIGN" value="$data.payment.sign" />
 	</form>
 
 </body>
