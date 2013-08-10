@@ -17,8 +17,9 @@ public interface OrderDao {
 	public void updateOrderStatusById(@Param("id") Long id, @Param("status") Short status);
 	public void updateOrdersStatusByIds(@Param("ids") List<Long> ids, @Param("status") Short status);
 
-	public void updateOrderPayResultById(@Param("id") Long id, @Param("status") Short payResult);
-	
-	public List<Order> findAllUnpaidOrdersMoreThan12Hours();
+	public void updateOrderPayResultById(@Param("id") Long id, @Param("payResult") Short payResult);
 
+	public void updateOrderCamsResultById(@Param("id") Long id, @Param("camsResult") Short camsResult);
+
+	public List<Order> findAllUnpaidOrdersMoreThan12Hours();
 }

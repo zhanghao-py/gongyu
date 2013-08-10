@@ -1,7 +1,6 @@
 package cm.h3c.college.pay.payment.service.impl;
 
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -11,8 +10,14 @@ import org.apache.commons.collections.Transformer;
 import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import cm.h3c.college.pay.cams.service.CamsService;
+import cm.h3c.college.pay.cmpay.CmpayObjectFactory;
+import cm.h3c.college.pay.cmpay.CmpayPaymentCallbackRequest;
+import cm.h3c.college.pay.cmpay.CmpayPaymentCallbackWebRequest;
+import cm.h3c.college.pay.cmpay.CmpayPaymentCallbackable;
 import cm.h3c.college.pay.cmpay.CmpayPaymentCheckResponse;
 import cm.h3c.college.pay.cmpay.CmpayPaymentRequest;
 import cm.h3c.college.pay.cmpay.service.CmpayPaymentService;
@@ -21,6 +26,7 @@ import cm.h3c.college.pay.core.util.PrimaryKeyGenerator;
 import cm.h3c.college.pay.payment.bo.College;
 import cm.h3c.college.pay.payment.bo.Log;
 import cm.h3c.college.pay.payment.bo.Order;
+import cm.h3c.college.pay.payment.cons.CamsResult;
 import cm.h3c.college.pay.payment.cons.LogType;
 import cm.h3c.college.pay.payment.cons.OrderStatus;
 import cm.h3c.college.pay.payment.cons.PayResult;
@@ -30,12 +36,14 @@ import cm.h3c.college.pay.payment.service.LogService;
 import cm.h3c.college.pay.payment.service.OrderService;
 import cm.h3c.college.pay.payment.web.action.dto.OrderForm;
 import cm.h3c.college.pay.payment.ws.delegate.AcmUserServiceDelegator;
-import cm.h3c.college.pay.payment.ws.delegate.FeeServiceDelegator;
 
 @Component("orderService")
 public class OrderServiceImpl implements OrderService {
 
 	private Logger log = Logger.getLogger(OrderService.class);
+	
+	@Autowired
+	private CmpayObjectFactory cmpayObjectFactory;
 	
 	@Resource(name = "collegeService")
 	private CollegeServcie collegeService;
@@ -45,6 +53,9 @@ public class OrderServiceImpl implements OrderService {
 	
 	@Resource(name = "cmpayPaymentService")
 	private CmpayPaymentService cmpayPaymentService;
+	
+	@Resource(name = "camsService")
+	private CamsService camsService;
 	
 	@Resource(name = "logService")
 	private LogService logService;
@@ -91,7 +102,6 @@ public class OrderServiceImpl implements OrderService {
 	private void validateAccountExistAtCASM(String account, College college) throws ServiceException {
 		AcmUserServiceDelegator acmUserServiceDelegator = new AcmUserServiceDelegator(college);
 		acmUserServiceDelegator.queryAcmUser(account);
-		
 		return;
 	}
 
@@ -129,35 +139,6 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public void doRecharge2CAMS(Long orderId) throws ServiceException {
-		
-		Order order = this.findOrderById(orderId);
-		
-		if (!order.getStatus().equals(OrderStatus.PAYING.getValue())) {
-			throw new ServiceException("只有支付中的订单，才可以向CAMS充值！");
-		}
-		
-		if (order.getPayResult() == null) {
-			throw new ServiceException("无法获取cmpay支付结果，无法向CAMS充值！");
-		}
-		
-		if (order.getPayResult().equals(PayResult.FAILED.getValue())) {
-			throw new ServiceException("cmpay支付失败，无法向CAMS充值！");
-		}
-		
-		Long collegeId = order.getCollegeId();
-		College college = collegeService.findCollegeById(collegeId);
-		
-		String account = order.getAccount();
-		BigDecimal money = order.getMoney();
-		
-		FeeServiceDelegator feeServiceDelegator = new FeeServiceDelegator(college);
-		feeServiceDelegator.pay(account, money.toPlainString());
-		
-		return;
-	}
-
-	@Override
 	public Order findOrderById(Long id) throws ServiceException {
 		if (id == null || id < 1) {
 			throw new ServiceException("id不能为空！");
@@ -170,17 +151,6 @@ public class OrderServiceImpl implements OrderService {
 		}
 		
 		return order;
-	}
-
-	@Override
-	public void updateOrdersStatus2CanceledByIds(List<Long> ids)
-			throws ServiceException {
-		if (ids == null || ids.size() < 1) {
-			throw new ServiceException("ids不能为空！");
-		}
-		
-		orderDao.updateOrdersStatusByIds(ids, OrderStatus.CANCELED.getValue());
-		return;
 	}
 
 	@Override
@@ -200,9 +170,47 @@ public class OrderServiceImpl implements OrderService {
 			}
 		});
 		
-		this.updateOrdersStatus2CanceledByIds(orderIds);
+		this.updateOrdersStatusByIds(orderIds, OrderStatus.CANCELED);
+	}
+	
+	@Override
+	public void updateOrdersStatusByIds(List<Long> orderIds, OrderStatus status) throws ServiceException {
+		if (orderIds == null || orderIds.size() < 1) {
+			throw new ServiceException("orderIds不能为空");
+		}
+		
+		orderDao.updateOrdersStatusByIds(orderIds, status.getValue());
+		return;
+	}
+	
+	@Override
+	public void updateOrderStatusById(Long orderId, OrderStatus status) throws ServiceException {
+		if (orderId == null || orderId < 1) {
+			throw new ServiceException("orderId不能为空");
+		}
+		
+		orderDao.updateOrderStatusById(orderId, status.getValue());
+		return;
 	}
 
+	@Override
+	public void updateOrderPayResultById(Long orderId, PayResult payResult) throws ServiceException {
+		if (orderId == null || orderId < 1) {
+			throw new ServiceException("orderId不能为空");
+		}
+		
+		orderDao.updateOrderPayResultById(orderId, payResult.getValue());
+	}
+	
+	@Override
+	public void updateOrderCamsResultById(Long orderId, CamsResult camsResult) throws ServiceException {
+		if (orderId == null || orderId < 1) {
+			throw new ServiceException("orderId不能为空");
+		}
+		
+		orderDao.updateOrderCamsResultById(orderId, camsResult.getValue());
+	}
+	
 	@Override
 	public CmpayPaymentRequest doPayOrder(Long orderId) throws ServiceException {
 		
@@ -221,53 +229,68 @@ public class OrderServiceImpl implements OrderService {
 			throw new ServiceException("只有处于初始化或付款中状态的订单, 方可进行付款！");
 		}
 		
-		// 修改订单状态
-		this.updateOrderStatus2PayingById(orderId);
+		// 修改订单状态至付款中
+		this.updateOrderStatusById(orderId, OrderStatus.PAYING);
 		
 		// 生成cmpay订单
-		
-		order.setPayTime(new Date());
 		return cmpayPaymentService.createPayment(order);
 	}
 
 	@Override
-	public void updateOrderStatus2PayingById(Long id) throws ServiceException {
-		if (id == null || id < 1) {
-			throw new ServiceException("id不能为空！");
-		}
-		
-		orderDao.updateOrderStatusById(id, OrderStatus.PAYING.getValue());
-		return;		
-	}
-
-	@Override
-	public void updateOrderPayResultByCallback(Long orderId, PayResult payResult, String remark) throws ServiceException {
-		
-		orderDao.updateOrderPayResultById(orderId, payResult.getValue());
-		logService.doLog(LogType.CMPAY_CALLBACK_REQUEST, orderId, remark);
-		
-//		if (payResult.equals(PayResult.SUCCESS)) {
-//		}
-		
-		return;
+	public void doCallbackOrder(CmpayPaymentCallbackRequest callback) throws ServiceException, NumberFormatException {
+		callbackOrder(callback, LogType.CMPAY_CALLBACK_REQUEST);
 	}
 	
 	@Override
-	public void updateOrderPayResultByWebCallback(Long orderId, PayResult payResult, String remark) throws ServiceException {
-		
-		List<Log> logs = logService.findByOrderIdAndType(orderId, LogType.CMPAY_CALLBACK_REQUEST);
-		
-		// Back Callback 已经调用过，无需进行Web Callback
-		if (logs.size() > 0) {
+	public void doWebCallbackOrder(CmpayPaymentCallbackWebRequest callback) throws ServiceException, NumberFormatException {
+		List<Log> logs = logService.findByOrderIdAndType(Long.valueOf(callback.getOrderId()), LogType.CMPAY_CALLBACK_REQUEST);
+		if (logs != null && logs.size() > 0) {
 			return;
 		}
 		
-		orderDao.updateOrderPayResultById(orderId, payResult.getValue());
-		logService.doLog(LogType.CMPAY_CALLBACK_WEB_REQUEST, orderId, remark);
-		
-		return;
+		callbackOrder(callback, LogType.CMPAY_CALLBACK_WEB_REQUEST);
 	}
-
+	
+	private void callbackOrder(CmpayPaymentCallbackable callback, LogType type) throws ServiceException, NumberFormatException {
+		
+		// 获取callback参数
+		Long orderId = null;
+		try {
+			orderId = Long.parseLong(callback.getOrderId());
+		} catch (NumberFormatException e) {
+			throw e;
+		}
+		
+		Order order = this.findOrderById(orderId);
+		
+		// 已有请求完成支付(CmpayPaymentCallbackRequest/CmpayPaymentCallbackWebRequest)
+		if (!ObjectUtils.equals(order.getPayResult(), null)) {
+			return;
+		}
+		
+		PayResult payResult = PayResult.valueOf(callback.getStatus());
+		
+		// 记录cmpay回调日志
+		if ( type.equals(LogType.CMPAY_CALLBACK_REQUEST) ) {
+			String reqXml = cmpayObjectFactory.cmpayPaymentCallbackRequest2Xml((CmpayPaymentCallbackRequest) callback);
+			logService.doLog(LogType.CMPAY_CALLBACK_REQUEST, orderId, reqXml);
+		} else {
+			String reqXml = cmpayObjectFactory.cmpayPaymentCallbackWebRequest2Xml((CmpayPaymentCallbackWebRequest) callback);
+			logService.doLog(LogType.CMPAY_CALLBACK_WEB_REQUEST, orderId, reqXml);
+		}
+		
+		// 更新order pay_result记录
+		this.updateOrderPayResultById(orderId, payResult);
+		
+		// CAMS充值
+		try {
+			camsService.doRecharge2Cams(orderId);
+		} catch (ServiceException e) {
+			log.warn("", e);
+		}
+		
+	}
+	
 	@Override
 	public CmpayPaymentCheckResponse checkPayment(Long orderId) throws ServiceException {
 		if (ObjectUtils.equals(orderId, null)) {

@@ -128,11 +128,11 @@ public class CmpayObjectFactory {
 		return toXml(callbackWebRequest);
 	}
 
-	public String cmpayPaymentCallbackRequest(
-			CmpayPaymentCallbackRequest callBackRequest) {
-		sign(callBackRequest);
-		return toXml(callBackRequest);
-	}
+//	public String cmpayPaymentCallbackRequest(
+//			CmpayPaymentCallbackRequest callBackRequest) {
+//		sign(callBackRequest);
+//		return toXml(callBackRequest);
+//	}
 
 	public CmpayPaymentCheckRequest createCmpayPaymentCheckRequest(Long orderId) {
 		CmpayPaymentCheckRequest ret = new CmpayPaymentCheckRequest();

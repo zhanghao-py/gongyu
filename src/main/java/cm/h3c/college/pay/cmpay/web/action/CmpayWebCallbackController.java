@@ -16,9 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import cm.h3c.college.pay.cmpay.CmpayObjectFactory;
 import cm.h3c.college.pay.cmpay.CmpayPaymentCallbackWebRequest;
-import cm.h3c.college.pay.cmpay.service.CmpayPaymentService;
 import cm.h3c.college.pay.core.config.SystemConfig;
-import cm.h3c.college.pay.payment.cons.PayResult;
+import cm.h3c.college.pay.core.exception.ServiceException;
 import cm.h3c.college.pay.payment.service.OrderService;
 
 @Controller
@@ -41,28 +40,16 @@ public class CmpayWebCallbackController implements HttpRequestHandler {
 			HttpServletResponse response) throws ServletException, IOException {
 		String reqXml = FileCopyUtils.copyToString(new InputStreamReader(
 				request.getInputStream(), "UTF-8"));
-		log.info(reqXml);
+//		log.info(reqXml);
 
 		CmpayPaymentCallbackWebRequest callback = cmpayObjectFactory
 				.parseCmpayPaymentCallbackWebRequest(reqXml);
 
-		// log callback to DB
-		Long orderId = null;		
 		try {
-			orderId = Long.parseLong(callback.getOrderId());
+			orderService.doWebCallbackOrder(callback);
 		} catch (NumberFormatException e) {
 			log.error("parse callback.orderId to Long error, xml=" + reqXml);
-		}
-
-		// update order status
-		try {
-//			orderService.updateOrderPayResultByCallback(
-//					orderId,
-//					callback.getStatus().equals(
-//							CmpayPaymentService.PaymentResult.SUCCESS.name()),
-//					callback.getStatus(), callback.getRemark());
-			orderService.updateOrderPayResultByCallback(orderId, PayResult.valueOf(callback.getStatus()), callback.getRemark());
-		} catch (Exception e) {
+		} catch (ServiceException e) {
 			log.error("", e);
 		}
 

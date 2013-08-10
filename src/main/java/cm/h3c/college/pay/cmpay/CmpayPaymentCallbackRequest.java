@@ -5,7 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("MESSAGE")
-public class CmpayPaymentCallbackRequest implements CmpaySignable {
+public class CmpayPaymentCallbackRequest implements CmpaySignable, CmpayPaymentCallbackable {
 	String MCODE;// 功能码 101440 M
 	String MID;// 系统跟踪号 14 位 M
 	String DATE;// 交易日期 YYYYMMDD M
@@ -75,6 +75,7 @@ public class CmpayPaymentCallbackRequest implements CmpaySignable {
 		this.STATUS = status;
 	}
 
+	@Override
 	public String getStatus() {
 		return STATUS;
 	}
@@ -119,6 +120,7 @@ public class CmpayPaymentCallbackRequest implements CmpaySignable {
 		MERID = merid;
 	}
 
+	@Override
 	public String getOrderId() {
 		return ORDERID;
 	}

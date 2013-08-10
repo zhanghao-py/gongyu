@@ -21,8 +21,6 @@ import cm.h3c.college.pay.cmpay.CmpayPaymentCallbackResponse;
 import cm.h3c.college.pay.cmpay.service.CmpayPaymentService;
 import cm.h3c.college.pay.core.config.SystemConfig;
 import cm.h3c.college.pay.core.exception.ServiceException;
-import cm.h3c.college.pay.payment.cons.LogType;
-import cm.h3c.college.pay.payment.cons.PayResult;
 import cm.h3c.college.pay.payment.service.LogService;
 import cm.h3c.college.pay.payment.service.OrderService;
 
@@ -49,7 +47,7 @@ public class CmpayCallbackController implements HttpRequestHandler {
 			HttpServletResponse response) throws ServletException, IOException {
 		String reqXml = FileCopyUtils.copyToString(new InputStreamReader(
 				request.getInputStream(), "UTF-8"));
-		log.info(reqXml);
+//		log.info(reqXml);
 
 		CmpayPaymentCallbackRequest callback = cmpayObjectFactory
 				.parseCmpayPaymentCallbackRequest(reqXml);
@@ -57,34 +55,16 @@ public class CmpayCallbackController implements HttpRequestHandler {
 		CmpayPaymentCallbackResponse callbackResponse = cmpayObjectFactory
 				.createCmpayPaymentCallbackResponse(callback);
 
-		Long orderId = null;
 		try {
-			orderId = Long.parseLong(callback.getOrderId());
+			orderService.doCallbackOrder(callback);
+			callbackResponse.setRcode(CmpayPaymentService.RCODE_SUCCESS);
 		} catch (NumberFormatException e) {
 			log.error("parse callback.orderId to Long error, xml=" + reqXml);
 			callbackResponse.setRcode("1");
 			callbackResponse.setDesc("error orderid");
 			sendCallBackResponse(response, callbackResponse);
 			return;
-		}
-
-		// log callback to DB
-		try {
-			logService.doLog(LogType.CMPAY_CALLBACK_REQUEST, orderId, reqXml);
 		} catch (ServiceException e) {
-			log.error("save callback error, xml=" + reqXml, e);
-		}
-
-		try {
-//			orderService.updateOrderPayResultByCallback(
-//					orderId,
-//					callback.getStatus().equals(
-//							CmpayPaymentService.PaymentResult.SUCCESS.name()),
-//					callback.getStatus(), callback.getRemark());
-
-			orderService.updateOrderPayResultByCallback(orderId, PayResult.valueOf(callback.getStatus()), callback.getRemark());
-			callbackResponse.setRcode(CmpayPaymentService.RCODE_SUCCESS);
-		} catch (Exception e) {
 			callbackResponse.setRcode("2");
 			log.error("", e);
 		}
