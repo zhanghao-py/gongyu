@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Transformer;
+import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
@@ -211,8 +212,8 @@ public class OrderServiceImpl implements OrderService {
 			throw new ServiceException("order id = " + orderId + ", 该订单不存在！");
 		}
 		
-		if (!order.getStatus().equals(OrderStatus.INIT.getValue())) {
-			throw new ServiceException("只有处于初始化状态的订单, 方可进行付款！");
+		if ( !(order.getStatus().equals(OrderStatus.INIT.getValue()) || order.getStatus().equals(OrderStatus.PAYING.getValue())) ) {
+			throw new ServiceException("只有处于初始化或付款中状态的订单, 方可进行付款！");
 		}
 		
 		// 修改订单状态
@@ -246,12 +247,23 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public CmpayPaymentCheckResponse checkPayment(Long orderId) throws ServiceException {
+		if (ObjectUtils.equals(orderId, null)) {
+			throw new ServiceException("orderId不能为空！");
+		}
+		
 		return cmpayPaymentService.checkPayment(orderId);
 	}
 
 	@Override
 	public CmpayPaymentRequest doCreateAndPayOrder(OrderForm form) throws ServiceException {
-		Long orderId = this.doCreateOrder(form);
+		
+		Long orderId = form.getId();
+		
+		if (orderId == null) {
+			orderId = this.doCreateOrder(form);
+			form.setId(orderId);
+		}
+		
 		return this.doPayOrder(orderId);
 	}
 

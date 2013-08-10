@@ -17,6 +17,8 @@ public interface OrderService {
 	
 	public CmpayPaymentRequest doPayOrder(Long orderId) throws ServiceException;
 	
+	public CmpayPaymentRequest doCreateAndPayOrder(OrderForm form) throws ServiceException;
+	
 //	public void doFinishOrder(Long orderId) throws ServiceException;
 		
 	
@@ -35,6 +37,5 @@ public interface OrderService {
 			String status, String remark);
 
 	public CmpayPaymentCheckResponse checkPayment(Long orderId) throws ServiceException;
-
-	public CmpayPaymentRequest doCreateAndPayOrder(OrderForm form) throws ServiceException;
+	
 }

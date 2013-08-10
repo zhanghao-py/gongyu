@@ -12,7 +12,6 @@ import org.apache.struts2.convention.annotation.Result;
 
 import cm.h3c.college.pay.cmpay.CmpayPaymentRequest;
 import cm.h3c.college.pay.core.config.SystemConfig;
-import cm.h3c.college.pay.core.cons.AjaxStatus;
 import cm.h3c.college.pay.core.exception.ServiceException;
 import cm.h3c.college.pay.core.web.action.GenericAction;
 import cm.h3c.college.pay.payment.service.OrderService;
@@ -43,12 +42,8 @@ public class CreateAndPayOrderAction extends GenericAction {
 			payment = orderService.doCreateAndPayOrder(form);
 		} catch (ServiceException e) {
 			log.warn("", e);
-			result.setStatus(AjaxStatus.ERROR.getValue());
-			result.setStatusInfo(e.getMessage());
 			return SUCCESS;
 		}
-		
-//		session.remove(SystemConfig.ORDER_FORM_KEY);
 		
 		Map<String, Object> data = new HashMap<String, Object>();
 		data.put("payment", payment);
