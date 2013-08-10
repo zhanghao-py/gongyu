@@ -28,6 +28,8 @@ public class SystemConfig {
 
 	private String paymentResultUrl;
 	private String callbackUrl;
+	private String productDesc;
+	private String productName;
 
 	public String getMerId() {
 		return merId;
@@ -67,6 +69,22 @@ public class SystemConfig {
 
 	public void setCallbackUrl(String callbackUrl) {
 		this.callbackUrl = callbackUrl;
+	}
+
+	public String getProductDesc() {
+		return productDesc;
+	}
+
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductDesc(String productDesc) {
+		this.productDesc = productDesc;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
 
 }

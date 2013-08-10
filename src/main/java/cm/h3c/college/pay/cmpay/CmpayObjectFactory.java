@@ -5,11 +5,13 @@ import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import cm.h3c.college.pay.core.config.SystemConfig;
+import cm.h3c.college.pay.core.util.SecurityCodeUtil;
 import cm.h3c.college.pay.payment.bo.Order;
 
 import com.thoughtworks.xstream.XStream;
@@ -128,16 +130,16 @@ public class CmpayObjectFactory {
 		return toXml(callbackWebRequest);
 	}
 
-//	public String cmpayPaymentCallbackRequest(
-//			CmpayPaymentCallbackRequest callBackRequest) {
-//		sign(callBackRequest);
-//		return toXml(callBackRequest);
-//	}
+	public String cmpayPaymentCallbackRequest(
+			CmpayPaymentCallbackRequest callBackRequest) {
+		sign(callBackRequest);
+		return toXml(callBackRequest);
+	}
 
 	public CmpayPaymentCheckRequest createCmpayPaymentCheckRequest(Long orderId) {
 		CmpayPaymentCheckRequest ret = new CmpayPaymentCheckRequest();
 		Date date = new Date();
-		ret.MID = formatYyyyMMddHHmmsss(date);
+		ret.MID = genMid(date);
 		ret.DATE = formatYyyyMMdd(date);
 		ret.TIME = formatHHmmsss(date);
 		ret.MERID = config.getMerId();
@@ -154,24 +156,27 @@ public class CmpayObjectFactory {
 		return ret;
 	}
 
-	String formatYyyyMMddHHmmsss(Date date) {
-		return new SimpleDateFormat("yyyyMMddHHmmss").format(date);
+	String genMid(Date date) {
+		return Long.toString(date.getTime() - 1370000000000L)
+				+ SecurityCodeUtil.getRandomNumber();
 	}
 
 	String formatYyyyMMdd(Date date) {
-		return new SimpleDateFormat("yyyyMMdd").format(date);
+		return DateFormatUtils.format(date, "yyyyMMdd");
 	}
 
 	String formatHHmmsss(Date date) {
-		return new SimpleDateFormat("HHmmss").format(date);
+		return DateFormatUtils.format(date, "HHmmss");
 	}
 
 	public CmpayPaymentRequest createCmpayPaymentRequest(Order order)
 			throws SignEncException {
+		Date payTime = new Date();
+		
 		CmpayPaymentRequest request = new CmpayPaymentRequest();
-		request.MID = "10000000000001";
-		request.DATE = formatYyyyMMdd(order.getPayTime());
-		request.TIME = formatHHmmsss(order.getPayTime());
+		request.MID = genMid(new Date());
+		request.DATE = formatYyyyMMdd(payTime);
+		request.TIME = formatHHmmsss(payTime);
 		request.MERID = config.getMerId();
 		request.ORDERID = "10" + order.getId();
 		request.AMOUT = order.getMoney().multiply(new BigDecimal(100))
@@ -182,9 +187,9 @@ public class CmpayObjectFactory {
 		request.ORDERDATE = request.DATE;
 		request.PERIOD = "30";// 有效期数量 3位
 		request.PERIODUNIT = "4";// 有效期单位 1位1-月2-日3-小时4-分钟
-		request.PRODUCTDESC = "cmpay";
+		request.PRODUCTDESC = config.getProductDesc();
 		request.PRODUCTID = request.AMOUT;
-		request.PRODUCTNAME = "cmpay";
+		request.PRODUCTNAME = config.getProductName();
 		request.TXNTYP = "S";// 交易类型 1位S：直接支付
 		request.CALLBACK = config.getCallbackUrl() + "?orderId="
 				+ order.getId();
