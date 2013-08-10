@@ -34,7 +34,7 @@
 </head>
 <body>
 
-<form name="paymentForm" method="post" action="$!{webRoot}/payment/createOrder.do" target="_blank">
+<form name="paymentForm" method="post" action="$!{webRoot}/payment/createAndPayOrder.do" target="_blank">
 
 <div class="contentRi">
 	<div class="lr-box">

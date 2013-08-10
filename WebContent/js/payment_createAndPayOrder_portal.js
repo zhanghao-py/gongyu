@@ -47,8 +47,11 @@ function btnSubmit() {
     var bank_id = jQuery('input[type=radio][name=pay_bank_id]:checked').attr('id');
     jQuery.cookie('lastBank', bank_id, { expires: 365 });
 
-	var url = jQuery('form[name="paymentForm"]').attr('action');
+//	var url = jQuery('form[name="paymentForm"]').attr('action');
+    popWindow();
+	jQuery('form[name="paymentForm"]').submit();
 	
+	/*
 	jQuery.ajax({
 		url : url,
 		type : "post",
@@ -61,12 +64,13 @@ function btnSubmit() {
 			if (status > 0) {
 				jQuery('#error_tip').html(statusInfo).css("display", "block");
 			} else {
-				popWindow();
+//				popWindow();
 				
 				var p = window.open("about:blank");
-				var forwardUrl = "http://wwwgongyu.oicp.net:99/payment/payOrder.do";
-//				var forwardUrl = "http://localhost:8080/gongyu/payment/payOrder.do";
+//				var forwardUrl = "http://wwwgongyu.oicp.net:99/payment/payOrder.do";
+				var forwardUrl = "http://localhost:8080/gongyu/payment/payOrder.do";
 				var orderId = data.id;
+//				alert("跳转到cmpay付款, orderId = " + orderId);
 				p.location = forwardUrl + "?orderId=" + orderId;
 				
 //				var orderId = data.id;
@@ -106,6 +110,7 @@ function btnSubmit() {
 			jQuery('#loading_panel').hideLoading();
 		}
 	});
+	*/
     
 }
 
