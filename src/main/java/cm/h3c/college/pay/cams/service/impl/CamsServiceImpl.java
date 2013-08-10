@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import javax.annotation.Resource;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +24,8 @@ import cm.h3c.college.pay.payment.ws.delegate.FeeServiceDelegator;
 
 @Component("camsService")
 public class CamsServiceImpl implements CamsService {
+	
+	private static Logger LOG = Logger.getLogger(CamsService.class);
 	
 	@Resource(name = "collegeService")
 	private CollegeServcie collegeService;
@@ -57,17 +60,25 @@ public class CamsServiceImpl implements CamsService {
 		String account = order.getAccount();
 		BigDecimal money = order.getMoney();
 		
+		// 更新order status状态->done
+		orderService.updateOrderStatusById(orderId, OrderStatus.DONE);
+		
 		// CAMS充值
 		FeeServiceDelegator feeServiceDelegator = new FeeServiceDelegator(college);
-		feeServiceDelegator.pay(account, money.toPlainString());
+		
+		try {
+			feeServiceDelegator.pay(account, money.toPlainString());
+		} catch(ServiceException e) {
+			LOG.warn("", e);
+			// 更新order cams_result->failed
+			orderService.updateOrderCamsResultById(orderId, CamsResult.FAILED);
+			return;
+		}
 		
 		logService.doLog(LogType.CAMS_PAY_REQUEST, orderId, "account:" + account + ", money:" + money.toPlainString());
 		
 		// 更新order cams_result->success
 		orderService.updateOrderCamsResultById(orderId, CamsResult.SUCCESS);
-		
-		// 更新order status状态->done
-		orderService.updateOrderStatusById(orderId, OrderStatus.DONE);
 		
 		return;
 	}
