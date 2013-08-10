@@ -5,8 +5,11 @@ import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLSession;
 
 public class SystemConfig {
-	
+
 	static {
+		System.setProperty("javax.net.ssl.trustStore", SystemConfig.class
+				.getClassLoader().getResource("jssecacerts").getFile());
+		
 		HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier() {
 			public boolean verify(String hostname, SSLSession session) {
 				if (hostname.equals("192.168.1.11"))
