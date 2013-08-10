@@ -23,7 +23,17 @@
 		</where>
 	</select>
 	
-	<insert id="saveLog"
+	<select id="findByOrderIdAndType" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from gy_log
+		<where> 
+			order_id = #{orderId, jdbcType=BIGINT}
+			and type = #{type, jdbcType=SMALLINT}
+		</where>
+	</select>
+	
+	<insert id="save"
 		parameterType="cm.h3c.college.pay.payment.bo.Log"
 		useGeneratedKeys="true" keyProperty="id">
 		insert into gy_log
