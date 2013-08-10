@@ -82,6 +82,32 @@
 		</where>
 	</update>
 	
+	<update id="updateOrderStatusById" flushCache="true">
+		update gy_order
+		<set>
+			status = #{status, jdbcType=SMALLINT},
+			<if test="status == 2">
+				pay_time = now(),
+			</if>
+			<if test="status == 3">
+				finish_time = now(),
+			</if>
+		</set>
+		<where> 
+			id = #{id, jdbcType=BIGINT}
+		</where>
+	</update>
+	
+	<update id="updateOrderPayResultById" flushCache="true">
+		update gy_order
+		<set>
+			pay_result = #{payResult, jdbcType=SMALLINT},
+		</set>
+		<where> 
+			id = #{id, jdbcType=BIGINT}
+		</where>
+	</update>
+	
 	<select id="findAllUnpaidOrdersMoreThan12Hours" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
