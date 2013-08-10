@@ -2,6 +2,8 @@ package cm.h3c.college.pay.cmpay;
 
 import org.apache.commons.lang3.StringUtils;
 
+import cm.h3c.college.pay.cmpay.service.CmpayPaymentService;
+
 public class CmpayPaymentCheckResponse implements CmpaySignable {
 	String MCODE;// 功能码 101455 M
 	String MID;// 系统跟踪号 同原交易 M
@@ -22,6 +24,8 @@ public class CmpayPaymentCheckResponse implements CmpaySignable {
 	String ORDACTDT;// 订单最后记账时间 M
 	String RJTRSN;// 拒付原因 O
 	String SIGN;// 签名 172位 M
+	
+	Boolean isPaySuccess;
 
 	@Override
 	public String prepareSignData() {
@@ -65,4 +69,10 @@ public class CmpayPaymentCheckResponse implements CmpaySignable {
 	public String getRjtrsn() {
 		return RJTRSN;
 	}
+
+	public Boolean isPaySuccess() {
+		return StringUtils.equals(RCODE, CmpayPaymentService.RCODE_SUCCESS);
+	}
+	
+	
 }

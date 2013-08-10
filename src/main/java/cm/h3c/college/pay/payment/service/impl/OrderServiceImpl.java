@@ -21,10 +21,12 @@ import cm.h3c.college.pay.core.exception.ServiceException;
 import cm.h3c.college.pay.core.util.PrimaryKeyGenerator;
 import cm.h3c.college.pay.payment.bo.College;
 import cm.h3c.college.pay.payment.bo.Order;
+import cm.h3c.college.pay.payment.cons.LogType;
 import cm.h3c.college.pay.payment.cons.OrderStatus;
 import cm.h3c.college.pay.payment.cons.PayResult;
 import cm.h3c.college.pay.payment.dao.OrderDao;
 import cm.h3c.college.pay.payment.service.CollegeServcie;
+import cm.h3c.college.pay.payment.service.LogService;
 import cm.h3c.college.pay.payment.service.OrderService;
 import cm.h3c.college.pay.payment.web.action.dto.OrderForm;
 import cm.h3c.college.pay.payment.ws.delegate.AcmUserServiceDelegator;
@@ -43,6 +45,9 @@ public class OrderServiceImpl implements OrderService {
 	
 	@Resource(name = "cmpayPaymentService")
 	private CmpayPaymentService cmpayPaymentService;
+	
+	@Resource(name = "logService")
+	private LogService logService;
 
 	@Override
 	public Long doCreateOrder(OrderForm form) throws ServiceException {
@@ -136,7 +141,7 @@ public class OrderServiceImpl implements OrderService {
 			throw new ServiceException("无法获取cmpay支付结果，无法向CAMS充值！");
 		}
 		
-		if (order.getPayResult().equals(PayResult.FAIL.getValue())) {
+		if (order.getPayResult().equals(PayResult.FAILED.getValue())) {
 			throw new ServiceException("cmpay支付失败，无法向CAMS充值！");
 		}
 		
@@ -231,18 +236,21 @@ public class OrderServiceImpl implements OrderService {
 			throw new ServiceException("id不能为空！");
 		}
 		
-		List<Long> ids = new ArrayList<Long>();
-		ids.add(id);
-		
-		orderDao.updateOrdersStatusByIds(ids, OrderStatus.PAYING.getValue());
+		orderDao.updateOrderStatusById(id, OrderStatus.PAYING.getValue());
 		return;		
 	}
 
 	@Override
-	public void updateOrderStatusByCallback(Long orderId, boolean success,
-			String status, String remark) {
-		// TODO Auto-generated method stub
+	public void updateOrderPayResultByCallback(Long orderId, PayResult payResult, String remark) throws ServiceException {
 		
+		orderDao.updateOrderPayResultById(orderId, payResult.getValue());
+		logService.doLog(LogType.CMPAY_CALLBACK_REQUEST, orderId, remark);
+		
+//		if (payResult.equals(PayResult.SUCCESS)) {
+			
+//		}
+		
+		return;
 	}
 
 	@Override

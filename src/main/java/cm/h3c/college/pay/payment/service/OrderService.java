@@ -6,6 +6,7 @@ import cm.h3c.college.pay.cmpay.CmpayPaymentCheckResponse;
 import cm.h3c.college.pay.cmpay.CmpayPaymentRequest;
 import cm.h3c.college.pay.core.exception.ServiceException;
 import cm.h3c.college.pay.payment.bo.Order;
+import cm.h3c.college.pay.payment.cons.PayResult;
 import cm.h3c.college.pay.payment.web.action.dto.OrderForm;
 
 
@@ -33,8 +34,7 @@ public interface OrderService {
 
 	public void updateOrderStatus2PayingById(Long id) throws ServiceException;
 
-	public void updateOrderStatusByCallback(Long orderId, boolean equals,
-			String status, String remark);
+	public void updateOrderPayResultByCallback(Long orderId, PayResult payResult, String remark) throws ServiceException;
 
 	public CmpayPaymentCheckResponse checkPayment(Long orderId) throws ServiceException;
 	

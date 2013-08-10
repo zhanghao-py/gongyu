@@ -22,6 +22,7 @@ import cm.h3c.college.pay.cmpay.service.CmpayPaymentService;
 import cm.h3c.college.pay.core.config.SystemConfig;
 import cm.h3c.college.pay.core.exception.ServiceException;
 import cm.h3c.college.pay.payment.cons.LogType;
+import cm.h3c.college.pay.payment.cons.PayResult;
 import cm.h3c.college.pay.payment.service.LogService;
 import cm.h3c.college.pay.payment.service.OrderService;
 
@@ -75,12 +76,13 @@ public class CmpayCallbackController implements HttpRequestHandler {
 		}
 
 		try {
-			orderService.updateOrderStatusByCallback(
-					orderId,
-					callback.getStatus().equals(
-							CmpayPaymentService.PaymentResult.SUCCESS.name()),
-					callback.getStatus(), callback.getRemark());
+//			orderService.updateOrderPayResultByCallback(
+//					orderId,
+//					callback.getStatus().equals(
+//							CmpayPaymentService.PaymentResult.SUCCESS.name()),
+//					callback.getStatus(), callback.getRemark());
 
+			orderService.updateOrderPayResultByCallback(orderId, PayResult.valueOf(callback.getStatus()), callback.getRemark());
 			callbackResponse.setRcode(CmpayPaymentService.RCODE_SUCCESS);
 		} catch (Exception e) {
 			callbackResponse.setRcode("2");
