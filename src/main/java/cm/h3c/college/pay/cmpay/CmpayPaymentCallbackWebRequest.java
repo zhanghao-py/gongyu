@@ -23,16 +23,16 @@ public class CmpayPaymentCallbackWebRequest implements CmpaySignable {
 	@Override
 	public String prepareSignData() {
 		StringBuilder ret = new StringBuilder();
-		// ret.append("MERID=").append(StringUtils.stripToEmpty(MERID));
-		// ret.append("&MID=").append(StringUtils.stripToEmpty(MID));
-		// ret.append("&OMID=").append(StringUtils.stripToEmpty(OMID));
-		// ret.append("&TXNTYP=").append(StringUtils.stripToEmpty(TXNTYP));
-		// ret.append("&AMOUT=").append(StringUtils.stripToEmpty(AMOUT));
-		// ret.append("&ORDERID=").append(StringUtils.stripToEmpty(ORDERID));
-		// ret.append("&ORDERDATE=").append(StringUtils.stripToEmpty(ORDERDATE));
-		// ret.append("&PAYDATE=").append(StringUtils.stripToEmpty(PAYDATE));
-		// ret.append("&REMARK=").append(StringUtils.stripToEmpty(REMARK));
-		// ret.append("&STATUS=").append(StringUtils.stripToEmpty(STATUS));
+		ret.append("MERID=").append(StringUtils.stripToEmpty(MERID));
+		ret.append("&MID=").append(StringUtils.stripToEmpty(MID));
+		ret.append("&OMID=").append(StringUtils.stripToEmpty(OMID));
+		ret.append("&TXNTYP=").append(StringUtils.stripToEmpty(TXNTYP));
+		ret.append("&AMOUT=").append(StringUtils.stripToEmpty(AMOUT));
+		ret.append("&ORDERID=").append(StringUtils.stripToEmpty(ORDERID));
+		ret.append("&ORDERDATE=").append(StringUtils.stripToEmpty(ORDERDATE));
+		ret.append("&PAYDATE=").append(StringUtils.stripToEmpty(PAYDATE));
+		ret.append("&REMARK=").append(StringUtils.stripToEmpty(REMARK));
+		ret.append("&STATUS=").append(StringUtils.stripToEmpty(STATUS));
 		return ret.toString();
 	}
 
