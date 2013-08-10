@@ -25,8 +25,8 @@ public class FeeServiceDelegator {
 
 	private Logger log = Logger.getLogger(FeeServiceDelegator.class);
 	
-//	private final String wsdlUrl = "/imcws/services/feeService?wsdl";
-	private final String wsdlUrl = "/imcws/services/feeService.wsdl";
+	private final String wsdlUrl = "/imcws/services/feeService?wsdl";
+//	private final String wsdlUrl = "/imcws/services/feeService.wsdl";
 	
 	private String baseUrl;
 	

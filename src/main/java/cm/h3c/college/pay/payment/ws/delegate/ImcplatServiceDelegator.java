@@ -24,8 +24,8 @@ public class ImcplatServiceDelegator {
 	
 	private Logger log = Logger.getLogger(ImcplatServiceDelegator.class);
 	
-//	private final String wsdlUrl = "/imcws/services/imcplatService?wsdl";
-	private final String wsdlUrl = "/imcws/services/imcplatService.wsdl";
+	private final String wsdlUrl = "/imcws/services/imcplatService?wsdl";
+//	private final String wsdlUrl = "/imcws/services/imcplatService.wsdl";
 	
 	private String baseUrl;
 	private String opUsername;
