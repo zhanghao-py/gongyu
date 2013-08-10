@@ -28,7 +28,7 @@ public class CmpayWebCallbackController implements HttpRequestHandler {
 
 	@Autowired
 	private CmpayObjectFactory cmpayObjectFactory;
-	
+
 	@Autowired
 	private OrderService orderService;
 
@@ -47,7 +47,7 @@ public class CmpayWebCallbackController implements HttpRequestHandler {
 				.parseCmpayPaymentCallbackWebRequest(reqXml);
 
 		// log callback to DB
-		Long orderId = null;		
+		Long orderId = null;
 		try {
 			orderId = Long.parseLong(callback.getOrderId());
 		} catch (NumberFormatException e) {
@@ -56,12 +56,9 @@ public class CmpayWebCallbackController implements HttpRequestHandler {
 
 		// update order status
 		try {
-//			orderService.updateOrderPayResultByCallback(
-//					orderId,
-//					callback.getStatus().equals(
-//							CmpayPaymentService.PaymentResult.SUCCESS.name()),
-//					callback.getStatus(), callback.getRemark());
-			orderService.updateOrderPayResultByCallback(orderId, PayResult.valueOf(callback.getStatus()), callback.getRemark());
+			orderService.updateOrderPayResultByWebCallback(orderId,
+					PayResult.valueOf(callback.getStatus()),
+					callback.getRemark());
 		} catch (Exception e) {
 			log.error("", e);
 		}

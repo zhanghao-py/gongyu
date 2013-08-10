@@ -76,13 +76,10 @@ public class CmpayCallbackController implements HttpRequestHandler {
 		}
 
 		try {
-//			orderService.updateOrderPayResultByCallback(
-//					orderId,
-//					callback.getStatus().equals(
-//							CmpayPaymentService.PaymentResult.SUCCESS.name()),
-//					callback.getStatus(), callback.getRemark());
 
-			orderService.updateOrderPayResultByCallback(orderId, PayResult.valueOf(callback.getStatus()), callback.getRemark());
+			orderService.updateOrderPayResultByCallback(orderId,
+					PayResult.valueOf(callback.getStatus()),
+					callback.getRemark());
 			callbackResponse.setRcode(CmpayPaymentService.RCODE_SUCCESS);
 		} catch (Exception e) {
 			callbackResponse.setRcode("2");
