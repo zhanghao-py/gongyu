@@ -117,7 +117,7 @@ public class CmpayPaymentServiceImpl implements CmpayPaymentService {
 			CmpayPaymentRequest ret = cmpayObjectFactory
 					.createCmpayPaymentRequest(order);
 			String reqXml = cmpayObjectFactory.cmpayPaymentReqeust2Xml(ret);
-			log.info(reqXml);
+			log.info(ret.prepareSignData());
 			// save request to db
 			logService.doLog(LogType.CAMS_PAY_REQUEST, order.getId(), reqXml);
 

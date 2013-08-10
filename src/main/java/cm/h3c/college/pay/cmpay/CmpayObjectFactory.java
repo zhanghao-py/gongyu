@@ -2,7 +2,6 @@ package cm.h3c.college.pay.cmpay;
 
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.commons.lang.time.DateFormatUtils;
@@ -172,7 +171,6 @@ public class CmpayObjectFactory {
 	public CmpayPaymentRequest createCmpayPaymentRequest(Order order)
 			throws SignEncException {
 		Date payTime = new Date();
-		
 		CmpayPaymentRequest request = new CmpayPaymentRequest();
 		request.MID = genMid(new Date());
 		request.DATE = formatYyyyMMdd(payTime);
