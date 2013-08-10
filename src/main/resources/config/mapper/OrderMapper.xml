@@ -108,6 +108,16 @@
 		</where>
 	</update>
 	
+	<update id="updateOrderCamsResultById" flushCache="true">
+		update gy_order
+		<set>
+			cams_result = #{camsResult, jdbcType=SMALLINT},
+		</set>
+		<where> 
+			id = #{id, jdbcType=BIGINT}
+		</where>
+	</update>
+	
 	<select id="findAllUnpaidOrdersMoreThan12Hours" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
