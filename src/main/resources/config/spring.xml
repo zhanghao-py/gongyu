@@ -23,16 +23,6 @@
 			</list>
 		</property>
 	</bean>
-	
-	<bean class="cm.h3c.college.pay.core.config.SystemConfig">
-		<property name="merId" value="${merId}" />
-		<property name="payUrl" value="${payUrl}" />
-		<property name="checkUrl" value="${checkUrl}" />
-		<property name="callbackUrl" value="${callbackUrl}" />
-		<property name="productName" value="${productName}" />
-		<property name="productDesc" value="${productDesc}" />
-		<property name="paymentResultUrl" value="${paymentResultUrl}" />
-	</bean>
 
 	<import resource="classpath:config/spring-dataSource.xml" />
 	<import resource="classpath:config/spring-transaction.xml" />

@@ -40,4 +40,9 @@ public class EncodeTest {
         Assert.assertEquals(inputStr, outputStr); 
 	}
 
+	@Test
+	public void testLong() {
+		String orderId = "0" + Long.MAX_VALUE;
+		Assert.assertEquals(Long.MAX_VALUE, Long.parseLong(orderId));
+	}
 }

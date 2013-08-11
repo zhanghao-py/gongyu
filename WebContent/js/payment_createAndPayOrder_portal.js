@@ -51,67 +51,6 @@ function btnSubmit() {
     popWindow();
 	jQuery('form[name="paymentForm"]').submit();
 	
-	/*
-	jQuery.ajax({
-		url : url,
-		type : "post",
-		dataType: "json",
-		success : function(msg) {
-			var status = msg.status;
-			var statusInfo = msg.statusInfo;
-			var data = msg.data;
-			
-			if (status > 0) {
-				jQuery('#error_tip').html(statusInfo).css("display", "block");
-			} else {
-//				popWindow();
-				
-				var p = window.open("about:blank");
-//				var forwardUrl = "http://wwwgongyu.oicp.net:99/payment/payOrder.do";
-				var forwardUrl = "http://localhost:8080/gongyu/payment/payOrder.do";
-				var orderId = data.id;
-//				alert("跳转到cmpay付款, orderId = " + orderId);
-				p.location = forwardUrl + "?orderId=" + orderId;
-				
-//				var orderId = data.id;
-//				alert("跳转到cmpay付款, orderId = " + orderId);
-//				var forwardUrl = 'http://www.baidu.com';
-//				window.open(forwardUrl, "_blank");
-//				jQuery('#merId').val(msg.data.payment.merId);
-//				jQuery('#orderId').val(msg.data.payment.orderId);
-//				jQuery('#amout').val(msg.data.payment.amout);
-//				jQuery('#mcode').val(msg.data.payment.mcode);
-//				jQuery('#mid').val(msg.data.payment.mid);
-//				jQuery('#date').val(msg.data.payment.date);
-//				jQuery('#time').val(msg.data.payment.time);
-//				jQuery('#allowNote').val(msg.data.payment.allowNote);
-//				jQuery('#authorizeMode').val(msg.data.payment.authorizeMode);
-//				jQuery('#currency').val(msg.data.payment.currency);
-//				jQuery('#orderDate').val(msg.data.payment.orderDate);
-//				jQuery('#period').val(msg.data.payment.period);
-//				jQuery('#periodUnit').val(msg.data.payment.periodUnit);
-//				jQuery('#productId').val(msg.data.payment.productId);
-//				jQuery('#productDesc').val(msg.data.payment.productDesc);
-//				jQuery('#productName').val(msg.data.payment.productName);
-//				jQuery('#mobileId').val(msg.data.payment.mobileId);
-//				jQuery('#callBack').val(msg.data.payment.callback);
-//				jQuery('#txntyp').val(msg.data.payment.txntyp);
-//				jQuery('#SIGN').val(msg.data.payment.sign);
-//				jQuery('form[name="cmpayForm"]').submit();
-			}
-		},
-		error : function(msg) {
-			jQuery('#error_tip').html('系统出错了，请联系管理员').css("display", "block");
-		},
-		beforeSend : function() {
-			jQuery('#loading_panel').showLoading();
-		},
-		complete : function() {
-			jQuery('#loading_panel').hideLoading();
-		}
-	});
-	*/
-    
 }
 
 /***
