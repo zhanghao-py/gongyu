@@ -69,6 +69,10 @@ public class CmpayPaymentCheckResponse implements CmpaySignable {
 	public String getRjtrsn() {
 		return RJTRSN;
 	}
+	
+	public String getOrdAmt() {
+		return ORDAMT;
+	}
 
 	public Boolean isPaySuccess() {
 		return StringUtils.equals(RCODE, CmpayPaymentService.RCODE_SUCCESS);

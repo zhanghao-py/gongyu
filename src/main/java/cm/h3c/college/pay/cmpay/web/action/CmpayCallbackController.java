@@ -47,7 +47,7 @@ public class CmpayCallbackController implements HttpRequestHandler {
 			HttpServletResponse response) throws ServletException, IOException {
 		String reqXml = FileCopyUtils.copyToString(new InputStreamReader(
 				request.getInputStream(), "UTF-8"));
-//		log.info(reqXml);
+		log.info(reqXml);//记录下来出现问题时排查用
 
 		CmpayPaymentCallbackRequest callback = cmpayObjectFactory
 				.parseCmpayPaymentCallbackRequest(reqXml);

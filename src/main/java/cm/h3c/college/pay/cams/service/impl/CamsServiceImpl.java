@@ -38,8 +38,7 @@ public class CamsServiceImpl implements CamsService {
 	
 	@Override
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
-	public void doRecharge2Cams(Long orderId) throws ServiceException {
-		
+	public synchronized void doRecharge2Cams(Long orderId) throws ServiceException {
 		Order order = orderService.findOrderById(orderId);
 		
 		if (!order.getStatus().equals(OrderStatus.PAYING.getValue())) {

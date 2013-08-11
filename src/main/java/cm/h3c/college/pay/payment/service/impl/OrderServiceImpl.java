@@ -243,8 +243,9 @@ public class OrderServiceImpl implements OrderService {
 	
 	@Override
 	public void doWebCallbackOrder(CmpayPaymentCallbackWebRequest callback) throws ServiceException, NumberFormatException {
-		List<Log> logs = logService.findByOrderIdAndType(Long.valueOf(callback.getOrderId()), LogType.CMPAY_CALLBACK_REQUEST);
+		List<Log> logs = logService.findByOrderIdAndType(callback.parseOriginOrderId(), LogType.CMPAY_CALLBACK_REQUEST);
 		if (logs != null && logs.size() > 0) {
+			LOG.warn("doWebCallbackOrder: callback already received, ignore: "  + callback.prepareSignData());
 			return;
 		}
 		
@@ -256,7 +257,7 @@ public class OrderServiceImpl implements OrderService {
 		// 获取callback参数
 		Long orderId = null;
 		try {
-			orderId = Long.parseLong(callback.getOrderId());
+			orderId = callback.parseOriginOrderId();
 		} catch (NumberFormatException e) {
 			throw e;
 		}

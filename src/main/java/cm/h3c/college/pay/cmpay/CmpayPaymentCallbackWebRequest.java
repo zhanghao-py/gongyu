@@ -111,7 +111,6 @@ public class CmpayPaymentCallbackWebRequest implements CmpaySignable, CmpayPayme
 		MERID = merid;
 	}
 
-	@Override
 	public String getOrderId() {
 		return ORDERID;
 	}
@@ -126,5 +125,10 @@ public class CmpayPaymentCallbackWebRequest implements CmpaySignable, CmpayPayme
 
 	public void setOrderDate(String orderdate) {
 		ORDERDATE = orderdate;
+	}
+
+	@Override
+	public Long parseOriginOrderId() {
+		return Long.parseLong(getOrderId().substring(2));
 	}
 }

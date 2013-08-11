@@ -4,6 +4,6 @@ public interface CmpayPaymentCallbackable {
 
 	String getStatus();
 
-	String getOrderId();
+	Long parseOriginOrderId();
 
 }
