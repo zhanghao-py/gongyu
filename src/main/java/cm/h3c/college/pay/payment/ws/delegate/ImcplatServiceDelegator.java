@@ -36,7 +36,8 @@ public class ImcplatServiceDelegator {
 	
 	public ImcplatServiceDelegator(College college) {
 		this.baseUrl = college.getUrl();
-		this.opUsername = college.getOperatorUsername();
+		String opUsername = college.getOperatorUsername();
+		this.opUsername = new String(Base64.decodeBase64(Base64.decodeBase64(opUsername)));
 		String opPassword = college.getOperatorPassword();
 		this.opPassword = new String(Base64.decodeBase64(Base64.decodeBase64(opPassword)));
 		init();
