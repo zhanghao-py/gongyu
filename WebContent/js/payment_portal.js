@@ -20,12 +20,7 @@ jQuery(function () {
     jQuery('#payPhoneID').removeClass().addClass('lr-zc-inp1 qh');
     //默认已登录用户手机号码
     var msisdn = jQuery('#payPhoneID').val();
-    if (msisdn == "" && loginNumber != "" && loginNumber.length == 11) {
-        jQuery('#payPhoneID').val(loginNumber);
-        jQuery('#payPhoneID').removeClass().addClass('lr-zc-inp1 qh');
-//        jQuery('#payPhoneID').focus()
-        autheMsisdn();
-    } else if (isMsisdn(msisdn) == true) {
+    if (isMsisdn(msisdn) == true) {
         jQuery('#payPhoneID').removeClass().addClass('lr-zc-inp1 qh');
 //        jQuery('#payPhoneID').focus()
         autheMsisdn();
@@ -148,14 +143,7 @@ function autheMsisdn() {
 //        test();
 //    });
     var msisdn = jQuery('#payPhoneID').val();
-    if (msisdn != loginNumber) {
-        //缴纳欠费处理
-        jQuery('#billMoney').val('');
-        if (jQuery('#YHKJF_YRCZ_YDL_JNQF') != undefined)
-            jQuery('#YHKJF_YRCZ_YDL_JNQF').remove();
-        jQuery('#div_userName').html('');
-        jQuery('#div_balance').html('');
-    }
+
     if (isMsisdn(msisdn) == false) {
         jQuery('#sjh_tip_div').removeClass().addClass('lr-zc-ts1').html('请输入正确的手机号');
 //        jQuery('#payPhoneID').focus();

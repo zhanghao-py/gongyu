@@ -25,8 +25,6 @@
     <script type="text/javascript" src="$!{webRoot}/js/payment_portal.js"></script>
     <script type="text/javascript" src="$!{webRoot}/js/show_msisdn.js"></script>
     <script type="text/javascript">
-        var loginNumber = "0";//登录号码
-        var imagesPath = 'http://localhost';
         var msg = "";
         var isPayPhoneFoucs = true;//手机号码输入框是否获取焦点标志,用于判断是否隐藏号码提示框
         var xialaDivIsOnOver = true;//手机提示层是否鼠标悬停在上面
