@@ -74,47 +74,6 @@
 			}
 		}).start();
 
-		new Thread(new Runnable() {
-			public void run() {
-				try {
-					CmpayPaymentCallbackWebRequest callbackRequest = new CmpayPaymentCallbackWebRequest();
-					callbackRequest.setRemark("中文");
-					callbackRequest.setOrderId(orderId);
-					callbackRequest.setStatus("SUCCESS");
-					String reqXml = cmpayObjectFactory
-							.cmpayPaymentCallbackWebRequest2Xml(callbackRequest);
-					DefaultHttpClient client = new DefaultHttpClient();
-					HttpPost post = new HttpPost(
-							"http://localhost:8080/gongyu/web.pay");
-					ByteArrayEntity entity = new ByteArrayEntity(reqXml
-							.getBytes("UTF-8"));
-					post.setEntity(entity);
-					String responseString;
-					try {
-						HttpResponse httpResponse = client.execute(post);
-
-						StatusLine statusLine = httpResponse
-								.getStatusLine();
-						HttpEntity responseEntity = httpResponse
-								.getEntity();
-						if (statusLine.getStatusCode() >= 300) {
-							EntityUtils.consume(responseEntity);
-							throw new HttpResponseException(statusLine
-									.getStatusCode(), statusLine
-									.getReasonPhrase());
-						}
-						responseString = EntityUtils.toString(
-								responseEntity, "UTF-8");
-					} finally {
-						if (post != null) {
-							post.releaseConnection();
-						}
-					}
-				} catch (Exception e) {
-					e.printStackTrace(pageWriter);
-				}
-			}
-		}).start();
 	%>
 </body>
 </html>
