@@ -21,7 +21,7 @@ public class SecurityCodeUtil {
 	}
 	
 	public static String getRandomNumber() {
-		return getSecurityCode(4, SecurityCodeLevel.Simple, true);
+		return getSecurityCode(5, SecurityCodeLevel.Simple, true);
 	}
 
 	/**
