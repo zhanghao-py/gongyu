@@ -56,7 +56,7 @@ public class PaymentActionTest {
 		String xml = cmpayObjectFactory
 				.cmpayPaymentCallbackRequest2Xml(callbackRequest);
 
-		request.setRequestURI("/");
+		request.setRequestURI("/back.pay");
 		request.setMethod(HttpMethod.POST.name());
 		request.setContent(xml.getBytes("UTF-8"));
 
@@ -77,12 +77,12 @@ public class PaymentActionTest {
 	public void postWebCallback() throws ClientProtocolException, IOException {
 		CmpayPaymentCallbackWebRequest callbackRequest = new CmpayPaymentCallbackWebRequest();
 		callbackRequest.setRemark("中文");
-		callbackRequest.setOrderId("201308101615543112");
+		callbackRequest.setOrderId("10201308111808392514");
 		callbackRequest.setStatus("SUCCESS");
 		String xml = cmpayObjectFactory
 				.cmpayPaymentCallbackWebRequest2Xml(callbackRequest);
 
-		request.setRequestURI("/");
+		request.setRequestURI("/web.pay");
 		request.setMethod(HttpMethod.POST.name());
 		request.setContent(xml.getBytes("UTF-8"));
 
