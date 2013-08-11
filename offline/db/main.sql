@@ -24,8 +24,8 @@ CREATE TABLE `gy_college` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '高校信息表';
 
-INSERT INTO `gy_college` VALUES ('1', '北京大学', 'http://123.120.10.78:88', '联系人：张浩、马计坤', 'admin', 'admin', '/home/xxx/college1.ks');
-INSERT INTO `gy_college` VALUES ('2', '清华大学', 'http://123.120.10.78:88', '联系人：张浩、马计坤', 'admin', 'admin', '/home/xxx/college2.ks');
+INSERT INTO `gy_college` VALUES ('1', '北京大学', 'http://123.120.10.78:88', '联系人：张浩、马计坤', 'admin', 'WVdSdGFXND0=', '/home/xxx/college1.ks');
+INSERT INTO `gy_college` VALUES ('2', '清华大学', 'http://123.120.10.78:88', '联系人：张浩、马计坤', 'admin', 'WVdSdGFXND0=', '/home/xxx/college2.ks');
 
 CREATE TABLE `gy_log` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,

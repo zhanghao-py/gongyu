@@ -5,6 +5,7 @@ import java.net.URL;
 
 import javax.xml.ws.BindingProvider;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.cxf.configuration.jsse.TLSClientParameters;
 import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.frontend.ClientProxy;
@@ -36,7 +37,8 @@ public class ImcplatServiceDelegator {
 	public ImcplatServiceDelegator(College college) {
 		this.baseUrl = college.getUrl();
 		this.opUsername = college.getOperatorUsername();
-		this.opPassword = college.getOperatorPassword();
+		String opPassword = college.getOperatorPassword();
+		this.opPassword = new String(Base64.decodeBase64(Base64.decodeBase64(opPassword)));
 		init();
 	}
 	
