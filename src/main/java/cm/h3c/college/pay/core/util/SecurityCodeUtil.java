@@ -23,6 +23,10 @@ public class SecurityCodeUtil {
 	public static String getRandomNumber() {
 		return getSecurityCode(5, SecurityCodeLevel.Simple, true);
 	}
+	
+	public static String getRandomNumberLen4() {
+		return getSecurityCode(4, SecurityCodeLevel.Simple, true);
+	}
 
 	/**
 	 * 产生长度和难度任意的验证码

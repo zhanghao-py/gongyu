@@ -138,7 +138,7 @@ public class CmpayPaymentCallbackRequest implements CmpaySignable, CmpayPaymentC
 
 	@Override
 	public Long parseOriginOrderId() {
-		return Long.parseLong(getOrderId().substring(2));
+		return Long.parseLong(getOrderId());
 	}
 
 }

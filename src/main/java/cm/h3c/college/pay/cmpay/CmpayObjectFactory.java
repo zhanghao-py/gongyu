@@ -164,7 +164,7 @@ public class CmpayObjectFactory {
 
 	String genMid(Date date) {
 		return Long.toString(date.getTime() - 1370000000000L)
-				+ SecurityCodeUtil.getRandomNumber();
+				+ SecurityCodeUtil.getRandomNumberLen4();
 	}
 
 	String formatYyyyMMdd(Date date) {
@@ -183,7 +183,7 @@ public class CmpayObjectFactory {
 		request.DATE = formatYyyyMMdd(payTime);
 		request.TIME = formatHHmmsss(payTime);
 		request.MERID = config.getMerId();
-		request.ORDERID = "10" + order.getId();
+		request.ORDERID = "0" + order.getId();
 		request.AMOUT = order.getMoney().multiply(new BigDecimal(100))
 				.toBigInteger().toString();
 		request.ALLOWNOTE = "1";

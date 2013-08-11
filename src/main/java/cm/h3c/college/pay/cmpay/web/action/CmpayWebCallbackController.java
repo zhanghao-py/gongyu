@@ -52,6 +52,8 @@ public class CmpayWebCallbackController implements HttpRequestHandler {
 		} catch (ServiceException e) {
 			log.error("", e);
 		}
+		
+		//TODO 需要把支付结果反馈给用户
 
 		request.getRequestDispatcher(
 				request.getContextPath() + config.getPaymentResultUrl())
