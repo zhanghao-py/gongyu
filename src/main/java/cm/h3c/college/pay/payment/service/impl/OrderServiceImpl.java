@@ -40,7 +40,7 @@ import cm.h3c.college.pay.payment.ws.delegate.AcmUserServiceDelegator;
 @Component("orderService")
 public class OrderServiceImpl implements OrderService {
 
-	private Logger log = Logger.getLogger(OrderService.class);
+	private static Logger LOG = Logger.getLogger(OrderService.class);
 	
 	@Autowired
 	private CmpayObjectFactory cmpayObjectFactory;
@@ -238,7 +238,7 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public void doCallbackOrder(CmpayPaymentCallbackRequest callback) throws ServiceException, NumberFormatException {
-		callbackOrder(callback, LogType.CMPAY_CALLBACK_REQUEST);
+		this.callbackOrder(callback, LogType.CMPAY_CALLBACK_REQUEST);
 	}
 	
 	@Override
@@ -248,7 +248,7 @@ public class OrderServiceImpl implements OrderService {
 			return;
 		}
 		
-		callbackOrder(callback, LogType.CMPAY_CALLBACK_WEB_REQUEST);
+		this.callbackOrder(callback, LogType.CMPAY_CALLBACK_WEB_REQUEST);
 	}
 	
 	private void callbackOrder(CmpayPaymentCallbackable callback, LogType type) throws ServiceException, NumberFormatException {
@@ -282,11 +282,16 @@ public class OrderServiceImpl implements OrderService {
 		// 更新order pay_result记录
 		this.updateOrderPayResultById(orderId, payResult);
 		
+		if (!ObjectUtils.equals(payResult, PayResult.SUCCESS)) {
+			LOG.warn("cmpay payment failed. orderId : " + orderId);
+			return;
+		}
+		
 		// CAMS充值
 		try {
 			camsService.doRecharge2Cams(orderId);
 		} catch (ServiceException e) {
-			log.warn("", e);
+			LOG.warn("Recharege to CAMS failed.", e);
 		}
 		
 	}
