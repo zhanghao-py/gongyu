@@ -10,7 +10,7 @@ CREATE TABLE `gy_order` (
   `account` varchar(100) NOT NULL COMMENT '缴费账号',
   `college_id` bigint(20) unsigned NOT NULL COMMENT '所属学校',
   PRIMARY KEY (`id`),
-  KEY `order_index_college_id` (`college_id`)
+  KEY `idx_order_college_id` (`college_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '订单信息表';
 
 CREATE TABLE `gy_college` (
@@ -21,12 +21,11 @@ CREATE TABLE `gy_college` (
   `operator_username` varchar(100) NOT NULL COMMENT '操作员-用户名',
   `operator_password` varchar(100) NOT NULL COMMENT '操作员-密码',
   `keystore_path` varchar(100) NOT NULL COMMENT '证书路径',
-  PRIMARY KEY (`id`),
-  KEY `college_index_name` (`name`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '高校信息表';
 
-INSERT INTO `gy_college` VALUES ('1', '北京大学', 'http://123.120.10.78:88', '联系人：张浩、马计坤', 'admin', 'admin', '/home/xxx');
-INSERT INTO `gy_college` VALUES ('2', '清华大学', 'http://123.120.10.78:88', '联系人：张浩、马计坤', 'admin', 'admin', '/home/xxx/ddd');
+INSERT INTO `gy_college` VALUES ('1', '北京大学', 'http://123.120.10.78:88', '联系人：张浩、马计坤', 'admin', 'admin', '/home/xxx/college1.ks');
+INSERT INTO `gy_college` VALUES ('2', '清华大学', 'http://123.120.10.78:88', '联系人：张浩、马计坤', 'admin', 'admin', '/home/xxx/college2.ks');
 
 CREATE TABLE `gy_log` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -35,5 +34,5 @@ CREATE TABLE `gy_log` (
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `content` longtext NOT NULL COMMENT '日志内容',
   PRIMARY KEY (`id`),
-  KEY `log_index_order_id` (`order_id`)
+  KEY `idx_log_order_id` (`order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '日志信息表';
