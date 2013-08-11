@@ -36,7 +36,7 @@ function showCookieMsisdn() {
 function showXiala() {
     var msisdn = jQuery('#payPhoneID').val();
     var msisdnStr = jQuery.cookie('msisdnStr');
-    if (msisdn == '请输入本省手机号') {
+    if (msisdn == '请输入手机号') {
         return false;
     } else if (msisdn == "") {
         jQuery('#li_xiala_msisdn').hide();
