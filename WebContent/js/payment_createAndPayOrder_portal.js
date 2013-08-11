@@ -84,6 +84,21 @@ function completePayment() {
 	window.location = forwardUrl;
 }
 
+function redirect2Url(url) {
+	// IE8 and lower fix
+	if (navigator.userAgent.match(/MSIE\s(?!9.0)/)) {
+		var referLink = document.createElement("a");
+		referLink.href = url;
+		document.body.appendChild(referLink);
+		referLink.click();
+	}
+
+	// All other browsers
+	else {
+		window.location.replace(url);
+	}
+}
+
 /***
  * 快捷支付页签切换
  */

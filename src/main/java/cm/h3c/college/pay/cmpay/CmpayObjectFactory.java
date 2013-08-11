@@ -28,7 +28,7 @@ public class CmpayObjectFactory {
 		xstream.alias("MESSAGE", CmpayPaymentCallbackRequest.class);
 		CmpayPaymentCallbackRequest request = (CmpayPaymentCallbackRequest) xstream
 				.fromXML(xml);
-		
+
 		if (!config.isDebug()) {
 			checkSign(request, xml);
 		}
@@ -41,7 +41,7 @@ public class CmpayObjectFactory {
 		xstream.alias("MESSAGE", CmpayPaymentCallbackWebRequest.class);
 		CmpayPaymentCallbackWebRequest request = (CmpayPaymentCallbackWebRequest) xstream
 				.fromXML(xml);
-		
+
 		if (!config.isDebug()) {
 			checkSign(request, xml);
 		}
@@ -66,7 +66,7 @@ public class CmpayObjectFactory {
 		return response;
 	}
 
-	void checkSign(CmpaySignable signedObj, String xml) {
+	public void checkSign(CmpaySignable signedObj, String xml) {
 
 		try {
 			if (!SignUtil.doCheckSign(signedObj.prepareSignData(),

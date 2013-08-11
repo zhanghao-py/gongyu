@@ -103,11 +103,11 @@ public class CmpayPaymentCallbackWebRequest implements CmpaySignable, CmpayPayme
 		MID = mid;
 	}
 
-	public String getMerid() {
+	public String getMerId() {
 		return MERID;
 	}
 
-	public void setMerid(String merid) {
+	public void setMerId(String merid) {
 		MERID = merid;
 	}
 
@@ -129,6 +129,14 @@ public class CmpayPaymentCallbackWebRequest implements CmpaySignable, CmpayPayme
 
 	@Override
 	public Long parseOriginOrderId() {
-		return Long.parseLong(getOrderId());
+		return Long.parseLong(getOrderId().trim());
+	}
+
+	public String getSIGN() {
+		return SIGN;
+	}
+
+	public void setSIGN(String sIGN) {
+		SIGN = sIGN;
 	}
 }

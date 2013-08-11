@@ -36,7 +36,7 @@ public class CreateAndPayOrderAction extends GenericAction {
 		
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		OrderForm form = (OrderForm) session.get(SystemConfig.ORDER_FORM_KEY);
-		
+		//TODO check order status
 		CmpayPaymentRequest payment = null;
 		try {
 			payment = orderService.doCreateAndPayOrder(form);
