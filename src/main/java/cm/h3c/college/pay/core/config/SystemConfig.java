@@ -4,6 +4,10 @@ import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLSession;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+@Component("systemConfig")
 public class SystemConfig {
 
 	static {
@@ -22,14 +26,24 @@ public class SystemConfig {
 	public final static String ORDER_FORM_KEY = "orderForm";
 	public final static String SECURITY_CODE_KEY = "securityCode";
 
+	@Value("${merId}")
 	private String merId;
+	@Value("${payUrl}")
 	private String payUrl;
+	@Value("${checkUrl}")
 	private String checkUrl;
 
+	@Value("${paymentResultUrl}")
 	private String paymentResultUrl;
+	@Value("${callbackUrl}")
 	private String callbackUrl;
+	@Value("${productDesc}")
 	private String productDesc;
+	@Value("${productName}")
 	private String productName;
+	
+	@Value("${app.debug}")
+	private boolean debug;
 
 	public String getMerId() {
 		return merId;
@@ -85,6 +99,14 @@ public class SystemConfig {
 
 	public void setProductName(String productName) {
 		this.productName = productName;
+	}
+
+	public boolean isDebug() {
+		return debug;
+	}
+
+	public void setDebug(boolean debug) {
+		this.debug = debug;
 	}
 
 }
