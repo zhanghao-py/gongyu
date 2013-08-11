@@ -21,7 +21,6 @@ import cm.h3c.college.pay.cmpay.CmpayPaymentCallbackResponse;
 import cm.h3c.college.pay.cmpay.service.CmpayPaymentService;
 import cm.h3c.college.pay.core.config.SystemConfig;
 import cm.h3c.college.pay.core.exception.ServiceException;
-import cm.h3c.college.pay.payment.cons.PayResult;
 import cm.h3c.college.pay.payment.service.LogService;
 import cm.h3c.college.pay.payment.service.OrderService;
 
