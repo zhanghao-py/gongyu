@@ -6,13 +6,7 @@ function btnGoPayMent(path) {
 //    window.location = path + "/paymentAction_pageInit.html";
 
 }
-/***
- * 跳转回首页
- * @param path
- */
-function btnGoIndx(path) {
-    window.location = path + "/paymentAction_pageInit.html";
-}
+
 
 function __doPostBack(method, key, sort) {
     document.forms[0].submit();
