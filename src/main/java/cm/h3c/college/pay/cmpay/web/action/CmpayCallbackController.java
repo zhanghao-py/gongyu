@@ -27,7 +27,7 @@ import cm.h3c.college.pay.payment.service.OrderService;
 @Controller
 public class CmpayCallbackController implements HttpRequestHandler {
 	private static Logger log = Logger
-			.getLogger(CmpayWebCallbackController.class);
+			.getLogger(CmpayCallbackController.class);
 
 	@Autowired
 	private CmpayObjectFactory cmpayObjectFactory;

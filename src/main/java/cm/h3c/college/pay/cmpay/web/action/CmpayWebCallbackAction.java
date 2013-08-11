@@ -21,7 +21,7 @@ public class CmpayWebCallbackAction extends ActionSupport implements
 	private static final long serialVersionUID = 20130811L;
 
 	private static Logger log = Logger
-			.getLogger(CmpayWebCallbackController.class);
+			.getLogger(CmpayWebCallbackAction.class);
 
 	@Autowired
 	private OrderService orderService;

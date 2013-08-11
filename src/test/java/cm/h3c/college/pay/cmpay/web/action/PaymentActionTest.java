@@ -18,7 +18,6 @@ import org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter;
 
 import cm.h3c.college.pay.cmpay.CmpayObjectFactory;
 import cm.h3c.college.pay.cmpay.CmpayPaymentCallbackRequest;
-import cm.h3c.college.pay.cmpay.CmpayPaymentCallbackWebRequest;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/config/spring.xml",
@@ -29,9 +28,6 @@ public class PaymentActionTest {
 	
 	@Autowired
 	private CmpayCallbackController cmpayCallbackController;
-	
-	@Autowired
-	private CmpayWebCallbackController cmpayWebCallbackController;
 	
 	@Autowired
 	private CmpayObjectFactory cmpayObjectFactory;
@@ -73,29 +69,4 @@ public class PaymentActionTest {
 		System.out.println(response.getContentAsString());
 	}
 	
-	@Test
-	public void postWebCallback() throws ClientProtocolException, IOException {
-		CmpayPaymentCallbackWebRequest callbackRequest = new CmpayPaymentCallbackWebRequest();
-		callbackRequest.setRemark("中文");
-		callbackRequest.setOrderId("10201308111808392514");
-		callbackRequest.setStatus("SUCCESS");
-		String xml = cmpayObjectFactory
-				.cmpayPaymentCallbackWebRequest2Xml(callbackRequest);
-
-		request.setRequestURI("/web.pay");
-		request.setMethod(HttpMethod.POST.name());
-		request.setContent(xml.getBytes("UTF-8"));
-
-		ModelAndView mv = null;
-		try {
-			mv = handlerAdapter.handle(request, response,
-					cmpayWebCallbackController);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		Assert.assertNull(mv);
-		Assert.assertEquals(response.getStatus(), 200);
-		System.out.println(response.getContentAsString());
-	}
 }
