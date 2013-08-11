@@ -28,7 +28,10 @@ public class CmpayObjectFactory {
 		xstream.alias("MESSAGE", CmpayPaymentCallbackRequest.class);
 		CmpayPaymentCallbackRequest request = (CmpayPaymentCallbackRequest) xstream
 				.fromXML(xml);
-		checkSign(request, xml);
+		
+		if (!config.isDebug()) {
+			checkSign(request, xml);
+		}
 		return request;
 	}
 
@@ -38,7 +41,10 @@ public class CmpayObjectFactory {
 		xstream.alias("MESSAGE", CmpayPaymentCallbackWebRequest.class);
 		CmpayPaymentCallbackWebRequest request = (CmpayPaymentCallbackWebRequest) xstream
 				.fromXML(xml);
-		checkSign(request, xml);
+		
+		if (!config.isDebug()) {
+			checkSign(request, xml);
+		}
 		return request;
 	}
 
@@ -47,6 +53,7 @@ public class CmpayObjectFactory {
 		xstream.alias("MESSAGE", CmpayPaymentCheckResponse.class);
 		CmpayPaymentCheckResponse response = (CmpayPaymentCheckResponse) xstream
 				.fromXML(xml);
+
 		checkSign(response, xml);
 		return response;
 	}
