@@ -81,7 +81,7 @@ public class CmpayPaymentServiceImpl implements CmpayPaymentService {
 			return cmpayObjectFactory.parseCmpayPaymentCheckResponse(response);
 		} catch (Exception e) {
 			log.error("", e);
-			throw new ServiceException("submit payment error", e);
+			throw new ServiceException("check payment error", e);
 		}
 	}
 

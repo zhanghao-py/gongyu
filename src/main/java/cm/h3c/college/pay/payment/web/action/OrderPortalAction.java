@@ -28,7 +28,6 @@ import com.opensymphony.xwork2.ActionContext;
 
 @Namespace("/payment")
 public class OrderPortalAction extends GenericAction {
-
 	private Logger log = Logger.getLogger(OrderPortalAction.class);
 
 	private static final long serialVersionUID = -5719028343640493412L;
@@ -76,7 +75,8 @@ public class OrderPortalAction extends GenericAction {
 
 	@Action(value = "doneOrderPortal", results = {
 			@Result(name = "success", type = "velocity", location = "/vm/payment_doneOrder_portal.vm"),
-			@Result(name = "error", type = "velocity", location = "/vm/error.vm") })
+			@Result(name = "error", type = "velocity", location = "/vm/error.vm"),
+			@Result(name = "errorMessage", type = "velocity", location = "/vm/errorMessage.vm") })
 	public String doneOrderPortal() {
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		OrderForm form = (OrderForm) session.get(SystemConfig.ORDER_FORM_KEY);
@@ -87,7 +87,8 @@ public class OrderPortalAction extends GenericAction {
 			String strOrderId = ServletActionContext.getRequest().getParameter(
 					"orderId");
 			if (strOrderId == null) {
-				return ERROR;
+				data = SystemConfig.ILLEGAL_REQUEST;
+				return "errorMessage";
 			}
 			orderId = Long.parseLong(strOrderId);
 		}

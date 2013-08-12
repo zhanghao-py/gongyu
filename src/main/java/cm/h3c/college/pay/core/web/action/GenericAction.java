@@ -1,5 +1,6 @@
 package cm.h3c.college.pay.core.web.action;
 
+import cm.h3c.college.pay.core.exception.ServiceException;
 import cm.h3c.college.pay.core.web.action.dto.AbstractGenericModel;
 import cm.h3c.college.pay.core.web.action.dto.AjaxResult;
 
@@ -22,4 +23,9 @@ public class GenericAction extends ActionSupport implements ModelDriven<Abstract
 		return result;
 	}
 
+	protected void assertNotNull(Object obj, String message) throws ServiceException {
+		if(obj == null) {
+			throw new ServiceException(message);
+		}
+	}
 }

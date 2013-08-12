@@ -31,7 +31,7 @@
 			#if($data.order.isPaySuccess() )
 				<!--充值成功 begin-->
 				<div style="MARGIN-LEFT: 101px" class="success">
-					<div class="pointInfo_success">您已成功支付$data.order.money元，订单号$data.order.id</div>
+					<div class="pointInfo_success">您已成功支付$data.order.money元，订单号0$data.order.id</div>
 					<p style="width:543px">尊敬的客户您好，您已经为$data.order.account客户成功充值$data.order.money元，谢谢您的使用！</p>
 					<div>&nbsp;</div>
 				</div>

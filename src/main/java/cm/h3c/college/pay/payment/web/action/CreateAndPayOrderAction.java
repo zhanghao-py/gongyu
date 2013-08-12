@@ -24,38 +24,40 @@ public class CreateAndPayOrderAction extends GenericAction {
 
 	private Logger log = Logger.getLogger(CreateAndPayOrderAction.class);
 	private static final long serialVersionUID = -1541026036542059117L;
-	
+
 	@Resource(name = "orderService")
 	private OrderService orderService;
-	
+
 	// 模版渲染参数
 	private Object data;
-	
-	@Action(value = "createAndPayOrder", results = { @Result(name = "success", type = "velocity", location = "/vm/payment_payRequest.vm") })
+
+	@Action(value = "createAndPayOrder", results = {
+			@Result(name = "success", type = "velocity", location = "/vm/payment_payRequest.vm"),
+			@Result(name = "error", type = "velocity", location = "/vm/errorMessage.vm") })
 	public String createAndPayOrder() {
-		
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		OrderForm form = (OrderForm) session.get(SystemConfig.ORDER_FORM_KEY);
-		//TODO check order status
+
 		CmpayPaymentRequest payment = null;
 		try {
+			assertNotNull(form, SystemConfig.ILLEGAL_REQUEST);
 			payment = orderService.doCreateAndPayOrder(form);
 		} catch (ServiceException e) {
 			log.warn("", e);
-			return SUCCESS;
+			this.data = e.getMessage();
+			return ERROR;
 		}
-		
+
 		Map<String, Object> data = new HashMap<String, Object>();
 		data.put("payment", payment);
-		
+
 		this.data = data;
-		
+
 		return SUCCESS;
 	}
 
 	public Object getData() {
 		return data;
 	}
-	
-	
+
 }
