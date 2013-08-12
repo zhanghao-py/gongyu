@@ -2,6 +2,8 @@ package cm.h3c.college.pay.payment.service.impl;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import javax.annotation.Resource;
 
@@ -21,6 +23,7 @@ import cm.h3c.college.pay.cmpay.CmpayPaymentCallbackable;
 import cm.h3c.college.pay.cmpay.CmpayPaymentCheckResponse;
 import cm.h3c.college.pay.cmpay.CmpayPaymentRequest;
 import cm.h3c.college.pay.cmpay.service.CmpayPaymentService;
+import cm.h3c.college.pay.core.config.SystemConfig;
 import cm.h3c.college.pay.core.exception.ServiceException;
 import cm.h3c.college.pay.core.util.PrimaryKeyGenerator;
 import cm.h3c.college.pay.payment.bo.College;
@@ -39,8 +42,8 @@ import cm.h3c.college.pay.payment.ws.delegate.AcmUserServiceDelegator;
 
 @Component("orderService")
 public class OrderServiceImpl implements OrderService {
-
 	private static Logger LOG = Logger.getLogger(OrderService.class);
+	private final Lock[] callbackLocks ;
 	
 	@Autowired
 	private CmpayObjectFactory cmpayObjectFactory;
@@ -59,6 +62,16 @@ public class OrderServiceImpl implements OrderService {
 	
 	@Resource(name = "logService")
 	private LogService logService;
+	
+	@Resource(name = "systemConfig")
+	private SystemConfig config;
+	
+	public OrderServiceImpl() {
+		callbackLocks = new Lock[config.getCallbackThreadNumber()];
+		for(int i = 0; i < callbackLocks.length; i++) {
+			callbackLocks[i] = new ReentrantLock();
+		}
+	}
 
 	@Override
 	public Long doCreateOrder(OrderForm form) throws ServiceException {
@@ -238,18 +251,30 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public void doCallbackOrder(CmpayPaymentCallbackRequest callback) throws ServiceException, NumberFormatException {
-		this.callbackOrder(callback, LogType.CMPAY_CALLBACK_REQUEST);
+		Lock lock = getLock(callback.parseOriginOrderId());
+		lock.lock();// callback 与  webcallback需要串行执行 
+		try {
+			this.callbackOrder(callback, LogType.CMPAY_CALLBACK_REQUEST);
+		}finally {
+			lock.unlock();
+		}
 	}
-	
+
 	@Override
 	public void doWebCallbackOrder(CmpayPaymentCallbackWebRequest callback) throws ServiceException, NumberFormatException {
-		List<Log> logs = logService.findByOrderIdAndType(callback.parseOriginOrderId(), LogType.CMPAY_CALLBACK_REQUEST);
-		if (logs != null && logs.size() > 0) {
-			LOG.warn("doWebCallbackOrder: callback already received, ignore: "  + callback.prepareSignData());
-			return;
+		Lock lock = getLock(callback.parseOriginOrderId());
+		lock.lock();// callback 与  webcallback需要串行执行 
+		try {
+			List<Log> logs = logService.findByOrderIdAndType(callback.parseOriginOrderId(), LogType.CMPAY_CALLBACK_REQUEST);
+			if (logs != null && logs.size() > 0) {
+				LOG.warn("doWebCallbackOrder: callback already received, ignore: "  + callback.prepareSignData());
+				return;
+			}
+			
+			this.callbackOrder(callback, LogType.CMPAY_CALLBACK_WEB_REQUEST);
+		}finally {
+			lock.unlock();
 		}
-		
-		this.callbackOrder(callback, LogType.CMPAY_CALLBACK_WEB_REQUEST);
 	}
 	
 	private void callbackOrder(CmpayPaymentCallbackable callback, LogType type) throws ServiceException, NumberFormatException {
@@ -318,5 +343,8 @@ public class OrderServiceImpl implements OrderService {
 		
 		return this.doPayOrder(orderId);
 	}
-
+	
+	private Lock getLock(Long orderId) {
+		return callbackLocks[(int) (orderId % config.getCallbackThreadNumber())];
+	}
 }
