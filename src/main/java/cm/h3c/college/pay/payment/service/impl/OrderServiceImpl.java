@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -43,7 +44,8 @@ import cm.h3c.college.pay.payment.ws.delegate.AcmUserServiceDelegator;
 @Component("orderService")
 public class OrderServiceImpl implements OrderService {
 	private static Logger LOG = Logger.getLogger(OrderService.class);
-	private final Lock[] callbackLocks ;
+	
+	private Lock[] callbackLocks;
 	
 	@Autowired
 	private CmpayObjectFactory cmpayObjectFactory;
@@ -66,7 +68,8 @@ public class OrderServiceImpl implements OrderService {
 	@Resource(name = "systemConfig")
 	private SystemConfig config;
 	
-	public OrderServiceImpl() {
+	@PostConstruct
+	private void init() {
 		callbackLocks = new Lock[config.getCallbackThreadNumber()];
 		for(int i = 0; i < callbackLocks.length; i++) {
 			callbackLocks[i] = new ReentrantLock();
