@@ -54,7 +54,9 @@ public class CmpayObjectFactory {
 		CmpayPaymentCheckResponse response = (CmpayPaymentCheckResponse) xstream
 				.fromXML(xml);
 
-		checkSign(response, xml);
+		if (!config.isDebug()) {
+			checkSign(response, xml);
+		}
 		return response;
 	}
 
