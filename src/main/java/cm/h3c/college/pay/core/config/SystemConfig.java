@@ -25,6 +25,7 @@ public class SystemConfig {
 
 	public final static String ORDER_FORM_KEY = "orderForm";
 	public final static String SECURITY_CODE_KEY = "securityCode";
+	public static final String ILLEGAL_REQUEST = "请求异常!";
 
 	@Value("${merId}")
 	private String merId;
@@ -44,6 +45,8 @@ public class SystemConfig {
 	
 	@Value("${app.debug}")
 	private boolean debug;
+	@Value("${callbackThreadNumber}")
+	private int callbackThreadNumber;
 
 	public String getMerId() {
 		return merId;
@@ -107,6 +110,14 @@ public class SystemConfig {
 
 	public void setDebug(boolean debug) {
 		this.debug = debug;
+	}
+
+	public int getCallbackThreadNumber() {
+		return callbackThreadNumber;
+	}
+
+	public void setCallbackThreadNumber(int callbackThreadNumber) {
+		this.callbackThreadNumber = callbackThreadNumber;
 	}
 
 }
