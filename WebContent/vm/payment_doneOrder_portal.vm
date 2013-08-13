@@ -12,9 +12,10 @@
 
 	<link rel="icon" href="$!{webRoot}/favicon.ico" type="image/x-icon" />
 	<link rel="shortcut icon" href="$!{webRoot}/favicon.ico" type="image/x-icon" />
-	
 
 	<link rel="stylesheet" type="text/css" href="$!{webRoot}/css/chongzhi.css">
+	
+	<script type="text/javascript" src="$!{webRoot}/js/payment_doneOrder_portal.js"></script>
 </head>
 <body>
 	<div class="contentRi">
@@ -41,7 +42,13 @@
 					<div class="pointInfo_success">充值失败</div>
 					<p style="width:543px">失败原因：$data.response.rcode, $data.response.desc, #if($data.order.camsResult)$data.order.camsResult.#end</p>
 					<div>&nbsp;</div>
+					<img class="hand" alt="重试" src="$!{webRoot}/images/btn33.png"
+					onmouseover="this.src='$!{webRoot}/images/btn33-1.png'"
+					id="YHKJF_YRCZ_LJZF" onclick="btnRetry()"
+					onmouseout="this.src='$!{webRoot}/images/btn33.png'"
+					height="36" width="116" />
 				</div>
+				
 				<!--加入重试按钮-->
 			#end
 		</div>
