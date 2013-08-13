@@ -293,7 +293,10 @@ public class OrderServiceImpl implements OrderService {
 		Order order = this.findOrderById(orderId);
 		
 		// 已有请求完成支付(CmpayPaymentCallbackRequest/CmpayPaymentCallbackWebRequest)
+		// TODO 需要判断不同的结果
 		if (!ObjectUtils.equals(order.getPayResult(), null)) {
+			LOG.info("aleary callback, ignore callback. origin result=" + order.getPayResult()
+					+ ", type: " + type.getName());
 			return;
 		}
 		
@@ -309,6 +312,7 @@ public class OrderServiceImpl implements OrderService {
 		}
 		
 		// 更新order pay_result记录
+		// TODO 记录生效请求
 		this.updateOrderPayResultById(orderId, payResult);
 		
 		if (!ObjectUtils.equals(payResult, PayResult.SUCCESS)) {
