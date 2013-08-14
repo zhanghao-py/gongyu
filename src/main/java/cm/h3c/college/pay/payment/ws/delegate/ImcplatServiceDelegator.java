@@ -63,7 +63,7 @@ public class ImcplatServiceDelegator {
 		}
 		
 		imcplatService = remoteImplService.getImcplatServiceHttpSoap12Endpoint();
-		SOAPKeepSessionHandlerSettor.getInstance().setHandler((BindingProvider) imcplatService);
+		SOAPKeepSessionHandlerSettor.getInstance().addHandler((BindingProvider) imcplatService);
 		Client client = ClientProxy.getClient(imcplatService);
 		HTTPConduit http = (HTTPConduit) client.getConduit();
 		
@@ -94,6 +94,8 @@ public class ImcplatServiceDelegator {
 		log.info("wsclient logout, baseUrl=" + baseUrl);
 
 		LogoutResponse response = imcplatService.logout();
+		SOAPKeepSessionHandlerSettor.getInstance().removeHandler((BindingProvider) imcplatService);
+		
 		WSCommonResult result = response.getReturn().getValue();
 		
 		int errorCode = result.getErrorCode();

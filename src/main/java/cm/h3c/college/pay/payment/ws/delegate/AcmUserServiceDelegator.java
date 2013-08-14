@@ -58,7 +58,7 @@ public class AcmUserServiceDelegator {
 		}
 		
 		acmUserService = remoteImplService.getAcmUserServiceHttpSoap12Endpoint();
-		SOAPKeepSessionHandlerSettor.getInstance().setHandler((BindingProvider) acmUserService);
+		SOAPKeepSessionHandlerSettor.getInstance().addHandler((BindingProvider) acmUserService);
 		Client client = ClientProxy.getClient(acmUserService);
 		HTTPConduit http = (HTTPConduit) client.getConduit();
 		
@@ -75,7 +75,7 @@ public class AcmUserServiceDelegator {
 		
 		imcplatServiceDelegator.login();
 		RetAcmUser result = acmUserService.queryAcmUser(username);
-//		imcplatServiceDelegator.logout();
+		imcplatServiceDelegator.logout();
 		
 		int errorCode = result.getErrorCode();
 		
@@ -85,8 +85,6 @@ public class AcmUserServiceDelegator {
 			log.warn(msg);
 			throw new ServiceException(errorMsg);
 		}
-		
-		
 		
 		return result.getAcmUser().getValue();
 	}

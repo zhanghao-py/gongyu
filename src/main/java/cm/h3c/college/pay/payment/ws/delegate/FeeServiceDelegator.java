@@ -59,7 +59,7 @@ public class FeeServiceDelegator {
 		}
 		
 		feeService = remoteImplService.getFeeServiceHttpSoap12Endpoint();
-		SOAPKeepSessionHandlerSettor.getInstance().setHandler((BindingProvider) feeService);
+		SOAPKeepSessionHandlerSettor.getInstance().addHandler((BindingProvider) feeService);
 		Client client = ClientProxy.getClient(feeService);
 		HTTPConduit http = (HTTPConduit) client.getConduit();
 		
@@ -79,7 +79,7 @@ public class FeeServiceDelegator {
 		
 		imcplatServiceDelegator.login();
 		WSCommonResult result = feeService.pay(info);
-//		imcplatServiceDelegator.logout();
+		imcplatServiceDelegator.logout();
 		
 		int errorCode = result.getErrorCode();
 		
