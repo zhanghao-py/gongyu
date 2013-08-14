@@ -20,7 +20,7 @@
 	</resultMap>
 	
 	<sql id="Base_Column_List">
-		id, money, status, pay_result,pay_callback_type,pay_callback_latest_time, cams_result, cams_call_times, call_call_latest_time, create_time, pay_time, finish_time, account, college_id
+		id, money, status, pay_result,pay_callback_type,pay_callback_latest_time, cams_result, cams_call_times, cams_call_latest_time, create_time, pay_time, finish_time, account, college_id
 	</sql>
 	
 	<insert id="save"
