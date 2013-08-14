@@ -17,7 +17,7 @@
 
 <body onload="javascript:document.forms[0].submit()">
 
-	<form name="cmpayForm" method="post" action="http://114.251.148.201:29095/newWpay/pay/uniformPayModSel.pay">
+	<form name="cmpayForm" method="post" action="$data.cmpayUrl">
 		<input type="hidden" id="merId" name="merId" value="$data.payment.merId" />
 		<input type="hidden" id="orderId" name="orderId" value="$data.payment.orderId" />
 		<input type="hidden" id="amout" name="amout" value="$data.payment.amout" />
