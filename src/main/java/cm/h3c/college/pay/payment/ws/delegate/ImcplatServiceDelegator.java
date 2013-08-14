@@ -54,7 +54,7 @@ public class ImcplatServiceDelegator {
 		ImcplatService remoteImplService = null;
 		
 		try {
-			remoteImplService = new ImcplatService(new URL("file:" + getClass().getClassLoader().getResource("/wsdl/imcplatService.wsdl").getFile()));
+			remoteImplService = new ImcplatService(new URL(url));
 		} catch (MalformedURLException e) {
 			log.warn("", e);
 		}
