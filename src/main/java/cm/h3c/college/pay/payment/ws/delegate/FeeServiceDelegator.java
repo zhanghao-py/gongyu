@@ -26,7 +26,7 @@ public class FeeServiceDelegator {
 	private Logger log = Logger.getLogger(FeeServiceDelegator.class);
 	
 	private final String wsdlUrl = "/imcws/services/feeService?wsdl";
-//	private final String wsdlUrl = "/imcws/services/feeService.wsdl";
+	private final String fileWsdlUrl = "/feeService.wsdl";
 	
 	private String baseUrl;
 	
@@ -41,8 +41,11 @@ public class FeeServiceDelegator {
 
 	private void init() {
 		String url =  baseUrl + wsdlUrl;
-		
-		if ( !(url.startsWith("http") || url.startsWith("https")) ) {
+		if(url.startsWith("file")) {
+			url = baseUrl + fileWsdlUrl;
+		}
+				
+		if ( !(url.startsWith("http") || url.startsWith("https") || url.startsWith("file")) ) {
 			log.error("can't init FeeServiceDelegator caused by url prefix illegal!");
 			return;
 		}

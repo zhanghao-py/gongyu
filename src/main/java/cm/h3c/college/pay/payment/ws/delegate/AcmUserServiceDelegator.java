@@ -25,7 +25,7 @@ public class AcmUserServiceDelegator {
 	private Logger log = Logger.getLogger(AcmUserServiceDelegator.class);
 	
 	private final String wsdlUrl = "/imcws/services/acmUserService?wsdl";
-//	private final String wsdlUrl = "/imcws/services/acmUserService.wsdl";
+	private final String fileWsdlUrl = "/acmUserService.wsdl";
 	
 	private String baseUrl;
 	
@@ -40,8 +40,11 @@ public class AcmUserServiceDelegator {
 
 	private void init() {
 		String url = baseUrl + wsdlUrl;
+		if(url.startsWith("file")) {
+			url = baseUrl + fileWsdlUrl;
+		}
 		
-		if ( !(url.startsWith("http") || url.startsWith("https")) ) {
+		if ( !(url.startsWith("http") || url.startsWith("https") || url.startsWith("file")) ) {
 			log.error("can't init AcmUserServiceDelegator caused by url prefix illegal!");
 			return;
 		}

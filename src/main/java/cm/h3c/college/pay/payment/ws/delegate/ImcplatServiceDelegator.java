@@ -26,7 +26,7 @@ public class ImcplatServiceDelegator {
 	private Logger log = Logger.getLogger(ImcplatServiceDelegator.class);
 	
 	private final String wsdlUrl = "/imcws/services/imcplatService?wsdl";
-//	private final String wsdlUrl = "/imcws/services/imcplatService.wsdl";
+	private final String fileWsdlUrl = "/imcplatService.wsdl";
 	
 	private String baseUrl;
 	private String opUsername;
@@ -45,8 +45,11 @@ public class ImcplatServiceDelegator {
 	
 	private void init() {
 		String url = baseUrl + wsdlUrl;
+		if(url.startsWith("file")) {
+			url = baseUrl + fileWsdlUrl;
+		}
 		
-		if ( !(url.startsWith("http") || url.startsWith("https")) ) {
+		if ( !(url.startsWith("http") || url.startsWith("https") || url.startsWith("file")) ) {
 			log.error("can't init ImcplatServiceDelegator caused by url prefix illegal!");
 			return;
 		}

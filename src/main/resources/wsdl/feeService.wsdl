@@ -1,0 +1,726 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://acm.imc.h3c.com/feeService" xmlns:ns="http://acm.imc.h3c.com/feeService" xmlns:ax28="http://bill.fee.acmws.imc.h3c.com/xsd" xmlns:ax25="http://accessuser.fee.acmws.imc.h3c.com/xsd" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ax21="http://fee.acmws.imc.h3c.com/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ax22="http://ws.common.imc.h3c.com/xsd" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:ax211="http://paymentRecord.fee.acmws.imc.h3c.com/xsd" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/">
+  <wsdl:types>
+    <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://bill.fee.acmws.imc.h3c.com/xsd" xmlns:ax29="http://ws.common.imc.h3c.com/xsd">
+            <xs:import namespace="http://ws.common.imc.h3c.com/xsd"/>
+            <xs:complexType name="RetAcmBillDetailList">
+                <xs:complexContent>
+                    <xs:extension base="ax22:WSCommonResult">
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="acmBillDetailSimpleInfo" nillable="true" type="ax28:AcmBillDetailSimpleInfo"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="AcmBillDetailSimpleInfo">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="accessEndTime" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="accessSessionTime" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="accessStartTime" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="bonusCash" nillable="true" type="xs:double"/>
+                    <xs:element minOccurs="0" name="feeSessionId" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="influxByte" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="outfluxByte" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="usedBonusCash" nillable="true" type="xs:double"/>
+                    <xs:element minOccurs="0" name="usedCash" nillable="true" type="xs:double"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="RetAcmUserBillList">
+                <xs:complexContent>
+                    <xs:extension base="ax22:WSCommonResult">
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="acmUserBillSimpleInfo" nillable="true" type="ax28:AcmUserBillSimpleInfo"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="AcmUserBillSimpleInfo">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="billID" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="billStatus" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="billTime" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="billType" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="bonusCash" nillable="true" type="xs:double"/>
+                    <xs:element minOccurs="0" name="endTime" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="fixedAmount" nillable="true" type="xs:double"/>
+                    <xs:element minOccurs="0" name="serviceName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="serviceType" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="startTime" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="usageUnit" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="usedAmount" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="usedBonusCash" nillable="true" type="xs:double"/>
+                    <xs:element minOccurs="0" name="usedCash" nillable="true" type="xs:double"/>
+                    <xs:element minOccurs="0" name="userName" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+    <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://acm.imc.h3c.com/feeService" xmlns:ax210="http://bill.fee.acmws.imc.h3c.com/xsd" xmlns:ax213="http://paymentRecord.fee.acmws.imc.h3c.com/xsd" xmlns:ax214="http://ws.common.imc.h3c.com/xsd" xmlns:ax24="http://fee.acmws.imc.h3c.com/xsd" xmlns:ax27="http://accessuser.fee.acmws.imc.h3c.com/xsd">
+            <xs:import namespace="http://fee.acmws.imc.h3c.com/xsd"/>
+            <xs:import namespace="http://accessuser.fee.acmws.imc.h3c.com/xsd"/>
+            <xs:import namespace="http://bill.fee.acmws.imc.h3c.com/xsd"/>
+            <xs:import namespace="http://paymentRecord.fee.acmws.imc.h3c.com/xsd"/>
+            <xs:import namespace="http://ws.common.imc.h3c.com/xsd"/>
+            <xs:element name="randomReqResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax21:RandomInfo"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="queryBalance">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="param0" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="queryBalanceResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax21:RetUserBalance"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="queryAcmUserService">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="param0" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="queryAcmUserServiceResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax25:RetAcmUserServiceList"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="queryBillDetailByBillId">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="param0" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="queryBillDetailByBillIdResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax210:RetAcmBillDetailList"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="queryBillByUserId">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="param0" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="queryBillByUserIdResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax210:RetAcmUserBillList"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="queryPaymentRecord">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="param0" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="queryPaymentRecordResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax211:RetPaymentRecordList"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="cancelSuspendUserById">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="param0" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="cancelSuspendUserByIdResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax214:WSCommonResult"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="pay">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="param0" nillable="true" type="ax21:PaymentInfo"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="payResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax214:WSCommonResult"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="selfPay">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="param0" nillable="true" type="ax21:SelfPaymentInfo"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="selfPayResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax214:WSCommonResult"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="suspendUserById">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="param0" type="xs:long"/>
+                        <xs:element minOccurs="0" name="param1" nillable="true" type="xs:dateTime"/>
+                        <xs:element minOccurs="0" name="param2" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="suspendUserByIdResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax214:WSCommonResult"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://fee.acmws.imc.h3c.com/xsd" xmlns:ax23="http://ws.common.imc.h3c.com/xsd">
+            <xs:import namespace="http://ws.common.imc.h3c.com/xsd"/>
+            <xs:complexType name="RandomInfo">
+                <xs:complexContent>
+                    <xs:extension base="ax22:WSCommonResult">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="random" nillable="true" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="RetUserBalance">
+                <xs:complexContent>
+                    <xs:extension base="ax22:WSCommonResult">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="balance" nillable="true" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="PaymentInfo">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="amount" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="cardNo" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="clientIp" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="userName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="userPassword" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="SelfPaymentInfo">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="cardNum" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="cardPassword" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="userName" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+    <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://paymentRecord.fee.acmws.imc.h3c.com/xsd" xmlns:ax212="http://ws.common.imc.h3c.com/xsd">
+            <xs:import namespace="http://ws.common.imc.h3c.com/xsd"/>
+            <xs:complexType name="RetPaymentRecordList">
+                <xs:complexContent>
+                    <xs:extension base="ax22:WSCommonResult">
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="resultList" nillable="true" type="ax211:PaymentRecordInfo"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="PaymentRecordInfo">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="balance" nillable="true" type="xs:double"/>
+                    <xs:element minOccurs="0" name="feeType" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="flowId" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="fullName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="lastBalance" nillable="true" type="xs:double"/>
+                    <xs:element minOccurs="0" name="operator" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="operatorLoginIp" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="payAmount" nillable="true" type="xs:double"/>
+                    <xs:element minOccurs="0" name="paymentDate" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="paymentID" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="paymentMode" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="userName" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+    <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://accessuser.fee.acmws.imc.h3c.com/xsd" xmlns:ax26="http://ws.common.imc.h3c.com/xsd">
+            <xs:import namespace="http://ws.common.imc.h3c.com/xsd"/>
+            <xs:complexType name="RetAcmUserServiceList">
+                <xs:complexContent>
+                    <xs:extension base="ax22:WSCommonResult">
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="acmUserService" nillable="true" type="ax25:AcmUserService"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="AcmUserService">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="curCycleEndTime" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="curCycleStartTime" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="serviceName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="serviceSuffix" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strategyName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="userIp" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+    <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://ws.common.imc.h3c.com/xsd">
+            <xs:complexType name="WSCommonResult">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="description" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="errorCode" type="xs:int"/>
+                    <xs:element minOccurs="0" name="errorMsg" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="queryBillByUserIdResponse">
+    <wsdl:part name="parameters" element="ns:queryBillByUserIdResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="queryPaymentRecordResponse">
+    <wsdl:part name="parameters" element="ns:queryPaymentRecordResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="randomReqResponse">
+    <wsdl:part name="parameters" element="ns:randomReqResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="selfPayResponse">
+    <wsdl:part name="parameters" element="ns:selfPayResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="queryAcmUserServiceResponse">
+    <wsdl:part name="parameters" element="ns:queryAcmUserServiceResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="queryPaymentRecordRequest">
+    <wsdl:part name="parameters" element="ns:queryPaymentRecord">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="selfPayRequest">
+    <wsdl:part name="parameters" element="ns:selfPay">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="queryAcmUserServiceRequest">
+    <wsdl:part name="parameters" element="ns:queryAcmUserService">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="cancelSuspendUserByIdResponse">
+    <wsdl:part name="parameters" element="ns:cancelSuspendUserByIdResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="suspendUserByIdRequest">
+    <wsdl:part name="parameters" element="ns:suspendUserById">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="randomReqRequest">
+  </wsdl:message>
+  <wsdl:message name="queryBalanceRequest">
+    <wsdl:part name="parameters" element="ns:queryBalance">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="queryBalanceResponse">
+    <wsdl:part name="parameters" element="ns:queryBalanceResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="suspendUserByIdResponse">
+    <wsdl:part name="parameters" element="ns:suspendUserByIdResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="queryBillByUserIdRequest">
+    <wsdl:part name="parameters" element="ns:queryBillByUserId">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="payRequest">
+    <wsdl:part name="parameters" element="ns:pay">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="cancelSuspendUserByIdRequest">
+    <wsdl:part name="parameters" element="ns:cancelSuspendUserById">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="queryBillDetailByBillIdResponse">
+    <wsdl:part name="parameters" element="ns:queryBillDetailByBillIdResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="queryBillDetailByBillIdRequest">
+    <wsdl:part name="parameters" element="ns:queryBillDetailByBillId">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="payResponse">
+    <wsdl:part name="parameters" element="ns:payResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="feeServicePortType">
+    <wsdl:operation name="queryPaymentRecord">
+      <wsdl:input message="ns:queryPaymentRecordRequest" wsaw:Action="urn:queryPaymentRecord">
+    </wsdl:input>
+      <wsdl:output message="ns:queryPaymentRecordResponse" wsaw:Action="urn:queryPaymentRecordResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="suspendUserById">
+      <wsdl:input message="ns:suspendUserByIdRequest" wsaw:Action="urn:suspendUserById">
+    </wsdl:input>
+      <wsdl:output message="ns:suspendUserByIdResponse" wsaw:Action="urn:suspendUserByIdResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="randomReq">
+      <wsdl:input message="ns:randomReqRequest" wsaw:Action="urn:randomReq">
+    </wsdl:input>
+      <wsdl:output message="ns:randomReqResponse" wsaw:Action="urn:randomReqResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="pay">
+      <wsdl:input message="ns:payRequest" wsaw:Action="urn:pay">
+    </wsdl:input>
+      <wsdl:output message="ns:payResponse" wsaw:Action="urn:payResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="queryAcmUserService">
+      <wsdl:input message="ns:queryAcmUserServiceRequest" wsaw:Action="urn:queryAcmUserService">
+    </wsdl:input>
+      <wsdl:output message="ns:queryAcmUserServiceResponse" wsaw:Action="urn:queryAcmUserServiceResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="queryBalance">
+      <wsdl:input message="ns:queryBalanceRequest" wsaw:Action="urn:queryBalance">
+    </wsdl:input>
+      <wsdl:output message="ns:queryBalanceResponse" wsaw:Action="urn:queryBalanceResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="queryBillByUserId">
+      <wsdl:input message="ns:queryBillByUserIdRequest" wsaw:Action="urn:queryBillByUserId">
+    </wsdl:input>
+      <wsdl:output message="ns:queryBillByUserIdResponse" wsaw:Action="urn:queryBillByUserIdResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cancelSuspendUserById">
+      <wsdl:input message="ns:cancelSuspendUserByIdRequest" wsaw:Action="urn:cancelSuspendUserById">
+    </wsdl:input>
+      <wsdl:output message="ns:cancelSuspendUserByIdResponse" wsaw:Action="urn:cancelSuspendUserByIdResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="queryBillDetailByBillId">
+      <wsdl:input message="ns:queryBillDetailByBillIdRequest" wsaw:Action="urn:queryBillDetailByBillId">
+    </wsdl:input>
+      <wsdl:output message="ns:queryBillDetailByBillIdResponse" wsaw:Action="urn:queryBillDetailByBillIdResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="selfPay">
+      <wsdl:input message="ns:selfPayRequest" wsaw:Action="urn:selfPay">
+    </wsdl:input>
+      <wsdl:output message="ns:selfPayResponse" wsaw:Action="urn:selfPayResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="feeServiceSoap12Binding" type="ns:feeServicePortType">
+    <soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="queryPaymentRecord">
+      <soap12:operation soapAction="urn:queryPaymentRecord" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="randomReq">
+      <soap12:operation soapAction="urn:randomReq" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="suspendUserById">
+      <soap12:operation soapAction="urn:suspendUserById" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="pay">
+      <soap12:operation soapAction="urn:pay" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="queryAcmUserService">
+      <soap12:operation soapAction="urn:queryAcmUserService" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="queryBalance">
+      <soap12:operation soapAction="urn:queryBalance" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="queryBillByUserId">
+      <soap12:operation soapAction="urn:queryBillByUserId" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cancelSuspendUserById">
+      <soap12:operation soapAction="urn:cancelSuspendUserById" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="queryBillDetailByBillId">
+      <soap12:operation soapAction="urn:queryBillDetailByBillId" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="selfPay">
+      <soap12:operation soapAction="urn:selfPay" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="feeServiceHttpBinding" type="ns:feeServicePortType">
+    <http:binding verb="POST"/>
+    <wsdl:operation name="queryPaymentRecord">
+      <http:operation location="feeService/queryPaymentRecord"/>
+      <wsdl:input>
+        <mime:content part="queryPaymentRecord" type="text/xml"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="queryPaymentRecord" type="text/xml"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="randomReq">
+      <http:operation location="feeService/randomReq"/>
+      <wsdl:input>
+        <mime:content part="randomReq" type="text/xml"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="randomReq" type="text/xml"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="suspendUserById">
+      <http:operation location="feeService/suspendUserById"/>
+      <wsdl:input>
+        <mime:content part="suspendUserById" type="text/xml"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="suspendUserById" type="text/xml"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="pay">
+      <http:operation location="feeService/pay"/>
+      <wsdl:input>
+        <mime:content part="pay" type="text/xml"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="pay" type="text/xml"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="queryAcmUserService">
+      <http:operation location="feeService/queryAcmUserService"/>
+      <wsdl:input>
+        <mime:content part="queryAcmUserService" type="text/xml"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="queryAcmUserService" type="text/xml"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="queryBalance">
+      <http:operation location="feeService/queryBalance"/>
+      <wsdl:input>
+        <mime:content part="queryBalance" type="text/xml"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="queryBalance" type="text/xml"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="queryBillByUserId">
+      <http:operation location="feeService/queryBillByUserId"/>
+      <wsdl:input>
+        <mime:content part="queryBillByUserId" type="text/xml"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="queryBillByUserId" type="text/xml"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cancelSuspendUserById">
+      <http:operation location="feeService/cancelSuspendUserById"/>
+      <wsdl:input>
+        <mime:content part="cancelSuspendUserById" type="text/xml"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="cancelSuspendUserById" type="text/xml"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="queryBillDetailByBillId">
+      <http:operation location="feeService/queryBillDetailByBillId"/>
+      <wsdl:input>
+        <mime:content part="queryBillDetailByBillId" type="text/xml"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="queryBillDetailByBillId" type="text/xml"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="selfPay">
+      <http:operation location="feeService/selfPay"/>
+      <wsdl:input>
+        <mime:content part="selfPay" type="text/xml"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="selfPay" type="text/xml"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="feeServiceSoap11Binding" type="ns:feeServicePortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="queryPaymentRecord">
+      <soap:operation soapAction="urn:queryPaymentRecord" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="randomReq">
+      <soap:operation soapAction="urn:randomReq" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="suspendUserById">
+      <soap:operation soapAction="urn:suspendUserById" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="pay">
+      <soap:operation soapAction="urn:pay" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="queryAcmUserService">
+      <soap:operation soapAction="urn:queryAcmUserService" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="queryBalance">
+      <soap:operation soapAction="urn:queryBalance" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="queryBillByUserId">
+      <soap:operation soapAction="urn:queryBillByUserId" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cancelSuspendUserById">
+      <soap:operation soapAction="urn:cancelSuspendUserById" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="queryBillDetailByBillId">
+      <soap:operation soapAction="urn:queryBillDetailByBillId" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="selfPay">
+      <soap:operation soapAction="urn:selfPay" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="feeService">
+    <wsdl:port name="feeServiceHttpSoap11Endpoint" binding="ns:feeServiceSoap11Binding">
+      <soap:address location="https://192.168.1.11:8443/imcws/services/feeService/"/>
+    </wsdl:port>
+    <wsdl:port name="feeServiceHttpSoap12Endpoint" binding="ns:feeServiceSoap12Binding">
+      <soap12:address location="https://192.168.1.11:8443/imcws/services/feeService/"/>
+    </wsdl:port>
+    <wsdl:port name="feeServiceHttpEndpoint" binding="ns:feeServiceHttpBinding">
+      <http:address location="https://192.168.1.11:8443/imcws/services/feeService/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
