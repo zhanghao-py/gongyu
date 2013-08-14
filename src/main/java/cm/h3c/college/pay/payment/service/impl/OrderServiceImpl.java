@@ -99,19 +99,19 @@ public class OrderServiceImpl implements OrderService {
 		
 		Long collegeId = form.getCollegeId();
 		if (collegeId == null || collegeId  < 1) {
-			throw new ServiceException("collegeId不能为空！");
+			throw new ServiceException("高校id不能为空！");
 		}
 		
 		College college = collegeService.findCollegeById(collegeId);
 		
 		if (StringUtils.isBlank(form.getAccount())) {
-			throw new ServiceException("account不能为空！");
+			throw new ServiceException("账号不能为空！");
 		}
 		
 		this.validateAccountExistAtCASM(form.getAccount(), college);
 		
 		if (form.getMoney() == null || form.getMoney().compareTo(BigDecimal.ONE) < 0) {
-			throw new ServiceException("money不能为空, 不能小于一元钱！");
+			throw new ServiceException("充值金额不能为空, 不能小于一元钱！");
 		}
 	}
 	
@@ -124,7 +124,7 @@ public class OrderServiceImpl implements OrderService {
 	private Long update(OrderForm form) throws ServiceException {
 		
 		if (form.getStatus() == null || form.getStatus()  < 1) {
-			throw new ServiceException("status不能为空！");
+			throw new ServiceException("订单状态不能为空！");
 		}
 		
 		Order order = new Order(form);
@@ -155,15 +155,15 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public Order findOrderById(Long id) throws ServiceException {
-		if (id == null || id < 1) {
-			throw new ServiceException("id不能为空！");
+	public Order findOrderById(Long orderId) throws ServiceException {
+		if (orderId == null || orderId < 1) {
+			throw new ServiceException("订单编号不能为空！");
 		}
 		
-		Order order = orderDao.findById(id);
+		Order order = orderDao.findById(orderId);
 		
 		if (order == null) {
-			throw new ServiceException("订单不存在，订单编号：" + id + "。");
+			throw new ServiceException("订单不存在，订单编号：" + orderId + "。");
 		}
 		
 		return order;
@@ -192,7 +192,7 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public void updateOrdersStatusByIds(List<Long> orderIds, OrderStatus status) throws ServiceException {
 		if (orderIds == null || orderIds.size() < 1) {
-			throw new ServiceException("orderIds不能为空");
+			throw new ServiceException("订单编号列表不能为空");
 		}
 		
 		orderDao.updateOrdersStatusByIds(orderIds, status.getValue());
@@ -202,7 +202,7 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public void updateOrderStatusById(Long orderId, OrderStatus status) throws ServiceException {
 		if (orderId == null || orderId < 1) {
-			throw new ServiceException("orderId不能为空");
+			throw new ServiceException("订单编号不能为空");
 		}
 		
 		orderDao.updateOrderStatusById(orderId, status.getValue());
@@ -212,7 +212,7 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public void updateOrderPayResultById(Long orderId, PayResult payResult) throws ServiceException {
 		if (orderId == null || orderId < 1) {
-			throw new ServiceException("orderId不能为空");
+			throw new ServiceException("订单编号不能为空");
 		}
 		
 		orderDao.updateOrderPayResultById(orderId, payResult.getValue());
@@ -221,7 +221,7 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public void updateOrderCamsResultById(Long orderId, CamsResult camsResult) throws ServiceException {
 		if (orderId == null || orderId < 1) {
-			throw new ServiceException("orderId不能为空");
+			throw new ServiceException("订单编号不能为空");
 		}
 		
 		orderDao.updateOrderCamsResultById(orderId, camsResult.getValue());
@@ -231,15 +231,11 @@ public class OrderServiceImpl implements OrderService {
 	public CmpayPaymentRequest doPayOrder(Long orderId) throws ServiceException {
 		
 		if (orderId == null || orderId < 1) {
-			throw new ServiceException("orderId不能为空！");
+			throw new ServiceException("订单编号不能为空！");
 		}
 		
 		// 订单状态检查
 		Order order = orderDao.findById(orderId);
-		
-		if (order == null) {
-			throw new ServiceException("order id = " + orderId + ", 该订单不存在！");
-		}
 		
 		if ( !(order.getStatus().equals(OrderStatus.INIT.getValue()) || order.getStatus().equals(OrderStatus.PAYING.getValue())) ) {
 			throw new ServiceException("只有处于初始化或付款中状态的订单, 方可进行付款！");
@@ -332,7 +328,7 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public CmpayPaymentCheckResponse checkPayment(Long orderId) throws ServiceException {
 		if (ObjectUtils.equals(orderId, null)) {
-			throw new ServiceException("orderId不能为空！");
+			throw new ServiceException("订单编号不能为空！");
 		}
 		
 		return cmpayPaymentService.checkPayment(orderId);
