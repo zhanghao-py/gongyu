@@ -33,7 +33,7 @@ public interface OrderService {
 	
 	public void doCancelOrderAutomatically() throws ServiceException;
 	
-	public CmpayPaymentCheckResponse checkPayment(Long orderId) throws ServiceException;
+	public CmpayPaymentCheckResponse checkPayment(Long orderId, String merId) throws ServiceException;
 	
 	
 	public Order findOrderById(Long id) throws ServiceException;

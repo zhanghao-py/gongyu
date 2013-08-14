@@ -30,11 +30,15 @@ CREATE TABLE `gy_college` (
   `operator_username` varchar(100) NOT NULL COMMENT '操作员-用户名',
   `operator_password` varchar(100) NOT NULL COMMENT '操作员-密码',
   `keystore_path` varchar(100) NOT NULL COMMENT '证书路径',
+  `merid` varchar(15) not null comment '商户id',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '高校信息表';
 
-INSERT INTO `gy_college` VALUES ('1', '北京大学', 'http://123.120.10.78:88', '联系人：张浩、马计坤', 'WVdSdGFXND0=', 'WVdSdGFXND0=', '/home/xxx/college1.ks');
-INSERT INTO `gy_college` VALUES ('2', '清华大学', 'http://123.120.10.78:88', '联系人：张浩、马计坤', 'WVdSdGFXND0=', 'WVdSdGFXND0=', '/home/xxx/college2.ks');
+-- alter table gy_college add column merid varchar(15) not null comment '商户id';
+-- update gy_college set merid='888000130000008';
+
+INSERT INTO `gy_college` VALUES ('1', '北京大学', 'http://123.120.10.78:88', '联系人：张浩、马计坤', 'WVdSdGFXND0=', 'WVdSdGFXND0=', '/home/xxx/college1.ks', '888000130000008');
+INSERT INTO `gy_college` VALUES ('2', '清华大学', 'http://123.120.10.78:88', '联系人：张浩、马计坤', 'WVdSdGFXND0=', 'WVdSdGFXND0=', '/home/xxx/college2.ks', '888000130000008');
 
 CREATE TABLE `gy_log` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,

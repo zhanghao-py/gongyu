@@ -245,8 +245,9 @@ public class OrderServiceImpl implements OrderService {
 		// 修改订单状态至付款中
 		this.updateOrderStatusById(orderId, OrderStatus.PAYING);
 		
+		College college = collegeService.findCollegeById(order.getCollegeId());
 		// 生成cmpay订单
-		return cmpayPaymentService.createPayment(order);
+		return cmpayPaymentService.createPayment(order, college.getMerId());
 	}
 
 	@Override
@@ -343,12 +344,12 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public CmpayPaymentCheckResponse checkPayment(Long orderId) throws ServiceException {
+	public CmpayPaymentCheckResponse checkPayment(Long orderId, String merId) throws ServiceException {
 		if (ObjectUtils.equals(orderId, null)) {
 			throw new ServiceException("订单编号不能为空！");
 		}
 		
-		return cmpayPaymentService.checkPayment(orderId);
+		return cmpayPaymentService.checkPayment(orderId, merId);
 	}
 
 	@Override
@@ -370,6 +371,6 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public String getCmpayUrl(String merId) {
-		return cmpayObjectFactory.getCmpayUrl(merId);
+		return config.getPayUrl();
 	}
 }

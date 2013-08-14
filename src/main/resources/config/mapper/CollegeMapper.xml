@@ -10,10 +10,11 @@
 		<result column="operator_username" property="operatorUsername" jdbcType="VARCHAR" />
 		<result column="operator_password" property="operatorPassword" jdbcType="VARCHAR" />
 		<result column="keystore_path" property="keystorePath" jdbcType="VARCHAR" />
+		<result column="merid" property="merId" jdbcType="VARCHAR" />
 	</resultMap>
 	
 	<sql id="Base_Column_List">
-		id, name, url, description, operator_username, operator_password, keystore_path
+		id, name, url, description, operator_username, operator_password, keystore_path, merid
 	</sql>
 	
 	<select id="findAll" resultMap="BaseResultMap">

@@ -99,8 +99,9 @@ public class OrderPortalAction extends GenericAction {
 			data.put("order", order);
 
 			if (order.getStatus().equals(OrderStatus.PAYING.getValue())) {
+				College college = collegeService.findCollegeById(order.getCollegeId());
 				CmpayPaymentCheckResponse response = orderService
-						.checkPayment(order.getId());
+						.checkPayment(order.getId(), college.getMerId());
 				data.put("response", response);
 			}
 		} catch (ServiceException e) {

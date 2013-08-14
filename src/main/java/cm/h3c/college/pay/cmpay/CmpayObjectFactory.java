@@ -123,13 +123,13 @@ public class CmpayObjectFactory {
 		return toXml(callbackRequest);
 	}
 
-	public CmpayPaymentCheckRequest createCmpayPaymentCheckRequest(Long orderId) {
+	public CmpayPaymentCheckRequest createCmpayPaymentCheckRequest(Long orderId, String merId) {
 		CmpayPaymentCheckRequest ret = new CmpayPaymentCheckRequest();
 		Date date = new Date();
 		ret.MID = genMid(date);
 		ret.DATE = formatYyyyMMdd(date);
 		ret.TIME = formatHHmmsss(date);
-		ret.MERID = config.getMerId();
+		ret.MERID = merId;
 		ret.ORDERID = "10" + orderId;
 		return ret;
 	}
@@ -156,14 +156,14 @@ public class CmpayObjectFactory {
 		return DateFormatUtils.format(date, "HHmmss");
 	}
 
-	public CmpayPaymentRequest createCmpayPaymentRequest(Order order)
+	public CmpayPaymentRequest createCmpayPaymentRequest(Order order, String merId)
 			throws SignEncException {
 		Date payTime = new Date();
 		CmpayPaymentRequest request = new CmpayPaymentRequest();
 		request.MID = genMid(new Date());
 		request.DATE = formatYyyyMMdd(payTime);
 		request.TIME = formatHHmmsss(payTime);
-		request.MERID = config.getMerId();
+		request.MERID = merId;
 		request.ORDERID = "0" + order.getId();
 		request.AMOUT = order.getMoney().multiply(new BigDecimal(100))
 				.toBigInteger().toString();
@@ -187,7 +187,7 @@ public class CmpayObjectFactory {
 
 	void sign(CmpaySignable obj, String merId) {
 		try {
-			obj.setSign(SignUtil.doGenerateSign(obj.prepareSignData()));
+			obj.setSign(SignUtil.doGenerateSign(obj.prepareSignData(), merId));
 		} catch (SignEncException e) {
 			throw new IllegalArgumentException(e);
 		}
@@ -196,15 +196,11 @@ public class CmpayObjectFactory {
 	public void checkSign(CmpaySignable signedObj, String xml, String merId) {
 		try {
 			if (!SignUtil.doCheckSign(signedObj.prepareSignData(),
-					signedObj.getSign())) {
+					signedObj.getSign(), merId)) {
 				throw new IllegalArgumentException("check Sign failed " + xml);
 			}
 		} catch (SignEncException e) {
 			throw new IllegalArgumentException("check Sign failed " + xml, e);
 		}
-	}
-	
-	public String getCmpayUrl(String merId) {
-		return "http://114.251.148.201:29095/newWpay/pay/uniformPayModSel.pay";
 	}
 }

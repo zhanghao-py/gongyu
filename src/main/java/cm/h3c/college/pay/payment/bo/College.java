@@ -48,6 +48,11 @@ public class College implements Serializable {
 	 * keystore路径，证书路径
 	 */
 	private String keystorePath;
+	
+	/**
+	 * cmpay商户id
+	 */
+	private String merId;
 
 
 	public Long getId() {
@@ -107,6 +112,14 @@ public class College implements Serializable {
 
 	public void setKeystorePath(String keystorePath) {
 		this.keystorePath = keystorePath;
+	}
+
+	public String getMerId() {
+		return merId;
+	}
+
+	public void setMerId(String merId) {
+		this.merId = merId;
 	}
 
 	@Override

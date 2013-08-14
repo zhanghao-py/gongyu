@@ -27,8 +27,6 @@ public class SystemConfig {
 	public final static String SECURITY_CODE_KEY = "securityCode";
 	public static final String ILLEGAL_REQUEST = "请求异常!";
 
-	@Value("${merId}")
-	private String merId;
 	@Value("${payUrl}")
 	private String payUrl;
 	@Value("${checkUrl}")
@@ -47,14 +45,6 @@ public class SystemConfig {
 	private boolean debug;
 	@Value("${callbackThreadNumber}")
 	private int callbackThreadNumber;
-
-	public String getMerId() {
-		return merId;
-	}
-
-	public void setMerId(String merId) {
-		this.merId = merId;
-	}
 
 	public String getPayUrl() {
 		return payUrl;

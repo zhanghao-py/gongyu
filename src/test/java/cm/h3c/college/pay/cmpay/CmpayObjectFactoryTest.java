@@ -27,7 +27,7 @@ public class CmpayObjectFactoryTest {
 		System.out.println(xstream.toXML(request));
 		
 		CmpayPaymentCheckRequest request2 = (CmpayPaymentCheckRequest) xstream.fromXML(xml);
-		assertTrue(SignUtil.doCheckSign(request2.prepareSignData(), request.getSign()));
+		assertTrue(SignUtil.doCheckSign(request2.prepareSignData(), request.getSign(), "888000130000008"));
 		assertEquals(request.MID, request2.MID);
 	}
 

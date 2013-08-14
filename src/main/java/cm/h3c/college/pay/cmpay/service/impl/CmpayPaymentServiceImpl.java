@@ -43,10 +43,10 @@ public class CmpayPaymentServiceImpl implements CmpayPaymentService {
 	@Autowired
 	private LogService logService;
 
-	@Override
+	@Deprecated
 	public void submitPayment(Order order) throws ServiceException {
 		// create CmpayPaymentRequest
-		CmpayPaymentRequest request = createPayment(order);
+		CmpayPaymentRequest request = createPayment(order, null);
 		String reqXml = cmpayObjectFactory.cmpayPaymentReqeust2Xml(request);
 		log.info(reqXml);
 		// save request to db
@@ -65,11 +65,11 @@ public class CmpayPaymentServiceImpl implements CmpayPaymentService {
 	}
 
 	@Override
-	public CmpayPaymentCheckResponse checkPayment(Long orderId)
+	public CmpayPaymentCheckResponse checkPayment(Long orderId, String merId)
 			throws ServiceException {
 		// create checkRequest by orderId
 		CmpayPaymentCheckRequest request = cmpayObjectFactory
-				.createCmpayPaymentCheckRequest(orderId);
+				.createCmpayPaymentCheckRequest(orderId, merId);
 		String reqXml = cmpayObjectFactory.cmpayPaymentCheckRequest2Xml(request);
 		log.info(reqXml);
 
@@ -111,11 +111,11 @@ public class CmpayPaymentServiceImpl implements CmpayPaymentService {
 	}
 
 	@Override
-	public CmpayPaymentRequest createPayment(Order order)
+	public CmpayPaymentRequest createPayment(Order order, String merId)
 			throws ServiceException {
 		try {
 			CmpayPaymentRequest ret = cmpayObjectFactory
-					.createCmpayPaymentRequest(order);
+					.createCmpayPaymentRequest(order, merId);
 			String reqXml = cmpayObjectFactory.cmpayPaymentReqeust2Xml(ret);
 			log.info(ret.prepareSignData());
 			// save request to db
