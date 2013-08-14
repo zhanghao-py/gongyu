@@ -49,7 +49,7 @@ public class CmpayWebCallbackAction extends ActionSupport implements
 		if (!config.isDebug()) {
 			objectFactory.checkSign(callback,
 					"webcallback:" + callback.prepareSignData() + ", "
-							+ callback.getSign());
+							+ callback.getSign(), callback.getMerId());
 		}
 
 		try {

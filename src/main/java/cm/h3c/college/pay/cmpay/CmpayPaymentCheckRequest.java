@@ -32,4 +32,12 @@ public class CmpayPaymentCheckRequest implements CmpaySignable {
 	public void setSign(String sign) {
 		this.SIGN = sign;
 	}
+	
+	public String getMerId() {
+		return MERID;
+	}
+
+	public void setMerId(String merid) {
+		MERID = merid;
+	}
 }

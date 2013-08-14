@@ -112,11 +112,11 @@ public class CmpayPaymentCallbackRequest implements CmpaySignable, CmpayPaymentC
 		TIME = time;
 	}
 
-	public String getMerid() {
+	public String getMerId() {
 		return MERID;
 	}
 
-	public void setMerid(String merid) {
+	public void setMerId(String merid) {
 		MERID = merid;
 	}
 

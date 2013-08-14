@@ -78,7 +78,7 @@ public class CmpayPaymentServiceImpl implements CmpayPaymentService {
 			String response = postRequest(reqXml, config.getCheckUrl());
 
 			log.info(response);
-			return cmpayObjectFactory.parseCmpayPaymentCheckResponse(response);
+			return cmpayObjectFactory.parseCmpayPaymentCheckResponse(response, request.getMerId());
 		} catch (Exception e) {
 			log.error("", e);
 			throw new ServiceException("check payment error", e);

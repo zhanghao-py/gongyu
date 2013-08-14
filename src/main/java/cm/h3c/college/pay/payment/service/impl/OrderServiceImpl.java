@@ -367,4 +367,9 @@ public class OrderServiceImpl implements OrderService {
 	private Lock getLock(Long orderId) {
 		return callbackLocks[(int) (orderId % config.getCallbackThreadNumber())];
 	}
+
+	@Override
+	public String getCmpayUrl(String merId) {
+		return cmpayObjectFactory.getCmpayUrl(merId);
+	}
 }

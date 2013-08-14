@@ -60,25 +60,25 @@ public class CmpayCallbackController implements HttpRequestHandler {
 			
 			orderService.doCallbackOrder(callback);
 			callbackResponse.setRcode(CmpayPaymentService.RCODE_SUCCESS);
-			sendCallBackResponse(response, callbackResponse);
+			sendCallBackResponse(response, callbackResponse, callback.getMerId());
 		} catch (NumberFormatException e) {
 			log.error("parse callback.orderId to Long error, xml=" + reqXml);
 			callbackResponse.setRcode("1");
 			callbackResponse.setDesc("error orderid");
-			sendCallBackResponse(response, callbackResponse);
+			sendCallBackResponse(response, callbackResponse, callback.getMerId());
 		} catch (ServiceException e) {
 			callbackResponse.setRcode("2");
 			callbackResponse.setDesc("error " + e.getMessage());
 			log.error("save callback error, xml=" + reqXml, e);
-			sendCallBackResponse(response, callbackResponse);
+			sendCallBackResponse(response, callbackResponse, callback.getMerId());
 		}
 	}
 
 	private void sendCallBackResponse(HttpServletResponse response,
-			CmpayPaymentCallbackResponse callbackResponse)
+			CmpayPaymentCallbackResponse callbackResponse, String merId)
 			throws UnsupportedEncodingException, IOException {
 		String responseXml = cmpayObjectFactory
-				.cmpayPaymentCallbackResponse2Xml(callbackResponse);
+				.cmpayPaymentCallbackResponse2Xml(callbackResponse, merId);
 		response.getOutputStream().write(responseXml.getBytes("UTF-8"));
 	}
 }

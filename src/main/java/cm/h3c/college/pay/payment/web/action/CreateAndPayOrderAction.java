@@ -50,7 +50,7 @@ public class CreateAndPayOrderAction extends GenericAction {
 
 		Map<String, Object> data = new HashMap<String, Object>();
 		data.put("payment", payment);
-		data.put("cmpayUrl", "http://114.251.148.201:29095/newWpay/pay/uniformPayModSel.pay");
+		data.put("cmpayUrl", orderService.getCmpayUrl(payment.getMerId()));
 
 		this.data = data;
 

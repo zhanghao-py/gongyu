@@ -30,7 +30,7 @@ public class CmpayObjectFactory {
 				.fromXML(xml);
 
 		if (!config.isDebug()) {
-			checkSign(request, xml);
+			checkSign(request, xml, request.getMerId());
 		}
 		return request;
 	}
@@ -43,19 +43,19 @@ public class CmpayObjectFactory {
 				.fromXML(xml);
 
 		if (!config.isDebug()) {
-			checkSign(request, xml);
+			checkSign(request, xml, request.getMerId());
 		}
 		return request;
 	}
 
-	public CmpayPaymentCheckResponse parseCmpayPaymentCheckResponse(String xml) {
+	public CmpayPaymentCheckResponse parseCmpayPaymentCheckResponse(String xml, String merId) {
 		XStream xstream = new XStream();
 		xstream.alias("MESSAGE", CmpayPaymentCheckResponse.class);
 		CmpayPaymentCheckResponse response = (CmpayPaymentCheckResponse) xstream
 				.fromXML(xml);
 
 		if (!config.isDebug()) {
-			checkSign(response, xml);
+			checkSign(response, xml, merId);
 		}
 		return response;
 	}
@@ -68,33 +68,12 @@ public class CmpayObjectFactory {
 		return response;
 	}
 
-	public void checkSign(CmpaySignable signedObj, String xml) {
-
-		try {
-			if (!SignUtil.doCheckSign(signedObj.prepareSignData(),
-					signedObj.getSign())) {
-				throw new IllegalArgumentException("check Sign failed " + xml);
-			}
-		} catch (SignEncException e) {
-			throw new IllegalArgumentException("check Sign failed " + xml, e);
-		}
-
-	}
-
 	public String cmpayPaymentCallbackResponse2Xml(
-			CmpayPaymentCallbackResponse callBackResponse) {
-		sign(callBackResponse);
+			CmpayPaymentCallbackResponse callBackResponse, String merId) {
+		sign(callBackResponse, merId);
 		return toXml(callBackResponse);
 	}
-
-	void sign(CmpaySignable obj) {
-		try {
-			obj.setSign(SignUtil.doGenerateSign(obj.prepareSignData()));
-		} catch (SignEncException e) {
-			throw new IllegalArgumentException(e);
-		}
-	}
-
+	
 	String toXml(Object obj) {
 		try {
 			Class<?> clazz = obj.getClass();
@@ -117,31 +96,31 @@ public class CmpayObjectFactory {
 
 	public String cmpayPaymentCheckRequest2Xml(
 			CmpayPaymentCheckRequest checkRequest) {
-		sign(checkRequest);
+		sign(checkRequest, checkRequest.getMerId());
 		return toXml(checkRequest);
 	}
 
 	public String cmpayPaymentReqeust2Xml(CmpayPaymentRequest request) {
-		sign(request);
+		sign(request, request.getMerId());
 		return toXml(request);
 	}
 
 	public String cmpayPaymentCallbackRequest2Xml(
 			CmpayPaymentCallbackRequest callbackRequest) {
-		sign(callbackRequest);
+		sign(callbackRequest, callbackRequest.getMerId());
 		return toXml(callbackRequest);
 	}
 
 	public String cmpayPaymentCallbackWebRequest2Xml(
 			CmpayPaymentCallbackWebRequest callbackWebRequest) {
-		sign(callbackWebRequest);
+		sign(callbackWebRequest, callbackWebRequest.getMerId());
 		return toXml(callbackWebRequest);
 	}
 
 	public String cmpayPaymentCallbackRequest(
-			CmpayPaymentCallbackRequest callBackRequest) {
-		sign(callBackRequest);
-		return toXml(callBackRequest);
+			CmpayPaymentCallbackRequest callbackRequest) {
+		sign(callbackRequest, callbackRequest.getMerId());
+		return toXml(callbackRequest);
 	}
 
 	public CmpayPaymentCheckRequest createCmpayPaymentCheckRequest(Long orderId) {
@@ -202,7 +181,30 @@ public class CmpayObjectFactory {
 				+ order.getId();
 		request.MOBILEID = order.getAccount();
 		
-		sign(request);
+		sign(request, request.getMerId());
 		return request;
+	}
+
+	void sign(CmpaySignable obj, String merId) {
+		try {
+			obj.setSign(SignUtil.doGenerateSign(obj.prepareSignData()));
+		} catch (SignEncException e) {
+			throw new IllegalArgumentException(e);
+		}
+	}
+
+	public void checkSign(CmpaySignable signedObj, String xml, String merId) {
+		try {
+			if (!SignUtil.doCheckSign(signedObj.prepareSignData(),
+					signedObj.getSign())) {
+				throw new IllegalArgumentException("check Sign failed " + xml);
+			}
+		} catch (SignEncException e) {
+			throw new IllegalArgumentException("check Sign failed " + xml, e);
+		}
+	}
+	
+	public String getCmpayUrl(String merId) {
+		return "http://114.251.148.201:29095/newWpay/pay/uniformPayModSel.pay";
 	}
 }

@@ -45,5 +45,7 @@ public interface OrderService {
 	public void updateOrderPayResultById(Long orderId, PayResult payResult, LogType type) throws ServiceException;
 	
 	public void updateOrderCamsResultById(Long orderId, CamsResult camsResult) throws ServiceException;
+
+	public String getCmpayUrl(String merId);
 	
 }
