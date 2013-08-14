@@ -42,15 +42,15 @@ public class CamsServiceImpl implements CamsService {
 		Order order = orderService.findOrderById(orderId);
 		
 		if (!order.getStatus().equals(OrderStatus.PAYING.getValue())) {
-			throw new ServiceException("只有支付中的订单，才可以向CAMS充值！");
+			throw new ServiceException("只有支付中的订单，才可以向CAMS充值！ 订单号: 0" + orderId);
 		}
 		
 		if (order.getPayResult() == null) {
-			throw new ServiceException("无法获取cmpay支付结果，无法向CAMS充值！");
+			throw new ServiceException("无法获取cmpay支付结果，无法向CAMS充值！ 订单号: 0" + orderId);
 		}
 		
 		if (!order.getPayResult().equals(PayResult.SUCCESS.getValue())) {
-			throw new ServiceException("cmpay支付失败，无法向CAMS充值！");
+			throw new ServiceException("cmpay支付失败，无法向CAMS充值！ 订单号: 0" + orderId);
 		}
 		
 		Long collegeId = order.getCollegeId();
@@ -68,7 +68,7 @@ public class CamsServiceImpl implements CamsService {
 		try {
 			feeServiceDelegator.pay(account, money.toPlainString());
 		} catch(ServiceException e) {
-			LOG.warn("", e);
+			LOG.warn("orderId: " + orderId, e);
 			// 更新order cams_result->failed
 			orderService.updateOrderCamsResultById(orderId, CamsResult.FAILED);
 			return;
