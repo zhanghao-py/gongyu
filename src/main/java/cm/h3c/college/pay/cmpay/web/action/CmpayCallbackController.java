@@ -21,6 +21,7 @@ import cm.h3c.college.pay.cmpay.CmpayPaymentCallbackResponse;
 import cm.h3c.college.pay.cmpay.service.CmpayPaymentService;
 import cm.h3c.college.pay.core.config.SystemConfig;
 import cm.h3c.college.pay.core.exception.ServiceException;
+import cm.h3c.college.pay.payment.cons.LogType;
 import cm.h3c.college.pay.payment.service.LogService;
 import cm.h3c.college.pay.payment.service.OrderService;
 
@@ -54,22 +55,23 @@ public class CmpayCallbackController implements HttpRequestHandler {
 
 		CmpayPaymentCallbackResponse callbackResponse = cmpayObjectFactory
 				.createCmpayPaymentCallbackResponse(callback);
-
 		try {
+			logService.doLog(LogType.CMPAY_CALLBACK_REQUEST, callback.parseOriginOrderId(), reqXml);
+			
 			orderService.doCallbackOrder(callback);
 			callbackResponse.setRcode(CmpayPaymentService.RCODE_SUCCESS);
+			sendCallBackResponse(response, callbackResponse);
 		} catch (NumberFormatException e) {
 			log.error("parse callback.orderId to Long error, xml=" + reqXml);
 			callbackResponse.setRcode("1");
 			callbackResponse.setDesc("error orderid");
 			sendCallBackResponse(response, callbackResponse);
-			return;
 		} catch (ServiceException e) {
+			callbackResponse.setRcode("2");
+			callbackResponse.setDesc("error " + e.getMessage());
 			log.error("save callback error, xml=" + reqXml, e);
+			sendCallBackResponse(response, callbackResponse);
 		}
-
-		// send response
-		sendCallBackResponse(response, callbackResponse);
 	}
 
 	private void sendCallBackResponse(HttpServletResponse response,

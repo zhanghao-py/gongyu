@@ -10,6 +10,8 @@ import cm.h3c.college.pay.cmpay.CmpayObjectFactory;
 import cm.h3c.college.pay.cmpay.CmpayPaymentCallbackWebRequest;
 import cm.h3c.college.pay.core.config.SystemConfig;
 import cm.h3c.college.pay.core.exception.ServiceException;
+import cm.h3c.college.pay.payment.cons.LogType;
+import cm.h3c.college.pay.payment.service.LogService;
 import cm.h3c.college.pay.payment.service.OrderService;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -30,6 +32,9 @@ public class CmpayWebCallbackAction extends ActionSupport implements
 	@Autowired
 	private CmpayObjectFactory objectFactory;
 
+	@Autowired
+	private LogService logService;
+	
 	private CmpayPaymentCallbackWebRequest callback = new CmpayPaymentCallbackWebRequest();
 
 	@Override
@@ -48,6 +53,8 @@ public class CmpayWebCallbackAction extends ActionSupport implements
 		}
 
 		try {
+			logService.doLog(LogType.CMPAY_CALLBACK_WEB_REQUEST, callback.parseOriginOrderId(), callback.prepareSignData());
+			
 			orderService.doWebCallbackOrder(callback);
 		} catch (NumberFormatException e) {
 			log.error(
