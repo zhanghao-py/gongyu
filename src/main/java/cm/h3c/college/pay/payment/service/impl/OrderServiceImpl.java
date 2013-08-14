@@ -210,12 +210,13 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public void updateOrderPayResultById(Long orderId, PayResult payResult) throws ServiceException {
+	public void updateOrderPayResultById(Long orderId, PayResult payResult, LogType type) throws ServiceException {
 		if (orderId == null || orderId < 1) {
 			throw new ServiceException("orderId不能为空");
 		}
 		
-		orderDao.updateOrderPayResultById(orderId, payResult.getValue());
+		Short callbackType = (short) (type == LogType.CMPAY_CALLBACK_WEB_REQUEST ? 1 : 2);
+		orderDao.updateOrderPayResultById(orderId, payResult.getValue(), callbackType);
 	}
 	
 	@Override
@@ -270,7 +271,7 @@ public class OrderServiceImpl implements OrderService {
 		try {
 			List<Log> logs = logService.findByOrderIdAndType(callback.parseOriginOrderId(), LogType.CMPAY_CALLBACK_REQUEST);
 			if (logs != null && logs.size() > 0) {
-				LOG.warn("doWebCallbackOrder: callback already received, ignore: "  + callback.prepareSignData());
+				LOG.warn("doWebCallbackOrder: back callback already received, ignore: "  + callback.prepareSignData());
 				return;
 			}
 			
@@ -281,42 +282,31 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 	private void callbackOrder(CmpayPaymentCallbackable callback, LogType type) throws ServiceException, NumberFormatException {
-		
 		// 获取callback参数
-		Long orderId = null;
-		try {
-			orderId = callback.parseOriginOrderId();
-		} catch (NumberFormatException e) {
-			throw e;
-		}
-		
+		Long orderId =  callback.parseOriginOrderId();
 		Order order = this.findOrderById(orderId);
+		
+		if(order == null) {
+			LOG.warn("can't find order by id " + orderId);
+			throw new ServiceException("can't find order by id " + orderId);
+		}
 		
 		// 已有请求完成支付(CmpayPaymentCallbackRequest/CmpayPaymentCallbackWebRequest)
 		// TODO 需要判断不同的结果
 		if (!ObjectUtils.equals(order.getPayResult(), null)) {
+			
 			LOG.info("aleary callback, ignore callback. origin result=" + order.getPayResult()
 					+ ", type: " + type.getName());
 			return;
 		}
 		
 		PayResult payResult = PayResult.valueOf(callback.getStatus());
-		
-		// 记录cmpay回调日志
-		if ( type.equals(LogType.CMPAY_CALLBACK_REQUEST) ) {
-			String reqXml = cmpayObjectFactory.cmpayPaymentCallbackRequest2Xml((CmpayPaymentCallbackRequest) callback);
-			logService.doLog(LogType.CMPAY_CALLBACK_REQUEST, orderId, reqXml);
-		} else {
-			String reqXml = cmpayObjectFactory.cmpayPaymentCallbackWebRequest2Xml((CmpayPaymentCallbackWebRequest) callback);
-			logService.doLog(LogType.CMPAY_CALLBACK_WEB_REQUEST, orderId, reqXml);
-		}
-		
 		// 更新order pay_result记录
 		// TODO 记录生效请求
-		this.updateOrderPayResultById(orderId, payResult);
+		this.updateOrderPayResultById(orderId, payResult, type);
 		
 		if (!ObjectUtils.equals(payResult, PayResult.SUCCESS)) {
-			LOG.warn("cmpay payment failed. orderId : " + orderId);
+			LOG.info("cmpay payment failed. orderId : " + orderId + ", result=" + payResult);
 			return;
 		}
 		
@@ -324,7 +314,7 @@ public class OrderServiceImpl implements OrderService {
 		try {
 			camsService.doRecharge2Cams(orderId);
 		} catch (ServiceException e) {
-			LOG.warn("Recharege to CAMS failed.", e);
+			LOG.error("Recharege to CAMS failed.", e);
 		}
 		
 	}

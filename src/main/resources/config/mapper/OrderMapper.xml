@@ -7,7 +7,11 @@
 		<result column="money" property="money" jdbcType="DECIMAL" />
 		<result column="status" property="status" jdbcType="SMALLINT" />
 		<result column="pay_result" property="payResult" jdbcType="SMALLINT" />
+		<result column="pay_callback_type" property="payCallbackType" jdbcType="SMALLINT" />
+		<result column="pay_callback_latest_time" property="payCallbackLatestTime" jdbcType="TIMESTAMP" />
 		<result column="cams_result" property="camsResult" jdbcType="SMALLINT" />
+		<result column="cams_call_times" property="camsCallTimes" jdbcType="SMALLINT" />
+		<result column="cams_call_latest_time" property="camsCallLatestTime" jdbcType="TIMESTAMP" />
 		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
 		<result column="pay_time" property="payTime" jdbcType="TIMESTAMP" />
 		<result column="finish_time" property="finishTime" jdbcType="TIMESTAMP" />
@@ -16,7 +20,7 @@
 	</resultMap>
 	
 	<sql id="Base_Column_List">
-		id, money, status, pay_result, cams_result, create_time, pay_time, finish_time, account, college_id
+		id, money, status, pay_result,pay_callback_type,pay_callback_latest_time, cams_result, cams_call_times, call_call_latest_time, create_time, pay_time, finish_time, account, college_id
 	</sql>
 	
 	<insert id="save"
@@ -102,6 +106,8 @@
 		update gy_order
 		<set>
 			pay_result = #{payResult, jdbcType=SMALLINT},
+			pay_callback_type = #{callbackType, jdbcType=SMALLINT},
+			pay_callback_latest_time = now(),
 		</set>
 		<where> 
 			id = #{id, jdbcType=BIGINT}
@@ -112,6 +118,8 @@
 		update gy_order
 		<set>
 			cams_result = #{camsResult, jdbcType=SMALLINT},
+			cams_call_times = cams_call_times + 1,
+			cams_call_latest_time = now(),
 		</set>
 		<where> 
 			id = #{id, jdbcType=BIGINT}

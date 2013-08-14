@@ -3,7 +3,11 @@ CREATE TABLE `gy_order` (
   `money` decimal NOT NULL COMMENT '角色名称',
   `status` tinyint(4) unsigned NOT NULL COMMENT '1:订单初始化 2:支付中 3:支付完成 4:取消',
   `pay_result` tinyint(4) unsigned NULL COMMENT '1:支付成功 2:支付失败 3:预授权成功 4:预授权失败 5:用户拒付',
+  `pay_callback_type` tinyint(4) unsigned null comment '1:web, 2:back',
+  `pay_callback_latest_time` datetime null comment '最后生效callback返回时间',
   `cams_result` tinyint(4) unsigned NULL COMMENT '1:充值成功 2:充值失败',
+  `cams_call_times` tinyint(4) unsigned not null default 0 comment '调用cams充值次数',
+  `cams_call_latest_time` datetime null comment '最后调用cams时间',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `pay_time` datetime NULL COMMENT '支付开始时间',
   `finish_time` datetime NULL COMMENT '完成时间',
@@ -12,6 +16,11 @@ CREATE TABLE `gy_order` (
   PRIMARY KEY (`id`),
   KEY `idx_order_college_id` (`college_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '订单信息表';
+
+-- alter table gy_order add column `pay_callback_type` tinyint(4) unsigned null comment '1:web, 2:back' after pay_result;
+-- alter table gy_order add column `pay_callback_latest_time` datetime null comment '最后生效callback返回时间' after pay_callback_type;
+-- alter table gy_order add column `cams_call_times` tinyint(4) unsigned not null default 0 comment '调用cams充值次数' after cams_result;
+-- alter table gy_order add column `cams_call_latest_time` datetime null comment '最后调用cams时间' after cams_call_times;
 
 CREATE TABLE `gy_college` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,

@@ -41,10 +41,30 @@ public class Order implements Serializable {
 	private Short payResult;
 	
 	/**
+	 * 生效的支付回调途径 1：页面（ web) 2：后台（back）
+	 */
+	private Short payCallbackType;
+	
+	/**
+	 * 最后生效callback返回时间
+	 */
+	private Date payCallbackLatestTime;
+
+	/**
 	 * 充值结果()
 	 */
 	private Short camsResult;
+
+	/**
+	 * 调用cams充值次数
+	 */
+	private Short camsCallTimes;
 	
+	/**
+	 * 最后调用cams时间
+	 */
+	private Date camsCallLatestTime;
+		
 	/**
 	 * 订单创建时间
 	 */
@@ -138,6 +158,38 @@ public class Order implements Serializable {
 
 	public void setCamsResult(Short camsResult) {
 		this.camsResult = camsResult;
+	}
+
+	public Short getPayCallbackType() {
+		return payCallbackType;
+	}
+
+	public void setPayCallbackType(Short payCallbackType) {
+		this.payCallbackType = payCallbackType;
+	}
+
+	public Date getPayCallbackLatestTime() {
+		return payCallbackLatestTime;
+	}
+
+	public void setPayCallbackLatestTime(Date payCallbackLatestTime) {
+		this.payCallbackLatestTime = payCallbackLatestTime;
+	}
+
+	public Short getCamsCallTimes() {
+		return camsCallTimes;
+	}
+
+	public void setCamsCallTimes(Short camsCallTimes) {
+		this.camsCallTimes = camsCallTimes;
+	}
+
+	public Date getCamsCallLatestTime() {
+		return camsCallLatestTime;
+	}
+
+	public void setCamsCallLatestTime(Date camsCallLatestTime) {
+		this.camsCallLatestTime = camsCallLatestTime;
 	}
 
 	@Override

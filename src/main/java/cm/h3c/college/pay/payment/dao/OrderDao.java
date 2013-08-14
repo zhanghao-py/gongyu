@@ -17,7 +17,7 @@ public interface OrderDao {
 	public void updateOrderStatusById(@Param("id") Long id, @Param("status") Short status);
 	public void updateOrdersStatusByIds(@Param("ids") List<Long> ids, @Param("status") Short status);
 
-	public void updateOrderPayResultById(@Param("id") Long id, @Param("payResult") Short payResult);
+	public void updateOrderPayResultById(@Param("id") Long id, @Param("payResult") Short payResult, @Param("callbackType") Short callbackType);
 
 	public void updateOrderCamsResultById(@Param("id") Long id, @Param("camsResult") Short camsResult);
 
