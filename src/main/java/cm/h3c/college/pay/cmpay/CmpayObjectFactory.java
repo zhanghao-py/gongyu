@@ -201,7 +201,8 @@ public class CmpayObjectFactory {
 		request.CALLBACK = config.getCallbackUrl() + "?orderId="
 				+ order.getId();
 		request.MOBILEID = order.getAccount();
-		request.SIGN = SignUtil.doGenerateSign(request.prepareSignData());
+		
+		sign(request);
 		return request;
 	}
 }
