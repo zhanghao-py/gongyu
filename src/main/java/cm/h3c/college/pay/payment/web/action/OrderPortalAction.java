@@ -66,6 +66,7 @@ public class OrderPortalAction extends GenericAction {
 		OrderForm form = (OrderForm) session.get(SystemConfig.ORDER_FORM_KEY);
 
 		if (ObjectUtils.equals(form, null)) {
+			this.data = "表单不能为空！";
 			return ERROR;
 		}
 
