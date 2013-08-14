@@ -71,6 +71,8 @@ public class AcmUserServiceDelegator {
 	}
 	
 	public AcmUser queryAcmUser(String username) throws ServiceException {
+		log.info("wsclient queryAcmUser, baseUrl=" + baseUrl);
+		
 		imcplatServiceDelegator.login();
 		RetAcmUser result = acmUserService.queryAcmUser(username);
 //		imcplatServiceDelegator.logout();

@@ -74,6 +74,7 @@ public class ImcplatServiceDelegator {
 	}
 	
 	public void login() throws ServiceException {
+		log.info("wsclient login, baseUrl=" + baseUrl);
 		
 		WSCommonResult result = imcplatService.login(opUsername, opPassword);
 
@@ -90,7 +91,8 @@ public class ImcplatServiceDelegator {
 	}
 	
 	public void logout() throws ServiceException {
-		
+		log.info("wsclient logout, baseUrl=" + baseUrl);
+
 		LogoutResponse response = imcplatService.logout();
 		WSCommonResult result = response.getReturn().getValue();
 		

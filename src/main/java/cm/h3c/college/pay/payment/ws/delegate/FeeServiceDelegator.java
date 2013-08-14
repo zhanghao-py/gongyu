@@ -70,6 +70,7 @@ public class FeeServiceDelegator {
 	}
 	
 	public void pay(String account, String money) throws ServiceException {
+		log.info("wsclient pay, baseUrl=" + baseUrl);
 		
 		ObjectFactory of = new ObjectFactory();
 		PaymentInfo info = new PaymentInfo();

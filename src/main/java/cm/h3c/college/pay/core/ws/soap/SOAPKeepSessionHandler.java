@@ -34,6 +34,7 @@ public class SOAPKeepSessionHandler implements SOAPHandler<SOAPMessageContext> {
 				//这是第一次HTTP调用，cookie刚刚得到
 				if( cookie == null && c != null ) { 
 					cookie = c;
+					log.debug("read cookie:" + c);
 				}
 			
 			//请求
@@ -53,6 +54,7 @@ public class SOAPKeepSessionHandler implements SOAPHandler<SOAPMessageContext> {
 				//如果已经获得了sessionid，将该sessionid设置到请求上下文中即可
 				if( cookie != null ){
 					requestHeaders.put("cookie", cookie);
+					log.debug("set cookie:" + cookie);
 				}
 			}
 			
