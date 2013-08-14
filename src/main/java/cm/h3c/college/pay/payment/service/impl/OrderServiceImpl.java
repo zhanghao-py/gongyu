@@ -288,7 +288,7 @@ public class OrderServiceImpl implements OrderService {
 		
 		if(order == null) {
 			LOG.warn("can't find order by id " + orderId);
-			throw new ServiceException("can't find order by id " + orderId);
+			throw new ServiceException("找不到指定的订单，订单号： " + orderId);
 		}
 		
 		// 已有请求完成支付(CmpayPaymentCallbackRequest/CmpayPaymentCallbackWebRequest)
@@ -310,7 +310,7 @@ public class OrderServiceImpl implements OrderService {
 		try {
 			camsService.doRecharge2Cams(orderId);
 		} catch (ServiceException e) {
-			LOG.error("Recharege to CAMS failed.", e);
+			LOG.error("Recharege to CAMS failed, orderId=" + orderId, e);
 		}
 		
 	}
