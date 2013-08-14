@@ -16,6 +16,9 @@
 	<link rel="stylesheet" type="text/css" href="$!{webRoot}/css/chongzhi.css">
 	
 	<script type="text/javascript" src="$!{webRoot}/js/payment_doneOrder_portal.js"></script>
+	<script type="text/javascript">
+		var doneOrderPortalUrl = "$!{webRoot}/payment/doneOrderPortal.do";
+	</script>
 </head>
 <body>
 	<div class="contentRi">

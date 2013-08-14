@@ -31,9 +31,9 @@ jQuery(function () {
  * 返回修改
  */
 function btnGobakck() {
-	var forwardUrl = "portal.do";
-	location.href = forwardUrl;
+	location.href = portalUrl;
 }
+
 /***
  * 立即支付
  */
@@ -47,8 +47,8 @@ function btnSubmit() {
     var bank_id = jQuery('input[type=radio][name=pay_bank_id]:checked').attr('id');
     jQuery.cookie('lastBank', bank_id, { expires: 365 });
 
-//	var url = jQuery('form[name="paymentForm"]').attr('action');
     popWindow();
+    jQuery('form[name="paymentForm"]').attr('action', createAndPayOrderUrl);
 	jQuery('form[name="paymentForm"]').submit();
 	
 }
@@ -80,8 +80,7 @@ function closeWindow() {
  * 已完成支付
  */
 function completePayment() {
-	var forwardUrl = "doneOrderPortal.do";
-	window.location = forwardUrl;
+	window.location = doneOrderPortalUrl;
 }
 
 function redirect2Url(url) {

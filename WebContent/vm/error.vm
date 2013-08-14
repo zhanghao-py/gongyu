@@ -29,7 +29,7 @@
 		
 			<div style="MARGIN-LEFT: 101px" class="success">
 				<div class="pointInfo_success">错误信息提示</div>
-				<p style="width:543px">手机支付下单错误:D22208 对不起，订单状态异常，详情请登录cmpay.10086.cn查询。</p>
+				<p style="width:543px">手机支付下单错误:D22208 对不起，订单状态异常。</p>
 				<p style="width:543px">$data</p>
 				<div>&nbsp;</div>
 			</div>

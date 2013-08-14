@@ -23,6 +23,11 @@
 	
 	<script type="text/javascript" src="$!{webRoot}/js/util.js"></script>
     <script type="text/javascript" src="$!{webRoot}/js/payment_createAndPayOrder_portal.js"></script>
+	<script type="text/javascript">
+		var portalUrl = "$!{webRoot}/payment/portal.do";
+		var createAndPayOrderUrl = "$!{webRoot}/payment/createAndPayOrder.do";
+		var doneOrderPortalUrl = "$!{webRoot}/payment/doneOrderPortal.do";
+	</script>
     
     <style type="text/css">
         .lr-lc-bluesp3 {
@@ -34,7 +39,7 @@
 </head>
 <body>
 
-<form name="paymentForm" method="post" action="$!{webRoot}/payment/createAndPayOrder.do" target="_blank">
+<form name="paymentForm" method="post" action="" target="_blank">
 
 <div class="contentRi">
 	<div class="lr-box">

@@ -200,11 +200,11 @@ function btnSubmit() {
 	//记录cookie
 	addMsisdnTOCookie(msisdn);
 	
-	var url = jQuery('form[name="paymentForm"]').attr('action');
-	var forwardUrl = "createAndPayOrderPortal.do";
+//	var url = jQuery('form[name="paymentForm"]').attr('action');
+//	var forwardUrl = "createAndPayOrderPortal.do";
 	
 	jQuery.ajax({
-		url : url,
+		url : checkOrderFormUrl,
 		type : "post",
 		dataType: "json",
 		data : {
@@ -222,7 +222,7 @@ function btnSubmit() {
 			if (status > 0) {
 				jQuery('#error_tip').html(statusInfo).css("display", "block");
 			} else {
-				location.href = forwardUrl;
+				location.href = createAndPayOrderPortalUrl;
 			}
 		},
 		error : function(msg) {
