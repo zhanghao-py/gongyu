@@ -43,7 +43,7 @@ import cm.h3c.college.pay.payment.ws.delegate.AcmUserServiceDelegator;
 
 @Component("orderService")
 public class OrderServiceImpl implements OrderService {
-	private static Logger LOG = Logger.getLogger(OrderService.class);
+	private static Logger log = Logger.getLogger(OrderService.class);
 	
 	private Lock[] callbackLocks;
 	
@@ -163,7 +163,7 @@ public class OrderServiceImpl implements OrderService {
 		Order order = orderDao.findById(id);
 		
 		if (order == null) {
-			throw new ServiceException("order = " + id + "，该订单不存在！");
+			throw new ServiceException("订单不存在，订单编号：" + id + "。");
 		}
 		
 		return order;
@@ -270,7 +270,7 @@ public class OrderServiceImpl implements OrderService {
 		try {
 			List<Log> logs = logService.findByOrderIdAndType(callback.parseOriginOrderId(), LogType.CMPAY_CALLBACK_REQUEST);
 			if (logs != null && logs.size() > 0) {
-				LOG.warn("doWebCallbackOrder: callback already received, ignore: "  + callback.prepareSignData());
+				log.warn("doWebCallbackOrder: callback already received, ignore: "  + callback.prepareSignData());
 				return;
 			}
 			
@@ -295,7 +295,7 @@ public class OrderServiceImpl implements OrderService {
 		// 已有请求完成支付(CmpayPaymentCallbackRequest/CmpayPaymentCallbackWebRequest)
 		// TODO 需要判断不同的结果
 		if (!ObjectUtils.equals(order.getPayResult(), null)) {
-			LOG.info("aleary callback, ignore callback. origin result=" + order.getPayResult()
+			log.info("aleary callback, ignore callback. origin result=" + order.getPayResult()
 					+ ", type: " + type.getName());
 			return;
 		}
@@ -316,7 +316,7 @@ public class OrderServiceImpl implements OrderService {
 		this.updateOrderPayResultById(orderId, payResult);
 		
 		if (!ObjectUtils.equals(payResult, PayResult.SUCCESS)) {
-			LOG.warn("cmpay payment failed. orderId : " + orderId);
+			log.warn("cmpay payment failed. orderId : " + orderId);
 			return;
 		}
 		
@@ -324,7 +324,7 @@ public class OrderServiceImpl implements OrderService {
 		try {
 			camsService.doRecharge2Cams(orderId);
 		} catch (ServiceException e) {
-			LOG.warn("Recharege to CAMS failed.", e);
+			log.warn("Recharege to CAMS failed.", e);
 		}
 		
 	}
