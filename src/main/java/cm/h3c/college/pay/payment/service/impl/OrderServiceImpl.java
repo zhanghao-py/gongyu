@@ -292,17 +292,13 @@ public class OrderServiceImpl implements OrderService {
 		}
 		
 		// 已有请求完成支付(CmpayPaymentCallbackRequest/CmpayPaymentCallbackWebRequest)
-		// TODO 需要判断不同的结果
-		if (!ObjectUtils.equals(order.getPayResult(), null)) {
-			
-			LOG.info("aleary callback, ignore callback. origin result=" + order.getPayResult()
-					+ ", type: " + type.getName());
+		if (!ObjectUtils.equals(order.getPayResult(), null)
+				&& !needHandle(orderId, order, type, callback)) {
 			return;
 		}
 		
 		PayResult payResult = PayResult.valueOf(callback.getStatus());
 		// 更新order pay_result记录
-		// TODO 记录生效请求
 		this.updateOrderPayResultById(orderId, payResult, type);
 		
 		if (!ObjectUtils.equals(payResult, PayResult.SUCCESS)) {
@@ -319,6 +315,37 @@ public class OrderServiceImpl implements OrderService {
 		
 	}
 	
+	private boolean needHandle(Long orderId, Order order, LogType type, CmpayPaymentCallbackable callback) {
+		// 判断不同的结果
+		if (LogType.CMPAY_CALLBACK_REQUEST == type) {
+			if (order.getPayCallbackType() == 2) {
+				LOG.warn("duplicate back callback,ignore. orderId="
+						+ orderId + ", origin result="
+						+ order.getPayResult() + ", new result="
+						+ callback.getStatus());
+			} else if (!order.getPayResult().equals(
+					PayResult.SUCCESS.getValue())
+					&& PayResult.SUCCESS.name().equalsIgnoreCase(
+							callback.getStatus())) {
+				LOG.info("back callback success, update result. orderId="
+						+ orderId + ", origin result="
+						+ order.getPayResult() + ", new result="
+						+ callback.getStatus());
+				return true;
+			} else {
+				LOG.info("back callback not success, ignore. orderId="
+						+ orderId + ", origin result="
+						+ order.getPayResult() + ", new result="
+						+ callback.getStatus());
+			}				
+		} else {
+			LOG.info("duplicate web callback,ignore. orderId=" + orderId
+					+ ", origin result=" + order.getPayResult()
+					+ ", new result=" + callback.getStatus());
+		}
+		return false;
+	}
+
 	@Override
 	public CmpayPaymentCheckResponse checkPayment(Long orderId) throws ServiceException {
 		if (ObjectUtils.equals(orderId, null)) {
