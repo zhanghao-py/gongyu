@@ -235,4 +235,9 @@ public class CmpayObjectFactory {
 		sign(notifyResponse, merId);
 		return toXml(notifyResponse);
 	}
+
+	public String cmpayPaymentFileNotifyRequest2Xml(
+			CmpayPaymentFileNotifyRequest callbackRequest) {
+		return toXml(callbackRequest);
+	}
 }
