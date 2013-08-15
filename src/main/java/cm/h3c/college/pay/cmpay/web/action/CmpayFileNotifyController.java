@@ -56,7 +56,7 @@ public class CmpayFileNotifyController implements HttpRequestHandler {
 		CmpayPaymentFileNotifyResponse notifyResponse = cmpayObjectFactory
 				.createCmpayPaymentFileNotifyResponse(notify);
 		try {
-			logService.doLog(LogType.CMPAY_CALLBACK_FILE_NOTIFY_REQUEST, 0L,
+			logService.doLog(LogType.CMPAY_CALLBACK_FILE_NOTIFY_REQUEST, 1L,
 					reqXml);
 			// TODO move file to safe path
 			// TODO check order
