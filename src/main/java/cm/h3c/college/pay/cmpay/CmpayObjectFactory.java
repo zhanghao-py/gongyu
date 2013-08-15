@@ -29,9 +29,7 @@ public class CmpayObjectFactory {
 		CmpayPaymentCallbackRequest request = (CmpayPaymentCallbackRequest) xstream
 				.fromXML(xml);
 
-		if (!config.isDebug()) {
-			checkSign(request, xml, request.getMerId());
-		}
+		checkSign(request, xml, request.getMerId());
 		return request;
 	}
 
@@ -42,21 +40,29 @@ public class CmpayObjectFactory {
 		CmpayPaymentCallbackWebRequest request = (CmpayPaymentCallbackWebRequest) xstream
 				.fromXML(xml);
 
-		if (!config.isDebug()) {
-			checkSign(request, xml, request.getMerId());
-		}
+		checkSign(request, xml, request.getMerId());
 		return request;
 	}
 
-	public CmpayPaymentCheckResponse parseCmpayPaymentCheckResponse(String xml, String merId) {
+	public CmpayPaymentFileNotifyRequest parseCmpayPaymentFileNotifyRequest(
+			String xml) {
+		XStream xstream = new XStream();
+		xstream.alias("MESSAGE", CmpayPaymentFileNotifyRequest.class);
+		CmpayPaymentFileNotifyRequest request = (CmpayPaymentFileNotifyRequest) xstream
+				.fromXML(xml);
+
+		checkSign(request, xml, request.getMerId());
+		return request;
+	}
+
+	public CmpayPaymentCheckResponse parseCmpayPaymentCheckResponse(String xml,
+			String merId) {
 		XStream xstream = new XStream();
 		xstream.alias("MESSAGE", CmpayPaymentCheckResponse.class);
 		CmpayPaymentCheckResponse response = (CmpayPaymentCheckResponse) xstream
 				.fromXML(xml);
 
-		if (!config.isDebug()) {
-			checkSign(response, xml, merId);
-		}
+		checkSign(response, xml, merId);
 		return response;
 	}
 
@@ -73,7 +79,7 @@ public class CmpayObjectFactory {
 		sign(callBackResponse, merId);
 		return toXml(callBackResponse);
 	}
-	
+
 	String toXml(Object obj) {
 		try {
 			Class<?> clazz = obj.getClass();
@@ -123,7 +129,8 @@ public class CmpayObjectFactory {
 		return toXml(callbackRequest);
 	}
 
-	public CmpayPaymentCheckRequest createCmpayPaymentCheckRequest(Long orderId, String merId) {
+	public CmpayPaymentCheckRequest createCmpayPaymentCheckRequest(
+			Long orderId, String merId) {
 		CmpayPaymentCheckRequest ret = new CmpayPaymentCheckRequest();
 		Date date = new Date();
 		ret.MID = genMid(date);
@@ -138,8 +145,10 @@ public class CmpayObjectFactory {
 			CmpayPaymentCallbackRequest callback) {
 		CmpayPaymentCallbackResponse ret = new CmpayPaymentCallbackResponse();
 		ret.MID = callback.MID;
-		ret.DATE = callback.DATE;
-		ret.TIME = callback.TIME;
+
+		Date date = new Date();
+		ret.DATE = formatYyyyMMdd(date);
+		ret.TIME = formatHHmmsss(date);
 		return ret;
 	}
 
@@ -156,8 +165,8 @@ public class CmpayObjectFactory {
 		return DateFormatUtils.format(date, "HHmmss");
 	}
 
-	public CmpayPaymentRequest createCmpayPaymentRequest(Order order, String merId)
-			throws SignEncException {
+	public CmpayPaymentRequest createCmpayPaymentRequest(Order order,
+			String merId) throws SignEncException {
 		Date payTime = new Date();
 		CmpayPaymentRequest request = new CmpayPaymentRequest();
 		request.MID = genMid(new Date());
@@ -180,7 +189,7 @@ public class CmpayObjectFactory {
 		request.CALLBACK = config.getCallbackUrl() + "?orderId="
 				+ order.getId();
 		request.MOBILEID = order.getAccount();
-		
+
 		sign(request, request.getMerId());
 		return request;
 	}
@@ -197,10 +206,33 @@ public class CmpayObjectFactory {
 		try {
 			if (!SignUtil.doCheckSign(signedObj.prepareSignData(),
 					signedObj.getSign(), merId)) {
-				throw new IllegalArgumentException("check Sign failed " + xml);
+				if (!config.isDebug()) {
+					throw new IllegalArgumentException("check Sign failed "
+							+ xml);
+				}
 			}
 		} catch (SignEncException e) {
-			throw new IllegalArgumentException("check Sign failed " + xml, e);
+			if (!config.isDebug()) {
+				throw new IllegalArgumentException("check Sign failed " + xml,
+						e);
+			}
 		}
+	}
+
+	public CmpayPaymentFileNotifyResponse createCmpayPaymentFileNotifyResponse(
+			CmpayPaymentFileNotifyRequest notify) {
+		CmpayPaymentFileNotifyResponse ret = new CmpayPaymentFileNotifyResponse();
+		ret.MID = notify.MID;
+
+		Date date = new Date();
+		ret.DATE = formatYyyyMMdd(date);
+		ret.TIME = formatHHmmsss(date);
+		return ret;
+	}
+
+	public String cmpayPaymentFileNotifyResponse2Xml(
+			CmpayPaymentFileNotifyResponse notifyResponse, String merId) {
+		sign(notifyResponse, merId);
+		return toXml(notifyResponse);
 	}
 }
