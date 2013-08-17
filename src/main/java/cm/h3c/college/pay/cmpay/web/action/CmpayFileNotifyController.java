@@ -56,10 +56,11 @@ public class CmpayFileNotifyController implements HttpRequestHandler {
 		CmpayPaymentFileNotifyResponse notifyResponse = cmpayObjectFactory
 				.createCmpayPaymentFileNotifyResponse(notify);
 		try {
-			logService.doLog(LogType.CMPAY_CALLBACK_FILE_NOTIFY_REQUEST, 1L,
-					reqXml);
+			logService.doLog(LogType.CMPAY_CALLBACK_FILE_NOTIFY_REQUEST, reqXml);
 			// TODO move file to safe path
 			// TODO check order
+			// 解析对账文件，并记录至数据库
+			logService.doLog(LogType.CMPAY_BILLING_FILE_PARSE, "");
 			notifyResponse.setRcode(CmpayPaymentService.RCODE_SUCCESS);
 			sendCallBackResponse(response, notifyResponse, notify.getMerId());
 		} catch (ServiceException e) {
