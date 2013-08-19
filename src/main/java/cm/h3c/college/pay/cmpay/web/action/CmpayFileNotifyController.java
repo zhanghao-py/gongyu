@@ -18,12 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import cm.h3c.college.pay.cmpay.CmpayObjectFactory;
 import cm.h3c.college.pay.cmpay.CmpayPaymentFileNotifyRequest;
 import cm.h3c.college.pay.cmpay.CmpayPaymentFileNotifyResponse;
+import cm.h3c.college.pay.cmpay.service.CmpayBillingService;
 import cm.h3c.college.pay.cmpay.service.CmpayPaymentService;
-import cm.h3c.college.pay.core.config.SystemConfig;
 import cm.h3c.college.pay.core.exception.ServiceException;
 import cm.h3c.college.pay.payment.cons.LogType;
 import cm.h3c.college.pay.payment.service.LogService;
-import cm.h3c.college.pay.payment.service.OrderService;
 
 @Controller
 public class CmpayFileNotifyController implements HttpRequestHandler {
@@ -34,13 +33,10 @@ public class CmpayFileNotifyController implements HttpRequestHandler {
 	private CmpayObjectFactory cmpayObjectFactory;
 
 	@Autowired
-	private OrderService orderService;
-
-	@Autowired
 	private LogService logService;
 
 	@Autowired
-	private SystemConfig config;
+	private CmpayBillingService cmpayBillingService;
 
 	@Override
 	@RequestMapping("/uploaded")
@@ -57,10 +53,8 @@ public class CmpayFileNotifyController implements HttpRequestHandler {
 				.createCmpayPaymentFileNotifyResponse(notify);
 		try {
 			logService.doLog(LogType.CMPAY_CALLBACK_FILE_NOTIFY_REQUEST, reqXml);
-			// TODO move file to safe path
+			cmpayBillingService.doLogCmpayBilling(notify);
 			// TODO check order
-			// 解析对账文件，并记录至数据库
-			logService.doLog(LogType.CMPAY_BILLING_FILE_PARSE, "");
 			notifyResponse.setRcode(CmpayPaymentService.RCODE_SUCCESS);
 			sendCallBackResponse(response, notifyResponse, notify.getMerId());
 		} catch (ServiceException e) {

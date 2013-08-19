@@ -45,6 +45,11 @@ public class SystemConfig {
 	private boolean debug;
 	@Value("${callbackThreadNumber}")
 	private int callbackThreadNumber;
+	
+	@Value("${cmpayBillingFileOrginalLocation}")
+	private String cmpayBillingFileOrginalLocation;
+	@Value("${cmpayBillingFileSafetyLocation}")
+	private String cmpayBillingFileSafetyLocation;
 
 	public String getPayUrl() {
 		return payUrl;
@@ -110,4 +115,12 @@ public class SystemConfig {
 		this.callbackThreadNumber = callbackThreadNumber;
 	}
 
+	public String getCmpayBillingFileOrginalLocation() {
+		return cmpayBillingFileOrginalLocation;
+	}
+
+	public String getCmpayBillingFileSafetyLocation() {
+		return cmpayBillingFileSafetyLocation;
+	}
+	
 }

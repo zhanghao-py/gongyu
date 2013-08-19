@@ -46,4 +46,10 @@ public class CmpayPaymentFileNotifyRequest implements CmpaySignable {
 	public String getMerId() {
 		return MERID;
 	}
+
+	public String getFilename() {
+		return FILENAME;
+	}
+	
+	
 }
