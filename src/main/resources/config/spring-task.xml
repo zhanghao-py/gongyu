@@ -26,12 +26,13 @@
 	</bean>
 
 	<bean id="scheduler"
-		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean" lazy-init="false">
+		<property name="autoStartup" value="${quartz.autostartup}"/>
 		<property name="triggers">
 			<list>
 				<ref bean="cancellationOrderArchiveTrigger" />
 			</list>
 		</property>
-		<property name="startupDelay" value="30" />
+		<property name="startupDelay" value="${quartz.startupDelay}" />
 	</bean>
 </beans>
