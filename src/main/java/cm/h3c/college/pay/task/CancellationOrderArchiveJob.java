@@ -1,4 +1,4 @@
-package cm.h3c.college.pay.core.task;
+package cm.h3c.college.pay.task;
 
 import javax.annotation.Resource;
 

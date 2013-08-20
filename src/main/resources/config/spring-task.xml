@@ -9,7 +9,7 @@
 	<!-- 每日定时任务 -->
 	<bean name="cancellationOrderArchiveJob" class="org.springframework.scheduling.quartz.JobDetailBean">
 		<property name="jobClass"
-			value="cm.h3c.college.pay.core.task.CancellationOrderArchiveJob" />
+			value="cm.h3c.college.pay.task.CancellationOrderArchiveJob" />
 		<!-- 
 		<property name="jobDataAsMap">
 			<map>
