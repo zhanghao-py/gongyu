@@ -49,3 +49,28 @@ CREATE TABLE `gy_log` (
   PRIMARY KEY (`id`),
   KEY `idx_log_order_id` (`order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '日志信息表';
+
+CREATE TABLE `gy_cmpay_billing_header` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `mer_id` varchar(100) NOT NULL COMMENT '商户ID 15位',
+  `province_id` varchar(100) NOT NULL COMMENT '省平台编号 8位',
+  `deal_times` varchar(100) NOT NULL COMMENT '交易笔数 8位',
+  `deal_amount` varchar(100) NOT NULL COMMENT '交易总金额 15位 单位：分',
+  `date` varchar(100) NOT NULL COMMENT '账务日期 YYYYMMDD',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT 'cmpay账单头信息表';
+
+CREATE TABLE `gy_cmpay_billing_detail` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `mer_id` varchar(100) NOT NULL COMMENT '商户ID 15位',
+  `product_id` varchar(100) NOT NULL COMMENT '产品编号 最长30位',
+  `order_id` varchar(100) NOT NULL COMMENT '商户订单号 20位',
+  `order_date` varchar(100) NOT NULL COMMENT '订单日期 8位',
+  `pay_date` varchar(100) NOT NULL COMMENT '支付日期 8位',
+  `amount` varchar(100) NOT NULL COMMENT '金额 15位 单位：分',
+  `type` varchar(100) NOT NULL COMMENT '付款类型 1位',
+  `status` varchar(100) NOT NULL COMMENT '订单状态 1位',
+  `header_id` bigint(20) unsigned NOT NULL COMMENT '关联headerId',
+  PRIMARY KEY (`id`),
+  KEY `idx_cmpay_billing_detail_header_id` (`header_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT 'cmpay账单详细信息表';
