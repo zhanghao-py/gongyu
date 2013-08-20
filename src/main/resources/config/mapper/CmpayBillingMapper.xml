@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cm.h3c.college.pay.cmpay.dao.CmpayBillingDao">
+
+	<insert id="saveCmpayBillingHeader"
+		parameterType="cm.h3c.college.pay.cmpay.bo.CmpayBillingHeader"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into gy_cmpay_billing_header
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			mer_id, province_id, deal_times, deal_amount, date
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{merId, jdbcType=VARCHAR},
+			#{provinceId, jdbcType=VARCHAR},
+			#{dealTimes, jdbcType=VARCHAR},
+			#{dealAmount, jdbcType=VARCHAR},
+			#{date, jdbcType=VARCHAR}
+		</trim>
+	</insert>
+	
+	<insert id="saveCmpayBillingDetail"
+		parameterType="cm.h3c.college.pay.cmpay.bo.CmpayBillingDetail"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into gy_cmpay_billing_detail
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			mer_id, product_id, order_id, order_date, pay_date, amount, type, status, header_id
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{merId, jdbcType=VARCHAR},
+			#{productId, jdbcType=VARCHAR},
+			#{orderId, jdbcType=VARCHAR},
+			#{orderDate, jdbcType=VARCHAR},
+			#{payDate, jdbcType=VARCHAR},
+			#{amount, jdbcType=VARCHAR},
+			#{type, jdbcType=VARCHAR},
+			#{status, jdbcType=VARCHAR},
+			#{headerId, jdbcType=BIGINT}
+		</trim>
+	</insert>
+
+
+
+</mapper>
+
