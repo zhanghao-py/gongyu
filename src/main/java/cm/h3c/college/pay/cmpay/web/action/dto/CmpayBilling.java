@@ -1,29 +1,36 @@
-package cm.h3c.college.pay.cmpay.util;
+package cm.h3c.college.pay.cmpay.web.action.dto;
 
 import java.io.IOException;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
+
+import cm.h3c.college.pay.cmpay.bo.CmpayBillingDetail;
+import cm.h3c.college.pay.cmpay.bo.CmpayBillingHeader;
 
 public class CmpayBilling {
 	
 	private static Logger log = Logger.getLogger(CmpayBilling.class);
 	
-	@JsonProperty
-	Header header;
-	@JsonProperty
-	List<Detail> details;
+	private CmpayBillingHeader header;
+	private List<CmpayBillingDetail> details;
 	
-	public CmpayBilling(Header header, List<Detail> details) {
+	public CmpayBilling(CmpayBillingHeader header, List<CmpayBillingDetail> details) {
 		this.header = header;
 		this.details = details;
 	}
 	
+	public CmpayBillingHeader getHeader() {
+		return header;
+	}
+
+	public List<CmpayBillingDetail> getDetails() {
+		return details;
+	}
+
 	@Override
 	public String toString() {
 		ObjectMapper mapper = new ObjectMapper();
@@ -44,6 +51,7 @@ public class CmpayBilling {
 	
 }
 
+/*
 class Detail {
 	
 	private static Logger log = Logger.getLogger(Detail.class);
@@ -135,3 +143,4 @@ class Header {
 		return jsonString;
 	}
 }
+*/

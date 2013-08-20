@@ -11,6 +11,10 @@ import java.util.List;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 
+import cm.h3c.college.pay.cmpay.bo.CmpayBillingDetail;
+import cm.h3c.college.pay.cmpay.bo.CmpayBillingHeader;
+import cm.h3c.college.pay.cmpay.web.action.dto.CmpayBilling;
+
 public class CmpayBillingFileUtils {
 	
 	private static Logger log = Logger.getLogger(CmpayBillingFileUtils.class);
@@ -31,12 +35,12 @@ public class CmpayBillingFileUtils {
 			String filename = file.getName();
 			String headLine = br.readLine();
 			
-			Header header = new Header(filename, headLine);
-			List<Detail> details = new LinkedList<Detail>();
+			CmpayBillingHeader header = new CmpayBillingHeader(filename, headLine);
+			List<CmpayBillingDetail> details = new LinkedList<CmpayBillingDetail>();
 			
 			String line = "";
 			while( (line = br.readLine())!=null ) {
-				Detail detail = new Detail(line);
+				CmpayBillingDetail detail = new CmpayBillingDetail(line);
 				details.add(detail);
 			}
 			
