@@ -353,7 +353,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public CmpayPaymentRequest doCreateAndPayOrder(OrderForm form) throws ServiceException {
+	public synchronized CmpayPaymentRequest doCreateAndPayOrder(OrderForm form) throws ServiceException {
 		
 		Long orderId = form.getId();
 		

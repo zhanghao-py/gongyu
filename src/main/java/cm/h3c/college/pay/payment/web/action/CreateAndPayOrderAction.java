@@ -22,7 +22,7 @@ import com.opensymphony.xwork2.ActionContext;
 @Namespace("/payment")
 public class CreateAndPayOrderAction extends GenericAction {
 
-	private Logger log = Logger.getLogger(CreateAndPayOrderAction.class);
+	private static Logger log = Logger.getLogger(CreateAndPayOrderAction.class);
 	private static final long serialVersionUID = -1541026036542059117L;
 
 	@Resource(name = "orderService")
@@ -41,6 +41,7 @@ public class CreateAndPayOrderAction extends GenericAction {
 		CmpayPaymentRequest payment = null;
 		try {
 			assertNotNull(form, SystemConfig.ILLEGAL_REQUEST);
+			log.info(orderService);
 			payment = orderService.doCreateAndPayOrder(form);
 		} catch (ServiceException e) {
 			log.warn("", e);
