@@ -6,7 +6,6 @@ public enum LogType {
 	CMPAY_CALLBACK_REQUEST("CmpayCallbackRequest", (short) 2),
 	CMPAY_CALLBACK_WEB_REQUEST("CmpayCallbackWebRequest", (short) 3),
 	CMPAY_CALLBACK_FILE_NOTIFY_REQUEST("CmpayPaymentFileNotifyRequest", (short) 4),
-	CMPAY_BILLING_FILE_PARSE("CmpayBillingFileParse", (short) 9),
 	
 	CAMS_PAY_REQUEST("CAMS充值日志", (short) 10),
 	
