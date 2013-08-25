@@ -28,8 +28,7 @@
 			</div>
 		
 			<div style="MARGIN-LEFT: 101px" class="success">
-				<div class="pointInfo_success">错误信息提示</div>
-				<p style="width:543px">手机支付下单错误:D22208 对不起，订单状态异常。</p>
+				<div class="pointInfo_success">充值失败，失败原因如下：</div>
 				<p style="width:543px">$data</p>
 				<div>&nbsp;</div>
 			</div>
