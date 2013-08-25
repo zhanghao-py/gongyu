@@ -33,7 +33,7 @@ public class CreateAndPayOrderAction extends GenericAction {
 
 	@Action(value = "createAndPayOrder", results = {
 			@Result(name = "success", type = "velocity", location = "/vm/payment_payRequest.vm"),
-			@Result(name = "error", type = "velocity", location = "/vm/errorMessage.vm") })
+			@Result(name = "error", type = "velocity", location = "/vm/error.vm") })
 	public String createAndPayOrder() {
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		OrderForm form = (OrderForm) session.get(SystemConfig.ORDER_FORM_KEY);
@@ -41,13 +41,16 @@ public class CreateAndPayOrderAction extends GenericAction {
 		CmpayPaymentRequest payment = null;
 		try {
 			assertNotNull(form, SystemConfig.ILLEGAL_REQUEST);
-			log.info(orderService);
 			payment = orderService.doCreateAndPayOrder(form);
+			session.put(SystemConfig.ORDER_ID_KEY, form.getId());
 		} catch (ServiceException e) {
 			log.warn("", e);
 			this.data = e.getMessage();
 			return ERROR;
 		}
+		
+		// 移除session中OrderForm数据
+		session.remove(SystemConfig.ORDER_FORM_KEY);
 
 		Map<String, Object> data = new HashMap<String, Object>();
 		data.put("payment", payment);

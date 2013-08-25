@@ -24,7 +24,10 @@ public class SystemConfig {
 	}
 
 	public final static String ORDER_FORM_KEY = "orderForm";
+	public final static String ORDER_ID_KEY = "orderId";
 	public final static String SECURITY_CODE_KEY = "securityCode";
+	
+	public static final String FORM_IS_NOT_NULL = "表单数据不能为空!";
 	public static final String ILLEGAL_REQUEST = "请求异常!";
 
 	@Value("${payUrl}")

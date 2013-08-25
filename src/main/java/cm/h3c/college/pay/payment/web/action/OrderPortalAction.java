@@ -66,7 +66,7 @@ public class OrderPortalAction extends GenericAction {
 		OrderForm form = (OrderForm) session.get(SystemConfig.ORDER_FORM_KEY);
 
 		if (ObjectUtils.equals(form, null)) {
-			this.data = "表单不能为空！";
+			this.data = SystemConfig.FORM_IS_NOT_NULL;
 			return ERROR;
 		}
 
@@ -76,20 +76,17 @@ public class OrderPortalAction extends GenericAction {
 
 	@Action(value = "doneOrderPortal", results = {
 			@Result(name = "success", type = "velocity", location = "/vm/payment_doneOrder_portal.vm"),
-			@Result(name = "error", type = "velocity", location = "/vm/error.vm"),
-			@Result(name = "errorMessage", type = "velocity", location = "/vm/errorMessage.vm") })
+			@Result(name = "error", type = "velocity", location = "/vm/error.vm") })
 	public String doneOrderPortal() {
 		Map<String, Object> session = ActionContext.getContext().getSession();
-		OrderForm form = (OrderForm) session.get(SystemConfig.ORDER_FORM_KEY);
-		Long orderId = null;
-		if (form != null) {
-			orderId = form.getId();// TODO 连续两次支付的问题
-		} else {
+		Long orderId = (Long) session.get(SystemConfig.ORDER_ID_KEY);
+		
+		if (ObjectUtils.equals(orderId, null)) {
 			String strOrderId = ServletActionContext.getRequest().getParameter(
 					"orderId");
 			if (strOrderId == null) {
-				data = SystemConfig.ILLEGAL_REQUEST;
-				return "errorMessage";
+				this.data = SystemConfig.ILLEGAL_REQUEST;
+				return ERROR;
 			}
 			orderId = Long.parseLong(strOrderId);
 		}
