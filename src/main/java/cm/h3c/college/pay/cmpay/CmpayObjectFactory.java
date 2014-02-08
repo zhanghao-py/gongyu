@@ -153,7 +153,7 @@ public class CmpayObjectFactory {
 	}
 
 	String genMid(Date date) {
-		return Long.toString(date.getTime() - 1370000000000L)
+		return Long.toString(date.getTime() % 10000000000L)
 				+ SecurityCodeUtil.getRandomNumberLen4();
 	}
 
