@@ -2,6 +2,8 @@ package cm.h3c.college.pay.cmpay;
 
 import static org.junit.Assert.*;
 
+import java.util.Date;
+
 import org.junit.Test;
 
 import com.thoughtworks.xstream.XStream;
@@ -29,6 +31,14 @@ public class CmpayObjectFactoryTest {
 		CmpayPaymentCheckRequest request2 = (CmpayPaymentCheckRequest) xstream.fromXML(xml);
 		assertTrue(SignUtil.doCheckSign(request2.prepareSignData(), request.getSign(), "888000130000008"));
 		assertEquals(request.MID, request2.MID);
+	}
+	
+	@Test
+	public void testGenMid() {
+		System.out.println(new Date().getTime());
+		CmpayObjectFactory factory = new CmpayObjectFactory();
+		String mid = factory.genMid(new Date());
+		assertEquals(14, mid.length());
 	}
 
 	@Test
