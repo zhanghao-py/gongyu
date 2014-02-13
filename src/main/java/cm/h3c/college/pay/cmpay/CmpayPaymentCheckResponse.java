@@ -75,7 +75,7 @@ public class CmpayPaymentCheckResponse implements CmpaySignable {
 	}
 
 	public Boolean isPaySuccess() {
-		return StringUtils.equals(RCODE, CmpayPaymentService.RCODE_SUCCESS);
+		return StringUtils.equals(StringUtils.trim(RCODE), CmpayPaymentService.RCODE_SUCCESS);
 	}
 	
 	

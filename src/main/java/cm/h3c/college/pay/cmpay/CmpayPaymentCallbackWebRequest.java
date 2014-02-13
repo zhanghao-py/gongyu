@@ -129,7 +129,7 @@ public class CmpayPaymentCallbackWebRequest implements CmpaySignable, CmpayPayme
 
 	@Override
 	public Long parseOriginOrderId() {
-		return Long.parseLong(getOrderId().trim());
+		return Long.parseLong(getOrderId().trim().substring(2));
 	}
 
 	public String getSIGN() {
