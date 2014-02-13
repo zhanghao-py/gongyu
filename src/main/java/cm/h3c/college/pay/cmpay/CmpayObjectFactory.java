@@ -173,7 +173,7 @@ public class CmpayObjectFactory {
 		request.DATE = formatYyyyMMdd(payTime);
 		request.TIME = formatHHmmsss(payTime);
 		request.MERID = merId;
-		request.ORDERID = "0" + order.getId();
+		request.ORDERID = "10" + order.getId();
 		request.AMOUT = order.getMoney().multiply(new BigDecimal(100))
 				.toBigInteger().toString();
 		request.ALLOWNOTE = "1";

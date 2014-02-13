@@ -11,7 +11,7 @@ public class PrimaryKeyGenerator {
 	 */
 	public static Long getKey() {
 		String keyPrefix = DateFormatUtils.format(System.currentTimeMillis(), "yyyyMMddHHmmss");
-		String keyPostfix = SecurityCodeUtil.getRandomNumber();
+		String keyPostfix = SecurityCodeUtil.getRandomNumberLen4();
 		String key = keyPrefix + keyPostfix;
 		return NumberUtils.createLong(key);
 	}
