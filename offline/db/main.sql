@@ -1,6 +1,6 @@
 CREATE TABLE `gy_order` (
   `id` bigint(20) unsigned NOT NULL,
-  `money` decimal NOT NULL COMMENT '角色名称',
+  `money` decimal(10,2) NOT NULL COMMENT '充值金额',
   `status` tinyint(4) unsigned NOT NULL COMMENT '1:订单初始化 2:支付中 3:支付完成 4:取消',
   `pay_result` tinyint(4) unsigned NULL COMMENT '1:支付成功 2:支付失败 3:预授权成功 4:预授权失败 5:用户拒付',
   `pay_callback_type` tinyint(4) unsigned null comment '1:web, 2:back',

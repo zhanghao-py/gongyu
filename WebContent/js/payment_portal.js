@@ -113,7 +113,7 @@ function selectAmount(amount) {
             jQuery('#YHKJF_YRCZ_UL > li[id^=\'YHKJF_YRCZ\']').removeClass();
             //缴纳欠费
             jQuery('#YHKJF_YRCZ_UL > li[id=\'YHKJF_YRCZ_YDL_JNQF\']').addClass('txt1');
-            if (isNumber(otherMoney) == false || otherMoney < 1 || otherMoney > 3000) {
+            if (isMoney(otherMoney) == false || otherMoney < 0.01 || otherMoney > 500.00) {
 //            if (otherMoney < 0.01 || otherMoney > 3000) {
                 jQuery('#otherMoney_tip').removeClass().addClass('lr-zc-fwt red');
                 jQuery('input[type=text][name="otherMoney"]').focus();
@@ -164,24 +164,30 @@ function closeLoginWindow() {
 function btnSubmit() {
     //手机号校验
     var msisdn = jQuery('#payPhoneID').val();
-    if (isMsisdn(msisdn) == false) {
-        jQuery('#sjh_tip_div').removeClass().addClass('lr-zc-ts1').html('请输入正确的手机号');
-        jQuery('#error_tip').html('请输入正确的手机号').css("display", "block");
+    if ( isBlank(msisdn) ) {
+        jQuery('#sjh_tip_div').removeClass().addClass('lr-zc-ts1').html('请输入正确的充值账号');
+        jQuery('#error_tip').html('请输入正确的充值账号').css("display", "block");
         jQuery('#payPhoneID').focus();
         return false;
     }
-    if (jQuery('#sjh_tip_div').html() == '请输入正确的手机号') {
-    	jQuery('#error_tip').html('请输入正确的手机号').css("display", "block");
+    if (jQuery('#sjh_tip_div').html() == '请输入正确的充值账号') {
+    	jQuery('#error_tip').html('请输入正确的充值账号').css("display", "block");
         jQuery('#payPhoneID').focus();
         return false;
     }
     
     //缴费
 	var amount = jQuery('#commonPay').val();
-	if (amount == "" || isNumber(amount) == false || amount < 1 || amount > 500) {
+	if (amount == "" || isMoney(amount) == false) {
 		jQuery('#otherMoney_tip').removeClass().addClass('lr-zc-fwt red');
 		jQuery('input[type=text][name="otherMoney"]').focus();
-		jQuery('#error_tip').html('请正确输入缴费金额').css("display", "block");
+		jQuery('#error_tip').html('金额只能由数字组成且带有2位小数，格式为0.00').css("display", "block");
+		return false;		
+	}
+	if (amount < 0.01 || amount > 500.00) {
+		jQuery('#otherMoney_tip').removeClass().addClass('lr-zc-fwt red');
+		jQuery('input[type=text][name="otherMoney"]').focus();
+		jQuery('#error_tip').html('金额需在0.01与500.00之间，请正确输入缴费金额').css("display", "block");
 		return false;
 	}
 	
