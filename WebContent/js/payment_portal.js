@@ -178,10 +178,16 @@ function btnSubmit() {
     
     //缴费
 	var amount = jQuery('#commonPay').val();
-	if (amount == "" || isNumber(amount) == false || amount < 1 || amount > 500) {
+	if (amount == "" || isMoney(amount) == false) {
 		jQuery('#otherMoney_tip').removeClass().addClass('lr-zc-fwt red');
 		jQuery('input[type=text][name="otherMoney"]').focus();
-		jQuery('#error_tip').html('请正确输入缴费金额').css("display", "block");
+		jQuery('#error_tip').html('金额只能由数字组成且带有2位小数，格式为0.00').css("display", "block");
+		return false;		
+	}
+	if (amount < 0.01 || amount > 500.00) {
+		jQuery('#otherMoney_tip').removeClass().addClass('lr-zc-fwt red');
+		jQuery('input[type=text][name="otherMoney"]').focus();
+		jQuery('#error_tip').html('金额需在0.01与500.00之间，请正确输入缴费金额').css("display", "block");
 		return false;
 	}
 	
