@@ -110,8 +110,8 @@ public class OrderServiceImpl implements OrderService {
 		
 		this.validateAccountExistAtCASM(form.getAccount(), college);
 		
-		if (form.getMoney() == null || form.getMoney().compareTo(BigDecimal.ONE) < 0) {
-			throw new ServiceException("充值金额不能为空, 不能小于一元钱！");
+		if (form.getMoney() == null || form.getMoney().compareTo(BigDecimal.ZERO) < 0) {
+			throw new ServiceException("充值金额不能为空, 不能小于零元钱！");
 		}
 	}
 	
@@ -229,8 +229,8 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 	@Override
-	public CmpayPaymentRequest doPayOrder(Long orderId) throws ServiceException {
 		
+	public CmpayPaymentRequest doPayOrder(Long orderId) throws ServiceException {
 		if (orderId == null || orderId < 1) {
 			throw new ServiceException("订单编号不能为空！");
 		}
