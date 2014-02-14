@@ -81,7 +81,7 @@
                 <div class="lr-zc-name">帐户</div>
                 <div class="lr-zc-bd">
                     <div class="lf">
-                        <input class="lr-zc-inp1 qh" name="payPhone" maxlength="11" value="15810710450" onblur="autheMsisdn()" id="payPhoneID" type="text" /> 
+                        <input class="lr-zc-inp1 qh" name="payPhone" maxlength="11" value="18615195181" onblur="autheMsisdn()" id="payPhoneID" type="text" /> 
                     </div>
                 </div>
             </div>
@@ -101,7 +101,7 @@
                 <div class="lf">
                     <input onblur="selectAmount('otherMoney')" id="YHKJF_YRCZ_WDL_QTJE" class="lr-zc-fw" type="text" />
                 </div>
-                <div class="lr-zc-fwt" id="otherMoney_tip">请输入0.01元~500元的金额</div>
+                <div class="lr-zc-fwt" id="otherMoney_tip">请输入0.01元~500.00元的金额</div>
                 <!--错误时，样式是class="lr-zc-fwt red"-->
             </div>
             <div class="lr-zc2">
