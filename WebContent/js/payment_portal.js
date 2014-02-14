@@ -164,9 +164,9 @@ function closeLoginWindow() {
 function btnSubmit() {
     //手机号校验
     var msisdn = jQuery('#payPhoneID').val();
-    if (isMsisdn(msisdn) == false) {
-        jQuery('#sjh_tip_div').removeClass().addClass('lr-zc-ts1').html('请输入正确的手机号');
-        jQuery('#error_tip').html('请输入正确的手机号').css("display", "block");
+    if ( isBlank(s) ) {
+        jQuery('#sjh_tip_div').removeClass().addClass('lr-zc-ts1').html('请输入正确的充值账号');
+        jQuery('#error_tip').html('请输入正确的充值账号').css("display", "block");
         jQuery('#payPhoneID').focus();
         return false;
     }

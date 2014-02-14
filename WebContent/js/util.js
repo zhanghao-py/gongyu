@@ -18,6 +18,12 @@ function btnShowOrHideHotLine() {
     jQuery('#hotLineTableID').toggle();
 }
 
+/**
+ * 是否为空串
+ */
+function isBlank(s) {
+	return (s == null || s === "" || s.length === 0);
+}
 
 /***
  * 是否为手机号码
