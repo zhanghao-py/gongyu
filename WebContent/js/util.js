@@ -43,6 +43,16 @@ function isNumber(str) {
         return true;
     }
 }
+
+function isMoney(str) {
+    var patrn = /^(0|[1-9]+)\.\d{2}$/;
+    if (!patrn.exec(str)) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
 /***
  * 添加手机号码到cookie，最多保留3个按时间顺序排列
  * @param msisdn
