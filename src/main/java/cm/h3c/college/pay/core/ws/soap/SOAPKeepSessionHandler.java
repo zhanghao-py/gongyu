@@ -10,6 +10,7 @@ import javax.xml.ws.handler.MessageContext;
 import javax.xml.ws.handler.soap.SOAPHandler;
 import javax.xml.ws.handler.soap.SOAPMessageContext;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 public class SOAPKeepSessionHandler implements SOAPHandler<SOAPMessageContext> {
@@ -31,10 +32,12 @@ public class SOAPKeepSessionHandler implements SOAPHandler<SOAPMessageContext> {
 				// sessionid在该域中
 				List<String> c = responseHeaders.get("Set-cookie"); 
 				
-				//这是第一次HTTP调用，cookie刚刚得到
-				if( cookie == null && c != null ) { 
+				// 这是第一次HTTP调用，cookie刚刚得到
+				if ((cookie == null && c != null)
+						|| (cookie.size() > 0 && c.size() > 0 && !StringUtils
+								.equals(cookie.get(0), c.get(0)))) {
 					cookie = c;
-					log.debug("read cookie:" + c);
+					log.debug("read cookie:" + cookie + ", " + c);
 				}
 			
 			//请求
