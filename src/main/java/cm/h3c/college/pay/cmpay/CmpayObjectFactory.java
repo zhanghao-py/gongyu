@@ -186,8 +186,7 @@ public class CmpayObjectFactory {
 		request.PRODUCTID = request.AMOUT;
 		request.PRODUCTNAME = config.getProductName();
 		request.TXNTYP = "S";// 交易类型 1位S：直接支付
-		request.CALLBACK = config.getCallbackUrl() + "?orderId="
-				+ order.getId();
+		request.CALLBACK = config.getCallbackUrl();
 		request.MOBILEID = order.getAccount();
 
 		sign(request, request.getMerId());
