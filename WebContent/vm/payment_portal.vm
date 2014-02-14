@@ -101,7 +101,7 @@
                 <div class="lf">
                     <input onblur="selectAmount('otherMoney')" id="YHKJF_YRCZ_WDL_QTJE" class="lr-zc-fw" type="text" />
                 </div>
-                <div class="lr-zc-fwt" id="otherMoney_tip">请输入1元~500元的整数</div>
+                <div class="lr-zc-fwt" id="otherMoney_tip">请输入0.01元~500元的金额</div>
                 <!--错误时，样式是class="lr-zc-fwt red"-->
             </div>
             <div class="lr-zc2">
