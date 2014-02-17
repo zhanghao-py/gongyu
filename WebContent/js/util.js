@@ -45,7 +45,7 @@ function isNumber(str) {
 }
 
 function isMoney(str) {
-    var patrn = /^(0|[1-9]+)\.\d{2}$/;
+    var patrn = /^(([1-9]\d*)|0)(\.\d{2})?$/;
     if (!patrn.exec(str)) {
         return false;
     } else {

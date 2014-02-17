@@ -105,7 +105,7 @@ function selectAmount(amount) {
         jQuery('#otherMoney_tip').removeClass().addClass('lr-zc-fwt');
         jQuery('input[type=text][name="otherMoney"]').val('');
         //隐藏表单
-        jQuery('#commonPay').val(amount);
+        jQuery('#commonPay').val(parseFloat(amount).toFixed(2));
     } else if (amount == 'otherMoney') {
         var otherMoney = jQuery('input[type=text][id="YHKJF_YRCZ_WDL_QTJE"]').val();
         if (otherMoney != "") {
