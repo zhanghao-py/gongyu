@@ -153,8 +153,8 @@ public class CmpayObjectFactory {
 	}
 
 	String genMid(Date date) {
-		return Long.toString(date.getTime() % 10000000000L)
-				+ SecurityCodeUtil.getRandomNumberLen4();
+		String head = DateFormatUtils.format(date, "MMddHHmmss");
+		return head + SecurityCodeUtil.getRandomNumberLen4();
 	}
 
 	String formatYyyyMMdd(Date date) {
